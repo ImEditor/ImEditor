@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui>
+  <menubar name="MenuBar">
+    <menu action="FileMenu">
+      <menuitem action="FileOpen" />
+    </menu>
+    <menu action="EditMenu">
+      <menuitem action="EditCopy" />
+    </menu>
+  </menubar>
+</ui>
