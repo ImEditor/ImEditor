@@ -3,6 +3,7 @@
 from gi.repository import Gtk, GObject
 
 class TabLabel(Gtk.Box):
+    """Define the label on the tab."""
     __gsignals__ = {
         'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
     }
