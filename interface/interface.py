@@ -4,6 +4,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf
 import sys
 from PIL import Image
 from io import BytesIO
+from os import path
 
 from interface.tabs import TabLabel
 from interface.menus import create_menus
@@ -27,7 +28,7 @@ class App(Gtk.Window):
 
         self.images = list()  # List of PIL images.
 
-    def quit_app(self, _):
+    def quit_app(self, _, __):
         Gtk.main_quit()
 
     def open_file(self, *args):
@@ -39,14 +40,17 @@ class App(Gtk.Window):
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filename = dialog.get_filename()
-            img = Image.open(filename)
-            pixbuf = self.create_pixbuf(img)
-            img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
-            pos = filename.rfind('/')
-            filename = filename[pos+1:]
-            self.images.append([img, filename])
-            self.create_tab(img_widget, filename)
+            self.open_tab(filename)
         dialog.destroy()
+
+    def open_tab(self, filename):
+        img = Image.open(filename)
+        pixbuf = self.create_pixbuf(img)
+        img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
+        pos = filename.rfind('/')
+        filename = filename[pos+1:]
+        self.images.append([img, filename])
+        self.create_tab(img_widget, filename)
 
     def create_tab(self, img_widget=None, title='Sans-titre'):
         """Create a tab containing the picture.
@@ -92,6 +96,9 @@ class App(Gtk.Window):
     def on_close_clicked(self, _, page):
         """Close a tab."""
         index = self.notebook.page_num(page)
+        self.close_tab(index)
+
+    def close_tab(self, index):
         self.notebook.remove_page(index)
         self.images.pop(index)
 
@@ -106,6 +113,35 @@ class App(Gtk.Window):
         scrolled_window.add(new_img_widget)
         self.notebook.show_all()
 
-    def file_save(self, _):
-        page = self.notebook.get_current_page()
-        self.images[page][0].save(self.images[page][1])
+    def file_save(self, action):
+        index = self.notebook.get_current_page()
+        self.images[index][0].save(self.images[index][1])
+
+    def file_save_as(self, action):
+        index = self.notebook.get_current_page()
+
+        dialog = Gtk.FileChooserDialog('Choisissez un fichier', self,
+            Gtk.FileChooserAction.SAVE,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_SAVE, Gtk.ResponseType.OK))
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            filename = dialog.get_filename()
+            self.images[index][0].save(filename)
+            self.close_tab(index)
+            self.open_tab(filename)
+
+        dialog.destroy()
+
+    def about(self, action):
+        dialog = Gtk.AboutDialog()
+        dialog.set_logo(GdkPixbuf.Pixbuf.new_from_file('assets/icons/imeditor.png'))
+        dialog.set_program_name('ImEditor')
+        dialog.set_version('0.1')
+        dialog.set_website('https://github.com/ImEditor')
+        dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
+        dialog.set_comments('GTK Linux Image Editor ')
+        dialog.set_license('Distributed under the GNU GPL(v3) license. \n\n https://github.com/ImEditor/ImEditor/blob/master/LICENSE')
+
+        dialog.run()
+        dialog.destroy()

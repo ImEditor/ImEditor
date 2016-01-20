@@ -20,6 +20,10 @@ def create_menus(self):
     action_filesave.connect('activate', self.file_save)
     action_group.add_action_with_accel(action_filesave, '<control>S')
 
+    action_filesaveas = Gtk.Action(name='FileSaveAs', stock_id=Gtk.STOCK_SAVE_AS)
+    action_filesaveas.connect('activate', self.file_save_as)
+    action_group.add_action_with_accel(action_filesaveas, '<shift><control>S')
+
     action_filequit = Gtk.Action(name='FileQuit', stock_id=Gtk.STOCK_QUIT)
     action_filequit.connect('activate', self.quit_app)
     action_group.add_action_with_accel(action_filequit, '<control>Q')
@@ -50,14 +54,16 @@ def create_menus(self):
 
     action_rotateleft = Gtk.Action(name='RotateLeft', label='Rotation -90°')
     action_rotateleft.connect('activate', lambda arg: self.filter(base.rotate_left))
+    action_rotateleft.set_icon_name('object-rotate-left')
     action_group.add_action(action_rotateleft)
 
     action_rotateright = Gtk.Action(name='RotateRight', label='Rotation 90°')
     action_rotateright.connect('activate', lambda arg: self.filter(base.rotate_right))
+    action_rotateright.set_icon_name('object-rotate-right')
     action_group.add_action(action_rotateright)
 
     # Base filters:
-    action_basefilters = Gtk.Action(name="FiltersMenu", label="Filters")
+    action_basefilters = Gtk.Action(name="FiltersMenu", label="Filtres")
     action_group.add_action(action_basefilters)
 
     action_basenegative = Gtk.Action(name='BaseNegative', label='Négatif')
@@ -67,6 +73,38 @@ def create_menus(self):
     action_basebw = Gtk.Action(name='BaseBW', label='Noir et blanc')
     action_basebw.connect('activate', lambda arg: self.filter(base.black_white))
     action_group.add_action(action_basebw)
+
+    action_basered = Gtk.Action(name='BaseRed', label='Rouge')
+    action_basered.connect('activate', lambda arg: self.filter(base.red))
+    action_group.add_action(action_basered)
+
+    action_basegreen = Gtk.Action(name='BaseGreen', label='Vert')
+    action_basegreen.connect('activate', lambda arg: self.filter(base.green))
+    action_group.add_action(action_basegreen)
+
+    action_baseblue = Gtk.Action(name='BaseBlue', label='Bleu')
+    action_baseblue.connect('activate', lambda arg: self.filter(base.blue))
+    action_group.add_action(action_baseblue)
+
+    action_baseGL = Gtk.Action(name='BaseGL', label='Niveau de gris')
+    action_baseGL.connect('activate', lambda arg: self.filter(base.gray_level))
+    action_group.add_action(action_baseGL)
+
+    action_baselighten = Gtk.Action(name='BaseLighten', label='Éclaircir')
+    action_baselighten.connect('activate', lambda arg: self.filter(base.lighten))
+    action_group.add_action(action_baselighten)
+
+    action_basedarken = Gtk.Action(name='BaseDarken', label='Assombrir')
+    action_basedarken.connect('activate', lambda arg: self.filter(base.darken))
+    action_group.add_action(action_basedarken)
+
+    # Help:
+    action_help = Gtk.Action(name="HelpMenu", label="Aide")
+    action_group.add_action(action_help)
+
+    action_helpabout = Gtk.Action(name='HelpAbout', stock_id=Gtk.STOCK_ABOUT)
+    action_helpabout.connect('activate', self.about)
+    action_group.add_action(action_helpabout)
 
     # UI:
     uimanager = Gtk.UIManager()
