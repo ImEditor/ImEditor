@@ -88,7 +88,7 @@ def darken(img, value=20):
     return img_m
 
 def rotate_left(img):
-    return img.rotate(-90)
+    return img.rotate(90)
 
 def rotate_right(img):
-    return img.rotate(90)
+    return img.rotate(-90)

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 from gi.repository import Gtk, Gdk, GdkPixbuf
-import sys
 from PIL import Image
 from io import BytesIO
 from os import path
@@ -27,11 +26,12 @@ class App(Gtk.Window):
         grid.attach(self.notebook, 0, 1, 1, 1)
 
         self.images = list()  # List of PIL images.
+        self.MAX_HIST = 3
 
-    def quit_app(self, _, __):
+    def quit_app(self, *args):
         Gtk.main_quit()
 
-    def open_file(self, *args):
+    def open_image(self, *args):
         dialog = Gtk.FileChooserDialog('Choisissez un fichier', self,
             Gtk.FileChooserAction.OPEN,
             (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
@@ -45,18 +45,19 @@ class App(Gtk.Window):
 
     def open_tab(self, filename):
         img = Image.open(filename)
-        pixbuf = self.create_pixbuf(img)
+        pos = filename.find('.')
+        ext = filename[pos+1:].lower()
+
+        pixbuf = self.create_pixbuf(img, ext)
         img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         pos = filename.rfind('/')
         filename = filename[pos+1:]
-        self.images.append([img, filename])
+        self.images.append([[img], filename, ext, 0])
         self.create_tab(img_widget, filename)
 
     def create_tab(self, img_widget=None, title='Sans-titre'):
         """Create a tab containing the picture.
 
-        Connect the mouse wheel for zoom.
-        Disable scrolling the scrolledindow with mouse wheel.
         Use TabLabel and connect it to close the tab.
 
         :param img_widget: image widget created by create_pixbuf
@@ -77,13 +78,15 @@ class App(Gtk.Window):
         #self.notebook.set_tab_reorderable(page, True)
         self.notebook.show_all()
 
-    def create_pixbuf(self, img, ext='jpeg'):
+    def create_pixbuf(self, img, ext):
         """Convert a PIL image to Gtk pixbuf.
 
         :param img : PIL image
 
         """
         buff = BytesIO()
+        if ext == 'jpg':
+            ext = 'jpeg'
         img.save(buff, ext)
         content = buff.getvalue()
         buff.close()
@@ -100,12 +103,34 @@ class App(Gtk.Window):
 
     def close_tab(self, index):
         self.notebook.remove_page(index)
-        self.images.pop(index)
+        self.images.pop(index)  #
 
     def filter(self, func):
+        print('filter')
+        print(self.images)
         page = self.notebook.get_current_page()
-        self.images[page][0] = func(self.images[page][0])
-        pixbuf = self.create_pixbuf(self.images[page][0])
+        index_img = self.images[page][3]
+        new_img = func(self.images[page][0][index_img])
+        self.edit_image(new_img, page)
+
+        self.images[page][0].append(new_img)
+        self.images[page][3] += 1
+        if len(self.images[page][0]) > self.MAX_HIST:
+            print('ok')
+            self.images[page][0].pop(0)
+            self.images[page][3] -= 1
+        print(self.images)
+        print('filter /')
+
+    def edit_image(self, new_img, page):
+        """Manage editing image.
+
+        Manage history, show new image.
+
+        """
+
+        # Show image:
+        pixbuf = self.create_pixbuf(new_img, self.images[page][2])
         new_img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         box = self.notebook.get_nth_page(page)
         scrolled_window = box.get_children()[0]
@@ -113,12 +138,35 @@ class App(Gtk.Window):
         scrolled_window.add(new_img_widget)
         self.notebook.show_all()
 
+    def history(self, num):
+        print('history')
+        print(self.images)
+        page = self.notebook.get_current_page()
+        if len(self.images[page][0]) >= 2:
+            print('ok')
+            index_img = self.images[page][3]
+
+            if num == -1: # Undo:
+                if index_img >= 1:
+                    self.images[page][3] += num
+                    index_img = self.images[page][3]
+                    self.edit_image(self.images[page][0][index_img], page)
+            else: # Redo:
+                if index_img + 1 < len(self.images[page][0]):
+                    self.images[page][3] += num
+                    index_img = self.images[page][3]
+                    self.edit_image(self.images[page][0][index_img], page)
+
+        print(self.images)
+        print('history /')
+
     def file_save(self, action):
-        index = self.notebook.get_current_page()
-        self.images[index][0].save(self.images[index][1])
+        page = self.notebook.get_current_page()
+        index_img = self.images[page][3]
+        self.images[page][0][index_img].save(self.images[page][1])
 
     def file_save_as(self, action):
-        index = self.notebook.get_current_page()
+        page = self.notebook.get_current_page()
 
         dialog = Gtk.FileChooserDialog('Choisissez un fichier', self,
             Gtk.FileChooserAction.SAVE,
@@ -127,8 +175,9 @@ class App(Gtk.Window):
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filename = dialog.get_filename()
-            self.images[index][0].save(filename)
-            self.close_tab(index)
+            index_img = self.images[page][3]
+            self.images[page][0][index_img].save(filename)  # need full path !!
+            self.close_tab(page)
             self.open_tab(filename)
 
         dialog.destroy()

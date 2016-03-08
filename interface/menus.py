@@ -13,7 +13,7 @@ def create_menus(self):
     action_group.add_action(action_filemenu)
 
     action_fileopen = Gtk.Action(name='FileOpen', stock_id=Gtk.STOCK_OPEN)
-    action_fileopen.connect('activate', self.open_file)
+    action_fileopen.connect('activate', self.open_image)
     action_group.add_action_with_accel(action_fileopen, '<control>O')
 
     action_filesave = Gtk.Action(name='FileSave', stock_id=Gtk.STOCK_SAVE)
@@ -33,11 +33,11 @@ def create_menus(self):
     action_group.add_action(action_editmenu)
 
     action_editundo = Gtk.Action(name='EditUndo', stock_id=Gtk.STOCK_UNDO)
-    #action_editundo.connect('activate', self.undo)
+    action_editundo.connect('activate', lambda arg: self.history(-1))
     action_group.add_action_with_accel(action_editundo, '<control>Z')
 
     action_editredo = Gtk.Action(name='EditRedo', stock_id=Gtk.STOCK_REDO)
-    #action_editredo.connect('activate', self.paste)
+    action_editredo.connect('activate', lambda arg: self.history(1))
     action_group.add_action_with_accel(action_editredo, '<control>Y')
 
     action_editcopy = Gtk.Action(name='EditCopy', stock_id=Gtk.STOCK_COPY)
