@@ -8,6 +8,15 @@ from os import path
 from interface.tabs import TabLabel
 from interface.menus import create_menus
 
+def img_open(func_):
+    """Avoid IndexError in filter."""
+    # func_ is the decorated function
+    # func is the filter to apply
+    def inner(self, func):
+        if len(self.images) > 0:
+            return func_(self, func)
+    return inner
+
 class App(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title='ImEditor')
@@ -105,6 +114,7 @@ class App(Gtk.Window):
         self.notebook.remove_page(index)
         self.images.pop(index)  #
 
+    @img_open
     def filter(self, func):
         print('filter')
         print(self.images)
@@ -138,6 +148,7 @@ class App(Gtk.Window):
         scrolled_window.add(new_img_widget)
         self.notebook.show_all()
 
+    @img_open
     def history(self, num):
         print('history')
         print(self.images)
@@ -160,11 +171,13 @@ class App(Gtk.Window):
         print(self.images)
         print('history /')
 
+    @img_open
     def file_save(self, action):
         page = self.notebook.get_current_page()
         index_img = self.images[page][3]
         self.images[page][0][index_img].save(self.images[page][1])
 
+    @img_open
     def file_save_as(self, action):
         page = self.notebook.get_current_page()
 
