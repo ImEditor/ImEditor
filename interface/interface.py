@@ -9,9 +9,9 @@ from interface.tabs import TabLabel
 from interface.menus import create_menus
 
 def img_open(func_):
-    """Avoid IndexError in filter."""
+    """Need open image."""
     # func_ is the decorated function
-    # func is the filter to apply
+    # func is the method to apply
     def inner(self, func):
         if len(self.images) > 0:
             return func_(self, func)
