@@ -41,10 +41,11 @@ class App(Gtk.Window):
         Gtk.main_quit()
 
     def open_image(self, *args):
-        dialog = Gtk.FileChooserDialog('Choisissez un fichier', self,
+        dialog = Gtk.FileChooserDialog('Choisissez un fichier',
+            self,
             Gtk.FileChooserAction.OPEN,
-            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+            ("Annuler", Gtk.ResponseType.CANCEL,
+             "Ouvrir", Gtk.ResponseType.OK))
 
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
