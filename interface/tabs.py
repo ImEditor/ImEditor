@@ -22,7 +22,7 @@ class TabLabel(Gtk.Box):
         button = Gtk.Button()
         button.set_relief(Gtk.ReliefStyle.NONE)
         button.set_focus_on_click(False)
-        button.add(Gtk.Image.new_from_stock(Gtk.STOCK_CLOSE, Gtk.IconSize.MENU))
+        button.add(Gtk.Image.new_from_icon_name('window-close', Gtk.IconSize.MENU))
         button.connect('clicked', self.button_clicked)
         self.pack_start(button, False, False, 0)
 

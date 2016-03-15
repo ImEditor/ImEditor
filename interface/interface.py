@@ -9,9 +9,9 @@ from interface.tabs import TabLabel
 from interface.menus import create_menus
 
 def img_open(func_):
-    """Avoid IndexError in filter."""
+    """Need open image."""
     # func_ is the decorated function
-    # func is the filter to apply
+    # func is the method to apply
     def inner(self, func):
         if len(self.images) > 0:
             return func_(self, func)
@@ -41,10 +41,11 @@ class App(Gtk.Window):
         Gtk.main_quit()
 
     def open_image(self, *args):
-        dialog = Gtk.FileChooserDialog('Choisissez un fichier', self,
+        dialog = Gtk.FileChooserDialog('Choisissez un fichier',
+            self,
             Gtk.FileChooserAction.OPEN,
-            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+            ("Annuler", Gtk.ResponseType.CANCEL,
+             "Ouvrir", Gtk.ResponseType.OK))
 
         response = dialog.run()
         if response == Gtk.ResponseType.OK:

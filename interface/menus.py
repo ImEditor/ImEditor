@@ -12,19 +12,22 @@ def create_menus(self):
     action_filemenu = Gtk.Action(name="FileMenu", label="Fichier")
     action_group.add_action(action_filemenu)
 
-    action_fileopen = Gtk.Action(name='FileOpen', stock_id=Gtk.STOCK_OPEN)
+    action_fileopen = Gtk.Action(name='FileOpen', label='Ouvrir')
     action_fileopen.connect('activate', self.open_image)
+    action_fileopen.set_icon_name('document-open')
     action_group.add_action_with_accel(action_fileopen, '<control>O')
 
-    action_filesave = Gtk.Action(name='FileSave', stock_id=Gtk.STOCK_SAVE)
+    action_filesave = Gtk.Action(name='FileSave', label='Enregistrer')
     action_filesave.connect('activate', self.file_save)
+    action_filesave.set_icon_name('document-save')
     action_group.add_action_with_accel(action_filesave, '<control>S')
 
-    action_filesaveas = Gtk.Action(name='FileSaveAs', stock_id=Gtk.STOCK_SAVE_AS)
+    action_filesaveas = Gtk.Action(name='FileSaveAs', label='Enregistrer sous')
     action_filesaveas.connect('activate', self.file_save_as)
+    action_filesaveas.set_icon_name('document-save-as')
     action_group.add_action_with_accel(action_filesaveas, '<shift><control>S')
 
-    action_filequit = Gtk.Action(name='FileQuit', stock_id=Gtk.STOCK_QUIT)
+    action_filequit = Gtk.Action(name='FileQuit', label='Quitter')
     action_filequit.connect('activate', self.quit_app)
     action_group.add_action_with_accel(action_filequit, '<control>Q')
 
@@ -32,24 +35,29 @@ def create_menus(self):
     action_editmenu = Gtk.Action(name="EditMenu", label="Édition")
     action_group.add_action(action_editmenu)
 
-    action_editundo = Gtk.Action(name='EditUndo', stock_id=Gtk.STOCK_UNDO)
+    action_editundo = Gtk.Action(name='EditUndo', label='Annuler')
     action_editundo.connect('activate', lambda arg: self.history(-1))
+    action_editundo.set_icon_name('edit-undo')
     action_group.add_action_with_accel(action_editundo, '<control>Z')
 
-    action_editredo = Gtk.Action(name='EditRedo', stock_id=Gtk.STOCK_REDO)
+    action_editredo = Gtk.Action(name='EditRedo', label='Rétablir')
     action_editredo.connect('activate', lambda arg: self.history(1))
+    action_editredo.set_icon_name('edit-redo')
     action_group.add_action_with_accel(action_editredo, '<control>Y')
 
-    action_editcopy = Gtk.Action(name='EditCopy', stock_id=Gtk.STOCK_COPY)
+    action_editcopy = Gtk.Action(name='EditCopy', label='Copier')
     #action_editcopy.connect('activate', self.copy)
+    action_editcopy.set_icon_name('edit-copy')
     action_group.add_action_with_accel(action_editcopy, '<control>C')
 
-    action_editpaste = Gtk.Action(name='EditPaste', stock_id=Gtk.STOCK_PASTE)
+    action_editpaste = Gtk.Action(name='EditPaste', label='Coller')
     #action_editpaste.connect('activate', self.paste)
+    action_editpaste.set_icon_name('edit-paste')
     action_group.add_action_with_accel(action_editpaste, '<control>V')
 
-    action_editcut = Gtk.Action(name='EditCut', stock_id=Gtk.STOCK_CUT)
+    action_editcut = Gtk.Action(name='EditCut', label='Couper')
     #action_editcut.connect('activate', self.paste)
+    action_editcut.set_icon_name('edit-cut')
     action_group.add_action_with_accel(action_editcut, '<control>C')
 
     action_rotateleft = Gtk.Action(name='RotateLeft', label='Rotation -90°')
@@ -102,7 +110,7 @@ def create_menus(self):
     action_help = Gtk.Action(name="HelpMenu", label="Aide")
     action_group.add_action(action_help)
 
-    action_helpabout = Gtk.Action(name='HelpAbout', stock_id=Gtk.STOCK_ABOUT)
+    action_helpabout = Gtk.Action(name='HelpAbout', label='À propos')
     action_helpabout.connect('activate', self.about)
     action_group.add_action(action_helpabout)
 
