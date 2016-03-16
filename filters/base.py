@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from PIL import Image
 
 def negative(img):
@@ -55,7 +57,7 @@ def gray_level(img):
     img_m.putdata(data_m)
     return img_m
 
-def black_white(img, limit=127):
+def black_white(img, limit):
     data = list(img.getdata())
     data_m = list()
     for pixel in data:
@@ -69,7 +71,7 @@ def black_white(img, limit=127):
     img_m.putdata(data_m)
     return img_m
 
-def lighten(img, value=20):
+def lighten(img, value):
     data = list(img.getdata())
     data_m = list()
     for pixel in data:
@@ -78,7 +80,7 @@ def lighten(img, value=20):
     img_m.putdata(data_m)
     return img_m
 
-def darken(img, value=20):
+def darken(img, value):
     data = list(img.getdata())
     data_m = list()
     for pixel in data:

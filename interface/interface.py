@@ -7,14 +7,18 @@ from os import path
 
 from interface.tabs import TabLabel
 from interface.menus import create_menus
+from interface.dialog import dialog
 
 def img_open(func_):
     """Need open image."""
     # func_ is the decorated function
     # func is the method to apply
-    def inner(self, func):
+    def inner(self, func, value=None):
         if len(self.images) > 0:
-            return func_(self, func)
+            if value is None:
+                return func_(self, func)
+            else:
+                return func_(self, func, value)
     return inner
 
 class App(Gtk.Window):
@@ -35,7 +39,7 @@ class App(Gtk.Window):
         grid.attach(self.notebook, 0, 1, 1, 1)
 
         self.images = list()  # List of PIL images.
-        self.MAX_HIST = 3
+        self.MAX_HIST = 10
 
     def quit_app(self, *args):
         Gtk.main_quit()
@@ -61,9 +65,9 @@ class App(Gtk.Window):
         pixbuf = self.create_pixbuf(img, ext)
         img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         pos = filename.rfind('/')
-        filename = filename[pos+1:]
+        basename = filename[pos+1:]
         self.images.append([[img], filename, ext, 0])
-        self.create_tab(img_widget, filename)
+        self.create_tab(img_widget, basename)
 
     def create_tab(self, img_widget=None, title='Sans-titre'):
         """Create a tab containing the picture.
@@ -72,7 +76,6 @@ class App(Gtk.Window):
 
         :param img_widget: image widget created by create_pixbuf
         :param: title: title of the picture: filename
-
         """
         page = Gtk.Box()
         page.set_hexpand(True)  # Fill available horizontal space
@@ -92,7 +95,6 @@ class App(Gtk.Window):
         """Convert a PIL image to Gtk pixbuf.
 
         :param img : PIL image
-
         """
         buff = BytesIO()
         if ext == 'jpg':
@@ -113,17 +115,21 @@ class App(Gtk.Window):
 
     def close_tab(self, index):
         self.notebook.remove_page(index)
-        self.images.pop(index)  #
+        self.images = self.images[:index] + self.images[index+1:]
 
     @img_open
-    def filter(self, func):
+    def filter(self, func, value=None):
         print('filter')
         print(self.images)
         page = self.notebook.get_current_page()
         index_img = self.images[page][3]
-        new_img = func(self.images[page][0][index_img])
+        if value is None:
+            new_img = func(self.images[page][0][index_img])
+        else:
+            new_img = func(self.images[page][0][index_img], value)
         self.edit_image(new_img, page)
-
+        self.images[page][0] = self.images[page][0][:index_img+1]
+        print(self.images)
         self.images[page][0].append(new_img)
         self.images[page][3] += 1
         if len(self.images[page][0]) > self.MAX_HIST:
@@ -131,13 +137,13 @@ class App(Gtk.Window):
             self.images[page][0].pop(0)
             self.images[page][3] -= 1
         print(self.images)
+
         print('filter /')
 
     def edit_image(self, new_img, page):
         """Manage editing image.
 
-        Manage history, show new image.
-
+        Show new image.
         """
 
         # Show image:
@@ -174,6 +180,7 @@ class App(Gtk.Window):
 
     @img_open
     def file_save(self, action):
+        print(action)
         page = self.notebook.get_current_page()
         index_img = self.images[page][3]
         self.images[page][0][index_img].save(self.images[page][1])
@@ -195,6 +202,9 @@ class App(Gtk.Window):
             self.open_tab(filename)
 
         dialog.destroy()
+
+    def filter_with_params(self, func, title, limits):
+        dialog(func, self, title, limits)
 
     def about(self, action):
         dialog = Gtk.AboutDialog()

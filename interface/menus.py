@@ -79,7 +79,7 @@ def create_menus(self):
     action_group.add_action(action_basenegative)
 
     action_basebw = Gtk.Action(name='BaseBW', label='Noir et blanc')
-    action_basebw.connect('activate', lambda arg: self.filter(base.black_white))
+    action_basebw.connect('activate', lambda arg: self.filter_with_params(base.black_white, 'Noir et blanc', (0, 255)))
     action_group.add_action(action_basebw)
 
     action_basered = Gtk.Action(name='BaseRed', label='Rouge')
@@ -99,11 +99,11 @@ def create_menus(self):
     action_group.add_action(action_baseGL)
 
     action_baselighten = Gtk.Action(name='BaseLighten', label='Éclaircir')
-    action_baselighten.connect('activate', lambda arg: self.filter(base.lighten))
+    action_baselighten.connect('activate', lambda arg: self.filter_with_params(base.lighten, 'Éclaircir', (0, 255)))
     action_group.add_action(action_baselighten)
 
     action_basedarken = Gtk.Action(name='BaseDarken', label='Assombrir')
-    action_basedarken.connect('activate', lambda arg: self.filter(base.darken))
+    action_basedarken.connect('activate', lambda arg: self.filter_with_params(base.darken, 'Assombrir', (0, 255)))
     action_group.add_action(action_basedarken)
 
     # Help:
