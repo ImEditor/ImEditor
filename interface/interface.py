@@ -2,12 +2,12 @@
 
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from PIL import Image
-from io import BytesIO
 from os import path
 
 from interface.tabs import TabLabel
 from interface.menus import create_menus
-from interface.dialog import dialog
+from interface.dialog import dialog_param, dialog_new_image
+from interface.tools import create_pixbuf, about
 
 def img_open(func_):
     """Need open image."""
@@ -57,16 +57,22 @@ class App(Gtk.Window):
             self.open_tab(filename)
         dialog.destroy()
 
+    def new_image(self, size, color='red'):
+        img = Image.new('RGB', size, color)
+        pixbuf = create_pixbuf(img)
+        img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
+        self.images.append([[img], 'noname.jpg', 0])
+        self.create_tab(img_widget)
+
     def open_tab(self, filename):
         img = Image.open(filename)
         pos = filename.find('.')
-        ext = filename[pos+1:].lower()
 
-        pixbuf = self.create_pixbuf(img, ext)
+        pixbuf = create_pixbuf(img)
         img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         pos = filename.rfind('/')
         basename = filename[pos+1:]
-        self.images.append([[img], filename, ext, 0])
+        self.images.append([[img], filename, 0])
         self.create_tab(img_widget, basename)
 
     def create_tab(self, img_widget=None, title='Sans-titre'):
@@ -91,23 +97,6 @@ class App(Gtk.Window):
         #self.notebook.set_tab_reorderable(page, True)
         self.notebook.show_all()
 
-    def create_pixbuf(self, img, ext):
-        """Convert a PIL image to Gtk pixbuf.
-
-        :param img : PIL image
-        """
-        buff = BytesIO()
-        if ext == 'jpg':
-            ext = 'jpeg'
-        img.save(buff, ext)
-        content = buff.getvalue()
-        buff.close()
-        loader = GdkPixbuf.PixbufLoader()
-        loader.write(content)
-        pixbuf = loader.get_pixbuf()
-        loader.close()
-        return pixbuf
-
     def on_close_clicked(self, _, page):
         """Close a tab."""
         index = self.notebook.page_num(page)
@@ -116,13 +105,14 @@ class App(Gtk.Window):
     def close_tab(self, index):
         self.notebook.remove_page(index)
         self.images = self.images[:index] + self.images[index+1:]
+        # add close img from PIL
 
     @img_open
     def filter(self, func, value=None):
         print('filter')
         print(self.images)
         page = self.notebook.get_current_page()
-        index_img = self.images[page][3]
+        index_img = self.images[page][2]
         if value is None:
             new_img = func(self.images[page][0][index_img])
         else:
@@ -131,11 +121,11 @@ class App(Gtk.Window):
         self.images[page][0] = self.images[page][0][:index_img+1]
         print(self.images)
         self.images[page][0].append(new_img)
-        self.images[page][3] += 1
+        self.images[page][2] += 1
         if len(self.images[page][0]) > self.MAX_HIST:
             print('ok')
             self.images[page][0].pop(0)
-            self.images[page][3] -= 1
+            self.images[page][2] -= 1
         print(self.images)
 
         print('filter /')
@@ -147,7 +137,7 @@ class App(Gtk.Window):
         """
 
         # Show image:
-        pixbuf = self.create_pixbuf(new_img, self.images[page][2])
+        pixbuf = create_pixbuf(new_img)
         new_img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         box = self.notebook.get_nth_page(page)
         scrolled_window = box.get_children()[0]
@@ -162,17 +152,17 @@ class App(Gtk.Window):
         page = self.notebook.get_current_page()
         if len(self.images[page][0]) >= 2:
             print('ok')
-            index_img = self.images[page][3]
+            index_img = self.images[page][2]
 
             if num == -1: # Undo:
                 if index_img >= 1:
-                    self.images[page][3] += num
-                    index_img = self.images[page][3]
+                    self.images[page][2] += num
+                    index_img = self.images[page][2]
                     self.edit_image(self.images[page][0][index_img], page)
             else: # Redo:
                 if index_img + 1 < len(self.images[page][0]):
-                    self.images[page][3] += num
-                    index_img = self.images[page][3]
+                    self.images[page][2] += num
+                    index_img = self.images[page][2]
                     self.edit_image(self.images[page][0][index_img], page)
 
         print(self.images)
@@ -182,7 +172,7 @@ class App(Gtk.Window):
     def file_save(self, action):
         print(action)
         page = self.notebook.get_current_page()
-        index_img = self.images[page][3]
+        index_img = self.images[page][2]
         self.images[page][0][index_img].save(self.images[page][1])
 
     @img_open
@@ -196,25 +186,15 @@ class App(Gtk.Window):
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filename = dialog.get_filename()
-            index_img = self.images[page][3]
-            self.images[page][0][index_img].save(filename)  # need full path !!
+            index_img = self.images[page][2]
+            self.images[page][0][index_img].save(filename)
             self.close_tab(page)
             self.open_tab(filename)
 
         dialog.destroy()
 
     def filter_with_params(self, func, title, limits):
-        dialog(func, self, title, limits)
+        dialog_param(func, self, title, limits)
 
     def about(self, action):
-        dialog = Gtk.AboutDialog()
-        dialog.set_logo(GdkPixbuf.Pixbuf.new_from_file('assets/icons/imeditor.png'))
-        dialog.set_program_name('ImEditor')
-        dialog.set_version('0.1')
-        dialog.set_website('https://github.com/ImEditor')
-        dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
-        dialog.set_comments('GTK Linux Image Editor ')
-        dialog.set_license('Distributed under the GNU GPL(v3) license. \n\n https://github.com/ImEditor/ImEditor/blob/master/LICENSE')
-
-        dialog.run()
-        dialog.destroy()
+        about()

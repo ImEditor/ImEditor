@@ -3,6 +3,7 @@
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
 from filters import base
+from interface.dialog import dialog_new_image
 
 def create_menus(self):
     # Menu:
@@ -11,6 +12,11 @@ def create_menus(self):
     # File:
     action_filemenu = Gtk.Action(name="FileMenu", label="Fichier")
     action_group.add_action(action_filemenu)
+
+    action_filenew = Gtk.Action(name='FileNew', label='Nouveau')
+    action_filenew.connect('activate', lambda arg: dialog_new_image(self))
+    action_filenew.set_icon_name('document-new')
+    action_group.add_action_with_accel(action_filenew, '<control>N')
 
     action_fileopen = Gtk.Action(name='FileOpen', label='Ouvrir')
     action_fileopen.connect('activate', self.open_image)
