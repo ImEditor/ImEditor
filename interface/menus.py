@@ -33,6 +33,10 @@ def create_menus(self):
     action_filesaveas.set_icon_name('document-save-as')
     action_group.add_action_with_accel(action_filesaveas, '<shift><control>S')
 
+    action_fileproperties = Gtk.Action(name='FileProperties', label='Propriétés de l\'image')
+    action_fileproperties.connect('activate', self.properties)
+    action_group.add_action(action_fileproperties)
+
     action_filequit = Gtk.Action(name='FileQuit', label='Quitter')
     action_filequit.connect('activate', self.quit_app)
     action_group.add_action_with_accel(action_filequit, '<control>Q')
