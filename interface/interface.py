@@ -169,6 +169,19 @@ class App(Gtk.Window):
         print('history /')
 
     @img_open
+    def properties(self, action):
+        page = self.notebook.get_current_page()
+        index_img = self.images[page][2]
+        img = self.images[page][0][index_img]
+
+        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, 'Propriétés de l\'image')
+        message = '<b>Taille : </b>' + str(img.width) + 'x' + str(img.height) + ' <b>Mode : </b>' + img.mode
+        dialog.format_secondary_markup(message)
+        dialog.run()
+
+        dialog.destroy()
+
+    @img_open
     def file_save(self, action):
         print(action)
         page = self.notebook.get_current_page()
