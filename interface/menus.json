@@ -1,0 +1,152 @@
+{
+  "Fichier": [
+    {
+      "name": "new",
+      "callback": "parent.new_image",
+      "label": "Nouvelle image",
+      "shortcut": "&lt;Primary&gt;n"
+    },
+    {
+      "name": "open",
+      "callback": "parent.open_image",
+      "label": "Ouvrir une image",
+      "shortcut": "&lt;Primary&gt;o"
+    },
+    {
+      "name": "save",
+      "callback": "editor.file_save",
+      "label": "Enregistrer",
+      "shortcut": "&lt;Primary&gt;s"
+    },
+    {
+      "name": "save_as",
+      "callback": "editor.file_save_as",
+      "label": "Enregistrer sous"
+    },
+    {
+      "name": "properties",
+      "callback": "editor.properties",
+      "label": "Propriétés de l'image"
+    },
+    {
+      "name": "quit",
+      "callback": "parent.quit",
+      "label": "Quitter",
+      "shortcut": "&lt;Primary&gt;q"
+    }
+  ],
+  "Édition": [
+    {
+      "name": "undo",
+      "callback": "editor.history",
+      "params": -1,
+      "label": "Annuler",
+      "shortcut": "&lt;Primary&gt;z"
+    },
+    {
+      "name": "redo",
+      "callback": "editor.history",
+      "params": 1,
+      "label": "Rétablir",
+      "shortcut": "&lt;Primary&gt;y"
+    },
+    {
+      "name": "rotate_left",
+      "callback": "editor.apply_filter",
+      "params": "base.rotate_left",
+      "label": "Rotation -90°"
+    },
+    {
+      "name": "rotate_right",
+      "callback": "editor.apply_filter",
+      "params": "base.rotate_right",
+      "label": "Rotation 90°"
+    }
+  ],
+  "Affichage": [
+    {
+      "name": "fullscreen",
+      "callback": "parent.set_fullscreen",
+      "label": "Plein écran",
+      "shortcut": "F11"
+    }
+  ],
+  "Filtres": [
+    {
+      "name": "negative",
+      "callback": "editor.apply_filter",
+      "params": "base.negative",
+      "label": "Négatif"
+    },
+    {
+      "name": "black_white",
+      "callback": "editor.filter_with_params",
+      "label": "Noir et blanc",
+      "params": [
+        "base.black_white",
+        "Noir et blanc",
+        [
+          0,
+          255
+        ]
+      ]
+    },
+    {
+      "name": "red",
+      "callback": "editor.apply_filter",
+      "label": "Rouge",
+      "params": "base.red"
+    },
+    {
+      "name": "green",
+      "callback": "editor.apply_filter",
+      "label": "Vert",
+      "params": "base.green"
+    },
+    {
+      "name": "blue",
+      "callback": "editor.apply_filter",
+      "label": "Bleu",
+      "params": "base.blue"
+    },
+    {
+      "name": "gray_level",
+      "callback": "editor.apply_filter",
+      "label": "Niveaux de gris",
+      "params": "base.gray_level"
+    },
+    {
+      "name": "lighten",
+      "callback": "editor.filter_with_params",
+      "label": "Éclaircir",
+      "params": [
+        "base.lighten",
+        "Éclaircir",
+        [
+          0,
+          255
+        ]
+      ]
+    },
+    {
+      "name": "darken",
+      "callback": "editor.filter_with_params",
+      "label": "Assombrir",
+      "params": [
+        "base.darken",
+        "Assombrir",
+        [
+          0,
+          255
+        ]
+      ]
+    }
+  ],
+  "Aide": [
+    {
+      "name": "about",
+      "callback": "parent.about",
+      "label": "À propos"
+    }
+  ]
+}

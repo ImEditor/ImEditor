@@ -1,19 +1,44 @@
 #!/usr/bin/python3
 
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject
+from PIL import Image
+
+from interface.tools import pil_to_pixbuf
+
+class Tab(Gtk.Box):
+    def __init__(self, parent, img, title):
+        Gtk.Box.__init__(self)
+        pixbuf = pil_to_pixbuf(img)
+        self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
+        self.set_hexpand(True)  # Fill available horizontal space
+        self.set_vexpand(True)  # Fill available vertical space
+        self.scrolled_window = Gtk.ScrolledWindow()
+        self.scrolled_window.add(self.img_widget)
+        self.tab_label = TabLabel(title, img)
+        self.tab_label.connect('close-clicked', parent.on_close_tab_clicked, self)
+        self.pack_start(self.scrolled_window, True, True, 0)
+
+    def get_tab_label(self):
+        return self.tab_label
+
+    def update_image(self, new_img):
+        pixbuf = pil_to_pixbuf(new_img)
+        self.img_widget.set_from_pixbuf(pixbuf)
 
 class TabLabel(Gtk.Box):
     """Define the label on the tab."""
-    __gsignals__ = {
-        'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
-    def __init__(self, title):
+    __gsignals__ = {'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),}
+    def __init__(self, title, img):
         Gtk.Box.__init__(self)
         self.set_orientation(Gtk.Orientation.HORIZONTAL)
         self.set_spacing(5)
 
-        # icon
-
+        # Icon:
+        self.icon_widget = Gtk.Image()
+        self.set_icon(img)
+        self.pack_start(self.icon_widget, False, False, 0)
         # Label:
         label = Gtk.Label(title)
         self.pack_start(label, True, True, 0)
@@ -27,6 +52,12 @@ class TabLabel(Gtk.Box):
         self.pack_start(button, False, False, 0)
 
         self.show_all()
+
+    def set_icon(self, img):
+        icon = img.copy()
+        icon.thumbnail((24, 24))
+        pixbuf = pil_to_pixbuf(icon)
+        self.icon_widget.set_from_pixbuf(pixbuf)
 
     def button_clicked(self, _):
         self.emit('close-clicked')

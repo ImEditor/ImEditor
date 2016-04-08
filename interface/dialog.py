@@ -1,10 +1,14 @@
 #!/usr/bin/python3
 
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-class MyDialog(Gtk.Dialog):
+from interface.tools import SpinButton
+
+class Dialog(Gtk.Dialog):
     def __init__(self, parent, title):
-        Gtk.Dialog.__init__(self, parent)
+        Gtk.Dialog.__init__(self, transient_for=parent)
         self.set_title(title)
         self.set_modal(True)
 
@@ -12,75 +16,114 @@ class MyDialog(Gtk.Dialog):
         self.set_size_request(300, -1)
         self.set_border_width(10)
 
-def dialog_param(func, parent, title, limits):
-    # Adjustment: value, lower, upper, step increment, page increment, page size
-    # Tags: MODAL: can't click on main window
-    dialog = MyDialog(parent, title)
+        self.values = list()
+
+    def get_values(self):
+        if self.values == []:
+            return None
+        elif len(self.values) == 1:
+            return self.values[0]
+        else:
+            return self.values
+
+def params_dialog(func, parent, title, limits):
+    dialog = Dialog(parent, title)
     label = Gtk.Label('Entrez une valeur')
 
     default = (limits[0] + limits[1]) / 2
-    adjustment = Gtk.Adjustment(default, limits[0], limits[1], 20, 10, 0)
-    h_scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adjustment)
-    h_scale.set_digits(0)
+    h_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, limits[0], limits[1], 20)
+    h_scale.set_value(default)
     h_scale.set_hexpand(True)
     h_scale.set_valign(Gtk.Align.START)
 
     cancel_button = Gtk.Button.new_with_label("Annuler")
-    cancel_button.connect("clicked", lambda arg: close(dialog))
+    cancel_button.connect("clicked", close_dialog, dialog)
 
-    ok_button = Gtk.Button.new_with_label("Ok")
-    ok_button.connect("clicked", lambda arg: apply(parent, h_scale, func, dialog))
+    ok_button = Gtk.Button.new_with_label("Valider")
+    ok_button.connect("clicked", apply, h_scale, dialog)
 
     dialog_box = dialog.get_content_area()
+    dialog_box.set_spacing(6)
     dialog_box.pack_start(label, False, False, 0)
     dialog_box.pack_start(h_scale, False, False, 0)
-    dialog_box.pack_start(cancel_button, False, False, 0)
-    dialog_box.pack_start(ok_button, False, False, 0)
-    dialog.show_all()
-    dialog.run()
 
-def dialog_new_image(parent):
-    dialog = MyDialog(parent, 'Nouvelle image')
+    button_box = Gtk.Box(spacing=6)
+    button_box.pack_start(cancel_button, True, True, 0)
+    button_box.pack_start(ok_button, True, True, 0)
+    dialog_box.pack_start(button_box, False, False, 0)
+
+    dialog.show_all()
+    ok_button.do_grab_focus(ok_button)
+    dialog.run()
+    dialog.destroy()
+
+    return dialog
+
+def apply(button, h_scale, dialog):
+    dialog.values.append(int(h_scale.get_value()))
+    dialog.destroy()
+
+def new_image_dialog(parent):
+    dialog = Dialog(parent, 'Nouvelle image')
 
     label_width = Gtk.Label('Largeur')
-    adj_width = Gtk.Adjustment(640, 1, 2048, 40, 20, 0)
-    spin_width = Gtk.SpinButton()
-    spin_width.set_adjustment(adj_width)
+    spin_width = SpinButton(640, 1, 2048)
 
     label_height = Gtk.Label('Hauteur')
-    adj_height = Gtk.Adjustment(360, 1, 1080, 40, 20, 0)
-    spin_height = Gtk.SpinButton()
-    spin_height.set_adjustment(adj_height)
+    spin_height = SpinButton(360, 1, 1080)
 
     color_chooser = Gtk.ColorChooserWidget()
+    color_chooser.set_use_alpha(False)
 
     cancel_button = Gtk.Button.new_with_label("Annuler")
-    cancel_button.connect("clicked", lambda arg: close(dialog))
+    cancel_button.connect("clicked", close_dialog, dialog)
 
-    ok_button = Gtk.Button.new_with_label("Ok")
-    ok_button.connect("clicked", lambda arg: new_image(parent, spin_width, spin_height, color_chooser, dialog))
+    ok_button = Gtk.Button.new_with_label("Valider")
+    ok_button.connect("clicked", ok_callback_new_image, spin_width, spin_height, color_chooser, dialog)
 
     dialog_box = dialog.get_content_area()
-    dialog_box.pack_start(spin_width, False, False, 0)
-    dialog_box.pack_start(spin_height, False, False, 0)
+    dialog_box.set_spacing(6)
+
+    spins_box = Gtk.Box(spacing=6)
+    spins_box.pack_start(Gtk.Label('Largeur :'), True, True, 0)
+    spins_box.pack_start(spin_width, True, True, 0)
+    spins_box.pack_start(Gtk.Label('Hauteur :'), True, True, 0)
+    spins_box.pack_start(spin_height, True, True, 0)
+    button_box = Gtk.Box(spacing=6)
+    button_box.pack_start(cancel_button, True, True, 0)
+    button_box.pack_start(ok_button, True, True, 0)
+
+    dialog_box.pack_start(spins_box, False, False, 0)
     dialog_box.pack_start(color_chooser, False, False, 0)
-    dialog_box.pack_start(cancel_button, False, False, 0)
-    dialog_box.pack_start(ok_button, False, False, 0)
+    dialog_box.pack_start(button_box, False, False, 0)
     dialog.show_all()
     dialog.run()
-
-def close(dialog):
     dialog.destroy()
 
-def apply(parent, h_scale, func, dialog):
-    value = int(h_scale.get_value())
-    parent.filter(func, value)
-    dialog.destroy()
-    close(dialog)
+    return dialog
 
-def new_image(parent, spin_width, spin_height, color_chooser, dialog):
+def close_dialog(button, dialog):
+    dialog.destroy()
+
+def ok_callback_new_image(button, spin_width, spin_height, color_chooser, dialog):
     width = spin_width.get_value_as_int()
     height = spin_height.get_value_as_int()
+    size = (width, height)
     color = color_chooser.get_rgba().to_string()
-    parent.new_image((width, height), color)
-    close(dialog)
+    dialog.values.append(size)
+    dialog.values.append(color)
+    dialog.destroy()
+
+def file_dialog(parent):
+    dialog = Gtk.FileChooserDialog('Choisissez un fichier',
+        parent,
+        Gtk.FileChooserAction.OPEN,
+        ("Annuler", Gtk.ResponseType.CANCEL,
+         "Ouvrir", Gtk.ResponseType.OK))
+    response = dialog.run()
+    if response == Gtk.ResponseType.OK:
+        filename = dialog.get_filename()
+    else:
+        filename = None
+    dialog.destroy()
+    return filename

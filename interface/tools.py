@@ -1,29 +1,23 @@
 #!/usr/bin/python3
 
-from gi.repository import Gtk, GdkPixbuf
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GdkPixbuf, GLib
 from io import BytesIO
 
-def create_pixbuf(img):
-    file1 = BytesIO()
-    img.save(file1, "ppm")
-    contents = file1.getvalue()
-    file1.close()
-    loader = GdkPixbuf.PixbufLoader()
-    loader.write(contents)
-    pixbuf = loader.get_pixbuf()
-    loader.close()
+def pil_to_pixbuf(img):
+    data = img.tobytes()
+    w, h = img.size
+    data = GLib.Bytes.new(data)
+    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, False, 8, w, h, w * 3)
 
     return pixbuf
 
-def about():
-    dialog = Gtk.AboutDialog()
-    dialog.set_logo(GdkPixbuf.Pixbuf.new_from_file('assets/icons/imeditor.png'))
-    dialog.set_program_name('ImEditor')
-    dialog.set_version('0.1')
-    dialog.set_website('https://github.com/ImEditor')
-    dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
-    dialog.set_comments('GTK Linux Image Editor ')
-    dialog.set_license('Distributed under the GNU GPL(v3) license. \n\n https://github.com/ImEditor/ImEditor/blob/master/LICENSE')
-
-    dialog.run()
-    dialog.destroy()
+class SpinButton(Gtk.SpinButton):
+    def __init__(self, default, min_value, max_value):
+        Gtk.SpinButton.__init__(self)
+        self.set_digits(0)
+        self.set_numeric(False)
+        self.set_range(min_value, max_value)
+        self.set_value(default)
+        self.set_increments(40, 20)
