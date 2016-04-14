@@ -1,24 +1,32 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python3
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject
-from PIL import Image
+from gi.repository import Gtk, GObject, Gdk
 
 from interface.tools import pil_to_pixbuf
 
-class Tab(Gtk.Box):
+class Tab(Gtk.ScrolledWindow):
     def __init__(self, parent, img, title):
-        Gtk.Box.__init__(self)
+        Gtk.ScrolledWindow.__init__(self)
         pixbuf = pil_to_pixbuf(img)
+
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
-        self.set_hexpand(True)  # Fill available horizontal space
-        self.set_vexpand(True)  # Fill available vertical space
-        self.scrolled_window = Gtk.ScrolledWindow()
-        self.scrolled_window.add(self.img_widget)
+        self.img_widget.set_hexpand(True)  # Fill available horizontal space
+        self.img_widget.set_vexpand(True)  # Fill available vertical space
+
+        self.event_box = Gtk.EventBox()
+        self.event_box.add(self.img_widget)
+        self.event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
+        self.event_box.connect('button-press-event', parent.editor.press_task)
+        self.event_box.connect('motion-notify-event', parent.editor.move_task)
+        self.event_box.connect('button-release-event', parent.editor.release_task)
+
+        self.add(self.event_box)
+
         self.tab_label = TabLabel(title, img)
         self.tab_label.connect('close-clicked', parent.on_close_tab_clicked, self)
-        self.pack_start(self.scrolled_window, True, True, 0)
 
     def get_tab_label(self):
         return self.tab_label
@@ -40,8 +48,8 @@ class TabLabel(Gtk.Box):
         self.set_icon(img)
         self.pack_start(self.icon_widget, False, False, 0)
         # Label:
-        label = Gtk.Label(title)
-        self.pack_start(label, True, True, 0)
+        self.label = Gtk.Label(title)
+        self.pack_start(self.label, True, True, 0)
 
         # Close button:
         button = Gtk.Button()
@@ -53,11 +61,14 @@ class TabLabel(Gtk.Box):
 
         self.show_all()
 
+    def set_label(self, label):
+        self.label.set_text(label)
+
     def set_icon(self, img):
         icon = img.copy()
         icon.thumbnail((24, 24))
         pixbuf = pil_to_pixbuf(icon)
         self.icon_widget.set_from_pixbuf(pixbuf)
 
-    def button_clicked(self, _):
+    def button_clicked(self, button):
         self.emit('close-clicked')

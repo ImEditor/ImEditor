@@ -37,6 +37,11 @@
   ],
   "Édition": [
     {
+      "name": "select",
+      "callback": "editor.select",
+      "label": "Sélectionner"
+    },
+    {
       "name": "undo",
       "callback": "editor.history",
       "params": -1,
@@ -61,6 +66,24 @@
       "callback": "editor.apply_filter",
       "params": "base.rotate_right",
       "label": "Rotation 90°"
+    },
+    {
+      "name": "copy",
+      "callback": "editor.copy",
+      "label": "Copier",
+      "shortcut": "&lt;Primary&gt;c"
+    },
+    {
+      "name": "paste",
+      "callback": "editor.paste",
+      "label": "Coller",
+      "shortcut": "&lt;Primary&gt;v"
+    },
+    {
+      "name": "cut",
+      "callback": "editor.cut",
+      "label": "Couper",
+      "shortcut": "&lt;Primary&gt;x"
     }
   ],
   "Affichage": [
@@ -69,6 +92,13 @@
       "callback": "parent.set_fullscreen",
       "label": "Plein écran",
       "shortcut": "F11"
+    }
+  ],
+  "Dessiner": [
+    {
+      "name": "draw-brush",
+      "callback": "editor.draw",
+      "label": "Pinceau"
     }
   ],
   "Filtres": [

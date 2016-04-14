@@ -1,9 +1,9 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python3
 
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GdkPixbuf, GLib
-from io import BytesIO
 
 def pil_to_pixbuf(img):
     data = img.tobytes()

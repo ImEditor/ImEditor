@@ -1,9 +1,9 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python3
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
-import json
+from gi.repository import Gtk, Gio, Gdk
 
 def create_menubar(parent, actions):
     editor = parent.editor
@@ -74,9 +74,22 @@ def create_toolbar(parent):
     rotate_right_button.show()
     rotate_right_button.set_action_name('win.rotate_right')
 
+    select_button = Gtk.ToolButton.new()
+    pixbuf = Gdk.Cursor(Gdk.CursorType.ARROW).get_image()
+    select_button.set_icon_widget(Gtk.Image.new_from_pixbuf(pixbuf))
+    toolbar.insert(select_button, 8)
+    select_button.show()
+    select_button.set_action_name('win.select')
+
+    draw_button = Gtk.ToolButton.new()
+    draw_button.set_icon_name('applications-graphics')
+    toolbar.insert(draw_button, 9)
+    draw_button.show()
+    draw_button.set_action_name('win.draw-brush')
+
     parent.fullscreen_button = Gtk.ToolButton.new()
     parent.fullscreen_button.set_icon_name('view-fullscreen')
-    toolbar.insert(parent.fullscreen_button, 8)
+    toolbar.insert(parent.fullscreen_button, 10)
     parent.fullscreen_button.set_action_name('win.fullscreen')
 
     toolbar.set_hexpand(True) # with extra horizontal space

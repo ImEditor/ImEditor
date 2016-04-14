@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python3
 
 import gi
@@ -26,7 +27,7 @@ class Dialog(Gtk.Dialog):
         else:
             return self.values
 
-def params_dialog(func, parent, title, limits):
+def params_dialog(parent, title, limits):
     dialog = Dialog(parent, title)
     label = Gtk.Label('Entrez une valeur')
 
@@ -40,7 +41,7 @@ def params_dialog(func, parent, title, limits):
     cancel_button.connect("clicked", close_dialog, dialog)
 
     ok_button = Gtk.Button.new_with_label("Valider")
-    ok_button.connect("clicked", apply, h_scale, dialog)
+    ok_button.connect("clicked", apply_filter, h_scale, dialog)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
@@ -53,23 +54,19 @@ def params_dialog(func, parent, title, limits):
     dialog_box.pack_start(button_box, False, False, 0)
 
     dialog.show_all()
-    ok_button.do_grab_focus(ok_button)
     dialog.run()
     dialog.destroy()
 
     return dialog
 
-def apply(button, h_scale, dialog):
+def apply_filter(button, h_scale, dialog):
     dialog.values.append(int(h_scale.get_value()))
     dialog.destroy()
 
 def new_image_dialog(parent):
     dialog = Dialog(parent, 'Nouvelle image')
 
-    label_width = Gtk.Label('Largeur')
     spin_width = SpinButton(640, 1, 2048)
-
-    label_height = Gtk.Label('Hauteur')
     spin_height = SpinButton(360, 1, 1080)
 
     color_chooser = Gtk.ColorChooserWidget()

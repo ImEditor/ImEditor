@@ -1,11 +1,12 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python3
 
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from PIL import Image
-from os import path
 import sys
+from os import path
 
 from interface.tabs import Tab
 from interface.menus import create_menubar, create_toolbar
@@ -33,7 +34,13 @@ class Window(Gtk.ApplicationWindow):
         self.notebook = Gtk.Notebook()
         grid.attach(self.notebook, 0, 1, 1, 1)
 
+        self.root = self.get_root_window()
+        self.default_cursor = Gdk.Cursor(Gdk.CursorType.ARROW)
+        self.draw_cursor = Gdk.Cursor(Gdk.CursorType.PENCIL)
+        self.move_cursor = Gdk.Cursor(Gdk.CursorType.FLEUR)
+
     def quit(self, action, parameter):
+        self.root.set_cursor(self.default_cursor)
         sys.exit()
 
     def new_image(self, action, parameter):
@@ -41,19 +48,17 @@ class Window(Gtk.ApplicationWindow):
         values = new_image_dialog.get_values()
         if values is not None:
             img = Image.new('RGB', values[0], values[1])
-            self.editor.add_image(img, 'noname.jpg', 0)
+            self.editor.add_image(img, 'sans-titre.png', 0, False, True)
             self.create_tab(img)
 
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self)
         if filename is not None:
             img = Image.open(filename)
-            pos = filename.rfind('/')
-            basename = filename[pos+1:]
-            self.editor.add_image(img, filename, 0)
-            self.create_tab(img, basename)
+            self.editor.add_image(img, filename, 0, True)
+            self.create_tab(img, path.basename(filename))
 
-    def create_tab(self, img, title='Sans-titre'):
+    def create_tab(self, img, title='Sans titre'):
         tab = Tab(self, img, title)
         page_num = self.notebook.get_current_page() + 1
         self.notebook.insert_page(tab, tab.get_tab_label(), page_num)
@@ -65,19 +70,34 @@ class Window(Gtk.ApplicationWindow):
         self.close_tab(page_num)
 
     def close_tab(self, page_num):
-        self.notebook.remove_page(page_num)
-        self.editor.close_image(page_num)
+        if not self.editor.images[page_num].get_saved():
+            dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
+                Gtk.ButtonsType.YES_NO,
+                'Enregistrer les modifications du document ' + self.editor.images[page_num].get_filename() + ' avant la fermeture ?')
+            dialog.format_secondary_text(
+                'Vos modifications seront perdues si vous ne les enregistrez pas.')
+            response = dialog.run()
+            if response == Gtk.ResponseType.YES:
+                self.editor.file_save_as(None, None)
+                self.notebook.remove_page(page_num)
+                self.editor.close_image(page_num)
+            elif response == Gtk.ResponseType.NO:
+                self.notebook.remove_page(page_num)
+                self.editor.close_image(page_num)
+            dialog.destroy()
+        else:
+            self.notebook.remove_page(page_num)
+            self.editor.close_image(page_num)
 
-    def update_image(self, new_img, page):
-        tab = self.notebook.get_nth_page(page)
+    def update_image(self, new_img):
+        page_num = self.notebook.get_current_page()
+        tab = self.notebook.get_nth_page(page_num)
         tab.update_image(new_img)
         tab.tab_label.set_icon(new_img)
         self.notebook.show_all()
 
     def set_fullscreen(self, action, parameter):
-        # check if the state is the same as Gdk.WindowState.FULLSCREEN, which is a bit flag
-        is_fullscreen = self.get_window().get_state() & Gdk.WindowState.FULLSCREEN != 0
-        if not is_fullscreen:
+        if not self.get_window().get_state() & Gdk.WindowState.FULLSCREEN != 0:
             self.fullscreen_button.set_icon_name('view-restore')
             self.fullscreen()
         else:
