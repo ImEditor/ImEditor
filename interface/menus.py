@@ -24,7 +24,6 @@ def create_menubar(parent, actions):
 
 def create_toolbar(parent):
     toolbar = Gtk.Toolbar()
-    toolbar.get_style_context().add_class(Gtk.STYLE_CLASS_PRIMARY_TOOLBAR)
 
     new_button = Gtk.ToolButton.new()
     new_button.set_icon_name('document-new')
