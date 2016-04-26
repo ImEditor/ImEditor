@@ -6,10 +6,10 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GdkPixbuf, GLib
 
 def pil_to_pixbuf(img):
-    data = img.tobytes()
-    w, h = img.size
-    data = GLib.Bytes.new(data)
-    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, False, 8, w, h, w * 3)
+    if img.mode != 'RGB': # pixbuf only support RGB
+        img = img.convert('RGB')
+    data = GLib.Bytes.new(img.tobytes())
+    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, False, 8, img.width, img.height, img.width * 3)
 
     return pixbuf
 
