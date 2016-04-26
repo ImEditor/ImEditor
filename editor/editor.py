@@ -4,13 +4,14 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from PIL import Image, ImageDraw
+from PIL import Image
 from os import path
 
 from interface import dialog
 from filters import base
 from editor.image import ImageObject
-from editor.tools import get_coords
+from editor.tools import get_coords, get_middle_mouse, get_infos
+from editor.draw import draw_point, draw_shape
 
 def img_open(func):
     def inner(self, *args, **kwargs):
@@ -36,6 +37,8 @@ class Editor(object):
         self.images[index].close_all_img()
         self.images = self.images[:index] + self.images[index+1:]
         self.select(None, None)
+        self.task = 'select'
+        self.win.root.set_cursor(self.win.default_cursor)
 
     def add_image(self, *args):
         self.images.append(ImageObject(*args))
@@ -55,11 +58,11 @@ class Editor(object):
             new_img = func(img, value)
         self.do_change(new_img)
 
-    def do_change(self, new_img):
+    def do_change(self, img):
         page_num = self.win.notebook.get_current_page()
-        self.win.update_image(new_img)
+        self.win.update_image(img)
         self.images[page_num].forget_img()
-        self.images[page_num].add_img(new_img)
+        self.images[page_num].add_img(img)
         self.images[page_num].increment_index()
         self.images[page_num].set_saved(False)
         if self.images[page_num].get_n_img() > self.MAX_HIST:
@@ -84,24 +87,25 @@ class Editor(object):
             if num == -1: # Undo:
                 if index_img >= 1:
                     self.images[page_num].decrement_index()
-                    new_img = self.images[page_num].get_current_img()
-                    self.win.update_image(new_img)
+                    img = self.images[page_num].get_current_img()
+                    self.win.update_image(img)
             else: # Redo:
                 if index_img + 1 < self.images[page_num].get_n_img():
                     self.images[page_num].increment_index()
-                    new_img = self.images[page_num].get_current_img()
-                    self.win.update_image(new_img)
+                    img = self.images[page_num].get_current_img()
+                    self.win.update_image(img)
 
+    @img_open
     def select(self, action, parameter):
-        if self.task != 'select':
-            self.win.root.set_cursor(self.win.default_cursor)
-            self.task = 'select'
+        if self.task == 'paste':
             page_num = self.win.notebook.get_current_page()
             tmp_img = self.images[page_num].get_tmp_img()
             if tmp_img is not None:
                 self.do_change(tmp_img)
-                self.win.update_image(tmp_img)
                 self.images[page_num].set_tmp_img(None)
+        if self.task != 'select':
+            self.win.root.set_cursor(self.win.default_cursor)
+            self.task = 'select'
 
     @img_open
     def draw(self, action, parameter):
@@ -109,85 +113,77 @@ class Editor(object):
             self.task = 'draw-brush'
             self.win.root.set_cursor(self.win.draw_cursor)
 
-    def press_task(self, widget, event):
+    def get_vars(self, mouse_coords, is_tmp=False):
+        """Return required variables."""
         page_num = self.win.notebook.get_current_page()
-        new_img = self.get_img().copy()
+        if is_tmp:
+            img = self.images[page_num].get_tmp_img().copy()
+        else:
+            img = self.get_img().copy()
         tab = self.win.notebook.get_nth_page(page_num)
-        x, y = get_coords(new_img, tab.get_allocation(), event)
-        if self.task == 'draw-brush':
-            self.move_task(None, event)
-        elif self.task == 'select':
-            self.selection.clear()
-            self.selection.append(x)
-            self.selection.append(y)
-            self.win.update_image(new_img)
-        elif self.task == 'paste':
-            new_img = self.get_img().copy()
-            x = x - (self.selected_img.width / 2)
-            y = y - (self.selected_img.height / 2)
-            new_img.paste(self.selected_img, (round(x), round(y)))
-            self.win.update_image(new_img)
-            self.images[page_num].set_tmp_img(new_img)
+        x_mouse, y_mouse = get_coords(img, tab.get_allocation(), mouse_coords)
+        return [x_mouse, y_mouse], page_num, img
 
-    def move_task(self, widget, event, shape='ellipse', size=5, color='black'):
-        page_num = self.win.notebook.get_current_page()
-        new_img = self.images[page_num].get_tmp_img().copy()
-        tab = self.win.notebook.get_nth_page(page_num)
-        x, y = get_coords(new_img, tab.get_allocation(), event)
+    def press_task(self, widget, event):
+        mouse_coords, page_num, img = self.get_vars([event.x, event.y])
         if self.task == 'select':
-            draw = ImageDraw.Draw(new_img)
-            x1 = self.selection[0]
-            y1 = self.selection[1]
-            draw.rectangle([x1, y1, x, y], outline=color)
-            self.win.update_image(new_img)
+            self.selection = mouse_coords
+            self.win.update_image(img)
         elif self.task == 'draw-brush':
-            draw = ImageDraw.Draw(new_img)
-            if shape == 'rectangle':
-                draw.rectangle([x-size, y-size, x+size, y+size], color)
-            elif shape == 'ellipse':
-                draw.ellipse([x-size, y-size, x+size, y+size], color)
-            self.win.update_image(new_img)
-            self.images[page_num].set_tmp_img(new_img)
+            self.move_task(None, event)
+        elif self.task == 'paste' and self.selected_img is not None:
+            self.move_task(None, event)
+
+    def move_task(self, widget, event):
+        mouse_coords, page_num, img = self.get_vars([event.x, event.y], True)
+        if self.task == 'select':
+            draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
+            self.win.update_image(img)
+        elif self.task == 'draw-brush':
+            draw_point(img, mouse_coords)
+            self.set_tmp_img(img)
         elif self.task == 'paste':
-            new_img = self.get_img().copy()
-            x = x - (self.selected_img.width / 2)
-            y = y - (self.selected_img.height / 2)
-            new_img.paste(self.selected_img, (round(x), round(y)))
-            self.win.update_image(new_img)
-            self.images[page_num].set_tmp_img(new_img)
+            self.paste(None, None, mouse_coords=mouse_coords)
 
     def release_task(self, widget, event):
-        page_num = self.win.notebook.get_current_page()
-        img = self.images[page_num].get_tmp_img()
-        tab = self.win.notebook.get_nth_page(page_num)
-        x, y = get_coords(img, tab.get_allocation(), event)
-        if self.task == 'draw-brush':
-            img = self.images[page_num].get_tmp_img()
+        mouse_coords, page_num, img = self.get_vars([event.x, event.y], True)
+        if self.task == 'select':
+            self.selection.extend(mouse_coords)
+        elif self.task == 'draw-brush':
             self.images[page_num].set_tmp_img(None)
             self.do_change(img)
-        elif self.task == 'select':
-            self.selection.append(x)
-            self.selection.append(y)
 
+    def set_tmp_img(self, img):
+        self.win.update_image(img)
+        page_num = self.win.notebook.get_current_page()
+        self.images[page_num].set_tmp_img(img)
+
+    @img_open
     def copy(self, action, parameter):
         if self.selection != list():
             img = self.get_img()
             self.selected_img = img.crop(tuple(self.selection))
 
-    def paste(self, action, parameter):
-        self.win.root.set_cursor(self.win.move_cursor)
-        self.task = 'paste'
-        new_img = self.get_img().copy()
-        new_img.paste(self.selected_img, (0, 0))
-        self.win.update_image(new_img)
+    @img_open
+    def paste(self, action, parameter, mouse_coords=None):
+        if self.selected_img is not None:
+            if self.task != 'paste':  # ctrl + V:
+                self.task = 'paste'
+                self.win.root.set_cursor(self.win.move_cursor)
+                x, y = 0, 0
+            else:
+                x, y = get_middle_mouse(self.selected_img.size, mouse_coords)
+            new_img = self.get_img().copy()
+            new_img.paste(self.selected_img, (x, y))
+            self.set_tmp_img(new_img)
 
+    @img_open
     def cut(self, action, parameter):
         if self.selection != list():
             self.copy(None, None)
             blank_img = Image.new('RGB', self.selected_img.size, 'white')
             img = self.get_img().copy()
             img.paste(blank_img, tuple(self.selection[:2]))
-            self.win.update_image(img)
             self.do_change(img)
 
     @img_open
@@ -202,29 +198,18 @@ class Editor(object):
 
     @img_open
     def file_save_as(self, action, parameter):
-        page_num = self.win.notebook.get_current_page()
-
-        dialog = Gtk.FileChooserDialog('Choisissez un fichier', self.win,
-            Gtk.FileChooserAction.SAVE,
-            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-             Gtk.STOCK_SAVE, Gtk.ResponseType.OK))
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
-            filename = dialog.get_filename()
+        filename = dialog.file_dialog(self.win)
+        if filename is not None:
+            page_num = self.win.notebook.get_current_page()
             img = self.images[page_num].get_current_img()
             img.save(filename)
             self.images[page_num].set_filename(filename)
             page_num = self.win.notebook.get_current_page()
             self.win.notebook.get_nth_page(page_num).get_tab_label().set_label(path.basename(filename))
             self.images[page_num].set_saved(True)
-        dialog.destroy()
 
     @img_open
     def properties(self, action, parameter):
         page_num = self.win.notebook.get_current_page()
-        img = self.images[page_num].get_current_img()
-        dialog = Gtk.MessageDialog(self.win, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, 'Propriétés de l\'image')
-        message = '<b>Taille : </b>' + str(img.width) + 'x' + str(img.height) + ' <b>Mode : </b>' + img.mode
-        dialog.format_secondary_markup(message)
-        dialog.run()
-        dialog.destroy()
+        img_infos = get_infos(self.images[page_num])
+        dialog_infos = dialog.info_dialog(self.win, 'Propriétés de l\'image', img_infos)

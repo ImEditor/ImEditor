@@ -59,6 +59,21 @@ def params_dialog(parent, title, limits):
 
     return dialog
 
+def info_dialog(parent, title, infos):
+    dialog = Dialog(parent, title)
+
+    dialog_box = dialog.get_content_area()
+    dialog_box.set_spacing(6)
+    for key, value in infos.items():
+        label = Gtk.Label('<b>' + key.capitalize() + ' : </b>' + value)
+        label.set_use_markup(True)
+        dialog_box.pack_start(label, False, False, 0)
+
+    dialog.show_all()
+    dialog.run()
+    dialog.destroy()
+
+
 def apply_filter(button, h_scale, dialog):
     dialog.values.append(int(h_scale.get_value()))
     dialog.destroy()
