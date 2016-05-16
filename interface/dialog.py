@@ -126,12 +126,19 @@ def ok_callback_new_image(button, spin_width, spin_height, color_chooser, dialog
     dialog.values.append(color)
     dialog.destroy()
 
-def file_dialog(parent):
-    dialog = Gtk.FileChooserDialog('Choisissez un fichier',
-        parent,
-        Gtk.FileChooserAction.OPEN,
-        ("Annuler", Gtk.ResponseType.CANCEL,
-         "Ouvrir", Gtk.ResponseType.OK))
+def file_dialog(parent, action):
+    if action == 'open':
+        dialog = Gtk.FileChooserDialog('Choisissez un fichier',
+            parent,
+            Gtk.FileChooserAction.OPEN,
+            ("Annuler", Gtk.ResponseType.CANCEL,
+            "Ouvrir", Gtk.ResponseType.OK))
+    elif action == 'save':
+        dialog = Gtk.FileChooserDialog('Choisissez un fichier',
+            parent,
+            Gtk.FileChooserAction.SAVE,
+            ("Annuler", Gtk.ResponseType.CANCEL,
+            "Ok", Gtk.ResponseType.OK))
     response = dialog.run()
     if response == Gtk.ResponseType.OK:
         filename = dialog.get_filename()

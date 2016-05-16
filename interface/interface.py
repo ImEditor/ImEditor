@@ -52,7 +52,7 @@ class Window(Gtk.ApplicationWindow):
             self.create_tab(img)
 
     def open_image(self, action, parameter):
-        filename = dialog.file_dialog(self)
+        filename = dialog.file_dialog(self, 'open')
         if filename is not None:
             img = Image.open(filename)
             self.editor.add_image(img, filename, 0, True)
