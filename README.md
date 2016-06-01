@@ -1,6 +1,7 @@
 # ImEditor
 
 [![Code Health](https://landscape.io/github/ImEditor/ImEditor/master/landscape.svg?style=flat)](https://landscape.io/github/ImEditor/ImEditor/master)
+[![Build Status](https://travis-ci.org/ImEditor/ImEditor.svg?branch=master)](https://travis-ci.org/ImEditor/ImEditor)
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
 
 ## Description
