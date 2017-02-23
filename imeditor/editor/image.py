@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 class ImageObject(object):
     def __init__(self, img, filename, index, saved, is_new_image=False):
