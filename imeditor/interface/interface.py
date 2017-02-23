@@ -109,7 +109,7 @@ class Window(Gtk.ApplicationWindow):
         dialog.set_logo(GdkPixbuf.Pixbuf.new_from_file('assets/icons/imeditor.png'))
         dialog.set_program_name('ImEditor')
         dialog.set_version('0.1')
-        dialog.set_website('https://github.com/ImEditor')
+        dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         dialog.set_comments('GTK Linux Image Editor ')
         dialog.set_license('Distributed under the GNU GPL(v3) license. \n\n https://github.com/ImEditor/ImEditor/blob/master/LICENSE')
