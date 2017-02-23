@@ -73,9 +73,9 @@ class Window(Gtk.ApplicationWindow):
         if not self.editor.images[page_num].get_saved():
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO,
-                'Enregistrer les modifications du document ' + self.editor.images[page_num].get_filename() + ' avant la fermeture ?')
+                'Enregistrer ' + self.editor.images[page_num].get_filename() + ' avant la fermeture ?')
             dialog.format_secondary_text(
-                'Vos modifications seront perdues si vous ne les enregistrez pas.')
+                'Vos modifications seront perdues si vous ne faites pas de sauvegarde.')
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 self.editor.file_save_as(None, None)
