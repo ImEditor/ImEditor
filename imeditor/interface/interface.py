@@ -41,6 +41,10 @@ class Window(Gtk.ApplicationWindow):
 
     def quit(self, action, parameter):
         self.root.set_cursor(self.default_cursor)
+        nb_tabs = self.notebook.get_n_pages()
+        print(self.editor.images)
+        for _ in range(nb_tabs):
+            self.close_tab(self.notebook.get_current_page())
         sys.exit()
 
     def new_image(self, action, parameter):
