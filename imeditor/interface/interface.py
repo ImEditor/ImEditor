@@ -33,14 +33,12 @@ class Window(Gtk.ApplicationWindow):
         # Tabs:
         self.notebook = Gtk.Notebook()
         grid.attach(self.notebook, 0, 1, 1, 1)
-        self.root = self.get_root_window()
         display = Gdk.Display.get_default()
         self.default_cursor = Gdk.Cursor.new_from_name(display, "default")
         self.draw_cursor = Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL)
         self.move_cursor = Gdk.Cursor.new_from_name(display, "move")
 
     def quit(self, action, parameter):
-        self.root.set_cursor(self.default_cursor)
         nb_tabs = self.notebook.get_n_pages()
         print(self.editor.images)
         for _ in range(nb_tabs):

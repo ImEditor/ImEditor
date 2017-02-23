@@ -13,10 +13,7 @@ class Tab(Gtk.ScrolledWindow):
         pixbuf = pil_to_pixbuf(img)
 
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
-        self.img_widget.set_hexpand(True)  # Fill available horizontal space
-        self.img_widget.set_vexpand(True)  # Fill available vertical space
-
-        self.event_box = Gtk.EventBox()
+        self.event_box = Gtk.EventBox(hexpand=True, vexpand=True)
         self.event_box.add(self.img_widget)
         self.event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
         self.event_box.connect('button-press-event', parent.editor.press_task)
@@ -38,7 +35,7 @@ class Tab(Gtk.ScrolledWindow):
 
 class TabLabel(Gtk.Box):
     """Define the label on the tab."""
-    __gsignals__ = {'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),}
+    __gsignals__ = {'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ())}
     def __init__(self, title, img):
         Gtk.Box.__init__(self)
         self.set_orientation(Gtk.Orientation.HORIZONTAL)

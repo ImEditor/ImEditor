@@ -39,7 +39,7 @@ class Editor(object):
         self.images = self.images[:index] + self.images[index+1:]
         self.select(None, None)
         self.task = 'select'
-        self.win.root.set_cursor(self.win.default_cursor)
+        self.change_cursor(0)
 
     def add_image(self, *args):
         self.images.append(ImageObject(*args))
@@ -105,14 +105,14 @@ class Editor(object):
                 self.do_change(tmp_img)
                 self.images[page_num].set_tmp_img(None)
         if self.task != 'select':
-            self.win.root.set_cursor(self.win.default_cursor)
+            self.change_cursor(0)
             self.task = 'select'
 
     @img_open
     def draw(self, action, parameter):
         if self.task != 'draw-brush':
             self.task = 'draw-brush'
-            self.win.root.set_cursor(self.win.draw_cursor)
+            self.change_cursor(1)
 
     def get_vars(self, mouse_coords, is_tmp=False):
         """Return required variables."""
@@ -154,6 +154,16 @@ class Editor(object):
             self.images[page_num].set_tmp_img(None)
             self.do_change(img)
 
+    def change_cursor(self, cursor):
+        tab = self.win.notebook.get_nth_page(self.win.notebook.get_current_page())
+        img = tab.img_widget.get_window()
+        if cursor == 0:
+            img.set_cursor(self.win.default_cursor)
+        elif cursor == 1:
+            img.set_cursor(self.win.draw_cursor)
+        elif cursor == 2:
+            img.set_cursor(self.win.move_cursor)
+
     def set_tmp_img(self, img):
         self.win.update_image(img)
         page_num = self.win.notebook.get_current_page()
@@ -170,7 +180,7 @@ class Editor(object):
         if self.selected_img is not None:
             if self.task != 'paste':  # ctrl + V:
                 self.task = 'paste'
-                self.win.root.set_cursor(self.win.move_cursor)
+                self.change_cursor(2)
                 x, y = 0, 0
             else:
                 x, y = get_middle_mouse(self.selected_img.size, mouse_coords)
