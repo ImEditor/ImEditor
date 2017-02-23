@@ -73,7 +73,7 @@ def create_toolbar(parent):
     rotate_right_button.set_action_name('win.rotate_right')
 
     select_button = Gtk.ToolButton.new()
-    pixbuf = Gdk.Cursor(Gdk.CursorType.ARROW).get_image()
+    pixbuf = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), "default").get_image()
     select_button.set_icon_widget(Gtk.Image.new_from_pixbuf(pixbuf))
     toolbar.insert(select_button, 8)
     select_button.show()
