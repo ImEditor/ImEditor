@@ -1,2 +1,1 @@
-Pillow==3.4.2
-pytest==3.0.3
+Pillow==4.0.0
