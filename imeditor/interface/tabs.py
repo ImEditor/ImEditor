@@ -6,6 +6,7 @@ from gi.repository import Gtk, GObject, Gdk
 
 from interface.tools import pil_to_pixbuf
 
+
 class Tab(Gtk.ScrolledWindow):
     def __init__(self, parent, img, title):
         Gtk.ScrolledWindow.__init__(self)
@@ -33,6 +34,7 @@ class Tab(Gtk.ScrolledWindow):
     def update_image(self, new_img):
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
+
 
 class TabLabel(Gtk.Box):
     """Define the label on the tab."""

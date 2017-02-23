@@ -5,6 +5,7 @@ from os import stat
 import datetime
 from platform import system
 
+
 def get_coords(img_size, tab_size, mouse_coords):
     top_space = (tab_size.height - img_size.height) / 2
     left_space = (tab_size.width - img_size.width) / 2
@@ -18,12 +19,14 @@ def get_coords(img_size, tab_size, mouse_coords):
         x = round(mouse_coords[0])
     return x, y
 
+
 def get_middle_mouse(size, mouse_coords):
     width = size[0]
     height = size[1]
     x = mouse_coords[0] - (width / 2)
     y = mouse_coords[1] - (height / 2)
     return round(x), round(y)
+
 
 def get_infos(image):
     img_infos = OrderedDict()

@@ -6,6 +6,7 @@ from gi.repository import Gtk
 
 from interface.tools import SpinButton
 
+
 class Dialog(Gtk.Dialog):
     def __init__(self, parent, title):
         Gtk.Dialog.__init__(self, transient_for=parent)
@@ -25,6 +26,7 @@ class Dialog(Gtk.Dialog):
             return self.values[0]
         else:
             return self.values
+
 
 def params_dialog(parent, title, limits):
     dialog = Dialog(parent, title)
@@ -58,6 +60,7 @@ def params_dialog(parent, title, limits):
 
     return dialog
 
+
 def info_dialog(parent, title, infos):
     dialog = Dialog(parent, title)
 
@@ -76,6 +79,7 @@ def info_dialog(parent, title, infos):
 def apply_filter(button, h_scale, dialog):
     dialog.values.append(int(h_scale.get_value()))
     dialog.destroy()
+
 
 def new_image_dialog(parent):
     dialog = Dialog(parent, 'Nouvelle image')
@@ -113,8 +117,10 @@ def new_image_dialog(parent):
 
     return dialog
 
+
 def close_dialog(button, dialog):
     dialog.destroy()
+
 
 def ok_callback_new_image(button, spin_width, spin_height, color_chooser, dialog):
     width = spin_width.get_value_as_int()
@@ -124,6 +130,7 @@ def ok_callback_new_image(button, spin_width, spin_height, color_chooser, dialog
     dialog.values.append(size)
     dialog.values.append(color)
     dialog.destroy()
+
 
 def file_dialog(parent, action):
     if action == 'open':

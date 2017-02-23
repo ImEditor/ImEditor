@@ -12,11 +12,13 @@ from editor.image import ImageObject
 from editor.tools import get_coords, get_middle_mouse, get_infos
 from editor.draw import draw_point, draw_shape
 
+
 def img_open(func):
     def inner(self, *args, **kwargs):
         if len(self.images) > 0:
             return func(self, *args, **kwargs)
     return inner
+
 
 class Editor(object):
     def __init__(self):

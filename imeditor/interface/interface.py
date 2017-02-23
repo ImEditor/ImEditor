@@ -12,6 +12,7 @@ from interface.menus import create_menubar, create_toolbar
 from interface import dialog
 from editor.editor import Editor
 
+
 class Window(Gtk.ApplicationWindow):
     def __init__(self, app):
         Gtk.Window.__init__(self, title='ImEditor', application=app)
