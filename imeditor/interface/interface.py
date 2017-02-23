@@ -40,7 +40,6 @@ class Window(Gtk.ApplicationWindow):
 
     def quit(self, action, parameter):
         nb_tabs = self.notebook.get_n_pages()
-        print(self.editor.images)
         for _ in range(nb_tabs):
             self.close_tab(self.notebook.get_current_page())
         sys.exit()

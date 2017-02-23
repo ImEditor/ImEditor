@@ -39,7 +39,6 @@ class Editor(object):
         self.images = self.images[:index] + self.images[index+1:]
         self.select(None, None)
         self.task = 'select'
-        self.change_cursor(0)
 
     def add_image(self, *args):
         self.images.append(ImageObject(*args))
