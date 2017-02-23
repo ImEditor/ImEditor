@@ -21,7 +21,7 @@
     {
       "name": "save_as",
       "callback": "editor.file_save_as",
-      "label": "Enregistrer sous"
+      "label": "Enregistrer sous..."
     },
     {
       "name": "properties",
