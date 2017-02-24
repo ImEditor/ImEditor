@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
-from collections import OrderedDict
 from os import stat
 import datetime
-from platform import system
 
 
 def get_middle_mouse(size, mouse_coords):
@@ -15,19 +13,16 @@ def get_middle_mouse(size, mouse_coords):
 
 
 def get_infos(image):
-    img_infos = OrderedDict()
-    filename = image.filename
+    img_infos = {}
     img = image.get_current_img()
 
     img_infos['mode'] = img.mode
-    img_infos['dimensions'] = str(img.width) + 'x' + str(img.height)
-    if filename != 'sans-titre.png':
-        img_stat = stat(filename)
-        img_infos['taille'] = str(round(img_stat.st_size / 1000, 2)) + ' ko (' + str(round(img_stat.st_size, 2)) + ' o)'
-        img_infos['chemin'] = filename
-        if system() == 'Windows':
-            img_infos['création'] = datetime.datetime.fromtimestamp(img_stat.st_birthtime).strftime('%d/%m/%Y %Hh%M')
-        img_infos['dernier accès'] = datetime.datetime.fromtimestamp(img_stat.st_atime).strftime('%d/%m/%Y %Hh%M')
-        img_infos['dernière modification'] = datetime.datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
+    img_infos['size'] = str(img.width) + 'x' + str(img.height)
+    if image.filename != 'sans-titre.png':
+        img_stat = stat(image.filename)
+        img_infos['weight'] = str(round(img_stat.st_size / 1000, 2)) + ' ko (' + str(round(img_stat.st_size, 2)) + ' o)'
+        img_infos['path'] = image.filename
+        img_infos['last_access'] = datetime.datetime.fromtimestamp(img_stat.st_atime).strftime('%d/%m/%Y %Hh%M')
+        img_infos['last_change'] = datetime.datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
 
     return img_infos

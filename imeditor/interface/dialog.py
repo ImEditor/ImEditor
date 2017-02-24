@@ -61,13 +61,32 @@ def params_dialog(parent, title, limits):
     return dialog
 
 
-def info_dialog(parent, title, infos):
+def properties_dialog(parent, title, infos):
     dialog = Dialog(parent, title)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
-    for key, value in infos.items():
-        label = Gtk.Label('<b>' + key.capitalize() + ' : </b>' + value)
+
+    label = Gtk.Label('<b>Mode :</b> {}'.format(infos['mode']))
+    label.set_use_markup(True)
+    dialog_box.pack_start(label, False, False, 0)
+    label = Gtk.Label('<b>Taille :</b> {}'.format(infos['size']))
+    label.set_use_markup(True)
+    dialog_box.pack_start(label, False, False, 0)
+    if 'weight' in infos:
+        label = Gtk.Label('<b>Poids :</b> {}'.format(infos['weight']))
+        label.set_use_markup(True)
+        dialog_box.pack_start(label, False, False, 0)
+    if 'path' in infos:
+        label = Gtk.Label('<b>Chemin :</b> {}'.format(infos['path']))
+        label.set_use_markup(True)
+        dialog_box.pack_start(label, False, False, 0)
+    if 'last_access' in infos:
+        label = Gtk.Label('<b>Dernier accès :</b> {}'.format(infos['last_access']))
+        label.set_use_markup(True)
+        dialog_box.pack_start(label, False, False, 0)
+    if 'last_change' in infos:
+        label = Gtk.Label('<b>Dernière modification :</b> {}'.format(infos['last_change']))
         label.set_use_markup(True)
         dialog_box.pack_start(label, False, False, 0)
 
