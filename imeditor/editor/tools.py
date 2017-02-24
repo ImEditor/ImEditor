@@ -6,20 +6,6 @@ import datetime
 from platform import system
 
 
-def get_coords(img_size, tab_size, mouse_coords):
-    top_space = (tab_size.height - img_size.height) / 2
-    left_space = (tab_size.width - img_size.width) / 2
-    if top_space > 0:
-        y = round(mouse_coords[1] - top_space)
-    else:
-        y = round(mouse_coords[1])
-    if left_space > 0:
-        x = round(mouse_coords[0] - left_space)
-    else:
-        x = round(mouse_coords[0])
-    return x, y
-
-
 def get_middle_mouse(size, mouse_coords):
     width = size[0]
     height = size[1]

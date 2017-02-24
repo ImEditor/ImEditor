@@ -9,7 +9,7 @@ from os import path
 from interface import dialog
 from filters import base
 from editor.image import ImageObject
-from editor.tools import get_coords, get_middle_mouse, get_infos
+from editor.tools import get_middle_mouse, get_infos
 from editor.draw import draw_point, draw_shape
 
 
@@ -121,7 +121,8 @@ class Editor(object):
         else:
             img = self.get_img().copy()
         tab = self.win.notebook.get_nth_page(page_num)
-        x_mouse, y_mouse = get_coords(img, tab.get_allocation(), mouse_coords)
+        x_mouse = round(mouse_coords[0])
+        y_mouse = round(mouse_coords[1])
         return [x_mouse, y_mouse], page_num, img
 
     def press_task(self, widget, event):
