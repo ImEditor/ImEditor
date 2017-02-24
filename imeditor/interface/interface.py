@@ -90,7 +90,7 @@ class Window(Gtk.ApplicationWindow):
         self.close_tab(page_num)
 
     def close_tab(self, page_num):
-        if not self.editor.images[page_num].get_saved():
+        if not self.editor.images[page_num].saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO,
                 'Enregistrer ' + self.editor.images[page_num].get_filename() + ' avant la fermeture ?')

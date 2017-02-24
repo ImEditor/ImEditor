@@ -16,38 +16,14 @@ class ImageObject(object):
         result += str(self.index)
         return result
 
-    def set_filename(self, filename):
-        self.filename = filename
-
-    def get_filename(self):
-        return self.filename
-
-    def set_index(self, index):
-        self.index = index
-
-    def get_index(self):
-        return self.index
-
-    def set_saved(self, saved):
-        self.saved = saved
-
-    def get_saved(self):
-        return self.saved
-
-    def get_is_new_image(self):
-        return self.is_new_image
-
-    def set_tmp_img(self, tmp_img):
-        self.tmp_img = tmp_img
+    def add_img(self, img):
+        self.images.append(img)
 
     def get_tmp_img(self):
         if self.tmp_img:
             return self.tmp_img
         else:
             return self.get_current_img()
-
-    def add_img(self, img):
-        self.images.append(img)
 
     def get_current_img(self):
         return self.images[self.index]

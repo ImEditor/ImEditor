@@ -64,7 +64,7 @@ class Editor(object):
         self.images[page_num].forget_img()
         self.images[page_num].add_img(img)
         self.images[page_num].increment_index()
-        self.images[page_num].set_saved(False)
+        self.images[page_num].saved = False
         if self.images[page_num].get_n_img() > self.MAX_HIST:
             self.images[page_num].remove_first_img()
             self.images[page_num].decrement_index()
@@ -102,7 +102,7 @@ class Editor(object):
             tmp_img = self.images[page_num].get_tmp_img()
             if tmp_img is not None:
                 self.do_change(tmp_img)
-                self.images[page_num].set_tmp_img(None)
+                self.images[page_num].tmp_img = None
         if self.task != 'select':
             self.change_cursor(0)
             self.task = 'select'
@@ -151,7 +151,7 @@ class Editor(object):
         if self.task == 'select':
             self.selection.extend(mouse_coords)
         elif self.task == 'draw-brush':
-            self.images[page_num].set_tmp_img(None)
+            self.images[page_num].tmp_img = None
             self.do_change(img)
 
     def change_cursor(self, cursor):
@@ -167,7 +167,7 @@ class Editor(object):
     def set_tmp_img(self, img):
         self.win.update_image(img)
         page_num = self.win.notebook.get_current_page()
-        self.images[page_num].set_tmp_img(img)
+        self.images[page_num].tmp_img = img
 
     @img_open
     def copy(self, action, parameter):
@@ -200,12 +200,12 @@ class Editor(object):
     @img_open
     def file_save(self, action, parameter):
         page_num = self.win.notebook.get_current_page()
-        if self.images[page_num].get_is_new_image():
+        if self.images[page_num].is_new_image:
             self.file_save_as(None, None)
         else:
             img = self.images[page_num].get_current_img()
-            self.images[page_num].set_saved(True)
-            img.save(self.images[page_num].get_filename())
+            self.images[page_num].saved = True
+            img.save(self.images[page_num].filename)
 
     @img_open
     def file_save_as(self, action, parameter):
@@ -214,10 +214,10 @@ class Editor(object):
             page_num = self.win.notebook.get_current_page()
             img = self.images[page_num].get_current_img()
             img.save(filename)
-            self.images[page_num].set_filename(filename)
+            self.images[page_num].filename = filename
             page_num = self.win.notebook.get_current_page()
             self.win.notebook.get_nth_page(page_num).get_tab_label().set_label(path.basename(filename))
-            self.images[page_num].set_saved(True)
+            self.images[page_num].saved = True
 
     @img_open
     def properties(self, action, parameter):
