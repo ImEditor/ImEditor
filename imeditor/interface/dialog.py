@@ -12,7 +12,6 @@ class Dialog(Gtk.Dialog):
         Gtk.Dialog.__init__(self, transient_for=parent)
         self.set_title(title)
         self.set_modal(True)
-
         self.set_resizable(False)
         self.set_size_request(300, -1)
         self.set_border_width(10)

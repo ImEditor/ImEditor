@@ -15,7 +15,8 @@ Current version is 0.1
 
 ImEditor uses a number of open source projects to work properly:
 
-- [Python 3](https://www.python.org/)
+- [Python 3](https://www.python.org)
+- [Gtk 3](https://www.gtk.org)
 
 
 ## Contributing
@@ -29,7 +30,7 @@ Fork the repository. Then, run:
 
 Then, do work and commit your changes. Finally publish your changes.
 
-When done, open a pull request to your feature branch.
+When done, open a pull request.
 
 ### Commit conventions :
 
