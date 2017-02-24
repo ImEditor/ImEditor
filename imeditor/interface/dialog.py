@@ -164,6 +164,7 @@ def file_dialog(parent, action):
             Gtk.FileChooserAction.SAVE,
             ("Annuler", Gtk.ResponseType.CANCEL,
             "Ok", Gtk.ResponseType.OK))
+        dialog.set_current_name('untitled.png')
     response = dialog.run()
     if response == Gtk.ResponseType.OK:
         filename = dialog.get_filename()
