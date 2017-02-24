@@ -18,6 +18,8 @@ class Window(Gtk.ApplicationWindow):
         Gtk.Window.__init__(self, title='ImEditor', application=app)
         self.set_size_request(700, 500)
         self.set_position(Gtk.WindowPosition.CENTER)
+        self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icons/icon.png')
+        self.set_icon(self.logo)
 
         grid = Gtk.Grid()  # Main grid
 
@@ -127,12 +129,12 @@ class Window(Gtk.ApplicationWindow):
 
     def about(self, action, parameter):
         dialog = Gtk.AboutDialog(transient_for=self)
-        dialog.set_logo(GdkPixbuf.Pixbuf.new_from_file('assets/icons/imeditor.png'))
+        dialog.set_logo(self.logo)
         dialog.set_program_name('ImEditor')
         dialog.set_version('0.1')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         dialog.set_comments('GTK Linux Image Editor ')
-        dialog.set_license('Distributed under the GNU GPL(v3) license. \n\n https://github.com/ImEditor/ImEditor/blob/master/LICENSE')
+        dialog.set_license('Distributed under the GNU GPL(v3) license. \n\nhttps://github.com/ImEditor/ImEditor/blob/master/LICENSE')
         dialog.run()
         dialog.destroy()
