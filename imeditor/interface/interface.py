@@ -31,7 +31,6 @@ class Window(Gtk.ApplicationWindow):
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
         self.homepage.set_halign(Gtk.Align.CENTER)
-        self.homepage.set_valign(Gtk.Align.CENTER)
         label = Gtk.Label()
         label.set_markup("<span size=\"xx-large\">ImEditor</span>")
         open_button = Gtk.Button("Ouvrir une image")

@@ -13,6 +13,8 @@ class Tab(Gtk.ScrolledWindow):
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         self.event_box = Gtk.EventBox(hexpand=True, vexpand=True)
+        self.event_box.set_halign(Gtk.Align.CENTER)
+        self.event_box.set_valign(Gtk.Align.CENTER)
         self.event_box.add(self.img_widget)
         self.event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
         self.event_box.connect('button-press-event', parent.editor.press_task)
