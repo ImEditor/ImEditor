@@ -7,7 +7,7 @@ from PIL import Image
 import sys
 from os import path
 
-from interface.tabs import Tab
+from interface.tab import Tab
 from interface.menus import create_menubar, create_toolbar
 from interface import dialog
 from editor.editor import Editor
