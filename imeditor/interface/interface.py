@@ -84,7 +84,7 @@ class Window(Gtk.ApplicationWindow):
         tab = Tab(self, img, title)
         page_num = self.notebook.get_current_page() + 1
         self.homepage.hide()
-        self.notebook.insert_page(tab, tab.get_tab_label(), page_num)
+        self.notebook.insert_page(tab, tab.tab_label, page_num)
         self.notebook.show_all()
         self.notebook.set_current_page(page_num)
 

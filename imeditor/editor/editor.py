@@ -216,7 +216,7 @@ class Editor(object):
             img.save(filename)
             self.images[page_num].filename = filename
             page_num = self.win.notebook.get_current_page()
-            self.win.notebook.get_nth_page(page_num).get_tab_label().set_label(path.basename(filename))
+            self.win.notebook.get_nth_page(page_num).tab_label.set_label(path.basename(filename))
             self.images[page_num].saved = True
 
     @img_open

@@ -27,9 +27,6 @@ class Tab(Gtk.ScrolledWindow):
         self.tab_label = TabLabel(title, img)
         self.tab_label.connect('close-clicked', parent.on_close_tab_clicked, self)
 
-    def get_tab_label(self):
-        return self.tab_label
-
     def update_image(self, new_img):
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
