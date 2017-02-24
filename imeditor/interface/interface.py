@@ -73,9 +73,10 @@ class Window(Gtk.ApplicationWindow):
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
         if filename is not None:
-            img = Image.open(filename)
-            self.editor.add_image(img, filename, 0, True)
-            self.create_tab(img, path.basename(filename))
+            if path.splitext(filename)[-1] in (".png", ".jpeg", ".jpg"):
+                img = Image.open(filename)
+                self.editor.add_image(img, filename, 0, True)
+                self.create_tab(img, path.basename(filename))
 
     def create_tab(self, img, title='Sans titre'):
         tab = Tab(self, img, title)
