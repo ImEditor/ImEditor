@@ -11,7 +11,6 @@ class Tab(Gtk.ScrolledWindow):
     def __init__(self, parent, img, title):
         Gtk.ScrolledWindow.__init__(self)
         pixbuf = pil_to_pixbuf(img)
-
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         self.event_box = Gtk.EventBox(hexpand=True, vexpand=True)
         self.event_box.add(self.img_widget)

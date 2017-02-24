@@ -19,20 +19,37 @@ class Window(Gtk.ApplicationWindow):
         self.set_size_request(700, 500)
         self.set_position(Gtk.WindowPosition.CENTER)
 
-        grid = Gtk.Grid()
-        self.add(grid)
+        grid = Gtk.Grid()  # Main grid
 
         self.editor = Editor()
         self.editor.set_win(self)
 
-        # Menubar:
+        # Menubar
         create_menubar(self, app.menu_info)
-        # Toolbar:
+        # Toolbar
         toolbar = create_toolbar(self)
-        grid.attach(toolbar, 0, 0, 1, 1)
-        # Tabs:
+        # Homepage
+        self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
+        self.homepage.set_halign(Gtk.Align.CENTER)
+        self.homepage.set_valign(Gtk.Align.CENTER)
+        label = Gtk.Label()
+        label.set_markup("<span size=\"xx-large\">ImEditor</span>")
+        open_button = Gtk.Button("Ouvrir une image")
+        open_button.set_action_name('win.open')
+        new_button = Gtk.Button("Nouvelle image")
+        new_button.set_action_name('win.new')
+        self.homepage.attach(label, 0, 0, 2, 1)
+        self.homepage.attach(open_button, 0, 1, 1, 1)
+        self.homepage.attach(new_button, 1, 1, 1, 1)
+        # Tabs
         self.notebook = Gtk.Notebook()
+
+        grid.attach(toolbar, 0, 0, 1, 1)
         grid.attach(self.notebook, 0, 1, 1, 1)
+        grid.attach(self.homepage, 0, 2, 1, 1)
+        self.add(grid)
+
+        # Cursors
         display = Gdk.Display.get_default()
         self.default_cursor = Gdk.Cursor.new_from_name(display, "default")
         self.draw_cursor = Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL)
@@ -62,6 +79,7 @@ class Window(Gtk.ApplicationWindow):
     def create_tab(self, img, title='Sans titre'):
         tab = Tab(self, img, title)
         page_num = self.notebook.get_current_page() + 1
+        self.homepage.hide()
         self.notebook.insert_page(tab, tab.get_tab_label(), page_num)
         self.notebook.show_all()
         self.notebook.set_current_page(page_num)
@@ -89,6 +107,9 @@ class Window(Gtk.ApplicationWindow):
         else:
             self.notebook.remove_page(page_num)
             self.editor.close_image(page_num)
+
+        if self.notebook.get_n_pages() == 0:
+            self.homepage.show()
 
     def update_image(self, new_img):
         page_num = self.notebook.get_current_page()
