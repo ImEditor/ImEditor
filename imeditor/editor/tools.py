@@ -16,7 +16,7 @@ def get_middle_mouse(size, mouse_coords):
 
 def get_infos(image):
     img_infos = OrderedDict()
-    filename = image.get_filename()
+    filename = image.filename
     img = image.get_current_img()
 
     img_infos['mode'] = img.mode

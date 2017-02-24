@@ -83,7 +83,7 @@ class Editor(object):
     def history(self, action, parameter, num):
         page_num = self.win.notebook.get_current_page()
         if self.images[page_num].get_n_img() >= 2:
-            index_img = self.images[page_num].get_index()
+            index_img = self.images[page_num].index
             if num == -1: # Undo:
                 if index_img >= 1:
                     self.images[page_num].decrement_index()
