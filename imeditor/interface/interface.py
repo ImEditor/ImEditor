@@ -85,8 +85,8 @@ class Window(Gtk.ApplicationWindow):
         page_num = self.notebook.get_current_page() + 1
         self.homepage.hide()
         self.notebook.insert_page(tab, tab.tab_label, page_num)
-        self.notebook.show_all()
         self.notebook.set_current_page(page_num)
+        self.notebook.show_all()
 
     def on_close_tab_clicked(self, button, box):
         page_num = self.notebook.page_num(box)
@@ -120,7 +120,6 @@ class Window(Gtk.ApplicationWindow):
         tab = self.notebook.get_nth_page(page_num)
         tab.update_image(new_img)
         tab.tab_label.set_icon(new_img)
-        self.notebook.show_all()
 
     def set_fullscreen(self, action, parameter):
         if not self.get_window().get_state() & Gdk.WindowState.FULLSCREEN != 0:

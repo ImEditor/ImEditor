@@ -37,18 +37,17 @@ class TabLabel(Gtk.Box):
     __gsignals__ = {'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ())}
     def __init__(self, title, img):
         Gtk.Box.__init__(self)
-        self.set_orientation(Gtk.Orientation.HORIZONTAL)
         self.set_spacing(5)
 
-        # Icon:
+        # Preview of image
         self.icon_widget = Gtk.Image()
         self.set_icon(img)
         self.pack_start(self.icon_widget, False, False, 0)
-        # Label:
+        # Title
         self.label = Gtk.Label(title)
         self.pack_start(self.label, True, True, 0)
 
-        # Close button:
+        # Close button
         button = Gtk.Button()
         button.set_relief(Gtk.ReliefStyle.NONE)
         button.set_focus_on_click(False)

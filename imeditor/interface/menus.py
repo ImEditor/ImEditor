@@ -83,5 +83,5 @@ def create_toolbar(parent):
     parent.fullscreen_button.set_action_name('win.fullscreen')
 
     toolbar.set_hexpand(True) # with extra horizontal space
-    toolbar.show_all()
+    
     return toolbar
