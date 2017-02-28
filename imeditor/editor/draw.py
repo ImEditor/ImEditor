@@ -2,13 +2,12 @@
 
 from PIL import ImageDraw
 
-
-def draw_point(img, mouse_coords, color='black', size=5):
+def draw_point(img, coords, color='black', size=5):
     draw = ImageDraw.Draw(img)
-    x = mouse_coords[0]
-    y = mouse_coords[1]
-    draw.ellipse([x-size, y-size, x+size, y+size], color)
-
+    top_left = (coords[0] - size, coords[1] - size)
+    bottom_right = (coords[0] + size, coords[1] + size)
+    point = [top_left, bottom_right]
+    draw.ellipse(point, color)
 
 def draw_shape(img, shape, **kwargs):
     draw = ImageDraw.Draw(img)
