@@ -23,8 +23,7 @@ class Interface(Gtk.ApplicationWindow):
 
         grid = Gtk.Grid()  # Main grid
 
-        self.editor = Editor()
-        self.editor.set_win(self)
+        self.editor = Editor(self)
 
         # Menubar
         create_menubar(self, app.menu_info)

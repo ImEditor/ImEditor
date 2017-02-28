@@ -21,17 +21,16 @@ def img_open(func):
 
 
 class Editor(object):
-    def __init__(self):
+    def __init__(self, parent):
         super(Editor, self).__init__()
+        self.parent = parent
+
         self.images = list()
         self.MAX_HIST = 10
 
         self.task = 'select'
         self.selection = list()
         self.selected_img = None
-
-    def set_win(self, win):
-        self.win = win
 
     @img_open
     def close_image(self, index):
@@ -44,7 +43,7 @@ class Editor(object):
         self.images.append(ImageObject(*args))
 
     def get_img(self):
-        page_num = self.win.notebook.get_current_page()
+        page_num = self.parent.notebook.get_current_page()
         img = self.images[page_num].get_current_img()
         return img
 
@@ -59,8 +58,8 @@ class Editor(object):
         self.do_change(new_img)
 
     def do_change(self, img):
-        page_num = self.win.notebook.get_current_page()
-        self.win.update_image(img)
+        page_num = self.parent.notebook.get_current_page()
+        self.parent.update_image(img)
         self.images[page_num].forget_img()
         self.images[page_num].add_img(img)
         self.images[page_num].increment_index()
@@ -74,31 +73,31 @@ class Editor(object):
         func = params[0]
         title = params[1]
         limits = params[2]
-        params_dialog = dialog.params_dialog(self.win, title, limits)
+        params_dialog = dialog.params_dialog(self.parent, title, limits)
         value = params_dialog.get_values()
         if value is not None:
             self.apply_filter(None, None, func, value)
 
     @img_open
     def history(self, action, parameter, num):
-        page_num = self.win.notebook.get_current_page()
+        page_num = self.parent.notebook.get_current_page()
         if self.images[page_num].get_n_img() >= 2:
             index_img = self.images[page_num].index
             if num == -1: # Undo:
                 if index_img >= 1:
                     self.images[page_num].decrement_index()
                     img = self.images[page_num].get_current_img()
-                    self.win.update_image(img)
+                    self.parent.update_image(img)
             else: # Redo:
                 if index_img + 1 < self.images[page_num].get_n_img():
                     self.images[page_num].increment_index()
                     img = self.images[page_num].get_current_img()
-                    self.win.update_image(img)
+                    self.parent.update_image(img)
 
     @img_open
     def select(self, action, parameter):
         if self.task == 'paste':
-            page_num = self.win.notebook.get_current_page()
+            page_num = self.parent.notebook.get_current_page()
             tmp_img = self.images[page_num].get_tmp_img()
             if tmp_img is not None:
                 self.do_change(tmp_img)
@@ -115,12 +114,12 @@ class Editor(object):
 
     def get_vars(self, mouse_coords, is_tmp=False):
         """Return required variables."""
-        page_num = self.win.notebook.get_current_page()
+        page_num = self.parent.notebook.get_current_page()
         if is_tmp:
             img = self.images[page_num].get_tmp_img().copy()
         else:
             img = self.get_img().copy()
-        tab = self.win.notebook.get_nth_page(page_num)
+        tab = self.parent.notebook.get_nth_page(page_num)
         x_mouse = round(mouse_coords[0])
         y_mouse = round(mouse_coords[1])
         return [x_mouse, y_mouse], page_num, img
@@ -129,7 +128,7 @@ class Editor(object):
         mouse_coords, page_num, img = self.get_vars([event.x, event.y])
         if self.task == 'select':
             self.selection = mouse_coords
-            self.win.update_image(img)
+            self.parent.update_image(img)
         elif self.task == 'draw-brush':
             self.move_task(None, event)
         elif self.task == 'paste' and self.selected_img is not None:
@@ -139,7 +138,7 @@ class Editor(object):
         mouse_coords, page_num, img = self.get_vars([event.x, event.y], True)
         if self.task == 'select':
             draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
-            self.win.update_image(img)
+            self.parent.update_image(img)
         elif self.task == 'draw-brush':
             draw_point(img, mouse_coords)
             self.set_tmp_img(img)
@@ -155,18 +154,18 @@ class Editor(object):
             self.do_change(img)
 
     def change_cursor(self, cursor):
-        tab = self.win.notebook.get_nth_page(self.win.notebook.get_current_page())
+        tab = self.parent.notebook.get_nth_page(self.parent.notebook.get_current_page())
         img = tab.img_widget.get_window()
         if cursor == 0:
-            img.set_cursor(self.win.default_cursor)
+            img.set_cursor(self.parent.default_cursor)
         elif cursor == 1:
-            img.set_cursor(self.win.draw_cursor)
+            img.set_cursor(self.parent.draw_cursor)
         elif cursor == 2:
-            img.set_cursor(self.win.move_cursor)
+            img.set_cursor(self.parent.move_cursor)
 
     def set_tmp_img(self, img):
-        self.win.update_image(img)
-        page_num = self.win.notebook.get_current_page()
+        self.parent.update_image(img)
+        page_num = self.parent.notebook.get_current_page()
         self.images[page_num].tmp_img = img
 
     @img_open
@@ -199,7 +198,7 @@ class Editor(object):
 
     @img_open
     def file_save(self, action, parameter):
-        page_num = self.win.notebook.get_current_page()
+        page_num = self.parent.notebook.get_current_page()
         if self.images[page_num].is_new_image:
             self.file_save_as(None, None)
         else:
@@ -209,18 +208,18 @@ class Editor(object):
 
     @img_open
     def file_save_as(self, action, parameter):
-        filename = dialog.file_dialog(self.win, 'save')
+        filename = dialog.file_dialog(self.parent, 'save')
         if filename is not None:
-            page_num = self.win.notebook.get_current_page()
+            page_num = self.parent.notebook.get_current_page()
             img = self.images[page_num].get_current_img()
             img.save(filename)
             self.images[page_num].filename = filename
-            page_num = self.win.notebook.get_current_page()
-            self.win.notebook.get_nth_page(page_num).tab_label.set_label(path.basename(filename))
+            page_num = self.parent.notebook.get_current_page()
+            self.parent.notebook.get_nth_page(page_num).tab_label.set_label(path.basename(filename))
             self.images[page_num].saved = True
 
     @img_open
     def properties(self, action, parameter):
-        page_num = self.win.notebook.get_current_page()
+        page_num = self.parent.notebook.get_current_page()
         img_infos = get_infos(self.images[page_num])
-        dialog.properties_dialog(self.win, 'Propriétés de l\'image', img_infos)
+        dialog.properties_dialog(self.parent, 'Propriétés de l\'image', img_infos)
