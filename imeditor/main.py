@@ -7,7 +7,7 @@ import sys
 import json
 from collections import OrderedDict
 
-from interface.interface import Window
+from interface.interface import Interface
 
 class Application(Gtk.Application):
     def __init__(self):
@@ -15,7 +15,7 @@ class Application(Gtk.Application):
         self.ui_info, self.menu_info = self.get_ui()
 
     def do_activate(self):
-        self.win = Window(self)
+        self.win = Interface(self)
         self.win.show_all()
 
     def do_startup(self):

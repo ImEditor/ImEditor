@@ -13,7 +13,7 @@ from interface import dialog
 from editor.editor import Editor
 
 
-class Window(Gtk.ApplicationWindow):
+class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
         Gtk.Window.__init__(self, title='ImEditor', application=app)
         self.set_size_request(700, 500)
