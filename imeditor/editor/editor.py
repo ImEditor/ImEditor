@@ -125,7 +125,7 @@ class Editor(object):
         return [x_mouse, y_mouse], page_num, img
 
     def press_task(self, widget, event):
-        mouse_coords, page_num, img = self.get_vars([event.x, event.y])
+        mouse_coords, page_num, img = self.get_vars((event.x, event.y))
         if self.task == 'select':
             self.selection = mouse_coords
             self.parent.update_image(img)
@@ -135,18 +135,19 @@ class Editor(object):
             self.move_task(None, event)
 
     def move_task(self, widget, event):
-        mouse_coords, page_num, img = self.get_vars([event.x, event.y], True)
+        mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
         if self.task == 'select':
             draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
             self.parent.update_image(img)
         elif self.task == 'draw-brush':
             draw_point(img, mouse_coords)
+            print(mouse_coords)
             self.set_tmp_img(img)
         elif self.task == 'paste':
             self.paste(None, None, mouse_coords=mouse_coords)
 
     def release_task(self, widget, event):
-        mouse_coords, page_num, img = self.get_vars([event.x, event.y], True)
+        mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
         if self.task == 'select':
             self.selection.extend(mouse_coords)
         elif self.task == 'draw-brush':
@@ -180,11 +181,11 @@ class Editor(object):
             if self.task != 'paste':  # ctrl + V:
                 self.task = 'paste'
                 self.change_cursor(2)
-                x, y = 0, 0
+                xy = (0, 0)
             else:
-                x, y = get_middle_mouse(self.selected_img.size, mouse_coords)
+                xy = get_middle_mouse(self.selected_img.size, mouse_coords)
             new_img = self.get_img().copy()
-            new_img.paste(self.selected_img, (x, y))
+            new_img.paste(self.selected_img, xy)
             self.set_tmp_img(new_img)
 
     @img_open
