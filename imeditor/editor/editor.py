@@ -141,7 +141,6 @@ class Editor(object):
             self.parent.update_image(img)
         elif self.task == 'draw-brush':
             draw_point(img, mouse_coords)
-            print(mouse_coords)
             self.set_tmp_img(img)
         elif self.task == 'paste':
             self.paste(None, None, mouse_coords=mouse_coords)
