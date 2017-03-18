@@ -21,7 +21,7 @@ class Interface(Gtk.ApplicationWindow):
         self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icons/icon.png')
         self.set_icon(self.logo)
 
-        grid = Gtk.Grid()  # Main grid
+        grid = Gtk.Grid()
 
         self.editor = Editor(self)
 
