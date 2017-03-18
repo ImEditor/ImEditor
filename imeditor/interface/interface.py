@@ -78,6 +78,13 @@ class Interface(Gtk.ApplicationWindow):
                 img = Image.open(filename)
                 self.editor.add_image(img, filename, 0, True)
                 self.create_tab(img, path.basename(filename))
+            else:
+                error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
+                    Gtk.ButtonsType.OK, "Une erreur est survenue...")
+                error_dialog.format_secondary_text(
+                    "Le format de ce fichier n'est pas pris en charge.")
+                error_dialog.run()
+                error_dialog.destroy()
 
     def create_tab(self, img, title='Sans titre'):
         tab = Tab(self, img, title)
