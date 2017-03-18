@@ -177,7 +177,7 @@ class Editor(object):
     @img_open
     def paste(self, action, parameter, mouse_coords=None):
         if self.selected_img is not None:
-            if self.task != 'paste':  # ctrl + V:
+            if self.task != 'paste':
                 self.task = 'paste'
                 self.change_cursor(2)
                 xy = (0, 0)
