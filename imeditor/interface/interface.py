@@ -142,7 +142,7 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_version('0.1')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
-        dialog.set_comments('GTK Linux Image Editor ')
+        dialog.set_comments('GTK Linux Image Editor')
         dialog.set_license('Distributed under the GNU GPL(v3) license. \n\nhttps://github.com/ImEditor/ImEditor/blob/master/LICENSE')
         dialog.run()
         dialog.destroy()
