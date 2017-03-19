@@ -75,7 +75,7 @@ class Editor(object):
         limits = params[2]
         params_dialog = dialog.params_dialog(self.parent, title, limits)
         value = params_dialog.get_values()
-        if value is not None:
+        if value:
             self.apply_filter(None, None, func, value)
 
     @img_open
@@ -99,7 +99,7 @@ class Editor(object):
         if self.task == 'paste':
             page_num = self.parent.notebook.get_current_page()
             tmp_img = self.images[page_num].get_tmp_img()
-            if tmp_img is not None:
+            if tmp_img:
                 self.do_change(tmp_img)
                 self.images[page_num].tmp_img = None
         if self.task != 'select':
@@ -131,7 +131,7 @@ class Editor(object):
             self.parent.update_image(img)
         elif self.task == 'draw-brush':
             self.move_task(None, event)
-        elif self.task == 'paste' and self.selected_img is not None:
+        elif self.task == 'paste' and self.selected_img:
             self.move_task(None, event)
 
     def move_task(self, widget, event):
@@ -176,7 +176,7 @@ class Editor(object):
 
     @img_open
     def paste(self, action, parameter, mouse_coords=None):
-        if self.selected_img is not None:
+        if self.selected_img:
             if self.task != 'paste':
                 self.task = 'paste'
                 self.change_cursor(2)
@@ -209,7 +209,7 @@ class Editor(object):
     @img_open
     def file_save_as(self, action, parameter):
         filename = dialog.file_dialog(self.parent, 'save')
-        if filename is not None:
+        if filename:
             page_num = self.parent.notebook.get_current_page()
             img = self.images[page_num].get_current_img()
             img.save(filename)
