@@ -66,10 +66,9 @@ class Interface(Gtk.ApplicationWindow):
     def new_image(self, action, parameter):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
-        if values is not None:
-            img = Image.new('RGB', values[0], values[1])
-            self.editor.add_image(img, 'sans-titre.png', 0, False, True)
-            self.create_tab(img)
+        img = Image.new('RGB', values[0], values[1])
+        self.editor.add_image(img, 'sans-titre.png', 0, False, True)
+        self.create_tab(img)
 
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
