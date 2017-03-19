@@ -6,11 +6,15 @@ from gi.repository import Gtk, GdkPixbuf, GLib
 
 
 def pil_to_pixbuf(img):
-    if img.mode != 'RGB': # pixbuf only support RGB
-        img = img.convert('RGB')
     data = GLib.Bytes.new(img.tobytes())
-    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, False, 8, img.width, img.height, img.width * 3)
-
+    if img.mode == "RGBA":
+        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
+                    True, 8, img.width, img.height, img.width * 4)
+    else:
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
+        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
+                    False, 8, img.width, img.height, img.width * 3)
     return pixbuf
 
 
