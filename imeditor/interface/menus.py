@@ -67,8 +67,7 @@ def create_toolbar(parent):
     rotate_right_button.set_action_name('win.rotate_right')
 
     select_button = Gtk.ToolButton.new()
-    pixbuf = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), "default").get_image()
-    select_button.set_icon_widget(Gtk.Image.new_from_pixbuf(pixbuf))
+    select_button.set_icon_name('input-mouse')
     toolbar.insert(select_button, 8)
     select_button.set_action_name('win.select')
 
@@ -82,6 +81,6 @@ def create_toolbar(parent):
     toolbar.insert(parent.fullscreen_button, 10)
     parent.fullscreen_button.set_action_name('win.fullscreen')
 
-    toolbar.set_hexpand(True) # with extra horizontal space
-    
+    toolbar.set_hexpand(True)
+
     return toolbar
