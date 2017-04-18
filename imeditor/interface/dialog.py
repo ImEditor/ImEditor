@@ -102,8 +102,8 @@ def apply_filter(button, h_scale, dialog):
 def new_image_dialog(parent):
     dialog = Dialog(parent, 'Nouvelle image')
 
-    spin_width = SpinButton(640, 1, 2048)
-    spin_height = SpinButton(360, 1, 1080)
+    spin_width = SpinButton(640, 1, 7680)
+    spin_height = SpinButton(360, 1, 4320)
 
     color_chooser = Gtk.ColorChooserWidget()
     color_chooser.set_use_alpha(False)
