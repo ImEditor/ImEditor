@@ -2,7 +2,7 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio, Gdk
+from gi.repository import Gtk, Gio
 
 
 def create_menubar(parent, actions):
