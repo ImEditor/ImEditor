@@ -16,7 +16,7 @@ from editor.editor import Editor
 class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
         Gtk.Window.__init__(self, title='ImEditor', application=app)
-        self.set_size_request(700, 500)
+        self.set_size_request(750, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icons/icon.png')
         self.set_icon(self.logo)
