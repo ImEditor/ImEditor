@@ -128,11 +128,11 @@ class Editor(object):
             self.selection = mouse_coords
             self.parent.update_image(img)
         elif self.task == 2:
-            self.move_task(None, event)
+            self.move_task(event)
         elif self.task == 1 and self.selected_img:
-            self.move_task(None, event)
+            self.move_task(event)
 
-    def move_task(self, widget, event):
+    def move_task(self, widget=None, event=None):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
         if self.task == 0:
             draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
@@ -141,7 +141,7 @@ class Editor(object):
             draw_point(img, mouse_coords)
             self.set_tmp_img(img)
         elif self.task == 1:
-            self.paste(None, None, mouse_coords=mouse_coords)
+            self.paste(mouse_coords=mouse_coords)
 
     def release_task(self, widget, event):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
@@ -167,13 +167,13 @@ class Editor(object):
         self.images[page_num].tmp_img = img
 
     @img_open
-    def copy(self, action, parameter):
+    def copy(self, action=None, parameter=None):
         if self.selection != list():
             img = self.get_img()
             self.selected_img = img.crop(tuple(self.selection))
 
     @img_open
-    def paste(self, action, parameter, mouse_coords=None):
+    def paste(self, action=None, parameter=None, mouse_coords=None):
         if self.selected_img:
             if self.task != 1:
                 self.task = 1
@@ -188,7 +188,7 @@ class Editor(object):
     @img_open
     def cut(self, action, parameter):
         if self.selection != list():
-            self.copy(None, None)
+            self.copy()
             blank_img = Image.new('RGB', self.selected_img.size, 'white')
             img = self.get_img().copy()
             img.paste(blank_img, tuple(self.selection[:2]))
@@ -198,14 +198,14 @@ class Editor(object):
     def file_save(self, action, parameter):
         page_num = self.parent.notebook.get_current_page()
         if self.images[page_num].is_new_image:
-            self.file_save_as(None, None)
+            self.file_save_as()
         else:
             img = self.images[page_num].get_current_img()
             self.images[page_num].saved = True
             img.save(self.images[page_num].filename)
 
     @img_open
-    def file_save_as(self, action, parameter):
+    def file_save_as(self, action=None, parameter=None):
         filename = dialog.file_dialog(self.parent, 'save')
         if filename:
             page_num = self.parent.notebook.get_current_page()
