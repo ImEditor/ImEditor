@@ -127,10 +127,8 @@ class Editor(object):
         if self.task == 0:
             self.selection = mouse_coords
             self.parent.update_image(img)
-        elif self.task == 2:
-            self.move_task(event)
-        elif self.task == 1 and self.selected_img:
-            self.move_task(event)
+        elif self.task == 2 or (self.task == 1 and self.selected_img):
+            self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
