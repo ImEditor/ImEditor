@@ -36,7 +36,7 @@ class Editor(object):
     def close_image(self, index):
         self.images[index].close_all_img()
         self.images = self.images[:index] + self.images[index+1:]
-        self.select(None, None)
+        self.select()
         self.task = 0
 
     def add_image(self, *args):
@@ -95,14 +95,14 @@ class Editor(object):
                     self.parent.update_image(img)
 
     @img_open
-    def select(self, action, parameter):
-        if self.task == 1:
-            page_num = self.parent.notebook.get_current_page()
-            tmp_img = self.images[page_num].get_tmp_img()
-            if tmp_img:
-                self.do_change(tmp_img)
-                self.images[page_num].tmp_img = None
+    def select(self, action=None, parameter=None):
         if self.task != 0:
+            if self.task == 1:
+                page_num = self.parent.notebook.get_current_page()
+                tmp_img = self.images[page_num].get_tmp_img()
+                if tmp_img:
+                    self.do_change(tmp_img)
+                    self.images[page_num].tmp_img = None
             self.change_cursor(0)
             self.task = 0
 
