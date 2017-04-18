@@ -28,7 +28,7 @@ class Editor(object):
         self.images = list()
         self.MAX_HIST = 10
 
-        self.task = 'select'
+        self.task = 0  # 0 -> select, 1 -> paste, 2 -> draw-brush
         self.selection = list()
         self.selected_img = None
 
@@ -37,7 +37,7 @@ class Editor(object):
         self.images[index].close_all_img()
         self.images = self.images[:index] + self.images[index+1:]
         self.select(None, None)
-        self.task = 'select'
+        self.task = 0
 
     def add_image(self, *args):
         self.images.append(ImageObject(*args))
@@ -96,20 +96,20 @@ class Editor(object):
 
     @img_open
     def select(self, action, parameter):
-        if self.task == 'paste':
+        if self.task == 1:
             page_num = self.parent.notebook.get_current_page()
             tmp_img = self.images[page_num].get_tmp_img()
             if tmp_img:
                 self.do_change(tmp_img)
                 self.images[page_num].tmp_img = None
-        if self.task != 'select':
+        if self.task != 0:
             self.change_cursor(0)
-            self.task = 'select'
+            self.task = 0
 
     @img_open
     def draw(self, action, parameter):
-        if self.task != 'draw-brush':
-            self.task = 'draw-brush'
+        if self.task != 2:
+            self.task = 2
             self.change_cursor(1)
 
     def get_vars(self, mouse_coords, is_tmp=False):
@@ -126,30 +126,30 @@ class Editor(object):
 
     def press_task(self, widget, event):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y))
-        if self.task == 'select':
+        if self.task == 0:
             self.selection = mouse_coords
             self.parent.update_image(img)
-        elif self.task == 'draw-brush':
+        elif self.task == 2:
             self.move_task(None, event)
-        elif self.task == 'paste' and self.selected_img:
+        elif self.task == 1 and self.selected_img:
             self.move_task(None, event)
 
     def move_task(self, widget, event):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
-        if self.task == 'select':
+        if self.task == 0:
             draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
             self.parent.update_image(img)
-        elif self.task == 'draw-brush':
+        elif self.task == 2:
             draw_point(img, mouse_coords)
             self.set_tmp_img(img)
-        elif self.task == 'paste':
+        elif self.task == 1:
             self.paste(None, None, mouse_coords=mouse_coords)
 
     def release_task(self, widget, event):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
-        if self.task == 'select':
+        if self.task == 0:
             self.selection.extend(mouse_coords)
-        elif self.task == 'draw-brush':
+        elif self.task == 2:
             self.images[page_num].tmp_img = None
             self.do_change(img)
 
@@ -177,8 +177,8 @@ class Editor(object):
     @img_open
     def paste(self, action, parameter, mouse_coords=None):
         if self.selected_img:
-            if self.task != 'paste':
-                self.task = 'paste'
+            if self.task != 1:
+                self.task = 1
                 self.change_cursor(2)
                 xy = (0, 0)
             else:
