@@ -70,9 +70,7 @@ class Editor(object):
 
     @img_open
     def filter_with_params(self, action, parameter, params):
-        func = params[0]
-        title = params[1]
-        limits = params[2]
+        func, title, limits = params
         params_dialog = dialog.params_dialog(self.parent, title, limits)
         value = params_dialog.get_values()
         if value:
