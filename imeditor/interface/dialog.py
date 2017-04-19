@@ -37,11 +37,11 @@ def params_dialog(parent, title, limits):
     h_scale.set_hexpand(True)
     h_scale.set_valign(Gtk.Align.START)
 
-    cancel_button = Gtk.Button.new_with_label("Annuler")
-    cancel_button.connect("clicked", close_dialog, dialog)
+    cancel_button = Gtk.Button.new_with_label('Annuler')
+    cancel_button.connect('clicked', close_dialog, dialog)
 
-    ok_button = Gtk.Button.new_with_label("Valider")
-    ok_button.connect("clicked", apply_filter, h_scale, dialog)
+    ok_button = Gtk.Button.new_with_label('Valider')
+    ok_button.connect('clicked', apply_filter, h_scale, dialog)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
@@ -108,11 +108,11 @@ def new_image_dialog(parent):
     color_chooser = Gtk.ColorChooserWidget()
     color_chooser.set_use_alpha(False)
 
-    cancel_button = Gtk.Button.new_with_label("Cancel")
-    cancel_button.connect("clicked", close_dialog, dialog)
+    cancel_button = Gtk.Button.new_with_label('Cancel')
+    cancel_button.connect('clicked', close_dialog, dialog)
 
-    ok_button = Gtk.Button.new_with_label("Confirm")
-    ok_button.connect("clicked", ok_callback_new_image, spin_width, spin_height, color_chooser, dialog)
+    ok_button = Gtk.Button.new_with_label('Confirm')
+    ok_button.connect('clicked', ok_callback_new_image, spin_width, spin_height, color_chooser, dialog)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
@@ -155,14 +155,14 @@ def file_dialog(parent, action):
         dialog = Gtk.FileChooserDialog('Choose a file',
             parent,
             Gtk.FileChooserAction.OPEN,
-            ("Cancel", Gtk.ResponseType.CANCEL,
-            "Open", Gtk.ResponseType.OK))
+            ('Cancel', Gtk.ResponseType.CANCEL,
+            'Open', Gtk.ResponseType.OK))
     elif action == 'save':
         dialog = Gtk.FileChooserDialog('Choose a file',
             parent,
             Gtk.FileChooserAction.SAVE,
-            ("Cancel", Gtk.ResponseType.CANCEL,
-            "Confirm", Gtk.ResponseType.OK))
+            ('Cancel', Gtk.ResponseType.CANCEL,
+            'Confirm', Gtk.ResponseType.OK))
         dialog.set_current_name('untitled.png')
     response = dialog.run()
     if response == Gtk.ResponseType.OK:

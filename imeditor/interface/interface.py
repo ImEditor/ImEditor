@@ -33,11 +33,11 @@ class Interface(Gtk.ApplicationWindow):
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
         self.homepage.set_halign(Gtk.Align.CENTER)
         label = Gtk.Label()
-        label.set_markup("<span size=\"xx-large\">What do you want to do?</span>")
-        new_button = Gtk.Button("Create a new image", always_show_image=True)
+        label.set_markup('<span size="xx-large">What do you want to do?</span>')
+        new_button = Gtk.Button('Create a new image', always_show_image=True)
         new_button.set_image(Gtk.Image.new_from_icon_name('document-new',  Gtk.IconSize.BUTTON))
         new_button.set_action_name('win.new')
-        open_button = Gtk.Button("Open an existing image", always_show_image=True)
+        open_button = Gtk.Button('Open an existing image', always_show_image=True)
         open_button.set_image(Gtk.Image.new_from_icon_name('document-open', Gtk.IconSize.BUTTON))
         open_button.set_action_name('win.open')
         self.homepage.attach(label, 0, 0, 2, 1)
@@ -53,9 +53,9 @@ class Interface(Gtk.ApplicationWindow):
 
         # Cursors
         display = Gdk.Display.get_default()
-        self.default_cursor = Gdk.Cursor.new_from_name(display, "default")
+        self.default_cursor = Gdk.Cursor.new_from_name(display, 'default')
         self.draw_cursor = Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL)
-        self.move_cursor = Gdk.Cursor.new_from_name(display, "move")
+        self.move_cursor = Gdk.Cursor.new_from_name(display, 'move')
 
     def quit(self, action, parameter):
         nb_tabs = self.notebook.get_n_pages()
@@ -74,15 +74,15 @@ class Interface(Gtk.ApplicationWindow):
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
         if filename:
-            if path.splitext(filename)[-1] in (".png", ".jpeg", ".jpg"):
+            if path.splitext(filename)[-1] in ('.png', '.jpeg', '.jpg'):
                 img = Image.open(filename)
                 self.editor.add_image(img, filename, 0, True)
                 self.create_tab(img, path.basename(filename))
             else:
                 error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
-                    Gtk.ButtonsType.OK, "An error has occurred...")
+                    Gtk.ButtonsType.OK, 'An error has occurred...')
                 error_dialog.format_secondary_text(
-                    "The format of this file is not supported.")
+                    'The format of this file is not supported.')
                 error_dialog.run()
                 error_dialog.destroy()
 

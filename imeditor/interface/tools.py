@@ -7,7 +7,7 @@ from gi.repository import Gtk, GdkPixbuf, GLib
 
 def pil_to_pixbuf(img):
     data = GLib.Bytes.new(img.tobytes())
-    if img.mode == "RGBA":
+    if img.mode == 'RGBA':
         pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
                     True, 8, img.width, img.height, img.width * 4)
     else:
