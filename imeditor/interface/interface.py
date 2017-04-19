@@ -33,11 +33,11 @@ class Interface(Gtk.ApplicationWindow):
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
         self.homepage.set_halign(Gtk.Align.CENTER)
         label = Gtk.Label()
-        label.set_markup("<span size=\"xx-large\">Que souhaitez-vous faire?</span>")
-        new_button = Gtk.Button("Créer une nouvelle image", always_show_image=True)
+        label.set_markup("<span size=\"xx-large\">What do you want to do?</span>")
+        new_button = Gtk.Button("Create a new image", always_show_image=True)
         new_button.set_image(Gtk.Image.new_from_icon_name('document-new',  Gtk.IconSize.BUTTON))
         new_button.set_action_name('win.new')
-        open_button = Gtk.Button("Ouvrir une image existante", always_show_image=True)
+        open_button = Gtk.Button("Open an existing image", always_show_image=True)
         open_button.set_image(Gtk.Image.new_from_icon_name('document-open', Gtk.IconSize.BUTTON))
         open_button.set_action_name('win.open')
         self.homepage.attach(label, 0, 0, 2, 1)
@@ -68,7 +68,7 @@ class Interface(Gtk.ApplicationWindow):
         values = new_image_dialog.get_values()
         if values:
             img = Image.new('RGB', values[0], values[1])
-            self.editor.add_image(img, 'sans-titre.png', 0, False, True)
+            self.editor.add_image(img, 'untitled.png', 0, False, True)
             self.create_tab(img)
 
     def open_image(self, action, parameter):
@@ -80,13 +80,13 @@ class Interface(Gtk.ApplicationWindow):
                 self.create_tab(img, path.basename(filename))
             else:
                 error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
-                    Gtk.ButtonsType.OK, "Une erreur est survenue...")
+                    Gtk.ButtonsType.OK, "An error has occurred...")
                 error_dialog.format_secondary_text(
-                    "Le format de ce fichier n'est pas pris en charge.")
+                    "The format of this file is not supported.")
                 error_dialog.run()
                 error_dialog.destroy()
 
-    def create_tab(self, img, title='Sans titre'):
+    def create_tab(self, img, title='Untitled'):
         tab = Tab(self, img, title)
         page_num = self.notebook.get_current_page() + 1
         self.homepage.hide()
@@ -102,9 +102,9 @@ class Interface(Gtk.ApplicationWindow):
         if not self.editor.images[page_num].saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO,
-                'Enregistrer ' + self.editor.images[page_num].filename + ' avant la fermeture ?')
+                'Save ' + self.editor.images[page_num].filename + ' before closing?')
             dialog.format_secondary_text(
-                'Vos modifications seront perdues si vous ne faites pas de sauvegarde.')
+                'Your changes will be lost if you do not back up.')
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 self.editor.file_save_as(None, None)

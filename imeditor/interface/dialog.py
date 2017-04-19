@@ -61,31 +61,31 @@ def params_dialog(parent, title, limits):
 
 
 def properties_dialog(parent, infos):
-    dialog = Dialog(parent, 'Propriétés de l\'image')
+    dialog = Dialog(parent, 'Image properties')
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
 
-    label = Gtk.Label('<b>Mode :</b> {}'.format(infos['mode']))
+    label = Gtk.Label('<b>Mode:</b> {}'.format(infos['mode']))
     label.set_use_markup(True)
     dialog_box.pack_start(label, False, False, 0)
-    label = Gtk.Label('<b>Taille :</b> {}'.format(infos['size']))
+    label = Gtk.Label('<b>Size:</b> {}'.format(infos['size']))
     label.set_use_markup(True)
     dialog_box.pack_start(label, False, False, 0)
     if 'weight' in infos:
-        label = Gtk.Label('<b>Poids :</b> {}'.format(infos['weight']))
+        label = Gtk.Label('<b>Weight:</b> {}'.format(infos['weight']))
         label.set_use_markup(True)
         dialog_box.pack_start(label, False, False, 0)
     if 'path' in infos:
-        label = Gtk.Label('<b>Chemin :</b> {}'.format(infos['path']))
+        label = Gtk.Label('<b>Path:</b> {}'.format(infos['path']))
         label.set_use_markup(True)
         dialog_box.pack_start(label, False, False, 0)
     if 'last_access' in infos:
-        label = Gtk.Label('<b>Dernier accès :</b> {}'.format(infos['last_access']))
+        label = Gtk.Label('<b>Last access:</b> {}'.format(infos['last_access']))
         label.set_use_markup(True)
         dialog_box.pack_start(label, False, False, 0)
     if 'last_change' in infos:
-        label = Gtk.Label('<b>Dernière modification :</b> {}'.format(infos['last_change']))
+        label = Gtk.Label('<b>Last change:</b> {}'.format(infos['last_change']))
         label.set_use_markup(True)
         dialog_box.pack_start(label, False, False, 0)
 
@@ -100,7 +100,7 @@ def apply_filter(button, h_scale, dialog):
 
 
 def new_image_dialog(parent):
-    dialog = Dialog(parent, 'Nouvelle image')
+    dialog = Dialog(parent, 'New image')
 
     spin_width = SpinButton(640, 1, 7680)
     spin_height = SpinButton(360, 1, 4320)
@@ -108,19 +108,19 @@ def new_image_dialog(parent):
     color_chooser = Gtk.ColorChooserWidget()
     color_chooser.set_use_alpha(False)
 
-    cancel_button = Gtk.Button.new_with_label("Annuler")
+    cancel_button = Gtk.Button.new_with_label("Cancel")
     cancel_button.connect("clicked", close_dialog, dialog)
 
-    ok_button = Gtk.Button.new_with_label("Valider")
+    ok_button = Gtk.Button.new_with_label("Confirm")
     ok_button.connect("clicked", ok_callback_new_image, spin_width, spin_height, color_chooser, dialog)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
 
     spins_box = Gtk.Box(spacing=6)
-    spins_box.pack_start(Gtk.Label('Largeur :'), True, True, 0)
+    spins_box.pack_start(Gtk.Label('Width:'), True, True, 0)
     spins_box.pack_start(spin_width, True, True, 0)
-    spins_box.pack_start(Gtk.Label('Hauteur :'), True, True, 0)
+    spins_box.pack_start(Gtk.Label('Height :'), True, True, 0)
     spins_box.pack_start(spin_height, True, True, 0)
     button_box = Gtk.Box(spacing=6)
     button_box.pack_start(cancel_button, True, True, 0)
@@ -152,17 +152,17 @@ def ok_callback_new_image(button, spin_width, spin_height, color_chooser, dialog
 
 def file_dialog(parent, action):
     if action == 'open':
-        dialog = Gtk.FileChooserDialog('Choisissez un fichier',
+        dialog = Gtk.FileChooserDialog('Choose a file',
             parent,
             Gtk.FileChooserAction.OPEN,
-            ("Annuler", Gtk.ResponseType.CANCEL,
-            "Ouvrir", Gtk.ResponseType.OK))
+            ("Cancel", Gtk.ResponseType.CANCEL,
+            "Open", Gtk.ResponseType.OK))
     elif action == 'save':
-        dialog = Gtk.FileChooserDialog('Choisissez un fichier',
+        dialog = Gtk.FileChooserDialog('Choose a file',
             parent,
             Gtk.FileChooserAction.SAVE,
-            ("Annuler", Gtk.ResponseType.CANCEL,
-            "Ok", Gtk.ResponseType.OK))
+            ("Cancel", Gtk.ResponseType.CANCEL,
+            "Confirm", Gtk.ResponseType.OK))
         dialog.set_current_name('untitled.png')
     response = dialog.run()
     if response == Gtk.ResponseType.OK:
