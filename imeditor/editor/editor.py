@@ -51,10 +51,7 @@ class Editor(object):
     def apply_filter(self, action, parameter, func, value=None):
         func = eval(func)
         img = self.get_img()
-        if value:
-            new_img = func(img, value)
-        else:
-            new_img = func(img)
+        new_img = func(img, value) if value else func(img)
         self.do_change(new_img)
 
     def do_change(self, img):
