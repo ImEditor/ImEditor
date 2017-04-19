@@ -218,4 +218,4 @@ class Editor(object):
     def properties(self, action, parameter):
         page_num = self.parent.notebook.get_current_page()
         img_infos = get_infos(self.images[page_num])
-        dialog.properties_dialog(self.parent, 'Propriétés de l\'image', img_infos)
+        dialog.properties_dialog(self.parent, img_infos)

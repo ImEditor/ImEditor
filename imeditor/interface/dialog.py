@@ -60,8 +60,8 @@ def params_dialog(parent, title, limits):
     return dialog
 
 
-def properties_dialog(parent, title, infos):
-    dialog = Dialog(parent, title)
+def properties_dialog(parent, infos):
+    dialog = Dialog(parent, 'Propriétés de l\'image')
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
