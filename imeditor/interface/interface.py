@@ -111,11 +111,8 @@ class Interface(Gtk.ApplicationWindow):
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 self.editor.file_save_as(None, None)
-                self.notebook.remove_page(page_num)
-                self.editor.close_image(page_num)
-            elif response == Gtk.ResponseType.NO:
-                self.notebook.remove_page(page_num)
-                self.editor.close_image(page_num)
+            self.notebook.remove_page(page_num)
+            self.editor.close_image(page_num)
             dialog.destroy()
         else:
             self.notebook.remove_page(page_num)
