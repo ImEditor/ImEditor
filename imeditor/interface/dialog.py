@@ -134,7 +134,7 @@ def new_image_dialog(parent):
 
     grid.attach(Gtk.Label('Background color'), 0, 1, 1, 1)
     grid.attach(color_button, 1, 1, 3, 1)
-    grid.attach(Gtk.Label('Extension'), 0, 2, 1, 1)
+    grid.attach(Gtk.Label('Format'), 0, 2, 1, 1)
     grid.attach(extension_combo, 1, 2, 3, 1)
 
     grid.attach(cancel_button, 0, 3, 2, 1)
