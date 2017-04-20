@@ -40,7 +40,7 @@ class Dialog(Gtk.Dialog):
 
 def params_dialog(parent, title, limits):
     dialog = Dialog(parent, title)
-    label = Gtk.Label('Entrez une valeur')
+    label = Gtk.Label('Enter a value')
 
     default = (limits[0] + limits[1]) / 2
     h_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, limits[0], limits[1], 20)
