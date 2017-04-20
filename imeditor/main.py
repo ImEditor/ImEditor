@@ -22,7 +22,6 @@ class Application(Gtk.Application):
 
         builder = Gtk.Builder()
         builder.add_from_string(self.ui_info)
-
         self.set_menubar(builder.get_object('menubar'))
 
     def get_ui(self):
