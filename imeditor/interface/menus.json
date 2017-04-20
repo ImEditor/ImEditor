@@ -30,7 +30,7 @@
     },
     {
       "name": "quit",
-      "callback": "parent.quit",
+      "callback": "parent.quit_app",
       "label": "Quit",
       "shortcut": "&lt;Primary&gt;q"
     }
