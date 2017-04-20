@@ -58,6 +58,9 @@ class Interface(Gtk.ApplicationWindow):
         self.draw_cursor = Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL)
         self.move_cursor = Gdk.Cursor.new_from_name(display, 'move')
 
+        # Vars
+        self.allowed_formats = ('png', 'jpeg', 'jpg', 'webp', 'bmp')
+
         self.show_all()
         self.notebook.hide()
 
@@ -79,7 +82,7 @@ class Interface(Gtk.ApplicationWindow):
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
         if filename:
-            if path.splitext(filename)[-1].lower() in ('.png', '.jpeg', '.jpg', '.webp', '.bmp'):
+            if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
                 img = Image.open(filename)
                 self.editor.add_image(img, filename, 0, True)
                 self.create_tab(img, path.basename(filename))
