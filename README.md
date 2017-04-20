@@ -5,7 +5,7 @@
 
 ## Description
 
-ImEditor is an image editor.
+ImEditor is a simple & versatile image editor.
 
 ## Version
 

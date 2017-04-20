@@ -8,9 +8,9 @@ setup(
     version = '0.1-dev',
     author='Nathan Seva, Hugo Posnic',
     install_requires=read('requirements.txt'),
-    description = ('Éditeur de photos, simple & polyvalent'),
+    description = ('Simple & versatile image editor.'),
     license = 'GNU GPL v3',
-    keywords = 'photo editor picture imeditor',
+    keywords = 'image editor picture imeditor',
     url = 'https://imeditor.github.io/',
     packages=['imeditor'],
     classifiers=[
