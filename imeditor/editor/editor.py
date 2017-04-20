@@ -124,7 +124,7 @@ class Editor(object):
         if self.task == 0:
             self.selection = mouse_coords
             self.parent.update_image(img)
-        elif self.task == 2 or (self.task == 1 and self.selected_img):
+        elif (self.task == 1 and self.selected_img) or self.task == 2:
             self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
@@ -132,11 +132,11 @@ class Editor(object):
         if self.task == 0:
             draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
             self.parent.update_image(img)
+        elif self.task == 1:
+            self.paste(mouse_coords=mouse_coords)
         elif self.task == 2:
             draw_point(img, mouse_coords)
             self.set_tmp_img(img)
-        elif self.task == 1:
-            self.paste(mouse_coords=mouse_coords)
 
     def release_task(self, widget, event):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
