@@ -71,8 +71,9 @@ class Interface(Gtk.ApplicationWindow):
         values = new_image_dialog.get_values()
         if values:
             img = Image.new('RGB', values[0], values[1])
-            self.editor.add_image(img, 'untitled.png', 0, False, True)
-            self.create_tab(img)
+            filename = 'untitled.png'
+            self.editor.add_image(img, filename, 0, False, True)
+            self.create_tab(img, filename)
 
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
@@ -89,7 +90,7 @@ class Interface(Gtk.ApplicationWindow):
                 error_dialog.run()
                 error_dialog.destroy()
 
-    def create_tab(self, img, title='Untitled'):
+    def create_tab(self, img, title):
         tab = Tab(self, img, title)
         page_num = self.notebook.get_current_page() + 1
         self.homepage.hide()
