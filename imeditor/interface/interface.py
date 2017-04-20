@@ -4,7 +4,6 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from PIL import Image
-import sys
 from os import path
 
 from interface.tab import Tab
@@ -16,6 +15,7 @@ from editor.editor import Editor
 class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
         Gtk.Window.__init__(self, title='ImEditor', application=app)
+        self.app = app
         self.set_size_request(750, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icons/icon.png')
@@ -63,7 +63,7 @@ class Interface(Gtk.ApplicationWindow):
         nb_tabs = self.notebook.get_n_pages()
         for _ in range(nb_tabs):
             self.close_tab(self.notebook.get_current_page())
-        sys.exit()
+        self.app.quit()
 
     def new_image(self, action, parameter):
         new_image_dialog = dialog.new_image_dialog(self)
