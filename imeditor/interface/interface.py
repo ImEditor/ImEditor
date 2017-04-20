@@ -59,8 +59,7 @@ class Interface(Gtk.ApplicationWindow):
         self.move_cursor = Gdk.Cursor.new_from_name(display, 'move')
 
         # Vars
-        self.allowed_formats = ('png', 'jpeg', 'jpg', 'webp', 'bmp')
-
+        self.allowed_formats = ('bmp', 'ico', 'jpeg', 'jpg', 'png', 'webp')
         self.show_all()
         self.notebook.hide()
 
