@@ -21,6 +21,15 @@ class Tab(Gtk.ScrolledWindow):
         frame = Gtk.Frame(hexpand=True, vexpand=True)
         frame.set_halign(Gtk.Align.CENTER)
         frame.set_valign(Gtk.Align.CENTER)
+        frame.set_name("TabFrame")
+        style_provider = Gtk.CssProvider()
+        css = b"""
+        #TabFrame {
+            background: url('assets/transparent.png');
+        }
+        """
+        style_provider.load_from_data(css)
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         frame.add(event_box)
         self.add(frame)
 
