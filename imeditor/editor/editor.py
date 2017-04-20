@@ -35,7 +35,7 @@ class Editor(object):
     @img_open
     def close_image(self, index):
         self.images[index].close_all_img()
-        self.images = self.images[:index] + self.images[index+1:]
+        del self.images[index]
         self.select()
         self.task = 0
 

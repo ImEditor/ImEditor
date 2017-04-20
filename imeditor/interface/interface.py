@@ -115,8 +115,8 @@ class Interface(Gtk.ApplicationWindow):
             self.editor.close_image(page_num)
             dialog.destroy()
         else:
-            self.notebook.remove_page(page_num)
             self.editor.close_image(page_num)
+            self.notebook.remove_page(page_num)
 
         if self.notebook.get_n_pages() == 0:
             self.homepage.show()
