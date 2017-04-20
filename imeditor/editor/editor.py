@@ -184,7 +184,7 @@ class Editor(object):
     def cut(self, action, parameter):
         if self.selection != list():
             self.copy()
-            blank_img = Image.new('RGB', self.selected_img.size, 'white')
+            blank_img = Image.new('RGBA', self.selected_img.size, (255, 255, 255, 0))
             img = self.get_img().copy()
             img.paste(blank_img, tuple(self.selection[:2]))
             self.do_change(img)
