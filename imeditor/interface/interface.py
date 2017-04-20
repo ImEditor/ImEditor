@@ -79,7 +79,7 @@ class Interface(Gtk.ApplicationWindow):
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
         if filename:
-            if path.splitext(filename)[-1] in ('.png', '.jpeg', '.jpg'):
+            if path.splitext(filename)[-1].lower() in ('.png', '.jpeg', '.jpg'):
                 img = Image.open(filename)
                 self.editor.add_image(img, filename, 0, True)
                 self.create_tab(img, path.basename(filename))
