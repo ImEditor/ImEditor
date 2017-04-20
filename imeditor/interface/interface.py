@@ -113,6 +113,7 @@ class Interface(Gtk.ApplicationWindow):
                 self.editor.file_save_as(None, None)
             self.notebook.remove_page(page_num)
             self.editor.close_image(page_num)
+            del self.editor.images[page_num]
             dialog.destroy()
         else:
             self.notebook.remove_page(page_num)
