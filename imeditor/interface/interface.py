@@ -59,6 +59,7 @@ class Interface(Gtk.ApplicationWindow):
         self.move_cursor = Gdk.Cursor.new_from_name(display, 'move')
 
         self.show_all()
+        self.notebook.hide()
 
     def quit_app(self, action=None, parameter=None):
         for _ in range(self.notebook.get_n_pages()):
@@ -94,6 +95,7 @@ class Interface(Gtk.ApplicationWindow):
         tab = Tab(self, img, title)
         page_num = self.notebook.get_current_page() + 1
         self.homepage.hide()
+        self.notebook.show()
         self.notebook.insert_page(tab, tab.tab_label, page_num)
         self.notebook.show_all()
         self.notebook.set_current_page(page_num)
@@ -120,6 +122,7 @@ class Interface(Gtk.ApplicationWindow):
             self.notebook.remove_page(page_num)
 
         if self.notebook.get_n_pages() == 0:
+            self.notebook.hide()
             self.homepage.show()
 
     def update_image(self, new_img):
