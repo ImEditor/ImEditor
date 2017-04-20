@@ -73,7 +73,7 @@ class Interface(Gtk.ApplicationWindow):
         if values:
             img = Image.new('RGB', values[0], values[1])
             filename = 'untitled.' + values[2].lower()
-            self.editor.add_image(img, filename, 0, False, True)
+            self.editor.add_image(img, filename, 0, False)
             self.create_tab(img, filename)
 
     def open_image(self, action, parameter):

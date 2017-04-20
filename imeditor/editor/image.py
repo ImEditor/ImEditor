@@ -2,13 +2,12 @@
 
 
 class ImageObject(object):
-    def __init__(self, img, filename, index, saved, is_new_image=False):
+    def __init__(self, img, filename, index, saved):
         super(ImageObject, self).__init__()
         self.images = [img]
         self.filename = filename
         self.index = index
         self.saved = saved
-        self.is_new_image = is_new_image
         self.tmp_img = None
 
     def __str__(self):

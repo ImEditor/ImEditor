@@ -192,12 +192,12 @@ class Editor(object):
     @img_open
     def file_save(self, action, parameter):
         page_num = self.parent.notebook.get_current_page()
-        if self.images[page_num].is_new_image:
-            self.file_save_as()
-        else:
+        if path.isfile(self.images[page_num].filename):
             img = self.images[page_num].get_current_img()
             self.images[page_num].saved = True
             img.save(self.images[page_num].filename)
+        else:
+            self.file_save_as()
 
     @img_open
     def file_save_as(self, action=None, parameter=None):
