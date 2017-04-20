@@ -18,6 +18,9 @@ class Dialog(Gtk.Dialog):
 
         self.values = list()
 
+        self.dialog_box = self.get_content_area()
+        self.dialog_box.set_spacing(6)
+
     def get_values(self):
         if self.values == []:
             return None
@@ -25,6 +28,14 @@ class Dialog(Gtk.Dialog):
             return self.values[0]
         else:
             return self.values
+
+    def launch(self):
+        self.show_all()
+        self.run()
+        self.destroy()
+
+    def close(self, button):
+        self.destroy()
 
 
 def params_dialog(parent, title, limits):
@@ -38,66 +49,51 @@ def params_dialog(parent, title, limits):
     h_scale.set_valign(Gtk.Align.START)
 
     cancel_button = Gtk.Button.new_with_label('Cancel')
-    cancel_button.connect('clicked', close_dialog, dialog)
+    cancel_button.connect('clicked', dialog.close)
 
     ok_button = Gtk.Button.new_with_label('Confirm')
-    ok_button.connect('clicked', apply_filter, h_scale, dialog)
+    ok_button.connect('clicked', callback_apply_filter, h_scale, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
-    dialog_box = dialog.get_content_area()
-    dialog_box.set_spacing(6)
-    dialog_box.pack_start(label, False, False, 0)
-    dialog_box.pack_start(h_scale, False, False, 0)
+    dialog.dialog_box.pack_start(label, False, False, 0)
+    dialog.dialog_box.pack_start(h_scale, False, False, 0)
 
     button_box = Gtk.Box(spacing=6)
     button_box.pack_start(cancel_button, True, True, 0)
     button_box.pack_start(ok_button, True, True, 0)
-    dialog_box.pack_start(button_box, False, False, 0)
+    dialog.dialog_box.pack_start(button_box, False, False, 0)
 
-    dialog.show_all()
-    dialog.run()
-    dialog.destroy()
-
+    dialog.launch()
     return dialog
 
 
 def properties_dialog(parent, infos):
     dialog = Dialog(parent, 'Image properties')
 
-    dialog_box = dialog.get_content_area()
-    dialog_box.set_spacing(6)
-
     label = Gtk.Label('<b>Mode:</b> {}'.format(infos['mode']))
     label.set_use_markup(True)
-    dialog_box.pack_start(label, False, False, 0)
+    dialog.dialog_box.pack_start(label, False, False, 0)
     label = Gtk.Label('<b>Size:</b> {}'.format(infos['size']))
     label.set_use_markup(True)
-    dialog_box.pack_start(label, False, False, 0)
+    dialog.dialog_box.pack_start(label, False, False, 0)
     if 'weight' in infos:
         label = Gtk.Label('<b>Weight:</b> {}'.format(infos['weight']))
         label.set_use_markup(True)
-        dialog_box.pack_start(label, False, False, 0)
+        dialog.dialog_box.pack_start(label, False, False, 0)
     if 'path' in infos:
         label = Gtk.Label('<b>Path:</b> {}'.format(infos['path']))
         label.set_use_markup(True)
-        dialog_box.pack_start(label, False, False, 0)
+        dialog.dialog_box.pack_start(label, False, False, 0)
     if 'last_access' in infos:
         label = Gtk.Label('<b>Last access:</b> {}'.format(infos['last_access']))
         label.set_use_markup(True)
-        dialog_box.pack_start(label, False, False, 0)
+        dialog.dialog_box.pack_start(label, False, False, 0)
     if 'last_change' in infos:
         label = Gtk.Label('<b>Last change:</b> {}'.format(infos['last_change']))
         label.set_use_markup(True)
-        dialog_box.pack_start(label, False, False, 0)
+        dialog.dialog_box.pack_start(label, False, False, 0)
 
-    dialog.show_all()
-    dialog.run()
-    dialog.destroy()
-
-
-def apply_filter(button, h_scale, dialog):
-    dialog.values.append(int(h_scale.get_value()))
-    dialog.destroy()
+    dialog.launch()
 
 
 def new_image_dialog(parent):
@@ -117,14 +113,11 @@ def new_image_dialog(parent):
     extension_combo.set_active(0)
 
     cancel_button = Gtk.Button.new_with_label('Cancel')
-    cancel_button.connect('clicked', close_dialog, dialog)
+    cancel_button.connect('clicked', dialog.close)
 
     ok_button = Gtk.Button.new_with_label('Confirm')
-    ok_button.connect('clicked', ok_callback_new_image, spin_width, spin_height, color_button, extension_combo, dialog)
+    ok_button.connect('clicked', callback_new_image, spin_width, spin_height, color_button, extension_combo, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
-
-    dialog_box = dialog.get_content_area()
-    dialog_box.set_spacing(6)
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
     grid.attach(Gtk.Label('Width'), 0, 0, 1, 1)
@@ -140,28 +133,10 @@ def new_image_dialog(parent):
     grid.attach(cancel_button, 0, 3, 2, 1)
     grid.attach(ok_button, 2, 3, 2, 1)
 
-    dialog_box.add(grid)
+    dialog.dialog_box.add(grid)
 
-    dialog.show_all()
-    dialog.run()
-    dialog.destroy()
+    dialog.launch()
     return dialog
-
-
-def close_dialog(button, dialog):
-    dialog.destroy()
-
-
-def ok_callback_new_image(button, spin_width, spin_height, color_button, extension_combo, dialog):
-    width = spin_width.get_value_as_int()
-    height = spin_height.get_value_as_int()
-    size = (width, height)
-    color = color_button.get_rgba().to_string()
-    extension = extension_combo.get_active_text()
-    dialog.values.append(size)
-    dialog.values.append(color)
-    dialog.values.append(extension)
-    dialog.destroy()
 
 
 def file_dialog(parent, action, filename=None):
@@ -179,9 +154,23 @@ def file_dialog(parent, action, filename=None):
             'Confirm', Gtk.ResponseType.OK))
         dialog.set_current_name(filename)
     response = dialog.run()
-    if response == Gtk.ResponseType.OK:
-        filename = dialog.get_filename()
-    else:
-        filename = None
+    filename = dialog.get_filename() if Gtk.ResponseType.OK else None
     dialog.destroy()
     return filename
+
+
+def callback_new_image(button, spin_width, spin_height, color_button, extension_combo, dialog):
+    width = spin_width.get_value_as_int()
+    height = spin_height.get_value_as_int()
+    size = (width, height)
+    color = color_button.get_rgba().to_string()
+    extension = extension_combo.get_active_text()
+    dialog.values.append(size)
+    dialog.values.append(color)
+    dialog.values.append(extension)
+    dialog.destroy()
+
+
+def callback_apply_filter(button, h_scale, dialog):
+    dialog.values.append(int(h_scale.get_value()))
+    dialog.destroy()
