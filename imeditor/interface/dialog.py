@@ -37,11 +37,12 @@ def params_dialog(parent, title, limits):
     h_scale.set_hexpand(True)
     h_scale.set_valign(Gtk.Align.START)
 
-    cancel_button = Gtk.Button.new_with_label('Annuler')
+    cancel_button = Gtk.Button.new_with_label('Cancel')
     cancel_button.connect('clicked', close_dialog, dialog)
 
-    ok_button = Gtk.Button.new_with_label('Valider')
+    ok_button = Gtk.Button.new_with_label('Confirm')
     ok_button.connect('clicked', apply_filter, h_scale, dialog)
+    ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
@@ -120,6 +121,7 @@ def new_image_dialog(parent):
 
     ok_button = Gtk.Button.new_with_label('Confirm')
     ok_button.connect('clicked', ok_callback_new_image, spin_width, spin_height, color_button, extension_combo, dialog)
+    ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
