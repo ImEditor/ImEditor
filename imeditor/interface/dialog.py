@@ -105,8 +105,8 @@ def new_image_dialog(parent):
     spin_width = SpinButton(640, 1, 7680)
     spin_height = SpinButton(360, 1, 4320)
 
-    color_chooser = Gtk.ColorChooserWidget()
-    color_chooser.set_use_alpha(False)
+    color_button = Gtk.ColorButton()
+    color_button.set_use_alpha(False)
 
     extension_combo = Gtk.ComboBoxText()
     extension_combo.set_entry_text_column(0)
@@ -119,7 +119,7 @@ def new_image_dialog(parent):
     cancel_button.connect('clicked', close_dialog, dialog)
 
     ok_button = Gtk.Button.new_with_label('Confirm')
-    ok_button.connect('clicked', ok_callback_new_image, spin_width, spin_height, color_chooser, extension_combo, dialog)
+    ok_button.connect('clicked', ok_callback_new_image, spin_width, spin_height, color_button, extension_combo, dialog)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
@@ -134,7 +134,7 @@ def new_image_dialog(parent):
     button_box.pack_start(ok_button, True, True, 0)
 
     dialog_box.pack_start(spins_box, False, False, 0)
-    dialog_box.pack_start(color_chooser, False, False, 0)
+    dialog_box.pack_start(color_button, False, False, 0)
     dialog_box.pack_start(extension_combo, False, False, 0)
     dialog_box.pack_start(button_box, False, False, 0)
     dialog.show_all()
@@ -147,11 +147,11 @@ def close_dialog(button, dialog):
     dialog.destroy()
 
 
-def ok_callback_new_image(button, spin_width, spin_height, color_chooser, extension_combo, dialog):
+def ok_callback_new_image(button, spin_width, spin_height, color_button, extension_combo, dialog):
     width = spin_width.get_value_as_int()
     height = spin_height.get_value_as_int()
     size = (width, height)
-    color = color_chooser.get_rgba().to_string()
+    color = color_button.get_rgba().to_string()
     extension = extension_combo.get_active_text()
     dialog.values.append(size)
     dialog.values.append(color)
