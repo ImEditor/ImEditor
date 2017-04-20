@@ -24,5 +24,4 @@ def get_infos(image):
         img_infos['path'] = image.filename
         img_infos['last_access'] = datetime.datetime.fromtimestamp(img_stat.st_atime).strftime('%d/%m/%Y %Hh%M')
         img_infos['last_change'] = datetime.datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
-
     return img_infos

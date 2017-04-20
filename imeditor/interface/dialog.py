@@ -132,7 +132,6 @@ def new_image_dialog(parent):
     dialog.show_all()
     dialog.run()
     dialog.destroy()
-
     return dialog
 
 
