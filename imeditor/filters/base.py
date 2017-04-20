@@ -3,12 +3,9 @@
 from PIL import Image
 
 def negative(img):
-    """Inverse les couleur de l'image.
-
-    :param img: opened image with Image.open
-    :return: PIL image object
-
-    """
+    """Invert colors of image.
+    :param img: image
+    :return: PIL object"""
     data = list(img.getdata())
     data_m = list()
     for pixel in data:
