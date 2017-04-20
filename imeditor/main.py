@@ -16,7 +16,6 @@ class Application(Gtk.Application):
 
     def do_activate(self):
         self.win = Interface(self)
-        self.win.show_all()
 
     def do_startup(self):
         Gtk.Application.do_startup(self)

@@ -57,6 +57,8 @@ class Interface(Gtk.ApplicationWindow):
         self.draw_cursor = Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL)
         self.move_cursor = Gdk.Cursor.new_from_name(display, 'move')
 
+        self.show_all()
+
     def quit(self, action, parameter):
         nb_tabs = self.notebook.get_n_pages()
         for _ in range(nb_tabs):
