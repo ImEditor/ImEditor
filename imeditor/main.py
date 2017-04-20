@@ -43,7 +43,7 @@ class Application(Gtk.Application):
         ui += '</menu></interface>'
         return ui, menu
 
+
 if __name__ == '__main__':
     app = Application()
-    exit_status = app.run(sys.argv)
-    sys.exit(exit_status)
+    app.run(sys.argv)
