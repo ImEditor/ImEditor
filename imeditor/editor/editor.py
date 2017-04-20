@@ -201,9 +201,9 @@ class Editor(object):
 
     @img_open
     def file_save_as(self, action=None, parameter=None):
-        filename = dialog.file_dialog(self.parent, 'save')
+        page_num = self.parent.notebook.get_current_page()
+        filename = dialog.file_dialog(self.parent, 'save', path.basename(self.images[page_num].filename))
         if filename:
-            page_num = self.parent.notebook.get_current_page()
             img = self.images[page_num].get_current_img()
             img.save(filename)
             self.images[page_num].filename = filename
