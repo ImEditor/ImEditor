@@ -108,19 +108,26 @@ def new_image_dialog(parent):
     color_chooser = Gtk.ColorChooserWidget()
     color_chooser.set_use_alpha(False)
 
+    extension_combo = Gtk.ComboBoxText()
+    extension_combo.set_entry_text_column(0)
+    extensions = ["PNG", "JPEG"]
+    for elt in extensions:
+        extension_combo.append_text(elt)
+    extension_combo.set_active(0)
+
     cancel_button = Gtk.Button.new_with_label('Cancel')
     cancel_button.connect('clicked', close_dialog, dialog)
 
     ok_button = Gtk.Button.new_with_label('Confirm')
-    ok_button.connect('clicked', ok_callback_new_image, spin_width, spin_height, color_chooser, dialog)
+    ok_button.connect('clicked', ok_callback_new_image, spin_width, spin_height, color_chooser, extension_combo, dialog)
 
     dialog_box = dialog.get_content_area()
     dialog_box.set_spacing(6)
 
     spins_box = Gtk.Box(spacing=6)
-    spins_box.pack_start(Gtk.Label('Width:'), True, True, 0)
+    spins_box.pack_start(Gtk.Label('Width'), True, True, 0)
     spins_box.pack_start(spin_width, True, True, 0)
-    spins_box.pack_start(Gtk.Label('Height :'), True, True, 0)
+    spins_box.pack_start(Gtk.Label('Height'), True, True, 0)
     spins_box.pack_start(spin_height, True, True, 0)
     button_box = Gtk.Box(spacing=6)
     button_box.pack_start(cancel_button, True, True, 0)
@@ -128,6 +135,7 @@ def new_image_dialog(parent):
 
     dialog_box.pack_start(spins_box, False, False, 0)
     dialog_box.pack_start(color_chooser, False, False, 0)
+    dialog_box.pack_start(extension_combo, False, False, 0)
     dialog_box.pack_start(button_box, False, False, 0)
     dialog.show_all()
     dialog.run()
@@ -139,13 +147,15 @@ def close_dialog(button, dialog):
     dialog.destroy()
 
 
-def ok_callback_new_image(button, spin_width, spin_height, color_chooser, dialog):
+def ok_callback_new_image(button, spin_width, spin_height, color_chooser, extension_combo, dialog):
     width = spin_width.get_value_as_int()
     height = spin_height.get_value_as_int()
     size = (width, height)
     color = color_chooser.get_rgba().to_string()
+    extension = extension_combo.get_active_text()
     dialog.values.append(size)
     dialog.values.append(color)
+    dialog.values.append(extension)
     dialog.destroy()
 
 

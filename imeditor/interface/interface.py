@@ -72,7 +72,7 @@ class Interface(Gtk.ApplicationWindow):
         values = new_image_dialog.get_values()
         if values:
             img = Image.new('RGB', values[0], values[1])
-            filename = 'untitled.png'
+            filename = 'untitled.' + values[2].lower()
             self.editor.add_image(img, filename, 0, False, True)
             self.create_tab(img, filename)
 
