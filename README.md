@@ -9,7 +9,7 @@ ImEditor is an image editor.
 
 ## Version
 
-Current version is 0.1
+Current version is 0.1-dev.
 
 ## Tech
 

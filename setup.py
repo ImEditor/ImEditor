@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name = 'ImEditor',
-    version = '0.1',
+    version = '0.1-dev',
     author='Nathan Seva, Hugo Posnic',
     install_requires=read('requirements.txt'),
     description = ('Éditeur de photos, simple & polyvalent'),

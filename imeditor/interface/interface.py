@@ -140,7 +140,7 @@ class Interface(Gtk.ApplicationWindow):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo(self.logo)
         dialog.set_program_name('ImEditor')
-        dialog.set_version('0.1')
+        dialog.set_version('0.1-dev')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         dialog.set_comments('GTK3 Image Editor')
