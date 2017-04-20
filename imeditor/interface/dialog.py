@@ -111,7 +111,7 @@ def new_image_dialog(parent):
 
     extension_combo = Gtk.ComboBoxText()
     extension_combo.set_entry_text_column(0)
-    extensions = ["PNG", "JPEG"]
+    extensions = ["PNG", "JPEG", "BMP"]
     for elt in extensions:
         extension_combo.append_text(elt)
     extension_combo.set_active(0)
