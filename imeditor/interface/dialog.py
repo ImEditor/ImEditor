@@ -40,7 +40,6 @@ class Dialog(Gtk.Dialog):
 
 def params_dialog(parent, title, limits):
     dialog = Dialog(parent, title)
-    label = Gtk.Label('Enter a value')
 
     default = (limits[0] + limits[1]) / 2
     h_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, limits[0], limits[1], 20)
@@ -55,7 +54,6 @@ def params_dialog(parent, title, limits):
     ok_button.connect('clicked', callback_apply_filter, h_scale, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
-    dialog.dialog_box.pack_start(label, False, False, 0)
     dialog.dialog_box.pack_start(h_scale, False, False, 0)
 
     button_box = Gtk.Box(spacing=6)
