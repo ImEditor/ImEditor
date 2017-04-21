@@ -169,10 +169,7 @@ def callback_new_image(button, spin_width, spin_height, color_button, extension_
     color = color_button.get_rgba().to_string()
     extension = extension_combo.get_active_text()
     transparent = transparent_check.get_active()
-    dialog.values.append(size)
-    dialog.values.append(color)
-    dialog.values.append(extension)
-    dialog.values.append(transparent)
+    dialog.values += [size, color, extension, transparent]
     dialog.destroy()
 
 
