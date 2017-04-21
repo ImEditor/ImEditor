@@ -67,12 +67,12 @@ def create_toolbar(parent):
     rotate_right_button.set_action_name('win.rotate_right')
 
     select_button = Gtk.ToolButton.new()
-    select_button.set_icon_name('input-mouse')
+    select_button.set_icon_widget(Gtk.Image.new_from_file('assets/select.png'))
     toolbar.insert(select_button, 8)
     select_button.set_action_name('win.select')
 
     draw_button = Gtk.ToolButton.new()
-    draw_button.set_icon_name('applications-graphics')
+    draw_button.set_icon_widget(Gtk.Image.new_from_file('assets/brush.png'))
     toolbar.insert(draw_button, 9)
     draw_button.set_action_name('win.draw-brush')
 
