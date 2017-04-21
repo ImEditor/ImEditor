@@ -13,6 +13,12 @@
       "shortcut": "&lt;Primary&gt;o"
     },
     {
+      "name": "close",
+      "callback": "parent.close_tab",
+      "label": "Close current tab",
+      "shortcut": "&lt;Primary&gt;w"
+    },
+    {
       "name": "save",
       "callback": "editor.file_save",
       "label": "Save",

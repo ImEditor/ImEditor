@@ -65,7 +65,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def quit_app(self, action=None, parameter=None):
         for _ in range(self.notebook.get_n_pages()):
-            self.close_tab(self.notebook.get_current_page())
+            self.close_tab(page_num=self.notebook.get_current_page())
         self.app.quit()
         return False
 
@@ -104,9 +104,11 @@ class Interface(Gtk.ApplicationWindow):
 
     def on_close_tab_clicked(self, button, box):
         page_num = self.notebook.page_num(box)
-        self.close_tab(page_num)
+        self.close_tab(page_num=page_num)
 
-    def close_tab(self, page_num):
+    def close_tab(self, action=None, parameter=None, page_num=None):
+        if not page_num:
+            page_num = self.notebook.get_current_page()
         if not self.editor.images[page_num].saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO,
