@@ -46,6 +46,7 @@ class Interface(Gtk.ApplicationWindow):
         self.homepage.attach(open_button, 1, 1, 1, 1)
         # Tabs
         self.notebook = Gtk.Notebook()
+        self.notebook.set_scrollable(True)
 
         grid.attach(toolbar, 0, 0, 1, 1)
         grid.attach(self.notebook, 0, 1, 1, 1)
