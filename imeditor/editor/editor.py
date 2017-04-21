@@ -114,13 +114,12 @@ class Editor(object):
             img = self.images[page_num].get_tmp_img().copy()
         else:
             img = self.get_img().copy()
-        tab = self.parent.notebook.get_nth_page(page_num)
         x_mouse = round(mouse_coords[0])
         y_mouse = round(mouse_coords[1])
         return [x_mouse, y_mouse], page_num, img
 
     def press_task(self, widget, event):
-        mouse_coords, page_num, img = self.get_vars((event.x, event.y))
+        mouse_coords, _, img = self.get_vars((event.x, event.y))
         if self.task == 0:
             self.selection = mouse_coords
             self.parent.update_image(img)
@@ -128,7 +127,7 @@ class Editor(object):
             self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
-        mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
+        mouse_coords, _, img = self.get_vars((event.x, event.y), True)
         if self.task == 0:
             draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
             self.parent.update_image(img)

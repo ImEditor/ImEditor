@@ -158,7 +158,7 @@ def file_dialog(parent, action, filename=None):
             'Confirm', Gtk.ResponseType.OK))
         dialog.set_current_name(filename)
     response = dialog.run()
-    filename = dialog.get_filename() if Gtk.ResponseType.OK else None
+    filename = dialog.get_filename() if response == Gtk.ResponseType.OK else None
     dialog.destroy()
     return filename
 
