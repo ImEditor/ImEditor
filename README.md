@@ -17,6 +17,7 @@ ImEditor uses a number of open source projects to work properly:
 
 - [Python 3](https://www.python.org)
 - [Gtk 3](https://www.gtk.org)
+- [Pillow](https://python-pillow.org)
 
 
 ## Contributing
