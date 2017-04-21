@@ -112,11 +112,13 @@ def new_image_dialog(parent):
         extension_combo.append_text(elt)
     extension_combo.set_active(0)
 
+    transparent_check = Gtk.CheckButton()
+
     cancel_button = Gtk.Button.new_with_label('Cancel')
     cancel_button.connect('clicked', dialog.close)
 
     ok_button = Gtk.Button.new_with_label('Confirm')
-    ok_button.connect('clicked', callback_new_image, spin_width, spin_height, color_button, extension_combo, dialog)
+    ok_button.connect('clicked', callback_new_image, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
@@ -126,7 +128,9 @@ def new_image_dialog(parent):
     grid.attach(spin_height, 3, 0, 1, 1)
 
     grid.attach(Gtk.Label('Background color'), 0, 1, 1, 1)
-    grid.attach(color_button, 1, 1, 3, 1)
+    grid.attach(color_button, 1, 1, 1, 1)
+    grid.attach(Gtk.Label('Transparent'), 2, 1, 1, 1)
+    grid.attach(transparent_check, 3, 1, 1, 1)
     grid.attach(Gtk.Label('Format'), 0, 2, 1, 1)
     grid.attach(extension_combo, 1, 2, 3, 1)
 
@@ -159,15 +163,17 @@ def file_dialog(parent, action, filename=None):
     return filename
 
 
-def callback_new_image(button, spin_width, spin_height, color_button, extension_combo, dialog):
+def callback_new_image(button, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
     width = spin_width.get_value_as_int()
     height = spin_height.get_value_as_int()
     size = (width, height)
     color = color_button.get_rgba().to_string()
     extension = extension_combo.get_active_text()
+    transparent = transparent_check.get_active()
     dialog.values.append(size)
     dialog.values.append(color)
     dialog.values.append(extension)
+    dialog.values.append(transparent)
     dialog.destroy()
 
 
