@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
 from PIL import Image
 from os import path
 
