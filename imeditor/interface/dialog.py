@@ -2,7 +2,7 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 from interface.tools import SpinButton
 
@@ -104,6 +104,7 @@ def new_image_dialog(parent):
 
     color_button = Gtk.ColorButton()
     color_button.set_use_alpha(False)
+    color_button.set_rgba(Gdk.RGBA(1, 1, 1, 1))
 
     extension_combo = Gtk.ComboBoxText()
     extension_combo.set_entry_text_column(0)
