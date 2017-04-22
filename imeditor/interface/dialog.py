@@ -47,17 +47,13 @@ def params_dialog(parent, title, limits):
     h_scale.set_hexpand(True)
     h_scale.set_valign(Gtk.Align.START)
 
-    cancel_button = Gtk.Button.new_with_label('Cancel')
-    cancel_button.connect('clicked', dialog.close)
-
-    ok_button = Gtk.Button.new_with_label('Confirm')
+    ok_button = Gtk.Button.new_with_label('Apply')
     ok_button.connect('clicked', callback_apply_filter, h_scale, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     dialog.dialog_box.pack_start(h_scale, False, False, 0)
 
     button_box = Gtk.Box(spacing=6)
-    button_box.pack_start(cancel_button, True, True, 0)
     button_box.pack_start(ok_button, True, True, 0)
     dialog.dialog_box.pack_start(button_box, False, False, 0)
 
