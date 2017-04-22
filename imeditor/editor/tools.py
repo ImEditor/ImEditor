@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from os import stat
+from os import stat, path
 import datetime
 
 
@@ -18,7 +18,7 @@ def get_infos(image):
 
     img_infos['mode'] = img.mode
     img_infos['size'] = str(img.width) + 'x' + str(img.height)
-    if image.filename != 'untitled.png':
+    if path.isfile(image.filename):
         img_stat = stat(image.filename)
         img_infos['weight'] = str(round(img_stat.st_size / 1000, 2)) + ' ko (' + str(round(img_stat.st_size, 2)) + ' o)'
         img_infos['path'] = image.filename
