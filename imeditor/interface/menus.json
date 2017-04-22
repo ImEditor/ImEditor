@@ -3,19 +3,19 @@
     {
       "name": "new",
       "callback": "parent.new_image",
-      "label": "New Image",
+      "label": "New image",
       "shortcut": "&lt;Primary&gt;n"
     },
     {
       "name": "open",
       "callback": "parent.open_image",
-      "label": "Open Image...",
+      "label": "Open image...",
       "shortcut": "&lt;Primary&gt;o"
     },
     {
       "name": "close",
       "callback": "parent.close_tab",
-      "label": "Close Tab",
+      "label": "Close tab",
       "shortcut": "&lt;Primary&gt;w"
     },
     {
@@ -32,7 +32,7 @@
     {
       "name": "details",
       "callback": "editor.details",
-      "label": "Image Details"
+      "label": "Image details"
     },
     {
       "name": "quit",
