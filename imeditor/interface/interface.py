@@ -65,8 +65,8 @@ class Interface(Gtk.ApplicationWindow):
         self.notebook.hide()
 
     def quit_app(self, action=None, parameter=None):
-        for _ in range(self.notebook.get_n_pages()):
-            self.close_tab(page_num=self.notebook.get_current_page())
+        for i in reversed(range(self.notebook.get_n_pages())):
+            self.close_tab(page_num=i)
         self.app.quit()
         return False
 
