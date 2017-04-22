@@ -30,9 +30,9 @@
       "label": "Save as..."
     },
     {
-      "name": "properties",
-      "callback": "editor.properties",
-      "label": "Image properties"
+      "name": "details",
+      "callback": "editor.details",
+      "label": "Image details"
     },
     {
       "name": "quit",

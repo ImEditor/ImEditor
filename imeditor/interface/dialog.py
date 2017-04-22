@@ -65,31 +65,29 @@ def params_dialog(parent, title, limits):
     return dialog
 
 
-def properties_dialog(parent, infos):
-    dialog = Dialog(parent, 'Image properties')
+def details_dialog(parent, infos):
+    dialog = Dialog(parent, 'Image details')
 
-    label = Gtk.Label('<b>Mode:</b> {}'.format(infos['mode']))
-    label.set_use_markup(True)
-    dialog.dialog_box.pack_start(label, False, False, 0)
-    label = Gtk.Label('<b>Size:</b> {}'.format(infos['size']))
-    label.set_use_markup(True)
-    dialog.dialog_box.pack_start(label, False, False, 0)
+    grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
+    grid.attach(Gtk.Label('<b>Mode</b>', use_markup=True), 0, 0, 1, 1)
+    grid.attach(Gtk.Label(infos['mode']), 1, 0, 1, 1)
+    grid.attach(Gtk.Label('<b>Size</b>', use_markup=True), 0, 1, 1, 1)
+    grid.attach(Gtk.Label(infos['size']), 1, 1, 1, 1)
+
     if 'weight' in infos:
-        label = Gtk.Label('<b>Weight:</b> {}'.format(infos['weight']))
-        label.set_use_markup(True)
-        dialog.dialog_box.pack_start(label, False, False, 0)
+        grid.attach(Gtk.Label('<b>Weight</b>', use_markup=True), 0, 2, 1, 1)
+        grid.attach(Gtk.Label(infos['weight']), 1, 2, 1, 1)
     if 'path' in infos:
-        label = Gtk.Label('<b>Path:</b> {}'.format(infos['path']))
-        label.set_use_markup(True)
-        dialog.dialog_box.pack_start(label, False, False, 0)
+        grid.attach(Gtk.Label('<b>Path</b>', use_markup=True), 0, 3, 1, 1)
+        grid.attach(Gtk.Label(infos['path']), 1, 3, 1, 1)
     if 'last_access' in infos:
-        label = Gtk.Label('<b>Last access:</b> {}'.format(infos['last_access']))
-        label.set_use_markup(True)
-        dialog.dialog_box.pack_start(label, False, False, 0)
+        grid.attach(Gtk.Label('<b>Last access</b>', use_markup=True), 0, 4, 1, 1)
+        grid.attach(Gtk.Label(infos['last_access']), 1, 4, 1, 1)
     if 'last_change' in infos:
-        label = Gtk.Label('<b>Last change:</b> {}'.format(infos['last_change']))
-        label.set_use_markup(True)
-        dialog.dialog_box.pack_start(label, False, False, 0)
+        grid.attach(Gtk.Label('<b>Last change</b>', use_markup=True), 0, 5, 1, 1)
+        grid.attach(Gtk.Label(infos['last_change']), 1, 5, 1, 1)
+
+    dialog.dialog_box.add(grid)
 
     dialog.launch()
 

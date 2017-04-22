@@ -208,7 +208,7 @@ class Editor(object):
             self.images[page_num].saved = True
 
     @img_open
-    def properties(self, action, parameter):
+    def details(self, action, parameter):
         page_num = self.parent.notebook.get_current_page()
         img_infos = get_infos(self.images[page_num])
-        dialog.properties_dialog(self.parent, img_infos)
+        dialog.details_dialog(self.parent, img_infos)
