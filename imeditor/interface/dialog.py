@@ -104,28 +104,22 @@ def new_image_dialog(parent):
 
     transparent_check = Gtk.CheckButton()
 
-    cancel_button = Gtk.Button.new_with_label('Cancel')
-    cancel_button.connect('clicked', dialog.close)
-
-    ok_button = Gtk.Button.new_with_label('Confirm')
+    ok_button = Gtk.Button.new_with_label('Create')
     ok_button.connect('clicked', callback_new_image, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
     grid.attach(Gtk.Label('Width'), 0, 0, 1, 1)
     grid.attach(spin_width, 1, 0, 1, 1)
-    grid.attach(Gtk.Label('Height'), 2, 0, 1, 1)
-    grid.attach(spin_height, 3, 0, 1, 1)
-
-    grid.attach(Gtk.Label('Background color'), 0, 1, 1, 1)
-    grid.attach(color_button, 1, 1, 1, 1)
-    grid.attach(Gtk.Label('Transparent'), 2, 1, 1, 1)
-    grid.attach(transparent_check, 3, 1, 1, 1)
-    grid.attach(Gtk.Label('Format'), 0, 2, 1, 1)
-    grid.attach(extension_combo, 1, 2, 3, 1)
-
-    grid.attach(cancel_button, 0, 3, 2, 1)
-    grid.attach(ok_button, 2, 3, 2, 1)
+    grid.attach(Gtk.Label('Height'), 0, 1, 1, 1)
+    grid.attach(spin_height, 1, 1, 1, 1)
+    grid.attach(Gtk.Label('Background color'), 0, 2, 1, 1)
+    grid.attach(color_button, 1, 2, 1, 1)
+    grid.attach(Gtk.Label('Transparent'), 0, 3, 1, 1)
+    grid.attach(transparent_check, 1, 3, 1, 1)
+    grid.attach(Gtk.Label('Format'), 0, 4, 1, 1)
+    grid.attach(extension_combo, 1, 4, 1, 1)
+    grid.attach(ok_button, 0, 5, 2, 1)
 
     dialog.dialog_box.add(grid)
 
