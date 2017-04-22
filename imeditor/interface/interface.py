@@ -19,7 +19,7 @@ class Interface(Gtk.ApplicationWindow):
         self.app = app
         self.set_size_request(750, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
-        self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icons/icon.png')
+        self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icon.png')
         self.set_icon(self.logo)
 
         grid = Gtk.Grid()
