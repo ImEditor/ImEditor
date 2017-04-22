@@ -74,16 +74,13 @@ def details_dialog(parent, infos):
     grid.attach(Gtk.Label('<b>Size</b>', use_markup=True), 0, 1, 1, 1)
     grid.attach(Gtk.Label(infos['size']), 1, 1, 1, 1)
 
-    if 'weight' in infos:
+    if len(infos) > 2:
         grid.attach(Gtk.Label('<b>Weight</b>', use_markup=True), 0, 2, 1, 1)
         grid.attach(Gtk.Label(infos['weight']), 1, 2, 1, 1)
-    if 'path' in infos:
         grid.attach(Gtk.Label('<b>Path</b>', use_markup=True), 0, 3, 1, 1)
         grid.attach(Gtk.Label(infos['path']), 1, 3, 1, 1)
-    if 'last_access' in infos:
         grid.attach(Gtk.Label('<b>Last access</b>', use_markup=True), 0, 4, 1, 1)
         grid.attach(Gtk.Label(infos['last_access']), 1, 4, 1, 1)
-    if 'last_change' in infos:
         grid.attach(Gtk.Label('<b>Last change</b>', use_markup=True), 0, 5, 1, 1)
         grid.attach(Gtk.Label(infos['last_change']), 1, 5, 1, 1)
 
