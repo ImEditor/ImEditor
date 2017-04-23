@@ -54,7 +54,7 @@ class Tab(Gtk.ScrolledWindow):
         sidebar_grid.attach(pencil_color_button, 1, 1, 1, 1)
         label_size_pencil = Gtk.Label('Size')
         sidebar_grid.attach(label_size_pencil, 0, 2, 1, 1)
-        pencil_size_spin = SpinButton(8, 1, 100, 1, 2)
+        pencil_size_spin = SpinButton(8, 1, 1000, 1, 2)
         sidebar_grid.attach(pencil_size_spin, 1, 2, 1, 1)
         pencil_size_spin.connect('value-changed', self.on_pencil_size_changed)
         sidebar_frame.add(sidebar_grid)
