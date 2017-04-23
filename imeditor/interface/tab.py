@@ -32,6 +32,7 @@ class Tab(Gtk.ScrolledWindow):
         style_provider.load_from_data(css)
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         frame.add(event_box)
+
         self.add(frame)
 
         self.tab_label = TabLabel(title, img)
@@ -56,18 +57,19 @@ class TabLabel(Gtk.Box):
         # Preview of image
         self.icon_widget = Gtk.Image()
         self.set_icon(img)
-        self.pack_start(self.icon_widget, False, False, 0)
+
         # Title
         self.label = Gtk.Label(title)
-        self.pack_start(self.label, True, True, 0)
 
         # Close button
         button = Gtk.Button()
         button.set_relief(Gtk.ReliefStyle.NONE)
-        button.set_focus_on_click(False)
         button.add(Gtk.Image.new_from_icon_name('window-close', Gtk.IconSize.MENU))
         button.connect('clicked', self.button_clicked)
-        self.pack_start(button, False, False, 0)
+
+        self.add(self.icon_widget)
+        self.add(self.label)
+        self.add(button)
 
         self.show_all()
 
@@ -80,5 +82,5 @@ class TabLabel(Gtk.Box):
         pixbuf = pil_to_pixbuf(icon)
         self.icon_widget.set_from_pixbuf(pixbuf)
 
-    def button_clicked(self, button):
+    def button_clicked(self, _):
         self.emit('close-clicked')
