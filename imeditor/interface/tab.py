@@ -5,7 +5,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject, Gdk
 
 from editor.editor import Editor
-from interface.tools import pil_to_pixbuf
+from interface.tools import pil_to_pixbuf, SpinButton
 
 
 class Tab(Gtk.ScrolledWindow):
@@ -13,6 +13,8 @@ class Tab(Gtk.ScrolledWindow):
         Gtk.ScrolledWindow.__init__(self)
         self.win = win
         self.editor = Editor(self.win, self, img, filename)
+
+        # Image
 
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
@@ -36,7 +38,34 @@ class Tab(Gtk.ScrolledWindow):
 
         event_box.add(self.img_widget)
         frame.add(event_box)
-        self.add(frame)
+
+        # Sidebar
+
+        sidebar_frame = Gtk.Frame()
+        sidebar_grid = Gtk.Grid(row_spacing=20, column_spacing=20, border_width=15)
+        label_pencil = Gtk.Label('<b>Pencil</b>', use_markup=True)
+        sidebar_grid.attach(label_pencil, 0, 0, 2, 1)
+        label_color_pencil = Gtk.Label('Color')
+        sidebar_grid.attach(label_color_pencil, 0, 1, 1, 1)
+        pencil_color_button = Gtk.ColorButton()
+        pencil_color_button.set_use_alpha(False)
+        pencil_color_button.set_rgba(Gdk.RGBA(0, 0, 0, 1))
+        pencil_color_button.connect('color-set', self.on_pencil_color_changed)
+        sidebar_grid.attach(pencil_color_button, 1, 1, 1, 1)
+        label_size_pencil = Gtk.Label('Size')
+        sidebar_grid.attach(label_size_pencil, 0, 2, 1, 1)
+        pencil_size_spin = SpinButton(8, 1, 100, 1, 2)
+        sidebar_grid.attach(pencil_size_spin, 1, 2, 1, 1)
+        pencil_size_spin.connect('value-changed', self.on_pencil_size_changed)
+        sidebar_frame.add(sidebar_grid)
+
+        # Main Box
+
+        main_box = Gtk.Box()
+        main_box.pack_start(frame, True, True, 0)
+        main_box.add(sidebar_frame)
+
+        self.add(main_box)
 
         self.tab_label = TabLabel(title, img)
         self.tab_label.connect('close-clicked', self.on_close_button_clicked)
@@ -47,6 +76,12 @@ class Tab(Gtk.ScrolledWindow):
         self.tab_label.set_icon(new_img)
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
+
+    def on_pencil_color_changed(self, button):
+        self.editor.pencil_color = button.get_rgba().to_string()
+
+    def on_pencil_size_changed(self, button):
+        self.editor.pencil_size = button.get_value_as_int()
 
     def on_close_button_clicked(self, _):
         page_num = self.win.notebook.page_num(self)

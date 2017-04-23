@@ -16,17 +16,17 @@ class Interface(Gtk.ApplicationWindow):
         Gtk.Window.__init__(self, title='ImEditor', application=app)
         self.connect('delete-event', self.quit_app)
         self.app = app
-        self.set_size_request(750, 550)
+        self.set_size_request(1000, 700)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icon.png')
         self.set_icon(self.logo)
 
-        grid = Gtk.Grid()
-
         # Menubar
         create_menubar(self, app.menu_info)
+
         # Toolbar
         toolbar = create_toolbar(self)
+
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
         self.homepage.set_halign(Gtk.Align.CENTER)
@@ -41,14 +41,17 @@ class Interface(Gtk.ApplicationWindow):
         self.homepage.attach(label, 0, 0, 2, 1)
         self.homepage.attach(new_button, 0, 1, 1, 1)
         self.homepage.attach(open_button, 1, 1, 1, 1)
+
         # Tabs
         self.notebook = Gtk.Notebook()
         self.notebook.set_scrollable(True)
 
-        grid.attach(toolbar, 0, 0, 1, 1)
-        grid.attach(self.notebook, 0, 1, 1, 1)
-        grid.attach(self.homepage, 0, 2, 1, 1)
-        self.add(grid)
+        # Main Box
+        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        main_box.add(toolbar)
+        main_box.add(self.notebook)
+        main_box.add(self.homepage)
+        self.add(main_box)
 
         # Cursors
         display = Gdk.Display.get_default()

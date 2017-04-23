@@ -19,10 +19,10 @@ def pil_to_pixbuf(img):
 
 
 class SpinButton(Gtk.SpinButton):
-    def __init__(self, default, min_value, max_value):
+    def __init__(self, default, min_value, max_value, step=20, page=40):
         Gtk.SpinButton.__init__(self)
         self.set_digits(0)
         self.set_numeric(False)
         self.set_range(min_value, max_value)
         self.set_value(default)
-        self.set_increments(40, 20)
+        self.set_increments(step, page)

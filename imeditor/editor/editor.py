@@ -31,8 +31,8 @@ class Editor(object):
         self.selected_img = None
 
         # Settings
-        self.color = 'black'
-        self.size = 8
+        self.pencil_color = 'black'
+        self.pencil_size = 8
 
     @img_open
     def close_image(self):
@@ -123,7 +123,7 @@ class Editor(object):
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_rectangle(img, coords, False, self.color, 0)
+            draw_rectangle(img, coords, False, self.pencil_color, 0)
             self.tab.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
@@ -131,7 +131,7 @@ class Editor(object):
             top_left = (mouse_coords[0], mouse_coords[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_ellipse(img, coords, True, self.color, self.size)
+            draw_ellipse(img, coords, True, self.pencil_color, self.pencil_size)
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):
