@@ -18,7 +18,6 @@ class Tab(Gtk.ScrolledWindow):
         event_box.connect('button-press-event', self.parent.editor.press_task)
         event_box.connect('motion-notify-event', self.parent.editor.move_task)
         event_box.connect('button-release-event', self.parent.editor.release_task)
-        event_box.add(self.img_widget)
         frame = Gtk.Frame(hexpand=True, vexpand=True)
         frame.set_halign(Gtk.Align.CENTER)
         frame.set_valign(Gtk.Align.CENTER)
@@ -31,8 +30,9 @@ class Tab(Gtk.ScrolledWindow):
         """
         style_provider.load_from_data(css)
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-        frame.add(event_box)
 
+        event_box.add(self.img_widget)
+        frame.add(event_box)
         self.add(frame)
 
         self.tab_label = TabLabel(title, img)
