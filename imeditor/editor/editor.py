@@ -137,7 +137,7 @@ class Editor(object):
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
         elif self.task == 2:
-            draw_point(img, mouse_coords, size=2)
+            draw_shape(img, 'rectangle', xy=[mouse_coords[0] - 0.5, mouse_coords[1] - 0.5, mouse_coords[0] + 0.5, mouse_coords[1] + 0.5], outline='black', fill='black')
             self.set_tmp_img(img)
         elif self.task == 3:
             draw_point(img, mouse_coords)
