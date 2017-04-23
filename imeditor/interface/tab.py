@@ -4,6 +4,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject, Gdk
 
+from editor.editor import Editor
 from interface.tools import pil_to_pixbuf
 
 
@@ -11,13 +12,15 @@ class Tab(Gtk.ScrolledWindow):
     def __init__(self, parent, img, title):
         Gtk.ScrolledWindow.__init__(self)
         self.parent = parent
+        self.editor = Editor(self.parent, self)
+
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         event_box = Gtk.EventBox()
         event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
-        event_box.connect('button-press-event', self.parent.editor.press_task)
-        event_box.connect('motion-notify-event', self.parent.editor.move_task)
-        event_box.connect('button-release-event', self.parent.editor.release_task)
+        event_box.connect('button-press-event', self.editor.press_task)
+        event_box.connect('motion-notify-event', self.editor.move_task)
+        event_box.connect('button-release-event', self.editor.release_task)
         frame = Gtk.Frame(hexpand=True, vexpand=True)
         frame.set_halign(Gtk.Align.CENTER)
         frame.set_valign(Gtk.Align.CENTER)
@@ -41,6 +44,7 @@ class Tab(Gtk.ScrolledWindow):
         self.show_all()
 
     def update_image(self, new_img):
+        self.tab_label.set_icon(new_img)
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
 

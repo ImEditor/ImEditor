@@ -20,18 +20,18 @@
         },
         {
             "name": "save",
-            "callback": "editor.file_save",
+            "callback": "parent.save",
             "label": "Save",
             "shortcut": "&lt;Primary&gt;s"
         },
         {
             "name": "save_as",
-            "callback": "editor.file_save_as",
+            "callback": "parent.save_as",
             "label": "Save as..."
         },
         {
             "name": "details",
-            "callback": "editor.details",
+            "callback": "parent.details",
             "label": "Image details"
         },
         {
@@ -44,50 +44,50 @@
     "Edit": [
         {
             "name": "select",
-            "callback": "editor.select",
+            "callback": "parent.select",
             "label": "Select"
         },
         {
             "name": "undo",
-            "callback": "editor.history",
+            "callback": "parent.history",
             "params": -1,
             "label": "Undo",
             "shortcut": "&lt;Primary&gt;z"
         },
         {
             "name": "redo",
-            "callback": "editor.history",
+            "callback": "parent.history",
             "params": 1,
             "label": "Redo",
             "shortcut": "&lt;Primary&gt;y"
         },
         {
             "name": "rotate_left",
-            "callback": "editor.apply_filter",
+            "callback": "parent.apply_filter",
             "params": "base.rotate_left",
             "label": "Rotate 90° counter-clockwise"
         },
         {
             "name": "rotate_right",
-            "callback": "editor.apply_filter",
+            "callback": "parent.apply_filter",
             "params": "base.rotate_right",
             "label": "Rotate 90° clockwise"
         },
         {
             "name": "copy",
-            "callback": "editor.copy",
+            "callback": "parent.copy",
             "label": "Copy",
             "shortcut": "&lt;Primary&gt;c"
         },
         {
             "name": "paste",
-            "callback": "editor.paste",
+            "callback": "parent.paste",
             "label": "Paste",
             "shortcut": "&lt;Primary&gt;v"
         },
         {
             "name": "cut",
-            "callback": "editor.cut",
+            "callback": "parent.cut",
             "label": "Cut",
             "shortcut": "&lt;Primary&gt;x"
         }
@@ -103,20 +103,20 @@
     "Draw": [
         {
             "name": "pencil",
-            "callback": "editor.pencil",
+            "callback": "parent.pencil",
             "label": "Pencil"
         }
     ],
     "Filters": [
         {
             "name": "negative",
-            "callback": "editor.apply_filter",
+            "callback": "parent.apply_filter",
             "params": "base.negative",
             "label": "Negative"
         },
         {
             "name": "black_white",
-            "callback": "editor.filter_with_params",
+            "callback": "parent.apply_filter_with_params",
             "label": "Black &amp; white",
             "params": [
                 "base.black_white",
@@ -129,31 +129,31 @@
         },
         {
             "name": "red",
-            "callback": "editor.apply_filter",
+            "callback": "parent.apply_filter",
             "label": "Red",
             "params": "base.red"
         },
         {
             "name": "green",
-            "callback": "editor.apply_filter",
+            "callback": "parent.apply_filter",
             "label": "Green",
             "params": "base.green"
         },
         {
             "name": "blue",
-            "callback": "editor.apply_filter",
+            "callback": "parent.apply_filter",
             "label": "Blue",
             "params": "base.blue"
         },
         {
             "name": "gray_level",
-            "callback": "editor.apply_filter",
+            "callback": "parent.apply_filter",
             "label": "Grey scales",
             "params": "base.gray_level"
         },
         {
             "name": "lighten",
-            "callback": "editor.filter_with_params",
+            "callback": "parent.apply_filter_with_params",
             "label": "Lighten",
             "params": [
                 "base.lighten",
@@ -166,7 +166,7 @@
         },
         {
             "name": "darken",
-            "callback": "editor.filter_with_params",
+            "callback": "parent.apply_filter_with_params",
             "label": "Darken",
             "params": [
                 "base.darken",

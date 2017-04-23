@@ -9,7 +9,6 @@ from os import path
 from interface.tab import Tab
 from interface.menus import create_menubar, create_toolbar
 from interface import dialog
-from editor.editor import Editor
 
 
 class Interface(Gtk.ApplicationWindow):
@@ -23,8 +22,6 @@ class Interface(Gtk.ApplicationWindow):
         self.set_icon(self.logo)
 
         grid = Gtk.Grid()
-
-        self.editor = Editor(self)
 
         # Menubar
         create_menubar(self, app.menu_info)
@@ -64,6 +61,25 @@ class Interface(Gtk.ApplicationWindow):
         self.show_all()
         self.notebook.hide()
 
+    def get_tab(self, page_num=None):
+        if not page_num:
+            page_num = self.notebook.get_current_page()
+        tab = self.notebook.get_nth_page(page_num)
+        return tab
+
+    def create_tab(self, img, filename, index, saved):
+        tab = Tab(self, img, path.basename(filename))
+        tab.editor.add_image(img, filename, 0, False)
+        page_num = self.notebook.get_current_page() + 1
+        nb_tabs = self.notebook.get_n_pages()
+        self.notebook.insert_page(tab, tab.tab_label, page_num)
+        if nb_tabs == 0:
+            self.homepage.hide()
+        self.notebook.show()
+        self.notebook.set_current_page(page_num)
+
+    # Callbacks
+
     def new_image(self, action, parameter):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
@@ -77,16 +93,14 @@ class Interface(Gtk.ApplicationWindow):
                 color = values[1]
             img = Image.new(mode, values[0], color)
             filename = 'untitled.' + values[2].lower()
-            self.editor.add_image(img, filename, 0, False)
-            self.create_tab(img, filename)
+            self.create_tab(img, filename, 0, False)
 
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
                 img = Image.open(filename)
-                self.editor.add_image(img, filename, 0, True)
-                self.create_tab(img, path.basename(filename))
+                self.create_tab(img, filename, 0, True)
             else:
                 error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
                     Gtk.ButtonsType.OK, 'An error has occurred...')
@@ -95,44 +109,75 @@ class Interface(Gtk.ApplicationWindow):
                 error_dialog.run()
                 error_dialog.destroy()
 
-    def create_tab(self, img, title):
-        tab = Tab(self, img, title)
-        page_num = self.notebook.get_current_page() + 1
-        nb_tabs = self.notebook.get_n_pages()
-        self.notebook.insert_page(tab, tab.tab_label, page_num)
-        if nb_tabs == 0:
-            self.homepage.hide()
-        self.notebook.show()
-        self.notebook.set_current_page(page_num)
+
 
     def close_tab(self, action=None, parameter=None, page_num=None):
         if not page_num:
             page_num = self.notebook.get_current_page()
-        if not self.editor.images[page_num].saved:
+        tab = self.get_tab(page_num)
+        if not tab.editor.image.saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO,
-                'Save ' + self.editor.images[page_num].filename + ' before closing?')
+                'Save ' + tab.editor.image.filename + ' before closing?')
             dialog.format_secondary_text(
                 'Your work will be lost if you don\'t make a back up.')
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
-                self.editor.file_save_as(None, None)
+                tab.save_as()
             self.notebook.remove_page(page_num)
-            self.editor.close_image(page_num)
+            tab.editor.close_image(page_num)
             dialog.destroy()
         else:
-            self.editor.close_image(page_num)
+            tab.editor.close_image(page_num)
             self.notebook.remove_page(page_num)
 
         if self.notebook.get_n_pages() == 0:
             self.notebook.hide()
             self.homepage.show()
 
-    def update_image(self, new_img):
-        page_num = self.notebook.get_current_page()
-        tab = self.notebook.get_nth_page(page_num)
-        tab.update_image(new_img)
-        tab.tab_label.set_icon(new_img)
+    def save(self, action, parameter):
+        tab = self.get_tab()
+        tab.editor.save_as()
+
+    def save_as(self, action=None, parameter=None):
+        tab = self.get_tab()
+        tab.editor.save_as()
+
+    def details(self, action, parameter):
+        tab = self.get_tab()
+        tab.editor.details()
+
+    def select(self, action=None, parameter=None):
+        tab = self.get_tab()
+        tab.editor.select()
+
+    def history(self, action, parameter, num):
+        tab = self.get_tab()
+        tab.editor.history(num)
+
+    def copy(self, action, parameter):
+        tab = self.get_tab()
+        tab.editor.copy()
+
+    def paste(self, action, parameter):
+        tab = self.get_tab()
+        tab.editor.paste()
+
+    def cut(self, action, parameter):
+        tab = self.get_tab()
+        tab.editor.cut()
+
+    def pencil(self, action, parameter):
+        tab = self.get_tab()
+        tab.editor.pencil()
+
+    def apply_filter(self, action, parameter, func, value=None):
+        tab = self.get_tab()
+        tab.editor.apply_filter(func, value)
+
+    def apply_filter_with_params(self, action, parameter, params):
+        tab = self.get_tab()
+        tab.editor.apply_filter_with_params(params)
 
     def set_fullscreen(self, action, parameter):
         if not self.get_window().get_state() & Gdk.WindowState.FULLSCREEN != 0:

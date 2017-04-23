@@ -6,7 +6,6 @@ from gi.repository import Gtk, Gio
 
 
 def create_menubar(parent, actions):
-    editor = parent.editor
     all_actions = list()
     for key in actions:
         all_actions.extend(actions[key])
