@@ -65,13 +65,13 @@
             "name": "rotate_left",
             "callback": "editor.apply_filter",
             "params": "base.rotate_left",
-            "label": "Rotate -90°"
+            "label": "Rotate 90° counter-clockwise"
         },
         {
             "name": "rotate_right",
             "callback": "editor.apply_filter",
             "params": "base.rotate_right",
-            "label": "Rotate 90°"
+            "label": "Rotate 90° clockwise"
         },
         {
             "name": "copy",
