@@ -7,7 +7,7 @@ from interface import dialog
 from filters import base
 from editor.image import ImageObject
 from editor.tools import get_middle_mouse, get_infos
-from editor.draw import draw_shape
+from editor.draw import draw_rectangle, draw_ellipse
 
 
 def img_open(func):
@@ -133,7 +133,7 @@ class Editor(object):
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_shape(img, 'rectangle', coords, False, self.color, 0)
+            draw_rectangle(img, coords, False, self.color, 0)
             self.parent.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
@@ -141,7 +141,7 @@ class Editor(object):
             top_left = (mouse_coords[0], mouse_coords[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_shape(img, 'ellipse', coords, True, self.color, self.size)
+            draw_ellipse(img, coords, True, self.color, self.size)
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):
