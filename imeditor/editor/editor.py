@@ -53,11 +53,10 @@ class Editor(object):
 
     @img_open
     def apply_filter(self, func, value=None):
-        func = eval(func)
         if value:
-            new_img = func(self.image.get_current_img(), value)
+            new_img = getattr(base, func)(self.image.get_current_img(), value)
         else:
-            new_img = func(self.image.get_current_img())
+            new_img = getattr(base, func)(self.image.get_current_img())
         self.do_change(new_img)
 
     @img_open

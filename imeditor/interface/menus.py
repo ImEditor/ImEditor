@@ -16,9 +16,9 @@ def create_menubar(parent, actions):
         act = Gio.SimpleAction.new(name, None)
         if 'params' in action.keys():
             params = action['params']
-            act.connect('activate', eval(callback), params)
+            act.connect('activate', getattr(parent, callback), params)
         else:
-            act.connect('activate', eval(callback))
+            act.connect('activate', getattr(parent, callback))
         parent.add_action(act)
 
 

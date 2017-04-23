@@ -2,41 +2,41 @@
     "File": [
         {
             "name": "new",
-            "callback": "parent.new_image",
+            "callback": "new_image",
             "label": "New image",
             "shortcut": "&lt;Primary&gt;n"
         },
         {
             "name": "open",
-            "callback": "parent.open_image",
+            "callback": "open_image",
             "label": "Open image...",
             "shortcut": "&lt;Primary&gt;o"
         },
         {
             "name": "close",
-            "callback": "parent.close_tab",
+            "callback": "close_tab",
             "label": "Close tab",
             "shortcut": "&lt;Primary&gt;w"
         },
         {
             "name": "save",
-            "callback": "parent.save",
+            "callback": "save",
             "label": "Save",
             "shortcut": "&lt;Primary&gt;s"
         },
         {
             "name": "save_as",
-            "callback": "parent.save_as",
+            "callback": "save_as",
             "label": "Save as..."
         },
         {
             "name": "details",
-            "callback": "parent.details",
+            "callback": "details",
             "label": "Image details"
         },
         {
             "name": "quit",
-            "callback": "parent.quit_app",
+            "callback": "quit_app",
             "label": "Quit",
             "shortcut": "&lt;Primary&gt;q"
         }
@@ -44,50 +44,50 @@
     "Edit": [
         {
             "name": "select",
-            "callback": "parent.select",
+            "callback": "select",
             "label": "Select"
         },
         {
             "name": "undo",
-            "callback": "parent.history",
+            "callback": "history",
             "params": -1,
             "label": "Undo",
             "shortcut": "&lt;Primary&gt;z"
         },
         {
             "name": "redo",
-            "callback": "parent.history",
+            "callback": "history",
             "params": 1,
             "label": "Redo",
             "shortcut": "&lt;Primary&gt;y"
         },
         {
             "name": "rotate_left",
-            "callback": "parent.apply_filter",
-            "params": "base.rotate_left",
+            "callback": "apply_filter",
+            "params": "rotate_left",
             "label": "Rotate 90° counter-clockwise"
         },
         {
             "name": "rotate_right",
-            "callback": "parent.apply_filter",
-            "params": "base.rotate_right",
+            "callback": "apply_filter",
+            "params": "rotate_right",
             "label": "Rotate 90° clockwise"
         },
         {
             "name": "copy",
-            "callback": "parent.copy",
+            "callback": "copy",
             "label": "Copy",
             "shortcut": "&lt;Primary&gt;c"
         },
         {
             "name": "paste",
-            "callback": "parent.paste",
+            "callback": "paste",
             "label": "Paste",
             "shortcut": "&lt;Primary&gt;v"
         },
         {
             "name": "cut",
-            "callback": "parent.cut",
+            "callback": "cut",
             "label": "Cut",
             "shortcut": "&lt;Primary&gt;x"
         }
@@ -95,7 +95,7 @@
     "View": [
         {
             "name": "fullscreen",
-            "callback": "parent.set_fullscreen",
+            "callback": "set_fullscreen",
             "label": "Fullscreen",
             "shortcut": "F11"
         }
@@ -103,23 +103,23 @@
     "Draw": [
         {
             "name": "pencil",
-            "callback": "parent.pencil",
+            "callback": "pencil",
             "label": "Pencil"
         }
     ],
     "Filters": [
         {
             "name": "negative",
-            "callback": "parent.apply_filter",
-            "params": "base.negative",
+            "callback": "apply_filter",
+            "params": "negative",
             "label": "Negative"
         },
         {
             "name": "black_white",
-            "callback": "parent.apply_filter_with_params",
+            "callback": "apply_filter_with_params",
             "label": "Black &amp; white",
             "params": [
-                "base.black_white",
+                "black_white",
                 "Black & white",
                 [
                     0,
@@ -129,34 +129,34 @@
         },
         {
             "name": "red",
-            "callback": "parent.apply_filter",
+            "callback": "apply_filter",
             "label": "Red",
-            "params": "base.red"
+            "params": "red"
         },
         {
             "name": "green",
-            "callback": "parent.apply_filter",
+            "callback": "apply_filter",
             "label": "Green",
-            "params": "base.green"
+            "params": "green"
         },
         {
             "name": "blue",
-            "callback": "parent.apply_filter",
+            "callback": "apply_filter",
             "label": "Blue",
-            "params": "base.blue"
+            "params": "blue"
         },
         {
             "name": "gray_level",
-            "callback": "parent.apply_filter",
+            "callback": "apply_filter",
             "label": "Grey scales",
-            "params": "base.gray_level"
+            "params": "gray_level"
         },
         {
             "name": "lighten",
-            "callback": "parent.apply_filter_with_params",
+            "callback": "apply_filter_with_params",
             "label": "Lighten",
             "params": [
-                "base.lighten",
+                "lighten",
                 "Lighten",
                 [
                     0,
@@ -166,10 +166,10 @@
         },
         {
             "name": "darken",
-            "callback": "parent.apply_filter_with_params",
+            "callback": "apply_filter_with_params",
             "label": "Darken",
             "params": [
-                "base.darken",
+                "darken",
                 "Darken",
                 [
                     0,
@@ -181,7 +181,7 @@
     "Help": [
         {
             "name": "about",
-            "callback": "parent.about",
+            "callback": "about",
             "label": "About"
         }
     ]
