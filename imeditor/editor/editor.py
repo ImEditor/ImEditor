@@ -123,7 +123,7 @@ class Editor(object):
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_rectangle(img, coords, False, self.pencil_color, 0)
+            draw_rectangle(img, coords, False, 'black', 0)
             self.tab.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
