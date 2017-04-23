@@ -77,14 +77,9 @@ def create_toolbar(parent):
     toolbar.insert(pencil_button, 9)
     pencil_button.set_action_name('win.pencil')
 
-    brush_button = Gtk.ToolButton.new()
-    brush_button.set_icon_widget(Gtk.Image.new_from_file('assets/brush.png'))
-    toolbar.insert(brush_button, 10)
-    brush_button.set_action_name('win.brush')
-
     parent.fullscreen_button = Gtk.ToolButton.new()
     parent.fullscreen_button.set_icon_name('view-fullscreen')
-    toolbar.insert(parent.fullscreen_button, 11)
+    toolbar.insert(parent.fullscreen_button, 10)
     parent.fullscreen_button.set_action_name('win.fullscreen')
 
     return toolbar

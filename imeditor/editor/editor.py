@@ -7,7 +7,7 @@ from interface import dialog
 from filters import base
 from editor.image import ImageObject
 from editor.tools import get_middle_mouse, get_infos
-from editor.draw import draw_point, draw_shape
+from editor.draw import draw_shape
 
 
 def img_open(func):
@@ -25,9 +25,13 @@ class Editor(object):
         self.images = list()
         self.MAX_HIST = 10
 
-        self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil, 3 -> brush,
+        self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
         self.selection = list()
         self.selected_img = None
+
+        # Settings
+        self.color = 'black'
+        self.size = 8
 
     @img_open
     def close_image(self, index):
@@ -104,12 +108,6 @@ class Editor(object):
             self.task = 2
             self.change_cursor(1)
 
-    @img_open
-    def brush(self, action, parameter):
-        if self.task != 3:
-            self.task = 3
-            self.change_cursor(1)
-
     def get_vars(self, mouse_coords, is_tmp=False):
         """Return required variables."""
         page_num = self.parent.notebook.get_current_page()
@@ -126,28 +124,31 @@ class Editor(object):
         if self.task == 0:
             self.selection = mouse_coords
             self.parent.update_image(img)
-        elif (self.task == 1 and self.selected_img) or self.task == 2 or self.task == 3:
+        elif (self.task == 1 and self.selected_img) or self.task == 2:
             self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
         mouse_coords, _, img = self.get_vars((event.x, event.y), True)
         if self.task == 0:
-            draw_shape(img, 'rectangle', xy=[self.selection[0], self.selection[1], mouse_coords[0], mouse_coords[1]], outline='black')
+            top_left = (self.selection[0], self.selection[1])
+            bottom_right = (mouse_coords[0], mouse_coords[1])
+            coords = (top_left, bottom_right)
+            draw_shape(img, 'rectangle', coords, False, self.color, 0)
             self.parent.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
         elif self.task == 2:
-            draw_shape(img, 'rectangle', xy=[mouse_coords[0] - 0.5, mouse_coords[1] - 0.5, mouse_coords[0] + 0.5, mouse_coords[1] + 0.5], outline='black', fill='black')
-            self.set_tmp_img(img)
-        elif self.task == 3:
-            draw_point(img, mouse_coords)
+            top_left = (mouse_coords[0], mouse_coords[1])
+            bottom_right = (mouse_coords[0], mouse_coords[1])
+            coords = (top_left, bottom_right)
+            draw_shape(img, 'ellipse', coords, True, self.color, self.size)
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
         if self.task == 0:
             self.selection.extend(mouse_coords)
-        elif self.task == 2 or self.task == 3:
+        elif self.task == 2:
             self.images[page_num].tmp_img = None
             self.do_change(img)
 
