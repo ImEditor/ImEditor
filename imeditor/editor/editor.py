@@ -31,6 +31,7 @@ class Editor(object):
         self.selected_img = None
 
         # Settings
+        self.pencil_shape = 'ellipse'
         self.pencil_color = 'black'
         self.pencil_size = 8
 
@@ -131,7 +132,10 @@ class Editor(object):
             top_left = (mouse_coords[0], mouse_coords[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_ellipse(img, coords, True, self.pencil_color, self.pencil_size)
+            if self.pencil_shape == 'ellipse':
+                draw_ellipse(img, coords, True, self.pencil_color, self.pencil_size)
+            elif self.pencil_shape == 'rectangle':
+                draw_rectangle(img, coords, True, self.pencil_color, self.pencil_size)
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):

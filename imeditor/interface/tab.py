@@ -43,19 +43,29 @@ class Tab(Gtk.ScrolledWindow):
 
         sidebar_frame = Gtk.Frame()
         sidebar_grid = Gtk.Grid(row_spacing=20, column_spacing=20, border_width=15)
-        label_pencil = Gtk.Label('<b>Pencil</b>', use_markup=True)
-        sidebar_grid.attach(label_pencil, 0, 0, 2, 1)
-        label_color_pencil = Gtk.Label('Color')
-        sidebar_grid.attach(label_color_pencil, 0, 1, 1, 1)
+        pencil_label = Gtk.Label('<b>Pencil</b>', use_markup=True)
+        sidebar_grid.attach(pencil_label, 0, 0, 2, 1)
+        shape_pencil_label = Gtk.Label('Shape')
+        sidebar_grid.attach(shape_pencil_label, 0, 1, 1, 1)
+        pencil_shape_combo = Gtk.ComboBoxText()
+        pencil_shape_combo.set_entry_text_column(0)
+        shapes = ['Ellipse', 'Rectangle']
+        for shape in shapes:
+            pencil_shape_combo.append_text(shape)
+        pencil_shape_combo.set_active(0)
+        pencil_shape_combo.connect('changed', self.on_pencil_shape_changed)
+        sidebar_grid.attach(pencil_shape_combo, 1, 1, 2, 1)
+        color_pencil_label = Gtk.Label('Color')
+        sidebar_grid.attach(color_pencil_label, 0, 2, 1, 1)
         pencil_color_button = Gtk.ColorButton()
         pencil_color_button.set_use_alpha(False)
         pencil_color_button.set_rgba(Gdk.RGBA(0, 0, 0, 1))
         pencil_color_button.connect('color-set', self.on_pencil_color_changed)
-        sidebar_grid.attach(pencil_color_button, 1, 1, 1, 1)
-        label_size_pencil = Gtk.Label('Size')
-        sidebar_grid.attach(label_size_pencil, 0, 2, 1, 1)
+        sidebar_grid.attach(pencil_color_button, 1, 2, 1, 1)
+        size_pencil_label = Gtk.Label('Size')
+        sidebar_grid.attach(size_pencil_label, 0, 3, 1, 1)
         pencil_size_spin = SpinButton(8, 1, 1000, 1, 2)
-        sidebar_grid.attach(pencil_size_spin, 1, 2, 1, 1)
+        sidebar_grid.attach(pencil_size_spin, 1, 3, 1, 1)
         pencil_size_spin.connect('value-changed', self.on_pencil_size_changed)
         sidebar_frame.add(sidebar_grid)
 
@@ -76,6 +86,9 @@ class Tab(Gtk.ScrolledWindow):
         self.tab_label.set_icon(new_img)
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
+
+    def on_pencil_shape_changed(self, button):
+        self.editor.pencil_shape = button.get_active_text().lower()
 
     def on_pencil_color_changed(self, button):
         self.editor.pencil_color = button.get_rgba().to_string()
