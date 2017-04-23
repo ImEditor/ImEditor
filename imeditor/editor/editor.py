@@ -35,7 +35,7 @@ class Editor(object):
         self.size = 8
 
     @img_open
-    def close_image(self, index):
+    def close_image(self):
         self.image.close_all_img()
         self.image = None
         self.select()

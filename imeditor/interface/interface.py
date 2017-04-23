@@ -74,7 +74,7 @@ class Interface(Gtk.ApplicationWindow):
         self.notebook.insert_page(tab, tab.tab_label, page_num)
         if nb_tabs == 0:
             self.homepage.hide()
-        self.notebook.show()
+            self.notebook.show()
         self.notebook.set_current_page(page_num)
 
     # Callbacks
@@ -108,8 +108,6 @@ class Interface(Gtk.ApplicationWindow):
                 error_dialog.run()
                 error_dialog.destroy()
 
-
-
     def close_tab(self, action=None, parameter=None, page_num=None):
         if not page_num:
             page_num = self.notebook.get_current_page()
@@ -123,11 +121,11 @@ class Interface(Gtk.ApplicationWindow):
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 tab.save_as()
+            tab.editor.close_image()
             self.notebook.remove_page(page_num)
-            tab.editor.close_image(page_num)
             dialog.destroy()
         else:
-            tab.editor.close_image(page_num)
+            tab.editor.close_image()
             self.notebook.remove_page(page_num)
 
         if self.notebook.get_n_pages() == 0:

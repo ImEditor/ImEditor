@@ -9,10 +9,10 @@ from interface.tools import pil_to_pixbuf
 
 
 class Tab(Gtk.ScrolledWindow):
-    def __init__(self, parent, img, title, filename):
+    def __init__(self, win, img, title, filename):
         Gtk.ScrolledWindow.__init__(self)
-        self.parent = parent
-        self.editor = Editor(self.parent, self, img, filename)
+        self.win = win
+        self.editor = Editor(self.win, self, img, filename)
 
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
@@ -49,8 +49,8 @@ class Tab(Gtk.ScrolledWindow):
         self.img_widget.set_from_pixbuf(pixbuf)
 
     def on_close_button_clicked(self, _):
-        page_num = self.parent.notebook.page_num(self)
-        self.parent.close_tab(page_num=page_num)
+        page_num = self.win.notebook.page_num(self)
+        self.win.close_tab(page_num=page_num)
 
 
 class TabLabel(Gtk.Box):
