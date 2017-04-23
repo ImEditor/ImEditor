@@ -24,7 +24,7 @@ class Tab(Gtk.ScrolledWindow):
         frame = Gtk.Frame(hexpand=True, vexpand=True)
         frame.set_halign(Gtk.Align.CENTER)
         frame.set_valign(Gtk.Align.CENTER)
-        frame.set_name("TabFrame")
+        frame.set_name('TabFrame')
         style_provider = Gtk.CssProvider()
         css = b"""
         #TabFrame {
@@ -65,7 +65,8 @@ class TabLabel(Gtk.Box):
         self.set_icon(img)
 
         # Title
-        self.label = Gtk.Label(title)
+        self.label = Gtk.Label()
+        self.set_title(title)
 
         # Close button
         button = Gtk.Button()
@@ -79,8 +80,11 @@ class TabLabel(Gtk.Box):
 
         self.show_all()
 
-    def set_label(self, label):
-        self.label.set_text(label)
+    def set_title(self, title):
+        max_size = 30
+        if len(title) > max_size:
+            title = title[:max_size - 3] + "..."
+        self.label.set_text(title)
 
     def set_icon(self, img):
         icon = img.copy()
