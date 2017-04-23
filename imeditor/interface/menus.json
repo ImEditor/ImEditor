@@ -102,6 +102,11 @@
     ],
     "Draw": [
         {
+            "name": "pencil",
+            "callback": "editor.pencil",
+            "label": "Pencil"
+        },
+        {
             "name": "brush",
             "callback": "editor.brush",
             "label": "Brush"

@@ -25,7 +25,7 @@ class Editor(object):
         self.images = list()
         self.MAX_HIST = 10
 
-        self.task = 0  # 0 -> select, 1 -> paste, 2 -> brush
+        self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil, 3 -> brush,
         self.selection = list()
         self.selected_img = None
 
@@ -99,9 +99,15 @@ class Editor(object):
             self.task = 0
 
     @img_open
-    def brush(self, action, parameter):
+    def pencil(self, action, parameter):
         if self.task != 2:
             self.task = 2
+            self.change_cursor(1)
+
+    @img_open
+    def brush(self, action, parameter):
+        if self.task != 3:
+            self.task = 3
             self.change_cursor(1)
 
     def get_vars(self, mouse_coords, is_tmp=False):
@@ -120,7 +126,7 @@ class Editor(object):
         if self.task == 0:
             self.selection = mouse_coords
             self.parent.update_image(img)
-        elif (self.task == 1 and self.selected_img) or self.task == 2:
+        elif (self.task == 1 and self.selected_img) or self.task == 2 or self.task == 3:
             self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
@@ -131,6 +137,9 @@ class Editor(object):
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
         elif self.task == 2:
+            draw_point(img, mouse_coords, size=2)
+            self.set_tmp_img(img)
+        elif self.task == 3:
             draw_point(img, mouse_coords)
             self.set_tmp_img(img)
 
@@ -138,7 +147,7 @@ class Editor(object):
         mouse_coords, page_num, img = self.get_vars((event.x, event.y), True)
         if self.task == 0:
             self.selection.extend(mouse_coords)
-        elif self.task == 2:
+        elif self.task == 2 or self.task == 3:
             self.images[page_num].tmp_img = None
             self.do_change(img)
 
@@ -149,7 +158,7 @@ class Editor(object):
             img.set_cursor(self.parent.default_cursor)
         elif cursor == 1:
             img.set_cursor(self.parent.draw_cursor)
-        elif cursor == 2:
+        elif cursor == 3:
             img.set_cursor(self.parent.move_cursor)
 
     def set_tmp_img(self, img):

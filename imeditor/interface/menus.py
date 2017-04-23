@@ -25,6 +25,7 @@ def create_menubar(parent, actions):
 
 def create_toolbar(parent):
     toolbar = Gtk.Toolbar()
+    toolbar.set_hexpand(True)
 
     new_button = Gtk.ToolButton.new()
     new_button.set_icon_name('document-new')
@@ -71,15 +72,19 @@ def create_toolbar(parent):
     toolbar.insert(select_button, 8)
     select_button.set_action_name('win.select')
 
-    draw_button = Gtk.ToolButton.new()
-    draw_button.set_icon_widget(Gtk.Image.new_from_file('assets/brush.png'))
-    toolbar.insert(draw_button, 9)
-    draw_button.set_action_name('win.draw-brush')
+    pencil_button = Gtk.ToolButton.new()
+    pencil_button.set_icon_widget(Gtk.Image.new_from_file('assets/pencil.png'))
+    toolbar.insert(pencil_button, 9)
+    pencil_button.set_action_name('win.pencil')
+
+    brush_button = Gtk.ToolButton.new()
+    brush_button.set_icon_widget(Gtk.Image.new_from_file('assets/brush.png'))
+    toolbar.insert(brush_button, 10)
+    brush_button.set_action_name('win.brush')
 
     parent.fullscreen_button = Gtk.ToolButton.new()
     parent.fullscreen_button.set_icon_name('view-fullscreen')
-    toolbar.insert(parent.fullscreen_button, 10)
+    toolbar.insert(parent.fullscreen_button, 11)
     parent.fullscreen_button.set_action_name('win.fullscreen')
 
-    toolbar.set_hexpand(True)
     return toolbar
