@@ -64,12 +64,6 @@ class Interface(Gtk.ApplicationWindow):
         self.show_all()
         self.notebook.hide()
 
-    def quit_app(self, action=None, parameter=None):
-        for i in reversed(range(self.notebook.get_n_pages())):
-            self.close_tab(page_num=i)
-        self.app.quit()
-        return False
-
     def new_image(self, action, parameter):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
@@ -117,7 +111,7 @@ class Interface(Gtk.ApplicationWindow):
                 Gtk.ButtonsType.YES_NO,
                 'Save ' + self.editor.images[page_num].filename + ' before closing?')
             dialog.format_secondary_text(
-                'Your changes will be lost if you do not back up.')
+                'Your work will be lost if you don\'t make a back up.')
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 self.editor.file_save_as(None, None)
@@ -145,6 +139,12 @@ class Interface(Gtk.ApplicationWindow):
         else:
             self.fullscreen_button.set_icon_name('view-fullscreen')
             self.unfullscreen()
+
+    def quit_app(self, action=None, parameter=None):
+        for i in reversed(range(self.notebook.get_n_pages())):
+            self.close_tab(page_num=i)
+        self.app.quit()
+        return False
 
     def about(self, action, parameter):
         dialog = Gtk.AboutDialog(transient_for=self)
