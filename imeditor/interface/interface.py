@@ -67,9 +67,8 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.notebook.get_nth_page(page_num)
         return tab
 
-    def create_tab(self, img, filename, index, saved):
-        tab = Tab(self, img, path.basename(filename))
-        tab.editor.add_image(img, filename, 0, False)
+    def create_tab(self, img, filename):
+        tab = Tab(self, img, path.basename(filename), filename)
         page_num = self.notebook.get_current_page() + 1
         nb_tabs = self.notebook.get_n_pages()
         self.notebook.insert_page(tab, tab.tab_label, page_num)
@@ -93,14 +92,14 @@ class Interface(Gtk.ApplicationWindow):
                 color = values[1]
             img = Image.new(mode, values[0], color)
             filename = 'untitled.' + values[2].lower()
-            self.create_tab(img, filename, 0, False)
+            self.create_tab(img, filename)
 
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
                 img = Image.open(filename)
-                self.create_tab(img, filename, 0, True)
+                self.create_tab(img, filename)
             else:
                 error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
                     Gtk.ButtonsType.OK, 'An error has occurred...')

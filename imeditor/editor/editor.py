@@ -18,12 +18,12 @@ def img_open(func):
 
 
 class Editor(object):
-    def __init__(self, win, tab):
+    def __init__(self, win, tab, img, filename):
         super(Editor, self).__init__()
         self.win = win
         self.tab = tab
 
-        self.image = None
+        self.image = ImageObject(img, filename, 0, False)
         self.MAX_HIST = 10
 
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
@@ -33,9 +33,6 @@ class Editor(object):
         # Settings
         self.color = 'black'
         self.size = 8
-
-    def add_image(self, *args):
-        self.image = ImageObject(*args)
 
     @img_open
     def close_image(self, index):

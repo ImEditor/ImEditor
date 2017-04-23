@@ -9,10 +9,10 @@ from interface.tools import pil_to_pixbuf
 
 
 class Tab(Gtk.ScrolledWindow):
-    def __init__(self, parent, img, title):
+    def __init__(self, parent, img, title, filename):
         Gtk.ScrolledWindow.__init__(self)
         self.parent = parent
-        self.editor = Editor(self.parent, self)
+        self.editor = Editor(self.parent, self, img, filename)
 
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
