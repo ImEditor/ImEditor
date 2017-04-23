@@ -36,7 +36,7 @@ class Tab(Gtk.ScrolledWindow):
         self.add(frame)
 
         self.tab_label = TabLabel(title, img)
-        self.tab_label.connect('close-clicked', self.on_close_tab_clicked)
+        self.tab_label.connect('close-clicked', self.on_close_button_clicked)
 
         self.show_all()
 
@@ -44,7 +44,7 @@ class Tab(Gtk.ScrolledWindow):
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
 
-    def on_close_tab_clicked(self, _):
+    def on_close_button_clicked(self, _):
         page_num = self.parent.notebook.page_num(self)
         self.parent.close_tab(page_num=page_num)
 
@@ -67,7 +67,7 @@ class TabLabel(Gtk.Box):
         button = Gtk.Button()
         button.set_relief(Gtk.ReliefStyle.NONE)
         button.add(Gtk.Image.new_from_icon_name('window-close', Gtk.IconSize.MENU))
-        button.connect('clicked', self.button_clicked)
+        button.connect('clicked', self.on_close_button_clicked)
 
         self.add(self.icon_widget)
         self.add(self.label)
@@ -84,5 +84,5 @@ class TabLabel(Gtk.Box):
         pixbuf = pil_to_pixbuf(icon)
         self.icon_widget.set_from_pixbuf(pixbuf)
 
-    def button_clicked(self, _):
+    def on_close_button_clicked(self, _):
         self.emit('close-clicked')
