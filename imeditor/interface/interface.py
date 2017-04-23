@@ -109,10 +109,6 @@ class Interface(Gtk.ApplicationWindow):
         self.notebook.show_all()
         self.notebook.set_current_page(page_num)
 
-    def on_close_tab_clicked(self, button, box):
-        page_num = self.notebook.page_num(box)
-        self.close_tab(page_num=page_num)
-
     def close_tab(self, action=None, parameter=None, page_num=None):
         if not page_num:
             page_num = self.notebook.get_current_page()

@@ -10,13 +10,14 @@ from interface.tools import pil_to_pixbuf
 class Tab(Gtk.ScrolledWindow):
     def __init__(self, parent, img, title):
         Gtk.ScrolledWindow.__init__(self)
+        self.parent = parent
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
         event_box = Gtk.EventBox()
         event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
-        event_box.connect('button-press-event', parent.editor.press_task)
-        event_box.connect('motion-notify-event', parent.editor.move_task)
-        event_box.connect('button-release-event', parent.editor.release_task)
+        event_box.connect('button-press-event', self.parent.editor.press_task)
+        event_box.connect('motion-notify-event', self.parent.editor.move_task)
+        event_box.connect('button-release-event', self.parent.editor.release_task)
         event_box.add(self.img_widget)
         frame = Gtk.Frame(hexpand=True, vexpand=True)
         frame.set_halign(Gtk.Align.CENTER)
@@ -34,11 +35,15 @@ class Tab(Gtk.ScrolledWindow):
         self.add(frame)
 
         self.tab_label = TabLabel(title, img)
-        self.tab_label.connect('close-clicked', parent.on_close_tab_clicked, self)
+        self.tab_label.connect('close-clicked', self.on_close_tab_clicked)
 
     def update_image(self, new_img):
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
+
+    def on_close_tab_clicked(self, _):
+        page_num = self.parent.notebook.page_num(self)
+        self.parent.close_tab(page_num=page_num)
 
 
 class TabLabel(Gtk.Box):
