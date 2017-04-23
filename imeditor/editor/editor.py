@@ -25,7 +25,7 @@ class Editor(object):
         self.images = list()
         self.MAX_HIST = 10
 
-        self.task = 0  # 0 -> select, 1 -> paste, 2 -> draw-brush
+        self.task = 0  # 0 -> select, 1 -> paste, 2 -> brush
         self.selection = list()
         self.selected_img = None
 
@@ -99,7 +99,7 @@ class Editor(object):
             self.task = 0
 
     @img_open
-    def draw(self, action, parameter):
+    def brush(self, action, parameter):
         if self.task != 2:
             self.task = 2
             self.change_cursor(1)
