@@ -98,9 +98,11 @@ class Interface(Gtk.ApplicationWindow):
     def create_tab(self, img, title):
         tab = Tab(self, img, title)
         page_num = self.notebook.get_current_page() + 1
-        self.homepage.hide()
+        nb_tabs = self.notebook.get_n_pages()
         self.notebook.insert_page(tab, tab.tab_label, page_num)
-        self.notebook.show_all()
+        if nb_tabs == 0:
+            self.homepage.hide()
+        self.notebook.show()
         self.notebook.set_current_page(page_num)
 
     def close_tab(self, action=None, parameter=None, page_num=None):
