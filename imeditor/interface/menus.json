@@ -1,188 +1,188 @@
 {
-  "File": [
-    {
-      "name": "new",
-      "callback": "parent.new_image",
-      "label": "New image",
-      "shortcut": "&lt;Primary&gt;n"
-    },
-    {
-      "name": "open",
-      "callback": "parent.open_image",
-      "label": "Open image...",
-      "shortcut": "&lt;Primary&gt;o"
-    },
-    {
-      "name": "close",
-      "callback": "parent.close_tab",
-      "label": "Close tab",
-      "shortcut": "&lt;Primary&gt;w"
-    },
-    {
-      "name": "save",
-      "callback": "editor.file_save",
-      "label": "Save",
-      "shortcut": "&lt;Primary&gt;s"
-    },
-    {
-      "name": "save_as",
-      "callback": "editor.file_save_as",
-      "label": "Save as..."
-    },
-    {
-      "name": "details",
-      "callback": "editor.details",
-      "label": "Image details"
-    },
-    {
-      "name": "quit",
-      "callback": "parent.quit_app",
-      "label": "Quit",
-      "shortcut": "&lt;Primary&gt;q"
-    }
-  ],
-  "Edit": [
-    {
-      "name": "select",
-      "callback": "editor.select",
-      "label": "Select"
-    },
-    {
-      "name": "undo",
-      "callback": "editor.history",
-      "params": -1,
-      "label": "Undo",
-      "shortcut": "&lt;Primary&gt;z"
-    },
-    {
-      "name": "redo",
-      "callback": "editor.history",
-      "params": 1,
-      "label": "Redo",
-      "shortcut": "&lt;Primary&gt;y"
-    },
-    {
-      "name": "rotate_left",
-      "callback": "editor.apply_filter",
-      "params": "base.rotate_left",
-      "label": "Rotate -90°"
-    },
-    {
-      "name": "rotate_right",
-      "callback": "editor.apply_filter",
-      "params": "base.rotate_right",
-      "label": "Rotate 90°"
-    },
-    {
-      "name": "copy",
-      "callback": "editor.copy",
-      "label": "Copy",
-      "shortcut": "&lt;Primary&gt;c"
-    },
-    {
-      "name": "paste",
-      "callback": "editor.paste",
-      "label": "Paste",
-      "shortcut": "&lt;Primary&gt;v"
-    },
-    {
-      "name": "cut",
-      "callback": "editor.cut",
-      "label": "Cut",
-      "shortcut": "&lt;Primary&gt;x"
-    }
-  ],
-  "View": [
-    {
-      "name": "fullscreen",
-      "callback": "parent.set_fullscreen",
-      "label": "Fullscreen",
-      "shortcut": "F11"
-    }
-  ],
-  "Draw": [
-    {
-      "name": "brush",
-      "callback": "editor.brush",
-      "label": "Brush"
-    }
-  ],
-  "Filters": [
-    {
-      "name": "negative",
-      "callback": "editor.apply_filter",
-      "params": "base.negative",
-      "label": "Negative"
-    },
-    {
-      "name": "black_white",
-      "callback": "editor.filter_with_params",
-      "label": "Black &amp; white",
-      "params": [
-        "base.black_white",
-        "Black & white",
-        [
-          0,
-          255
-        ]
-      ]
-    },
-    {
-      "name": "red",
-      "callback": "editor.apply_filter",
-      "label": "Red",
-      "params": "base.red"
-    },
-    {
-      "name": "green",
-      "callback": "editor.apply_filter",
-      "label": "Green",
-      "params": "base.green"
-    },
-    {
-      "name": "blue",
-      "callback": "editor.apply_filter",
-      "label": "Blue",
-      "params": "base.blue"
-    },
-    {
-      "name": "gray_level",
-      "callback": "editor.apply_filter",
-      "label": "Grey scales",
-      "params": "base.gray_level"
-    },
-    {
-      "name": "lighten",
-      "callback": "editor.filter_with_params",
-      "label": "Lighten",
-      "params": [
-        "base.lighten",
-        "Lighten",
-        [
-          0,
-          255
-        ]
-      ]
-    },
-    {
-      "name": "darken",
-      "callback": "editor.filter_with_params",
-      "label": "Darken",
-      "params": [
-        "base.darken",
-        "Darken",
-        [
-          0,
-          255
-        ]
-      ]
-    }
-  ],
-  "Help": [
-    {
-      "name": "about",
-      "callback": "parent.about",
-      "label": "About"
-    }
-  ]
+    "File": [
+        {
+            "name": "new",
+            "callback": "parent.new_image",
+            "label": "New image",
+            "shortcut": "&lt;Primary&gt;n"
+        },
+        {
+            "name": "open",
+            "callback": "parent.open_image",
+            "label": "Open image...",
+            "shortcut": "&lt;Primary&gt;o"
+        },
+        {
+            "name": "close",
+            "callback": "parent.close_tab",
+            "label": "Close tab",
+            "shortcut": "&lt;Primary&gt;w"
+        },
+        {
+            "name": "save",
+            "callback": "editor.file_save",
+            "label": "Save",
+            "shortcut": "&lt;Primary&gt;s"
+        },
+        {
+            "name": "save_as",
+            "callback": "editor.file_save_as",
+            "label": "Save as..."
+        },
+        {
+            "name": "details",
+            "callback": "editor.details",
+            "label": "Image details"
+        },
+        {
+            "name": "quit",
+            "callback": "parent.quit_app",
+            "label": "Quit",
+            "shortcut": "&lt;Primary&gt;q"
+        }
+    ],
+    "Edit": [
+        {
+            "name": "select",
+            "callback": "editor.select",
+            "label": "Select"
+        },
+        {
+            "name": "undo",
+            "callback": "editor.history",
+            "params": -1,
+            "label": "Undo",
+            "shortcut": "&lt;Primary&gt;z"
+        },
+        {
+            "name": "redo",
+            "callback": "editor.history",
+            "params": 1,
+            "label": "Redo",
+            "shortcut": "&lt;Primary&gt;y"
+        },
+        {
+            "name": "rotate_left",
+            "callback": "editor.apply_filter",
+            "params": "base.rotate_left",
+            "label": "Rotate -90°"
+        },
+        {
+            "name": "rotate_right",
+            "callback": "editor.apply_filter",
+            "params": "base.rotate_right",
+            "label": "Rotate 90°"
+        },
+        {
+            "name": "copy",
+            "callback": "editor.copy",
+            "label": "Copy",
+            "shortcut": "&lt;Primary&gt;c"
+        },
+        {
+            "name": "paste",
+            "callback": "editor.paste",
+            "label": "Paste",
+            "shortcut": "&lt;Primary&gt;v"
+        },
+        {
+            "name": "cut",
+            "callback": "editor.cut",
+            "label": "Cut",
+            "shortcut": "&lt;Primary&gt;x"
+        }
+    ],
+    "View": [
+        {
+            "name": "fullscreen",
+            "callback": "parent.set_fullscreen",
+            "label": "Fullscreen",
+            "shortcut": "F11"
+        }
+    ],
+    "Draw": [
+        {
+            "name": "brush",
+            "callback": "editor.brush",
+            "label": "Brush"
+        }
+    ],
+    "Filters": [
+        {
+            "name": "negative",
+            "callback": "editor.apply_filter",
+            "params": "base.negative",
+            "label": "Negative"
+        },
+        {
+            "name": "black_white",
+            "callback": "editor.filter_with_params",
+            "label": "Black &amp; white",
+            "params": [
+                "base.black_white",
+                "Black & white",
+                [
+                    0,
+                    255
+                ]
+            ]
+        },
+        {
+            "name": "red",
+            "callback": "editor.apply_filter",
+            "label": "Red",
+            "params": "base.red"
+        },
+        {
+            "name": "green",
+            "callback": "editor.apply_filter",
+            "label": "Green",
+            "params": "base.green"
+        },
+        {
+            "name": "blue",
+            "callback": "editor.apply_filter",
+            "label": "Blue",
+            "params": "base.blue"
+        },
+        {
+            "name": "gray_level",
+            "callback": "editor.apply_filter",
+            "label": "Grey scales",
+            "params": "base.gray_level"
+        },
+        {
+            "name": "lighten",
+            "callback": "editor.filter_with_params",
+            "label": "Lighten",
+            "params": [
+                "base.lighten",
+                "Lighten",
+                [
+                    0,
+                    255
+                ]
+            ]
+        },
+        {
+            "name": "darken",
+            "callback": "editor.filter_with_params",
+            "label": "Darken",
+            "params": [
+                "base.darken",
+                "Darken",
+                [
+                    0,
+                    255
+                ]
+            ]
+        }
+    ],
+    "Help": [
+        {
+            "name": "about",
+            "callback": "parent.about",
+            "label": "About"
+        }
+    ]
 }
