@@ -75,7 +75,7 @@ class Tab(Gtk.Box):
 
         # Main Box
 
-        self.pack_start(scrolled_window, True, True, 0)
+        self.add(scrolled_window)
         self.add(sidebar_frame)
 
         self.tab_label = TabLabel(title, img)
