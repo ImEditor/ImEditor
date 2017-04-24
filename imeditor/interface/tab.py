@@ -8,9 +8,9 @@ from editor.editor import Editor
 from interface.tools import pil_to_pixbuf, SpinButton
 
 
-class Tab(Gtk.ScrolledWindow):
+class Tab(Gtk.Box):
     def __init__(self, win, img, title, filename):
-        Gtk.ScrolledWindow.__init__(self)
+        Gtk.Box.__init__(self)
         self.win = win
         self.editor = Editor(self.win, self, img, filename)
 
@@ -18,15 +18,19 @@ class Tab(Gtk.ScrolledWindow):
 
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
+
         event_box = Gtk.EventBox()
         event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
         event_box.connect('button-press-event', self.editor.press_task)
         event_box.connect('motion-notify-event', self.editor.move_task)
         event_box.connect('button-release-event', self.editor.release_task)
+        event_box.add(self.img_widget)
+
         frame = Gtk.Frame(hexpand=True, vexpand=True)
         frame.set_halign(Gtk.Align.CENTER)
         frame.set_valign(Gtk.Align.CENTER)
         frame.set_name('TabFrame')
+        frame.add(event_box)
         style_provider = Gtk.CssProvider()
         css = b"""
         #TabFrame {
@@ -36,8 +40,8 @@ class Tab(Gtk.ScrolledWindow):
         style_provider.load_from_data(css)
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-        event_box.add(self.img_widget)
-        frame.add(event_box)
+        scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.add(frame)
 
         # Sidebar
 
@@ -71,11 +75,8 @@ class Tab(Gtk.ScrolledWindow):
 
         # Main Box
 
-        main_box = Gtk.Box()
-        main_box.pack_start(frame, True, True, 0)
-        main_box.add(sidebar_frame)
-
-        self.add(main_box)
+        self.pack_start(scrolled_window, True, True, 0)
+        self.add(sidebar_frame)
 
         self.tab_label = TabLabel(title, img)
         self.tab_label.connect('close-clicked', self.on_close_button_clicked)
