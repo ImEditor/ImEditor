@@ -169,7 +169,7 @@ class Editor(object):
         if self.selected_img:
             if self.task != 1:
                 self.task = 1
-                self.change_cursor(2)
+                self.change_cursor(3)
                 xy = (0, 0)
             else:
                 xy = get_middle_mouse(self.selected_img.size, mouse_coords)
