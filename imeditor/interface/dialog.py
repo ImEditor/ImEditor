@@ -88,6 +88,9 @@ def details_dialog(parent, infos):
 def new_image_dialog(parent):
     dialog = Dialog(parent, 'New image')
 
+    name_entry = Gtk.Entry()
+    name_entry.set_text("untitled")
+
     spin_width = SpinButton(640, 1, 7680)
     spin_height = SpinButton(360, 1, 4320)
 
@@ -105,21 +108,23 @@ def new_image_dialog(parent):
     transparent_check = Gtk.CheckButton()
 
     ok_button = Gtk.Button.new_with_label('Create')
-    ok_button.connect('clicked', callback_new_image, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
+    ok_button.connect('clicked', callback_new_image, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
-    grid.attach(Gtk.Label('Width'), 0, 0, 1, 1)
-    grid.attach(spin_width, 1, 0, 1, 1)
-    grid.attach(Gtk.Label('Height'), 0, 1, 1, 1)
-    grid.attach(spin_height, 1, 1, 1, 1)
-    grid.attach(Gtk.Label('Background color'), 0, 2, 1, 1)
-    grid.attach(color_button, 1, 2, 1, 1)
-    grid.attach(Gtk.Label('Transparent'), 0, 3, 1, 1)
-    grid.attach(transparent_check, 1, 3, 1, 1)
-    grid.attach(Gtk.Label('Format'), 0, 4, 1, 1)
-    grid.attach(extension_combo, 1, 4, 1, 1)
-    grid.attach(ok_button, 0, 5, 2, 1)
+    grid.attach(Gtk.Label('Name'), 0, 0, 1, 1)
+    grid.attach(name_entry, 1, 0, 1, 1)
+    grid.attach(Gtk.Label('Width'), 0, 1, 1, 1)
+    grid.attach(spin_width, 1, 1, 1, 1)
+    grid.attach(Gtk.Label('Height'), 0, 2, 1, 1)
+    grid.attach(spin_height, 1, 2, 1, 1)
+    grid.attach(Gtk.Label('Background color'), 0, 3, 1, 1)
+    grid.attach(color_button, 1, 3, 1, 1)
+    grid.attach(Gtk.Label('Transparent'), 0, 4, 1, 1)
+    grid.attach(transparent_check, 1, 4, 1, 1)
+    grid.attach(Gtk.Label('Format'), 0, 5, 1, 1)
+    grid.attach(extension_combo, 1, 5, 1, 1)
+    grid.attach(ok_button, 0, 6, 2, 1)
 
     dialog.dialog_box.add(grid)
 
@@ -147,14 +152,15 @@ def file_dialog(parent, action, filename=None):
     return filename
 
 
-def callback_new_image(button, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
+def callback_new_image(button, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
+    name = name_entry.get_text()
     width = spin_width.get_value_as_int()
     height = spin_height.get_value_as_int()
     size = (width, height)
     color = color_button.get_rgba().to_string()
     extension = extension_combo.get_active_text()
     transparent = transparent_check.get_active()
-    dialog.values += [size, color, extension, transparent]
+    dialog.values += [name, size, color, extension, transparent]
     dialog.destroy()
 
 
