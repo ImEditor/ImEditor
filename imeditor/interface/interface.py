@@ -112,7 +112,7 @@ class Interface(Gtk.ApplicationWindow):
                 error_dialog.destroy()
 
     def close_tab(self, action=None, parameter=None, page_num=None):
-        if not page_num:
+        if page_num is None:
             page_num = self.notebook.get_current_page()
         tab = self.get_tab(page_num)
         if not tab.editor.image.saved:
