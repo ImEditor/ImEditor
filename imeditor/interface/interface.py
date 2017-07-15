@@ -3,7 +3,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
-from PIL import Image
+from PIL import Image, __version__ as pil_version
 from os import path
 
 from interface.tab import Tab
@@ -201,7 +201,7 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_version('0.1-dev')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
-        dialog.set_comments('Simple & versatile image editor.')
+        dialog.set_comments('Simple & versatile image editor.\n\nPillow: ' + pil_version)
         dialog.set_license('Distributed under the GNU GPL(v3) license. \nhttps://github.com/ImEditor/ImEditor/blob/master/LICENSE\nIcons made by Madebyoliver under CC 3.0 BY.\nhttp://www.flaticon.com/authors/madebyoliver')
         dialog.run()
         dialog.destroy()
