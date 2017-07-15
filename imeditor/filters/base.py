@@ -59,10 +59,7 @@ def black_white(img, limit):
     data_m = list()
     for pixel in data:
         gray = (pixel[0] + pixel[1] + pixel[2]) // 3
-        if gray < limit:
-            gray = 0
-        else:
-            gray = 255
+        gray = 0 if gray < limit else 255
         data_m.append((gray, gray, gray))
     img_m = Image.new(img.mode, img.size)
     img_m.putdata(data_m)
