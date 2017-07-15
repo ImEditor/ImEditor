@@ -201,7 +201,7 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_version('0.1-dev')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
-        dialog.set_comments('Simple & versatile image editor.\n\nPillow: ' + pil_version)
+        dialog.set_comments('Simple & versatile image editor.\n\nGtk: {}.{}.{}\nPillow: {}'.format(Gtk.get_major_version(), Gtk.get_micro_version(), Gtk.get_minor_version(), pil_version))
         dialog.set_license('Distributed under the GNU GPL(v3) license. \nhttps://github.com/ImEditor/ImEditor/blob/master/LICENSE\nIcons made by Madebyoliver under CC 3.0 BY.\nhttp://www.flaticon.com/authors/madebyoliver')
         dialog.run()
         dialog.destroy()
