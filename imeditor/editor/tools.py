@@ -19,7 +19,7 @@ def get_infos(image):
     img_infos['size'] = '{} x {} pixels'.format(str(img.width), str(img.height))
     if path.isfile(image.filename):
         img_stat = stat(image.filename)
-        img_infos['weight'] = str(round(img_stat.st_size / 1000, 2)) + 'ko (' + str(round(img_stat.st_size, 2)) + 'o)'
+        img_infos['weight'] = '{}ko ({}o)'.format(str(round(img_stat.st_size / 1000, 2)), str(round(img_stat.st_size, 2)))
         img_infos['path'] = image.filename
         img_infos['last_access'] = datetime.datetime.fromtimestamp(img_stat.st_atime).strftime('%d/%m/%Y %Hh%M')
         img_infos['last_change'] = datetime.datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
