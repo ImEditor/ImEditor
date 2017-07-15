@@ -124,7 +124,7 @@ class Interface(Gtk.ApplicationWindow):
                 'Your work will be lost if you don\'t make a back up.')
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
-                tab.save_as()
+                tab.editor.save_as()
             tab.editor.close_image()
             self.notebook.remove_page(page_num)
             dialog.destroy()
