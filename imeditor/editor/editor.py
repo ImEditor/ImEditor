@@ -18,12 +18,12 @@ def img_open(func):
 
 
 class Editor(object):
-    def __init__(self, win, tab, img, filename):
+    def __init__(self, win, tab, img, filename, saved):
         super(Editor, self).__init__()
         self.win = win
         self.tab = tab
 
-        self.image = ImageObject(img, filename, 0, False)
+        self.image = ImageObject(img, filename, 0, saved)
         self.MAX_HIST = 10
 
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
@@ -190,8 +190,8 @@ class Editor(object):
     def save(self):
         if path.isfile(self.image.filename):
             img = self.image.get_current_img()
-            self.image.saved = True
             img.save(self.image.filename)
+            self.image.saved = True
         else:
             self.file_save_as()
 

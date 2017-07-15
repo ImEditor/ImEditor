@@ -70,8 +70,8 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.notebook.get_nth_page(page_num)
         return tab
 
-    def create_tab(self, img, filename):
-        tab = Tab(self, img, path.basename(filename), filename)
+    def create_tab(self, img, filename, saved=True):
+        tab = Tab(self, img, path.basename(filename), filename, saved)
         page_num = self.notebook.get_current_page() + 1
         nb_tabs = self.notebook.get_n_pages()
         self.notebook.insert_page(tab, tab.tab_label, page_num)
@@ -96,7 +96,7 @@ class Interface(Gtk.ApplicationWindow):
             img = Image.new(mode, values[1], color)
             name = values[0] if values[0] else 'untitled'
             filename = name + '.' + values[3].lower()
-            self.create_tab(img, filename)
+            self.create_tab(img, filename, False)
 
     def open_image(self, action, parameter):
         filename = dialog.file_dialog(self, 'open')

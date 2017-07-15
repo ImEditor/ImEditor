@@ -9,10 +9,10 @@ from interface.tools import pil_to_pixbuf, SpinButton
 
 
 class Tab(Gtk.Box):
-    def __init__(self, win, img, title, filename):
+    def __init__(self, win, img, title, filename, saved):
         Gtk.Box.__init__(self)
         self.win = win
-        self.editor = Editor(self.win, self, img, filename)
+        self.editor = Editor(self.win, self, img, filename, saved)
 
         # Image
 
