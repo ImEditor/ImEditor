@@ -138,7 +138,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def save(self, action, parameter):
         tab = self.get_tab()
-        tab.editor.save_as()
+        tab.editor.save()
 
     def save_as(self, action=None, parameter=None):
         tab = self.get_tab()

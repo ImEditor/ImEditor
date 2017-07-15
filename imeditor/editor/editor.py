@@ -193,7 +193,7 @@ class Editor(object):
             img.save(self.image.filename)
             self.image.saved = True
         else:
-            self.file_save_as()
+            self.save_as()
 
     @img_open
     def save_as(self):
