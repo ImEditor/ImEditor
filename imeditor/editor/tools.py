@@ -5,8 +5,7 @@ import datetime
 
 
 def get_middle_mouse(size, mouse_coords):
-    width = size[0]
-    height = size[1]
+    width, height = size
     x = mouse_coords[0] - (width / 2)
     y = mouse_coords[1] - (height / 2)
     return (round(x), round(y))
