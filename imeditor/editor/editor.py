@@ -202,7 +202,7 @@ class Editor(object):
             img = self.image.get_current_img()
             img.save(filename)
             self.image.filename = filename
-            self.tab.set_label(path.basename(filename))
+            self.tab.tab_label.set_title(path.basename(filename))
             self.image.saved = True
 
     @img_open
