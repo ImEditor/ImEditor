@@ -119,7 +119,7 @@ class Interface(Gtk.ApplicationWindow):
         if not tab.editor.image.saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO,
-                'Save ' + tab.editor.image.filename + ' before closing?')
+                'Save ' + path.basename(tab.editor.image.filename) + ' before closing?')
             dialog.format_secondary_text(
                 'Your work will be lost if you don\'t make a back up.')
             response = dialog.run()

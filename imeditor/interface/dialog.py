@@ -88,7 +88,7 @@ def new_image_dialog(parent):
     dialog = Dialog(parent, 'New image')
 
     name_entry = Gtk.Entry()
-    name_entry.set_text("untitled")
+    name_entry.set_text('untitled')
 
     spin_width = SpinButton(640, 1, 7680)
     spin_height = SpinButton(360, 1, 4320)
