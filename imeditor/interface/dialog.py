@@ -55,8 +55,8 @@ def params_dialog(parent, title, limits):
 
     button_box = Gtk.Box(spacing=6)
     button_box.pack_start(ok_button, True, True, 0)
-    dialog.dialog_box.pack_start(button_box, False, False, 0)
 
+    dialog.dialog_box.pack_start(button_box, False, False, 0)
     dialog.launch()
     return dialog
 
@@ -81,7 +81,6 @@ def details_dialog(parent, infos):
         grid.attach(Gtk.Label(infos['last_change']), 1, 5, 1, 1)
 
     dialog.dialog_box.add(grid)
-
     dialog.launch()
 
 
@@ -127,7 +126,6 @@ def new_image_dialog(parent):
     grid.attach(ok_button, 0, 6, 2, 1)
 
     dialog.dialog_box.add(grid)
-
     dialog.launch()
     return dialog
 
