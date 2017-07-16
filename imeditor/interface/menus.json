@@ -1,5 +1,5 @@
 {
-    "File": [
+    "Image": [
         {
             "name": "new",
             "callback": "new_image",
