@@ -132,17 +132,17 @@ def new_image_dialog(parent):
 
 def file_dialog(parent, action, filename=None):
     if action == 'open':
-        dialog = Gtk.FileChooserDialog('Choose a file',
+        dialog = Gtk.FileChooserDialog('Open image',
             parent,
             Gtk.FileChooserAction.OPEN,
             ('Cancel', Gtk.ResponseType.CANCEL,
             'Open', Gtk.ResponseType.OK))
     elif action == 'save':
-        dialog = Gtk.FileChooserDialog('Choose a file',
+        dialog = Gtk.FileChooserDialog('Save image',
             parent,
             Gtk.FileChooserAction.SAVE,
             ('Cancel', Gtk.ResponseType.CANCEL,
-            'Confirm', Gtk.ResponseType.OK))
+            'Save', Gtk.ResponseType.OK))
         dialog.set_current_name(filename)
     response = dialog.run()
     filename = dialog.get_filename() if response == Gtk.ResponseType.OK else None
