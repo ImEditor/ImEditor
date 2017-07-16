@@ -106,7 +106,7 @@ class Interface(Gtk.ApplicationWindow):
                 self.create_tab(img, filename)
             else:
                 error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
-                    Gtk.ButtonsType.OK, 'An error has occurred...')
+                    Gtk.ButtonsType.OK, 'Unable to open this file')
                 error_dialog.format_secondary_text(
                     'The format of this file is not supported.')
                 error_dialog.run()
