@@ -45,6 +45,7 @@ class Interface(Gtk.ApplicationWindow):
         # Tabs
         self.notebook = Gtk.Notebook()
         self.notebook.set_scrollable(True)
+        self.notebook.connect('switch-page', self.on_tab_switched)
 
         # Main Box
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -133,6 +134,7 @@ class Interface(Gtk.ApplicationWindow):
             self.notebook.remove_page(page_num)
 
         if self.notebook.get_n_pages() == 0:
+            self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
 
@@ -205,3 +207,6 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_license('Distributed under the GNU GPL(v3) license. \nhttps://github.com/ImEditor/ImEditor/blob/master/LICENSE\nIcons made by Madebyoliver under CC 3.0 BY.\nhttp://www.flaticon.com/authors/madebyoliver')
         dialog.run()
         dialog.destroy()
+
+    def on_tab_switched(self, notebook, page, page_num):
+        self.set_title('[{}]'.format(path.basename(page.editor.image.filename)))
