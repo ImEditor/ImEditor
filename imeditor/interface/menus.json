@@ -146,10 +146,10 @@
             "params": "blue"
         },
         {
-            "name": "gray_level",
+            "name": "grayscale",
             "callback": "apply_filter",
             "label": "Grey scales",
-            "params": "gray_level"
+            "params": "grayscale"
         },
         {
             "name": "lighten",

@@ -44,7 +44,7 @@ def blue(img):
     img_m.putdata(data_m)
     return img_m
 
-def gray_level(img):
+def grayscale(img):
     data = list(img.getdata())
     data_m = list()
     for pixel in data:
