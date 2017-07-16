@@ -24,7 +24,7 @@ class Editor(object):
         self.tab = tab
 
         self.image = ImageObject(img, filename, 0, saved)
-        self.MAX_HIST = 10
+        self.MAX_HIST = 20
 
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
         self.selection = list()
