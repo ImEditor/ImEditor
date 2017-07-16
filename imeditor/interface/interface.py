@@ -16,7 +16,7 @@ class Interface(Gtk.ApplicationWindow):
         Gtk.Window.__init__(self, title='ImEditor', application=app)
         self.connect('delete-event', self.quit_app)
         self.app = app
-        self.set_size_request(950, 550)
+        self.set_default_size(950, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icon.png')
         self.set_icon(self.logo)
