@@ -2,12 +2,11 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GdkPixbuf
+from gi.repository import Gtk, Gdk, GdkPixbuf, Gio
 from PIL import Image, __version__ as pil_version
 from os import path
 
 from interface.tab import Tab
-from interface.menus import create_menubar, create_toolbar
 from interface import dialog
 
 
@@ -21,11 +20,122 @@ class Interface(Gtk.ApplicationWindow):
         self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icon.png')
         self.set_icon(self.logo)
 
-        # Menubar
-        create_menubar(self, app.menu_info)
+        # Header Bar
+        hb = Gtk.HeaderBar()
+        hb.set_show_close_button(True)
+        hb.props.title = "ImEditor"
+        hb.props.subtitle = "Simple & versatile image editor"
+        self.set_titlebar(hb)
 
-        # Toolbar
-        toolbar = create_toolbar(self)
+        # Actions
+        menu_button = Gtk.MenuButton()
+        menu_model = Gio.Menu()
+        menu_model.append("Copy", "win.copy")
+        menu_model.append("Paste", "win.paste")
+        menu_model.append("Cut", "win.cut")
+        sub_menu = Gio.Menu()
+        sub_menu.append("Black & white", "win.filter")
+        sub_menu.append("Negative", "win.filter")
+        sub_menu.append("Red", "win.filter")
+        sub_menu.append("Green", "win.filter")
+        sub_menu.append("Blue", "win.filter")
+        sub_menu.append("Gray scales", "win.filter")
+        sub_menu.append("Ligthen", "win.filter")
+        sub_menu.append("Darken", "win.filter")
+        menu_model.append_submenu("Filters", sub_menu)
+        menu_model.append("Image details", "win.details")
+        menu_model.append("About", "win.about")
+        menu_button.set_menu_model(menu_model)
+        hb.pack_end(menu_button)
+
+        action = Gio.SimpleAction.new("pencil", None)
+        action.connect("activate", self.pencil)
+        self.add_action(action)
+        self.pencil_button = Gtk.Button()
+        self.pencil_button.set_image(Gtk.Image.new_from_file('assets/pencil.png'))
+        self.pencil_button.set_action_name("win.pencil")
+        hb.pack_end(self.pencil_button)
+
+        action = Gio.SimpleAction.new("select", None)
+        action.connect("activate", self.select)
+        self.add_action(action)
+        self.select_button = Gtk.Button()
+        self.select_button.set_image(Gtk.Image.new_from_file('assets/select.png'))
+        self.select_button.set_action_name("win.select")
+        hb.pack_end(self.select_button)
+
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        Gtk.StyleContext.add_class(box.get_style_context(), "linked")
+
+        action = Gio.SimpleAction.new("new", None)
+        action.connect("activate", self.new_image)
+        self.add_action(action)
+        app.add_accelerator('<Primary>n', 'win.new', None)
+        self.new_button = Gtk.Button.new_from_icon_name('document-new', Gtk.IconSize.SMALL_TOOLBAR)
+        self.new_button.set_action_name("win.new")
+        box.add(self.new_button)
+
+        action = Gio.SimpleAction.new("open", None)
+        action.connect("activate", self.open_image)
+        self.add_action(action)
+        app.add_accelerator('<Primary>o', 'win.open', None)
+        self.open_button = Gtk.Button.new_from_icon_name('document-open', Gtk.IconSize.SMALL_TOOLBAR)
+        self.open_button.set_action_name("win.open")
+        box.add(self.open_button)
+
+        action = Gio.SimpleAction.new("save", None)
+        action.connect("activate", self.save)
+        self.add_action(action)
+        app.add_accelerator('<Primary>s', 'win.save', None)
+        self.save_button = Gtk.Button.new_from_icon_name('document-save', Gtk.IconSize.SMALL_TOOLBAR)
+        self.save_button.set_action_name("win.save")
+        box.add(self.save_button)
+
+        action = Gio.SimpleAction.new("save-as", None)
+        action.connect("activate", self.save_as)
+        self.add_action(action)
+        self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as', Gtk.IconSize.SMALL_TOOLBAR)
+        self.save_as_button.set_action_name("win.save-as")
+        box.add(self.save_as_button)
+
+        self.undo_button = Gtk.Button.new_from_icon_name('edit-undo', Gtk.IconSize.SMALL_TOOLBAR)
+        self.undo_button.connect("clicked", self.history, -1)
+        box.add(self.undo_button)
+
+        self.redo_button = Gtk.Button.new_from_icon_name('edit-redo', Gtk.IconSize.SMALL_TOOLBAR)
+        self.redo_button.connect("clicked", self.history, 1)
+        box.add(self.redo_button)
+
+        self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left', Gtk.IconSize.SMALL_TOOLBAR)
+        self.rotate_left_button.connect("clicked", self.apply_filter, "rotate_left")
+        box.add(self.rotate_left_button)
+
+        self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right', Gtk.IconSize.SMALL_TOOLBAR)
+        self.rotate_right_button.connect("clicked", self.apply_filter, "rotate_right")
+        box.add(self.rotate_right_button)
+
+        hb.pack_start(box)
+        self.sensitive_toolbar(False)
+
+        # Actions without buttons
+        self.copy_action = Gio.SimpleAction.new("copy", None)
+        self.copy_action.connect("activate", self.copy)
+        self.add_action(self.copy_action)
+        app.add_accelerator('<Primary>c', 'win.copy', None)
+
+        action = Gio.SimpleAction.new("paste", None)
+        action.connect("activate", self.paste)
+        self.add_action(action)
+        app.add_accelerator('<Primary>v', 'win.paste', None)
+
+        action = Gio.SimpleAction.new("cut", None)
+        action.connect("activate", self.cut)
+        self.add_action(action)
+        app.add_accelerator('<Primary>x', 'win.cut', None)
+
+        action = Gio.SimpleAction.new("details", None)
+        action.connect("activate", self.details)
+        self.add_action(action)
 
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
@@ -34,10 +144,10 @@ class Interface(Gtk.ApplicationWindow):
         label.set_markup('<span size="xx-large">What do you want to do?</span>')
         new_button = Gtk.Button('Create a new image', always_show_image=True)
         new_button.set_image(Gtk.Image.new_from_icon_name('document-new',  Gtk.IconSize.BUTTON))
-        new_button.set_action_name('win.new')
+        new_button.connect("clicked", self.new_image)
         open_button = Gtk.Button('Open an existing image', always_show_image=True)
         open_button.set_image(Gtk.Image.new_from_icon_name('document-open', Gtk.IconSize.BUTTON))
-        open_button.set_action_name('win.open')
+        open_button.connect("clicked", self.open_image)
         self.homepage.attach(label, 0, 0, 2, 1)
         self.homepage.attach(new_button, 0, 1, 1, 1)
         self.homepage.attach(open_button, 1, 1, 1, 1)
@@ -49,7 +159,6 @@ class Interface(Gtk.ApplicationWindow):
 
         # Main Box
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        main_box.add(toolbar)
         main_box.add(self.notebook)
         main_box.add(self.homepage)
         self.add(main_box)
@@ -64,6 +173,16 @@ class Interface(Gtk.ApplicationWindow):
         self.allowed_formats = ('bmp', 'ico', 'jpeg', 'jpg', 'png', 'webp')
         self.show_all()
         self.notebook.hide()
+
+    def sensitive_toolbar(self, state):
+        self.pencil_button.set_sensitive(state)
+        self.select_button.set_sensitive(state)
+        self.save_button.set_sensitive(state)
+        self.save_as_button.set_sensitive(state)
+        self.undo_button.set_sensitive(state)
+        self.redo_button.set_sensitive(state)
+        self.rotate_left_button.set_sensitive(state)
+        self.rotate_right_button.set_sensitive(state)
 
     def get_tab(self, page_num=None):
         if not page_num:
@@ -80,10 +199,12 @@ class Interface(Gtk.ApplicationWindow):
             self.homepage.hide()
             self.notebook.show()
         self.notebook.set_current_page(page_num)
+        self.sensitive_toolbar(True)
 
-    # Callbacks
+    def on_tab_switched(self, notebook, page, page_num):
+        self.set_title('[{}]'.format(path.basename(page.editor.image.filename)))
 
-    def new_image(self, action, parameter):
+    def new_image(self, a, b=None):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
         if values:
@@ -99,7 +220,7 @@ class Interface(Gtk.ApplicationWindow):
             filename = name + '.' + values[3].lower()
             self.create_tab(img, filename, False)
 
-    def open_image(self, action, parameter):
+    def open_image(self, a, b=None):
         filename = dialog.file_dialog(self, 'open')
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
@@ -113,7 +234,7 @@ class Interface(Gtk.ApplicationWindow):
                 error_dialog.run()
                 error_dialog.destroy()
 
-    def close_tab(self, action=None, parameter=None, page_num=None):
+    def close_tab(self, a=None, b=None, page_num=None):
         if page_num is None:
             page_num = self.notebook.get_current_page()
         tab = self.get_tab(page_num)
@@ -137,66 +258,59 @@ class Interface(Gtk.ApplicationWindow):
             self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
+            self.sensitive_toolbar(False)
 
-    def save(self, action, parameter):
+    def save(self, a, b=None):
         tab = self.get_tab()
         tab.editor.save()
 
-    def save_as(self, action=None, parameter=None):
+    def save_as(self, a, b=None):
         tab = self.get_tab()
         tab.editor.save_as()
 
-    def details(self, action, parameter):
+    def details(self, a, b=None):
         tab = self.get_tab()
         tab.editor.details()
 
-    def select(self, action=None, parameter=None):
+    def select(self, a, b=None):
         tab = self.get_tab()
         tab.editor.select()
 
-    def history(self, action, parameter, num):
+    def history(self, _, num):
         tab = self.get_tab()
         tab.editor.history(num)
 
-    def copy(self, action, parameter):
+    def copy(self, a, b=None):
         tab = self.get_tab()
         tab.editor.copy()
 
-    def paste(self, action, parameter):
+    def paste(self, a, b=None):
         tab = self.get_tab()
         tab.editor.paste()
 
-    def cut(self, action, parameter):
+    def cut(self, a, b=None):
         tab = self.get_tab()
         tab.editor.cut()
 
-    def pencil(self, action, parameter):
+    def pencil(self, a, b=None):
         tab = self.get_tab()
         tab.editor.pencil()
 
-    def apply_filter(self, action, parameter, func, value=None):
+    def apply_filter(self, _, func, value=None):
         tab = self.get_tab()
         tab.editor.apply_filter(func, value)
 
-    def apply_filter_with_params(self, action, parameter, params):
+    def apply_filter_with_params(self, _, params):
         tab = self.get_tab()
         tab.editor.apply_filter_with_params(params)
 
-    def set_fullscreen(self, action, parameter):
-        if not self.get_window().get_state() & Gdk.WindowState.FULLSCREEN != 0:
-            self.fullscreen_button.set_icon_name('view-restore')
-            self.fullscreen()
-        else:
-            self.fullscreen_button.set_icon_name('view-fullscreen')
-            self.unfullscreen()
-
-    def quit_app(self, action=None, parameter=None):
+    def quit_app(self, a=None, b=None):
         for i in reversed(range(self.notebook.get_n_pages())):
             self.close_tab(page_num=i)
         self.app.quit()
         return False
 
-    def about(self, action, parameter):
+    def about(self, a, b=None):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo(self.logo)
         dialog.set_program_name('ImEditor')
@@ -207,6 +321,3 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_license('Distributed under the GNU GPL(v3) license. \nhttps://github.com/ImEditor/ImEditor/blob/master/LICENSE\nIcons made by Madebyoliver under CC 3.0 BY.\nhttp://www.flaticon.com/authors/madebyoliver')
         dialog.run()
         dialog.destroy()
-
-    def on_tab_switched(self, notebook, page, page_num):
-        self.set_title('[{}]'.format(path.basename(page.editor.image.filename)))
