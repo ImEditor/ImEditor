@@ -283,19 +283,19 @@ class Interface(Gtk.ApplicationWindow):
             self.homepage.show()
             self.sensitive_toolbar(False)
 
-    def save(self, a, b=None):
+    def save(self, a, b):
         tab = self.get_tab()
         tab.editor.save()
 
-    def save_as(self, a, b=None):
+    def save_as(self, a, b):
         tab = self.get_tab()
         tab.editor.save_as()
 
-    def details(self, a, b=None):
+    def details(self, a, b):
         tab = self.get_tab()
         tab.editor.details()
 
-    def select(self, a, b=None):
+    def select(self, a, b):
         tab = self.get_tab()
         tab.editor.select()
 
@@ -303,19 +303,19 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.history(num)
 
-    def copy(self, a, b=None):
+    def copy(self, a, b):
         tab = self.get_tab()
         tab.editor.copy()
 
-    def paste(self, a, b=None):
+    def paste(self, a, b):
         tab = self.get_tab()
         tab.editor.paste()
 
-    def cut(self, a, b=None):
+    def cut(self, a, b):
         tab = self.get_tab()
         tab.editor.cut()
 
-    def pencil(self, a, b=None):
+    def pencil(self, a, b):
         tab = self.get_tab()
         tab.editor.pencil()
 
@@ -329,7 +329,7 @@ class Interface(Gtk.ApplicationWindow):
         self.app.quit()
         return False
 
-    def about(self, a, b=None):
+    def about(self, a, b):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo(self.logo)
         dialog.set_program_name('ImEditor')
