@@ -265,7 +265,7 @@ class Interface(Gtk.ApplicationWindow):
     def on_tab_switched(self, notebook, page, page_num):
         self.set_title('[{}]'.format(path.basename(page.editor.image.filename)))
 
-    def new_image(self, a, b=None):
+    def new_image(self, a, b):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
         if values:
@@ -281,7 +281,7 @@ class Interface(Gtk.ApplicationWindow):
             filename = name + '.' + values[3].lower()
             self.create_tab(img, filename, False)
 
-    def open_image(self, a, b=None):
+    def open_image(self, a, b):
         filename = dialog.file_dialog(self, 'open')
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
@@ -295,7 +295,7 @@ class Interface(Gtk.ApplicationWindow):
                 error_dialog.run()
                 error_dialog.destroy()
 
-    def close_tab(self, a=None, b=None, page_num=None):
+    def close_tab(self, page_num=None):
         if page_num is None:
             page_num = self.notebook.get_current_page()
         tab = self.get_tab(page_num)
