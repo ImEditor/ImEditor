@@ -34,14 +34,14 @@ class Interface(Gtk.ApplicationWindow):
         menu_model.append('Paste', 'win.paste')
         menu_model.append('Cut', 'win.cut')
         sub_menu = Gio.Menu()
-        sub_menu.append('Black & white', 'win.apply_filter')
-        sub_menu.append('Negative', 'win.apply_filter')
-        sub_menu.append('Red', 'win.apply_filter')
-        sub_menu.append('Green', 'win.apply_filter')
-        sub_menu.append('Blue', 'win.apply_filter')
-        sub_menu.append('Gray scales', 'win.apply_filter')
-        sub_menu.append('Ligthen', 'win.apply_filter')
-        sub_menu.append('Darken', 'win.apply_filter')
+        sub_menu.append('Black & white', 'win.filter')
+        sub_menu.append('Negative', 'win.filter')
+        sub_menu.append('Red', 'win.filter')
+        sub_menu.append('Green', 'win.filter')
+        sub_menu.append('Blue', 'win.filter')
+        sub_menu.append('Gray scales', 'win.filter')
+        sub_menu.append('Ligthen', 'win.filter')
+        sub_menu.append('Darken', 'win.filter')
         menu_model.append_submenu('Filters', sub_menu)
         menu_model.append('Image details', 'win.details')
         menu_model.append('About', 'win.about')
@@ -143,6 +143,11 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.cut_action)
         app.add_accelerator('<Primary>x', 'win.cut', None)
 
+        # Filter
+        self.filter_action = Gio.SimpleAction.new('filter', None)
+        self.filter_action.connect('activate', self.apply_filter)
+        self.add_action(self.filter_action)
+
         # Details
         self.details_action = Gio.SimpleAction.new('details', None)
         self.details_action.connect('activate', self.details)
@@ -206,6 +211,7 @@ class Interface(Gtk.ApplicationWindow):
         self.copy_action.set_enabled(state)
         self.paste_action.set_enabled(state)
         self.cut_action.set_enabled(state)
+        self.filter_action.set_enabled(state)
         self.details_action.set_enabled(state)
 
     def get_tab(self, page_num=None):
