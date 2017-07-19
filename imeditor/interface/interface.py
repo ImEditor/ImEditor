@@ -319,13 +319,9 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.pencil()
 
-    def apply_filter(self, _, func, value=None):
+    def apply_filter(self, a, func, value=None, title=None, limits=None):
         tab = self.get_tab()
         tab.editor.apply_filter(func, value)
-
-    def apply_filter_with_params(self, _, params):
-        tab = self.get_tab()
-        tab.editor.apply_filter_with_params(params)
 
     def quit_app(self, a=None, b=None):
         for i in reversed(range(self.notebook.get_n_pages())):
