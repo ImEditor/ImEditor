@@ -199,6 +199,7 @@ class Interface(Gtk.ApplicationWindow):
         self.save_action.set_enabled(state)
         self.save_as_action.set_enabled(state)
         self.pencil_action.set_enabled(state)
+        self.undo_button.set_sensitive(state)
         self.redo_button.set_sensitive(state)
         self.rotate_left_button.set_sensitive(state)
         self.rotate_right_button.set_sensitive(state)
