@@ -46,11 +46,9 @@ class Editor(object):
 
     def apply_filter(self, func, params=None):
         if params:
-            if params[1] and params[2]:
-                params_dialog = dialog.params_dialog(self.win, params[1], params[2])
-                params[0] = params_dialog.get_values()
-            if params[0]:
-                new_img = getattr(base, func)(self.image.get_current_img(), params[0])
+            params_dialog = dialog.params_dialog(self.win, *params)
+            value = params_dialog.get_values()
+            new_img = getattr(base, func)(self.image.get_current_img(), value)
         else:
             new_img = getattr(base, func)(self.image.get_current_img())
         self.do_change(new_img)

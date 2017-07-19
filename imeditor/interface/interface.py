@@ -34,14 +34,14 @@ class Interface(Gtk.ApplicationWindow):
         menu_model.append('Paste', 'win.paste')
         menu_model.append('Cut', 'win.cut')
         sub_menu = Gio.Menu()
-        sub_menu.append('Black & white', 'win.filter')
-        sub_menu.append('Negative', 'win.filter')
-        sub_menu.append('Red', 'win.filter')
-        sub_menu.append('Green', 'win.filter')
-        sub_menu.append('Blue', 'win.filter')
-        sub_menu.append('Gray scales', 'win.filter')
-        sub_menu.append('Ligthen', 'win.filter')
-        sub_menu.append('Darken', 'win.filter')
+        sub_menu.append('Black & white', 'win.black-and-white')
+        sub_menu.append('Negative', 'win.negative')
+        sub_menu.append('Red', 'win.red')
+        sub_menu.append('Green', 'win.green')
+        sub_menu.append('Blue', 'win.blue')
+        sub_menu.append('Grayscale', 'win.grayscale')
+        sub_menu.append('Ligthen', 'win.lighten')
+        sub_menu.append('Darken', 'win.darken')
         menu_model.append_submenu('Filters', sub_menu)
         menu_model.append('Image details', 'win.details')
         menu_model.append('About', 'win.about')
@@ -143,11 +143,6 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.cut_action)
         app.add_accelerator('<Primary>x', 'win.cut', None)
 
-        # Filter
-        self.filter_action = Gio.SimpleAction.new('filter', None)
-        self.filter_action.connect('activate', self.apply_filter)
-        self.add_action(self.filter_action)
-
         # Details
         self.details_action = Gio.SimpleAction.new('details', None)
         self.details_action.connect('activate', self.details)
@@ -157,6 +152,39 @@ class Interface(Gtk.ApplicationWindow):
         self.about_action = Gio.SimpleAction.new('about', None)
         self.about_action.connect('activate', self.about)
         self.add_action(self.about_action)
+
+        # Filters
+        self.black_and_white = Gio.SimpleAction.new('black-and-white', None)
+        self.black_and_white.connect('activate', self.apply_filter, 'black_white', ('Black & white', [0, 255]))
+        self.add_action(self.black_and_white)
+
+        self.negative = Gio.SimpleAction.new('negative', None)
+        self.negative.connect('activate', self.apply_filter, 'negative')
+        self.add_action(self.negative)
+
+        self.red = Gio.SimpleAction.new('red', None)
+        self.red.connect('activate', self.apply_filter, 'red')
+        self.add_action(self.red)
+
+        self.green = Gio.SimpleAction.new('green', None)
+        self.green.connect('activate', self.apply_filter, 'green')
+        self.add_action(self.green)
+
+        self.blue = Gio.SimpleAction.new('blue', None)
+        self.blue.connect('activate', self.apply_filter, 'blue')
+        self.add_action(self.blue)
+
+        self.grayscale = Gio.SimpleAction.new('grayscale', None)
+        self.grayscale.connect('activate', self.apply_filter, 'grayscale')
+        self.add_action(self.grayscale)
+
+        self.lighten = Gio.SimpleAction.new('lighten', None)
+        self.lighten.connect('activate', self.apply_filter, 'lighten', ('Lighten', [0, 255]))
+        self.add_action(self.lighten)
+
+        self.darken = Gio.SimpleAction.new('darken', None)
+        self.darken.connect('activate', self.apply_filter, 'darken', ('Darken', [0, 255]))
+        self.add_action(self.darken)
 
         hb.pack_start(box)
         self.sensitive_toolbar(False)
@@ -211,8 +239,15 @@ class Interface(Gtk.ApplicationWindow):
         self.copy_action.set_enabled(state)
         self.paste_action.set_enabled(state)
         self.cut_action.set_enabled(state)
-        self.filter_action.set_enabled(state)
         self.details_action.set_enabled(state)
+        self.black_and_white.set_enabled(state)
+        self.negative.set_enabled(state)
+        self.red.set_enabled(state)
+        self.green.set_enabled(state)
+        self.blue.set_enabled(state)
+        self.grayscale.set_enabled(state)
+        self.lighten.set_enabled(state)
+        self.darken.set_enabled(state)
 
     def get_tab(self, page_num=None):
         if not page_num:
@@ -325,7 +360,7 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.pencil()
 
-    def apply_filter(self, a, func, params=None):
+    def apply_filter(self, a, b, func, params=None):
         tab = self.get_tab()
         tab.editor.apply_filter(func, params)
 
