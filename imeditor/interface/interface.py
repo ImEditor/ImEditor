@@ -299,7 +299,7 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.select()
 
-    def history(self, _, num):
+    def history(self, a, num):
         tab = self.get_tab()
         tab.editor.history(num)
 
@@ -319,9 +319,9 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.pencil()
 
-    def apply_filter(self, a, func, value=None, title=None, limits=None):
+    def apply_filter(self, a, func, params=None):
         tab = self.get_tab()
-        tab.editor.apply_filter(func, value)
+        tab.editor.apply_filter(func, params)
 
     def quit_app(self, a=None, b=None):
         for i in reversed(range(self.notebook.get_n_pages())):

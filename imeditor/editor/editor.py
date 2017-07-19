@@ -44,12 +44,13 @@ class Editor(object):
             self.image.remove_first_img()
             self.image.decrement_index()
 
-    def apply_filter(self, func, value=None, title=None, limits=None):
-        if title and limits:
-            params_dialog = dialog.params_dialog(self.win, title, limits)
-            value = params_dialog.get_values()
-        if value:
-            new_img = getattr(base, func)(self.image.get_current_img(), value)
+    def apply_filter(self, func, params=None):
+        if params:
+            if params[1] and params[2]:
+                params_dialog = dialog.params_dialog(self.win, params[1], params[2])
+                params[0] = params_dialog.get_values()
+            if params[0]:
+                new_img = getattr(base, func)(self.image.get_current_img(), params[0])
         else:
             new_img = getattr(base, func)(self.image.get_current_img())
         self.do_change(new_img)
