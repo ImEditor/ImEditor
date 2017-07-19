@@ -361,7 +361,7 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.apply_filter(func, params)
 
-    def quit_app(self, a=None, b=None):
+    def quit_app(self, a, b):
         for i in reversed(range(self.notebook.get_n_pages())):
             self.close_tab(page_num=i)
         self.app.quit()
