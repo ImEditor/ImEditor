@@ -23,134 +23,134 @@ class Interface(Gtk.ApplicationWindow):
         # Header Bar
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
-        hb.props.title = "ImEditor"
-        hb.props.subtitle = "Simple & versatile image editor"
+        hb.props.title = 'ImEditor'
+        hb.props.subtitle = 'Simple & versatile image editor'
         self.set_titlebar(hb)
 
         # Menu
         menu_button = Gtk.MenuButton()
         menu_model = Gio.Menu()
-        menu_model.append("Copy", "win.copy")
-        menu_model.append("Paste", "win.paste")
-        menu_model.append("Cut", "win.cut")
+        menu_model.append('Copy', 'win.copy')
+        menu_model.append('Paste', 'win.paste')
+        menu_model.append('Cut', 'win.cut')
         sub_menu = Gio.Menu()
-        sub_menu.append("Black & white", "win.apply_filter")
-        sub_menu.append("Negative", "win.apply_filter")
-        sub_menu.append("Red", "win.apply_filter")
-        sub_menu.append("Green", "win.apply_filter")
-        sub_menu.append("Blue", "win.apply_filter")
-        sub_menu.append("Gray scales", "win.apply_filter")
-        sub_menu.append("Ligthen", "win.apply_filter")
-        sub_menu.append("Darken", "win.apply_filter")
-        menu_model.append_submenu("Filters", sub_menu)
-        menu_model.append("Image details", "win.details")
-        menu_model.append("About", "win.about")
+        sub_menu.append('Black & white', 'win.apply_filter')
+        sub_menu.append('Negative', 'win.apply_filter')
+        sub_menu.append('Red', 'win.apply_filter')
+        sub_menu.append('Green', 'win.apply_filter')
+        sub_menu.append('Blue', 'win.apply_filter')
+        sub_menu.append('Gray scales', 'win.apply_filter')
+        sub_menu.append('Ligthen', 'win.apply_filter')
+        sub_menu.append('Darken', 'win.apply_filter')
+        menu_model.append_submenu('Filters', sub_menu)
+        menu_model.append('Image details', 'win.details')
+        menu_model.append('About', 'win.about')
         menu_button.set_menu_model(menu_model)
         hb.pack_end(menu_button)
 
         # Actions
         # Pencil
-        self.pencil_action = Gio.SimpleAction.new("pencil", None)
-        self.pencil_action.connect("activate", self.pencil)
+        self.pencil_action = Gio.SimpleAction.new('pencil', None)
+        self.pencil_action.connect('activate', self.pencil)
         self.add_action(self.pencil_action)
         self.pencil_button = Gtk.Button()
         self.pencil_button.set_image(Gtk.Image.new_from_file('assets/pencil.png'))
-        self.pencil_button.set_action_name("win.pencil")
+        self.pencil_button.set_action_name('win.pencil')
         hb.pack_end(self.pencil_button)
 
         # Select
-        self.select_action = Gio.SimpleAction.new("select", None)
-        self.select_action.connect("activate", self.select)
+        self.select_action = Gio.SimpleAction.new('select', None)
+        self.select_action.connect('activate', self.select)
         self.add_action(self.select_action)
         self.select_button = Gtk.Button()
         self.select_button.set_image(Gtk.Image.new_from_file('assets/select.png'))
-        self.select_button.set_action_name("win.select")
+        self.select_button.set_action_name('win.select')
         hb.pack_end(self.select_button)
 
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        Gtk.StyleContext.add_class(box.get_style_context(), "linked")
+        Gtk.StyleContext.add_class(box.get_style_context(), 'linked')
 
         # New
-        self.new_action = Gio.SimpleAction.new("new", None)
-        self.new_action.connect("activate", self.new_image)
+        self.new_action = Gio.SimpleAction.new('new', None)
+        self.new_action.connect('activate', self.new_image)
         self.add_action(self.new_action)
         app.add_accelerator('<Primary>n', 'win.new', None)
         self.new_button = Gtk.Button.new_from_icon_name('document-new', Gtk.IconSize.SMALL_TOOLBAR)
-        self.new_button.set_action_name("win.new")
+        self.new_button.set_action_name('win.new')
         box.add(self.new_button)
 
         # Open
-        self.open_action = Gio.SimpleAction.new("open", None)
-        self.open_action.connect("activate", self.open_image)
+        self.open_action = Gio.SimpleAction.new('open', None)
+        self.open_action.connect('activate', self.open_image)
         self.add_action(self.open_action)
         app.add_accelerator('<Primary>o', 'win.open', None)
         self.open_button = Gtk.Button.new_from_icon_name('document-open', Gtk.IconSize.SMALL_TOOLBAR)
-        self.open_button.set_action_name("win.open")
+        self.open_button.set_action_name('win.open')
         box.add(self.open_button)
 
         # Save
-        self.save_action = Gio.SimpleAction.new("save", None)
-        self.save_action.connect("activate", self.save)
+        self.save_action = Gio.SimpleAction.new('save', None)
+        self.save_action.connect('activate', self.save)
         self.add_action(self.save_action)
         app.add_accelerator('<Primary>s', 'win.save', None)
         self.save_button = Gtk.Button.new_from_icon_name('document-save', Gtk.IconSize.SMALL_TOOLBAR)
-        self.save_button.set_action_name("win.save")
+        self.save_button.set_action_name('win.save')
         box.add(self.save_button)
 
         # Save as
-        self.save_as_action = Gio.SimpleAction.new("save-as", None)
-        self.save_as_action.connect("activate", self.save_as)
+        self.save_as_action = Gio.SimpleAction.new('save-as', None)
+        self.save_as_action.connect('activate', self.save_as)
         self.add_action(self.save_as_action)
         self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as', Gtk.IconSize.SMALL_TOOLBAR)
-        self.save_as_button.set_action_name("win.save-as")
+        self.save_as_button.set_action_name('win.save-as')
         box.add(self.save_as_button)
 
         # Undo
         self.undo_button = Gtk.Button.new_from_icon_name('edit-undo', Gtk.IconSize.SMALL_TOOLBAR)
-        self.undo_button.connect("clicked", self.history, -1)
+        self.undo_button.connect('clicked', self.history, -1)
         box.add(self.undo_button)
 
         # Redo
         self.redo_button = Gtk.Button.new_from_icon_name('edit-redo', Gtk.IconSize.SMALL_TOOLBAR)
-        self.redo_button.connect("clicked", self.history, 1)
+        self.redo_button.connect('clicked', self.history, 1)
         box.add(self.redo_button)
 
         # Rotate left
         self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left', Gtk.IconSize.SMALL_TOOLBAR)
-        self.rotate_left_button.connect("clicked", self.apply_filter, "rotate_left")
+        self.rotate_left_button.connect('clicked', self.apply_filter, 'rotate_left')
         box.add(self.rotate_left_button)
 
         # Rotate right
         self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right', Gtk.IconSize.SMALL_TOOLBAR)
-        self.rotate_right_button.connect("clicked", self.apply_filter, "rotate_right")
+        self.rotate_right_button.connect('clicked', self.apply_filter, 'rotate_right')
         box.add(self.rotate_right_button)
 
         # Copy
-        self.copy_action = Gio.SimpleAction.new("copy", None)
-        self.copy_action.connect("activate", self.copy)
+        self.copy_action = Gio.SimpleAction.new('copy', None)
+        self.copy_action.connect('activate', self.copy)
         self.add_action(self.copy_action)
         app.add_accelerator('<Primary>c', 'win.copy', None)
 
         # Paste
-        self.paste_action = Gio.SimpleAction.new("paste", None)
-        self.paste_action.connect("activate", self.paste)
+        self.paste_action = Gio.SimpleAction.new('paste', None)
+        self.paste_action.connect('activate', self.paste)
         self.add_action(self.paste_action)
         app.add_accelerator('<Primary>v', 'win.paste', None)
 
         # Cut
-        self.cut_action = Gio.SimpleAction.new("cut", None)
-        self.cut_action.connect("activate", self.cut)
+        self.cut_action = Gio.SimpleAction.new('cut', None)
+        self.cut_action.connect('activate', self.cut)
         self.add_action(self.cut_action)
         app.add_accelerator('<Primary>x', 'win.cut', None)
 
         # Details
-        self.details_action = Gio.SimpleAction.new("details", None)
-        self.details_action.connect("activate", self.details)
+        self.details_action = Gio.SimpleAction.new('details', None)
+        self.details_action.connect('activate', self.details)
         self.add_action(self.details_action)
 
         # About
-        self.about_action = Gio.SimpleAction.new("about", None)
-        self.about_action.connect("activate", self.about)
+        self.about_action = Gio.SimpleAction.new('about', None)
+        self.about_action.connect('activate', self.about)
         self.add_action(self.about_action)
 
         hb.pack_start(box)
@@ -163,10 +163,10 @@ class Interface(Gtk.ApplicationWindow):
         label.set_markup('<span size="xx-large">What do you want to do?</span>')
         new_button = Gtk.Button('Create a new image', always_show_image=True)
         new_button.set_image(Gtk.Image.new_from_icon_name('document-new',  Gtk.IconSize.BUTTON))
-        new_button.connect("clicked", self.new_image)
+        new_button.connect('clicked', self.new_image)
         open_button = Gtk.Button('Open an existing image', always_show_image=True)
         open_button.set_image(Gtk.Image.new_from_icon_name('document-open', Gtk.IconSize.BUTTON))
-        open_button.connect("clicked", self.open_image)
+        open_button.connect('clicked', self.open_image)
         self.homepage.attach(label, 0, 0, 2, 1)
         self.homepage.attach(new_button, 0, 1, 1, 1)
         self.homepage.attach(open_button, 1, 1, 1, 1)
@@ -234,7 +234,7 @@ class Interface(Gtk.ApplicationWindow):
             if values[4]:
                 mode = 'RGBA'
                 color = values[2][:-1] + ',0)'
-                color = color.replace('rgb', "rgba")
+                color = color.replace('rgb', 'rgba')
             else:
                 mode = 'RGB'
                 color = values[2]
