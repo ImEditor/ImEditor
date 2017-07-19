@@ -119,9 +119,9 @@ class Interface(Gtk.ApplicationWindow):
         self.redo_action.connect('activate', self.history, 1)
         self.add_action(self.redo_action)
         app.add_accelerator('<Primary>y', 'win.redo', None)
-        self.redo_button = Gtk.Button.new_from_icon_name('edit-redo', Gtk.IconSize.SMALL_TOOLBAR)
-        self.redo_button.set_action_name('win.redo')
-        box.add(self.redo_button)
+        self.redo_action_button = Gtk.Button.new_from_icon_name('edit-redo', Gtk.IconSize.SMALL_TOOLBAR)
+        self.redo_action_button.set_action_name('win.redo')
+        box.add(self.redo_action_button)
 
         # Rotate left
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
@@ -168,40 +168,40 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.about_action)
 
         # Filters
-        self.black_and_white = Gio.SimpleAction.new('black-and-white', None)
-        self.black_and_white.connect('activate', self.apply_filter, 'black_white', ('Black & white', [0, 255]))
-        self.add_action(self.black_and_white)
+        self.black_and_white_action = Gio.SimpleAction.new('black-and-white', None)
+        self.black_and_white_action.connect('activate', self.apply_filter, 'black_white', ('Black & white', [0, 255]))
+        self.add_action(self.black_and_white_action)
 
-        self.negative = Gio.SimpleAction.new('negative', None)
-        self.negative.connect('activate', self.apply_filter, 'negative')
-        self.add_action(self.negative)
+        self.negative_action = Gio.SimpleAction.new('negative', None)
+        self.negative_action.connect('activate', self.apply_filter, 'negative')
+        self.add_action(self.negative_action)
 
-        self.red = Gio.SimpleAction.new('red', None)
-        self.red.connect('activate', self.apply_filter, 'red')
-        self.add_action(self.red)
+        self.red_action = Gio.SimpleAction.new('red', None)
+        self.red_action.connect('activate', self.apply_filter, 'red')
+        self.add_action(self.red_action)
 
-        self.green = Gio.SimpleAction.new('green', None)
-        self.green.connect('activate', self.apply_filter, 'green')
-        self.add_action(self.green)
+        self.green_action = Gio.SimpleAction.new('green', None)
+        self.green_action.connect('activate', self.apply_filter, 'green')
+        self.add_action(self.green_action)
 
-        self.blue = Gio.SimpleAction.new('blue', None)
-        self.blue.connect('activate', self.apply_filter, 'blue')
-        self.add_action(self.blue)
+        self.blue_action = Gio.SimpleAction.new('blue', None)
+        self.blue_action.connect('activate', self.apply_filter, 'blue')
+        self.add_action(self.blue_action)
 
-        self.grayscale = Gio.SimpleAction.new('grayscale', None)
-        self.grayscale.connect('activate', self.apply_filter, 'grayscale')
-        self.add_action(self.grayscale)
+        self.grayscale_action = Gio.SimpleAction.new('grayscale', None)
+        self.grayscale_action.connect('activate', self.apply_filter, 'grayscale')
+        self.add_action(self.grayscale_action)
 
-        self.lighten = Gio.SimpleAction.new('lighten', None)
-        self.lighten.connect('activate', self.apply_filter, 'lighten', ('Lighten', [0, 255]))
-        self.add_action(self.lighten)
+        self.lighten_action = Gio.SimpleAction.new('lighten', None)
+        self.lighten_action.connect('activate', self.apply_filter, 'lighten', ('Lighten', [0, 255]))
+        self.add_action(self.lighten_action)
 
-        self.darken = Gio.SimpleAction.new('darken', None)
-        self.darken.connect('activate', self.apply_filter, 'darken', ('Darken', [0, 255]))
-        self.add_action(self.darken)
+        self.darken_action = Gio.SimpleAction.new('darken', None)
+        self.darken_action.connect('activate', self.apply_filter, 'darken', ('Darken', [0, 255]))
+        self.add_action(self.darken_action)
 
         hb.pack_start(box)
-        self.sensitive_toolbar(False)
+        self.switch_toolbar(False)
 
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
@@ -240,28 +240,11 @@ class Interface(Gtk.ApplicationWindow):
         self.show_all()
         self.notebook.hide()
 
-    def sensitive_toolbar(self, state):
-        self.pencil_action.set_enabled(state)
-        self.select_action.set_enabled(state)
-        self.save_action.set_enabled(state)
-        self.save_as_action.set_enabled(state)
-        self.pencil_action.set_enabled(state)
-        self.undo_action.set_enabled(state)
-        self.redo_action.set_enabled(state)
-        self.rotate_left_action.set_enabled(state)
-        self.rotate_right_action.set_enabled(state)
-        self.copy_action.set_enabled(state)
-        self.paste_action.set_enabled(state)
-        self.cut_action.set_enabled(state)
-        self.details_action.set_enabled(state)
-        self.black_and_white.set_enabled(state)
-        self.negative.set_enabled(state)
-        self.red.set_enabled(state)
-        self.green.set_enabled(state)
-        self.blue.set_enabled(state)
-        self.grayscale.set_enabled(state)
-        self.lighten.set_enabled(state)
-        self.darken.set_enabled(state)
+    def switch_toolbar(self, state):
+        # Enable / disable actions (depending on whether an image is open)
+        actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'lighten', 'darken']
+        for action in actions:
+            getattr(self, action + '_action').set_enabled(state)
 
     def get_tab(self, page_num=None):
         if not page_num:
@@ -277,7 +260,7 @@ class Interface(Gtk.ApplicationWindow):
             self.homepage.hide()
             self.notebook.show()
         self.notebook.set_current_page(page_num)
-        self.sensitive_toolbar(True)
+        self.switch_toolbar(True)
 
     def on_tab_switched(self, notebook, page, page_num):
         self.set_title('[{}]'.format(path.basename(page.editor.image.filename)))
@@ -336,7 +319,7 @@ class Interface(Gtk.ApplicationWindow):
             self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
-            self.sensitive_toolbar(False)
+            self.switch_toolbar(False)
 
     def save(self, a, b):
         tab = self.get_tab()
