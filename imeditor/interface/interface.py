@@ -106,23 +106,37 @@ class Interface(Gtk.ApplicationWindow):
         box.add(self.save_as_button)
 
         # Undo
+        self.undo_action = Gio.SimpleAction.new('undo', None)
+        self.undo_action.connect('activate', self.history, -1)
+        self.add_action(self.undo_action)
+        app.add_accelerator('<Primary>z', 'win.undo', None)
         self.undo_button = Gtk.Button.new_from_icon_name('edit-undo', Gtk.IconSize.SMALL_TOOLBAR)
-        self.undo_button.connect('clicked', self.history, -1)
+        self.undo_button.set_action_name('win.undo')
         box.add(self.undo_button)
 
         # Redo
+        self.redo_action = Gio.SimpleAction.new('redo', None)
+        self.redo_action.connect('activate', self.history, 1)
+        self.add_action(self.redo_action)
+        app.add_accelerator('<Primary>y', 'win.redo', None)
         self.redo_button = Gtk.Button.new_from_icon_name('edit-redo', Gtk.IconSize.SMALL_TOOLBAR)
-        self.redo_button.connect('clicked', self.history, 1)
+        self.redo_button.set_action_name('win.redo')
         box.add(self.redo_button)
 
         # Rotate left
+        self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
+        self.rotate_left_action.connect('activate', self.apply_filter, 'rotate_left')
+        self.add_action(self.rotate_left_action)
         self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left', Gtk.IconSize.SMALL_TOOLBAR)
-        self.rotate_left_button.connect('clicked', self.apply_filter, 'rotate_left')
+        self.rotate_left_button.set_action_name('win.rotate-left')
         box.add(self.rotate_left_button)
 
         # Rotate right
+        self.rotate_right_action = Gio.SimpleAction.new('rotate-right', None)
+        self.rotate_right_action.connect('activate', self.apply_filter, 'rotate_right')
+        self.add_action(self.rotate_right_action)
         self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right', Gtk.IconSize.SMALL_TOOLBAR)
-        self.rotate_right_button.connect('clicked', self.apply_filter, 'rotate_right')
+        self.rotate_right_button.set_action_name('win.rotate-right')
         box.add(self.rotate_right_button)
 
         # Copy
@@ -232,10 +246,10 @@ class Interface(Gtk.ApplicationWindow):
         self.save_action.set_enabled(state)
         self.save_as_action.set_enabled(state)
         self.pencil_action.set_enabled(state)
-        self.undo_button.set_sensitive(state)
-        self.redo_button.set_sensitive(state)
-        self.rotate_left_button.set_sensitive(state)
-        self.rotate_right_button.set_sensitive(state)
+        self.undo_action.set_enabled(state)
+        self.redo_action.set_enabled(state)
+        self.rotate_left_action.set_enabled(state)
+        self.rotate_right_action.set_enabled(state)
         self.copy_action.set_enabled(state)
         self.paste_action.set_enabled(state)
         self.cut_action.set_enabled(state)
@@ -340,7 +354,7 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.select()
 
-    def history(self, a, num):
+    def history(self, a, b, num):
         tab = self.get_tab()
         tab.editor.history(num)
 
