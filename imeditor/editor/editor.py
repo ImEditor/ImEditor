@@ -88,9 +88,7 @@ class Editor(object):
             img = self.image.get_tmp_img().copy()
         else:
             img = self.image.get_current_img().copy()
-        x_mouse = round(mouse_coords[0])
-        y_mouse = round(mouse_coords[1])
-        return [x_mouse, y_mouse], img
+        return list(map(round, mouse_coords)), img
 
     def press_task(self, widget, event):
         mouse_coords, img = self.get_vars((event.x, event.y))
@@ -111,9 +109,8 @@ class Editor(object):
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
         elif self.task == 2:
-            top_left = (mouse_coords[0], mouse_coords[1])
-            bottom_right = (mouse_coords[0], mouse_coords[1])
-            coords = (top_left, bottom_right)
+            coords = (mouse_coords[0], mouse_coords[1])
+            coords = (coords, coords)
             if self.pencil_shape == 'ellipse':
                 draw_ellipse(img, coords, True, self.pencil_color, self.pencil_size)
             elif self.pencil_shape == 'rectangle':
