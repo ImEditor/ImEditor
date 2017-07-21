@@ -34,9 +34,6 @@ class Dialog(Gtk.Dialog):
         self.run()
         self.destroy()
 
-    def close(self, button):
-        self.destroy()
-
 
 def params_dialog(parent, title, limits):
     dialog = Dialog(parent, title)
