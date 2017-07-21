@@ -10,13 +10,6 @@ from editor.tools import get_middle_mouse, get_infos
 from editor.draw import draw_rectangle, draw_ellipse
 
 
-def img_open(func):
-    def inner(self, *args, **kwargs):
-        if self.image:
-            return func(self, *args, **kwargs)
-    return inner
-
-
 class Editor(object):
     def __init__(self, win, tab, img, filename, saved):
         super(Editor, self).__init__()
@@ -35,7 +28,6 @@ class Editor(object):
         self.pencil_color = 'black'
         self.pencil_size = 8
 
-    @img_open
     def close_image(self):
         self.image.close_all_img()
         self.image = None
@@ -52,23 +44,15 @@ class Editor(object):
             self.image.remove_first_img()
             self.image.decrement_index()
 
-    @img_open
-    def apply_filter(self, func, value=None):
-        if value:
+    def apply_filter(self, func, params=None):
+        if params:
+            params_dialog = dialog.params_dialog(self.win, *params)
+            value = params_dialog.get_values()
             new_img = getattr(base, func)(self.image.get_current_img(), value)
         else:
             new_img = getattr(base, func)(self.image.get_current_img())
         self.do_change(new_img)
 
-    @img_open
-    def apply_filter_with_params(self, params):
-        func, title, limits = params
-        params_dialog = dialog.params_dialog(self.win, title, limits)
-        value = params_dialog.get_values()
-        if value:
-            self.apply_filter(func, value)
-
-    @img_open
     def history(self, num):
         if self.image.get_n_img() >= 2:
             index_img = self.image.index
@@ -83,7 +67,6 @@ class Editor(object):
                     img = self.image.get_current_img()
                     self.tab.update_image(img)
 
-    @img_open
     def select(self):
         if self.task != 0:
             if self.task == 1:
@@ -94,7 +77,6 @@ class Editor(object):
             self.change_cursor(0)
             self.task = 0
 
-    @img_open
     def pencil(self):
         if self.task != 2:
             self.task = 2
@@ -159,12 +141,10 @@ class Editor(object):
         self.tab.update_image(img)
         self.image.tmp_img = img
 
-    @img_open
     def copy(self):
         if self.selection != list():
             self.selected_img = self.image.get_current_img().crop(tuple(self.selection))
 
-    @img_open
     def paste(self, mouse_coords=None):
         if self.selected_img:
             if self.task != 1:
@@ -177,7 +157,6 @@ class Editor(object):
             new_img.paste(self.selected_img, xy)
             self.set_tmp_img(new_img)
 
-    @img_open
     def cut(self):
         if self.selection != list():
             self.copy()
@@ -186,7 +165,6 @@ class Editor(object):
             img.paste(blank_img, tuple(self.selection[:2]))
             self.do_change(img)
 
-    @img_open
     def save(self):
         if path.isfile(self.image.filename):
             img = self.image.get_current_img()
@@ -195,7 +173,6 @@ class Editor(object):
         else:
             self.save_as()
 
-    @img_open
     def save_as(self):
         filename = dialog.file_dialog(self.win, 'save', path.basename(self.image.filename))
         if filename:
@@ -205,7 +182,6 @@ class Editor(object):
             self.tab.tab_label.set_title(path.basename(filename))
             self.image.saved = True
 
-    @img_open
     def details(self):
         img_infos = get_infos(self.image)
         dialog.details_dialog(self.win, img_infos)
