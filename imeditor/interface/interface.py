@@ -29,6 +29,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Menu
         menu_button = Gtk.MenuButton()
+        menu_button.set_image(Gtk.Image.new_from_icon_name('open-menu-symbolic', Gtk.IconSize.MENU))
         menu_model = Gio.Menu()
         menu_model.append('Copy', 'win.copy')
         menu_model.append('Paste', 'win.paste')
