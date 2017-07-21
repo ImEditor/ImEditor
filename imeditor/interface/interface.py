@@ -262,9 +262,6 @@ class Interface(Gtk.ApplicationWindow):
         self.notebook.set_current_page(page_num)
         self.switch_toolbar(True)
 
-    def on_tab_switched(self, notebook, page, page_num):
-        self.set_title('[{}] - ImEditor'.format(path.basename(page.editor.image.filename)))
-
     def new_image(self, a, b):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
@@ -320,6 +317,9 @@ class Interface(Gtk.ApplicationWindow):
             self.notebook.hide()
             self.homepage.show()
             self.switch_toolbar(False)
+
+    def on_tab_switched(self, notebook, page, page_num):
+        self.set_title('[{}] - ImEditor'.format(path.basename(page.editor.image.filename)))
 
     def save(self, a, b):
         tab = self.get_tab()
