@@ -236,8 +236,8 @@ class Interface(Gtk.ApplicationWindow):
         self.draw_cursor = Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL)
         self.move_cursor = Gdk.Cursor.new_from_name(display, 'move')
 
-        # Vars
         self.allowed_formats = ('bmp', 'ico', 'jpeg', 'jpg', 'png', 'webp')
+
         self.show_all()
         self.notebook.hide()
 
