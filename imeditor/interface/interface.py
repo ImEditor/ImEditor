@@ -336,7 +336,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def select(self, a, b):
         tab = self.get_tab()
-        tab.hide_sidebar()
+        tab.enable_sidebar(False)
         tab.editor.select()
 
     def history(self, a, b, num):
@@ -357,7 +357,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def pencil(self, a, b):
         tab = self.get_tab()
-        tab.show_sidebar('pencil')
+        tab.enable_sidebar(True)
         tab.editor.pencil()
 
     def apply_filter(self, a, b, func, params=None):

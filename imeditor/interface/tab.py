@@ -91,13 +91,13 @@ class Tab(Gtk.Box):
         pixbuf = pil_to_pixbuf(new_img)
         self.img_widget.set_from_pixbuf(pixbuf)
 
-    def hide_sidebar(self):
-        self.sidebar_frame.hide()
-
-    def show_sidebar(self, tool):
-        self.sidebar_frame.show()
-        if tool == 'pencil':
-            self.pencil_grid.show()
+    def enable_sidebar(self, enable):
+        if enable:
+            self.sidebar_frame.show()
+            if self.editor.task == 0:
+                self.pencil_grid.show()
+        else:
+            self.sidebar_frame.hide()
 
     def on_pencil_shape_changed(self, button):
         self.editor.pencil_shape = button.get_active_text().lower()
