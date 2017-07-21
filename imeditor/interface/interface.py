@@ -263,7 +263,7 @@ class Interface(Gtk.ApplicationWindow):
         self.switch_toolbar(True)
 
     def on_tab_switched(self, notebook, page, page_num):
-        self.set_title('[{}]'.format(path.basename(page.editor.image.filename)))
+        self.set_title('[{}] - ImEditor'.format(path.basename(page.editor.image.filename)))
 
     def new_image(self, a, b):
         new_image_dialog = dialog.new_image_dialog(self)
