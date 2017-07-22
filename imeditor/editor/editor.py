@@ -5,9 +5,15 @@ from os import path
 
 from interface import dialog
 from filters import base
-from editor.image import ImageObject
+from editor.image import ImageObject, Layer, Filter
 from editor.tools import get_middle_mouse, get_infos
 from editor.draw import draw_rectangle, draw_ellipse
+
+def img_open(func):
+    def inner(self, *args, **kwargs):
+        if self.image:
+            return func(self, *args, **kwargs)
+    return inner
 
 
 class Editor(object):
@@ -16,7 +22,7 @@ class Editor(object):
         self.win = win
         self.tab = tab
 
-        self.image = ImageObject(img, filename, 0, saved)
+        self.image = ImageObject(img, filename, saved)
         self.MAX_HIST = 20
 
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
@@ -29,20 +35,14 @@ class Editor(object):
         self.pencil_size = 8
 
     def close_image(self):
-        self.image.close_all_img()
         self.image = None
         self.select()
         self.task = 0
 
     def do_change(self, img):
         self.tab.update_image(img)
-        self.image.forget_img()
-        self.image.add_img(img)
-        self.image.increment_index()
+        self.image.new_layer()
         self.image.saved = False
-        if self.image.get_n_img() > self.MAX_HIST:
-            self.image.remove_first_img()
-            self.image.decrement_index()
 
     def apply_filter(self, func, params=None):
         if params:
@@ -50,28 +50,25 @@ class Editor(object):
             value = params_dialog.get_values()
             new_img = getattr(base, func)(self.image.get_current_img(), value)
         else:
-            new_img = getattr(base, func)(self.image.get_current_img())
+            new_img = getattr(base, func)(self.image.current_img)
         self.do_change(new_img)
 
     def history(self, num):
-        if self.image.get_n_img() >= 2:
-            index_img = self.image.index
+        if len(self.image.layers) >= 2:
             if num == -1: # Undo:
-                if index_img >= 1:
-                    self.image.decrement_index()
-                    img = self.image.get_current_img()
-                    self.tab.update_image(img)
+                if self.image.index >= 1:
+                    self.image.index -= 1
+                    self.tab.update_image(self.image.current_img)
             else: # Redo:
-                if index_img + 1 < self.image.get_n_img():
-                    self.image.increment_index()
-                    img = self.image.get_current_img()
-                    self.tab.update_image(img)
+                if self.image.index + 1 < len(self.image.layers):
+                    self.image.index += 1
+                    self.tab.update_image(self.image.current_img)
 
     def select(self):
         if self.task != 0:
-            if self.task == 1:
+            if self.task == 1:  # paste
                 tmp_img = self.image.get_tmp_img()
-                if tmp_img:
+                if tmp_img:  # is not None:
                     self.do_change(tmp_img)
                     self.image.tmp_img = None
             self.change_cursor(0)
@@ -95,12 +92,16 @@ class Editor(object):
         if self.task == 0:
             self.selection = mouse_coords
             self.tab.update_image(img)
-        elif (self.task == 1 and self.selected_img) or self.task == 2:
+        elif (self.task == 1 and self.selected_img):
+            self.move_task(event=event)
+        elif self.task == 2:
+            layer = Layer(self.pencil_shape, list(), self.pencil_size, self.pencil_color)
+            self.image.tmp_layer = layer
             self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
         mouse_coords, img = self.get_vars((event.x, event.y), True)
-        if self.task == 0:
+        if self.task == 0:  # select
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
@@ -108,21 +109,20 @@ class Editor(object):
             self.tab.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
-        elif self.task == 2:
-            coords = (mouse_coords[0], mouse_coords[1])
-            coords = (coords, coords)
-            if self.pencil_shape == 'ellipse':
-                draw_ellipse(img, coords, True, self.pencil_color, self.pencil_size)
-            elif self.pencil_shape == 'rectangle':
-                draw_rectangle(img, coords, True, self.pencil_color, self.pencil_size)
+        elif self.task == 2:  # pencil
+            top_left = (mouse_coords[0], mouse_coords[1])
+            bottom_right = (mouse_coords[0], mouse_coords[1])
+            coords = (top_left, bottom_right)
+            self.image.tmp_layer.add_coords(coords)
+            img = self.image.apply_layer()
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):
         mouse_coords, img = self.get_vars((event.x, event.y), True)
         if self.task == 0:
             self.selection.extend(mouse_coords)
-        elif self.task == 2:
-            self.image.tmp_img = None
+        elif self.task == 2:  # pencil
+            self.image.tmp_layer = None
             self.do_change(img)
 
     def change_cursor(self, cursor):
@@ -140,7 +140,7 @@ class Editor(object):
 
     def copy(self):
         if self.selection != list():
-            self.selected_img = self.image.get_current_img().crop(tuple(self.selection))
+            self.selected_img = self.image.current_img.crop(tuple(self.selection))
 
     def paste(self, mouse_coords=None):
         if self.selected_img:
@@ -150,7 +150,7 @@ class Editor(object):
                 xy = (0, 0)
             else:
                 xy = get_middle_mouse(self.selected_img.size, mouse_coords)
-            new_img = self.image.get_current_img().copy()
+            new_img = self.image.current_img.copy()
             new_img.paste(self.selected_img, xy)
             self.set_tmp_img(new_img)
 
@@ -158,13 +158,13 @@ class Editor(object):
         if self.selection != list():
             self.copy()
             blank_img = Image.new('RGBA', self.selected_img.size, (255, 255, 255, 0))
-            img = self.image.get_current_img().copy()
+            img = self.image.current_img.copy()
             img.paste(blank_img, tuple(self.selection[:2]))
             self.do_change(img)
 
     def save(self):
         if path.isfile(self.image.filename):
-            img = self.image.get_current_img()
+            img = self.image.current_img
             img.save(self.image.filename)
             self.image.saved = True
         else:
@@ -173,7 +173,7 @@ class Editor(object):
     def save_as(self):
         filename = dialog.file_dialog(self.win, 'save', path.basename(self.image.filename))
         if filename:
-            img = self.image.get_current_img()
+            img = self.image.current_img
             img.save(filename)
             self.image.filename = filename
             self.tab.tab_label.set_title(path.basename(filename))
