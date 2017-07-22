@@ -15,7 +15,6 @@ class Tab(Gtk.Box):
         self.editor = Editor(self.win, self, img, filename, saved)
 
         # Image
-
         pixbuf = pil_to_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
 
@@ -49,9 +48,7 @@ class Tab(Gtk.Box):
         # Pencil
         self.pencil_grid = Gtk.Grid(row_spacing=20, column_spacing=20, border_width=15)
         pencil_label = Gtk.Label('<b>Pencil</b>', use_markup=True)
-        self.pencil_grid.attach(pencil_label, 0, 0, 2, 1)
         shape_pencil_label = Gtk.Label('Shape')
-        self.pencil_grid.attach(shape_pencil_label, 0, 1, 1, 1)
         pencil_shape_combo = Gtk.ComboBoxText()
         pencil_shape_combo.set_entry_text_column(0)
         shapes = ['Ellipse', 'Rectangle']
@@ -59,19 +56,22 @@ class Tab(Gtk.Box):
             pencil_shape_combo.append_text(shape)
         pencil_shape_combo.set_active(0)
         pencil_shape_combo.connect('changed', self.on_pencil_shape_changed)
-        self.pencil_grid.attach(pencil_shape_combo, 1, 1, 2, 1)
         color_pencil_label = Gtk.Label('Color')
-        self.pencil_grid.attach(color_pencil_label, 0, 2, 1, 1)
         pencil_color_button = Gtk.ColorButton()
         pencil_color_button.set_use_alpha(False)
         pencil_color_button.set_rgba(Gdk.RGBA(0, 0, 0, 1))
         pencil_color_button.connect('color-set', self.on_pencil_color_changed)
-        self.pencil_grid.attach(pencil_color_button, 1, 2, 1, 1)
         size_pencil_label = Gtk.Label('Size')
-        self.pencil_grid.attach(size_pencil_label, 0, 3, 1, 1)
         pencil_size_spin = SpinButton(8, 1, 1000, 1, 2)
-        self.pencil_grid.attach(pencil_size_spin, 1, 3, 1, 1)
         pencil_size_spin.connect('value-changed', self.on_pencil_size_changed)
+        self.pencil_grid.attach(pencil_label, 0, 0, 2, 1)
+        self.pencil_grid.attach(shape_pencil_label, 0, 1, 1, 1)
+        self.pencil_grid.attach(pencil_shape_combo, 1, 1, 2, 1)
+        self.pencil_grid.attach(color_pencil_label, 0, 2, 1, 1)
+        self.pencil_grid.attach(pencil_color_button, 1, 2, 1, 1)
+        self.pencil_grid.attach(size_pencil_label, 0, 3, 1, 1)
+        self.pencil_grid.attach(pencil_size_spin, 1, 3, 1, 1)
+
         self.sidebar_frame.add(self.pencil_grid)
 
         # Main Box
