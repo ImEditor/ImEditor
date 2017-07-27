@@ -4,18 +4,20 @@ from editor.draw import draw_rectangle, draw_ellipse
 
 class ImageObject(object):
     def __init__(self, img, filename, saved):
+        print('new image object!')
         super(ImageObject, self).__init__()
         self.layers = list()  # 20 max ( 5 for tests)
-        self.tmp_layer = None
+        self.tmp_layer = str()
         self.filename = filename
-        self.index = 0
+        self.index = 0  # the size of the layers list
         self.saved = saved
-        self.tmp_img = None  # for select task
-        self.current_img = img
-        self.img_original = img
+        self.tmp_img = img  # for select task
+        self.current_img = img.copy()
+        self.img_original = img.copy()
 
     def __str__(self):
-        result = str(self.layers) + '\n'
+        result = 'ImageObject, '
+        result += str(self.layers) + '\n'
         result += str(self.index)
         return result
 
@@ -25,34 +27,59 @@ class ImageObject(object):
         else:
             return self.current_img
 
-    def remove_first_layer(self):
-        self.layers = self.layers[1:]
+    def add_coords(self, coords):
+        self.tmp_layer.add_coords(coords)
+        # make ligne to avoid blanks
 
     def apply_layer(self):
         return self.tmp_layer.execute(self.current_img)
 
     def new_layer(self):
+        print('new_layer')
+        print(type(self.tmp_layer))
         self.layers.append(self.tmp_layer)
         self.index += 1
-        self.layers = self.layers[:self.index]
-        if len(self.layers) >= 5:  # 20
+        """
+        if len(self.layers) >= 20:  # 5
+            print('to many layers!')
+            self.layers = self.layers[:self.index -1]  # ? ...
+            img = self.img_original
+            i = 0
+            for layer in self.layers:
+                if i <= self.index:
+                    img = layer.execute(img)
+                    i += 1
+                else:
+                    break
+                    print('break')
+            self.img_original = img
             self.layers = self.layers[1:]
-            self.index -= 1
+        """
+        self.img_original.save('org.png')
+        ### draw an image modify itself so even if self.img_original isn't redifined, it change at each new layer
 
     def undo(self):
-        """Execute all layers to the original image."""
-        if self.index >= 1:
-            self.index -= 1
-        img = self.img_original
+        # Execute all layers to the original image.
+        print('undo')
+        self.index -= 1
+        img = self.img_original.copy()
+        img.save('org.png')
+        layer_redone = 0
         for layer in self.layers:
-            img = layer.execute(img)
+            if layer_redone < self.index:
+                img = layer.execute(img)
+                layer_redone += 1
+            else:
+                break
+                print('break')
+            print(layer_redone)
+            img.save(str(layer_redone) + '.png')
         self.current_img = img
+        img.save('fin.png')
 
     def redo(self):
         self.index += 1
-        if len(self.layers) >= 5:  # 20
-            self.layers = self.layers[:self.index]
-        self.current_img = self.layers[index].execute(self.current_img)
+        self.current_img = self.layers[self.index -1].execute(self.current_img)
 
 class Layer(object):
     def __init__(self, shape=None, location=list(), size=8, color='#000000'):
@@ -73,7 +100,7 @@ class Layer(object):
         if self.shape == 'ellipse':
             for coords in self.location:
                 draw_ellipse(img, coords, True, self.color, self.size)
-        elif self.pencil_shape == 'rectangle':
+        elif self.shape == 'rectangle':
             for coords in self.location:
                 draw_rectangle(img, coords, True, self.color, self.size)
         return img
@@ -86,3 +113,4 @@ class Filter(object):
 
     def execute(self, img):
         """Apply the filter to the given im, return it."""
+        pass

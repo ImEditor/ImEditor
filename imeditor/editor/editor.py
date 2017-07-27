@@ -54,15 +54,18 @@ class Editor(object):
         self.do_change(new_img)
 
     def history(self, num):
+        print('history')
+        print(self.image)
         if len(self.image.layers) >= 2:
             if num == -1: # Undo:
-                if self.image.index >= 1:
-                    self.image.index -= 1
+                if self.image.index >= 1:  # != 0  # > 0
+                    self.image.undo()
                     self.tab.update_image(self.image.current_img)
             else: # Redo:
-                if self.image.index + 1 < len(self.image.layers):
-                    self.image.index += 1
+                if self.image.index < len(self.image.layers):
+                    self.image.redo()
                     self.tab.update_image(self.image.current_img)
+        print(self.image)
 
     def select(self):
         if self.task != 0:
@@ -82,9 +85,9 @@ class Editor(object):
     def get_vars(self, mouse_coords, is_tmp=False):
         """Return required variables."""
         if is_tmp:
-            img = self.image.get_tmp_img().copy()
+            img = self.image.get_tmp_img().copy()  # need to be change (remove .copy())
         else:
-            img = self.image.get_current_img().copy()
+            img = self.image.current_img.copy()
         return list(map(round, mouse_coords)), img
 
     def press_task(self, widget, event):
@@ -94,9 +97,13 @@ class Editor(object):
             self.tab.update_image(img)
         elif (self.task == 1 and self.selected_img):
             self.move_task(event=event)
-        elif self.task == 2:
+        elif self.task == 2:  # pencil
+            print('pencil press_task')
             layer = Layer(self.pencil_shape, list(), self.pencil_size, self.pencil_color)
+            print('press_task')
+            print(type(layer))
             self.image.tmp_layer = layer
+            self.image.tmp_img = self.image.current_img  # bad!
             self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
@@ -113,8 +120,8 @@ class Editor(object):
             top_left = (mouse_coords[0], mouse_coords[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            self.image.tmp_layer.add_coords(coords)
-            img = self.image.apply_layer()
+            self.image.add_coords(coords)
+            img = self.image.tmp_layer.execute(self.image.current_img)
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):
@@ -122,8 +129,8 @@ class Editor(object):
         if self.task == 0:
             self.selection.extend(mouse_coords)
         elif self.task == 2:  # pencil
-            self.image.tmp_layer = None
             self.do_change(img)
+            self.image.tmp_img = None
 
     def change_cursor(self, cursor):
         img = self.tab.img_widget.get_window()
