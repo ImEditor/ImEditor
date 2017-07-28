@@ -13,7 +13,7 @@ def get_middle_mouse(size, mouse_coords):
 
 def get_infos(image):
     img_infos = {}
-    img = image.get_current_img()
+    img = image.current_img
     img_infos['mode'] = img.mode
     img_infos['size'] = '{} x {} pixels'.format(str(img.width), str(img.height))
     if path.isfile(image.filename):
