@@ -34,11 +34,6 @@ class Editor(object):
         self.pencil_color = 'black'
         self.pencil_size = 8
 
-    def close_image(self):
-        self.image = None
-        self.select()
-        self.task = 0
-
     def do_change(self, img):
         self.tab.update_image(img)
         self.image.new_layer()
