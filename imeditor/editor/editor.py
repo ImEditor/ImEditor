@@ -9,13 +9,6 @@ from editor.image import ImageObject, Layer, Filter
 from editor.tools import get_middle_mouse, get_infos
 from editor.draw import draw_rectangle, draw_ellipse
 
-def img_open(func):
-    def inner(self, *args, **kwargs):
-        if self.image:
-            return func(self, *args, **kwargs)
-    return inner
-
-
 class Editor(object):
     def __init__(self, win, tab, img, filename, saved):
         super(Editor, self).__init__()
