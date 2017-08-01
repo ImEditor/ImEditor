@@ -118,7 +118,9 @@ class Editor(object):
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
             self.image.add_coords(coords)
+            # very bad:
             img = self.image.tmp_layer.execute(self.image.current_img)
+            # must draw only one point
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):

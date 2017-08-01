@@ -7,6 +7,8 @@ class ImageObject(object):
         print('new image object!')
         super(ImageObject, self).__init__()
         self.layers = list()  # 20 max ( 5 for tests)
+        self.redo_stack = list()
+        self.undo_stack = list()
         self.tmp_layer = str()
         self.filename = filename
         self.index = 0  # the size of the layers list
@@ -39,24 +41,9 @@ class ImageObject(object):
         print(type(self.tmp_layer))
         self.layers.append(self.tmp_layer)
         self.index += 1
-        """
-        if len(self.layers) >= 20:  # 5
-            print('to many layers!')
-            self.layers = self.layers[:self.index -1]  # ? ...
-            img = self.img_original
-            i = 0
-            for layer in self.layers:
-                if i <= self.index:
-                    img = layer.execute(img)
-                    i += 1
-                else:
-                    break
-                    print('break')
-            self.img_original = img
-            self.layers = self.layers[1:]
-        """
         self.img_original.save('org.png')
         ### draw an image modify itself so even if self.img_original isn't redifined, it change at each new layer
+        # TODO: MAX_HIST
 
     def undo(self):
         # Execute all layers to the original image.
@@ -80,6 +67,16 @@ class ImageObject(object):
     def redo(self):
         self.index += 1
         self.current_img = self.layers[self.index -1].execute(self.current_img)
+
+class Task(object):
+    def __init__(self):
+        super(Task, self).__init__()
+
+    def execute(self, img):
+        pass
+
+    def reverse(self, img):
+        pass
 
 class Layer(object):
     def __init__(self, shape=None, location=list(), size=8, color='#000000'):
