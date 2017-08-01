@@ -6,21 +6,17 @@ class ImageObject(object):
     def __init__(self, img, filename, saved):
         print('new image object!')
         super(ImageObject, self).__init__()
-        self.layers = list()  # 20 max ( 5 for tests)
         self.redo_stack = list()
         self.undo_stack = list()
-        self.tmp_layer = str()
         self.filename = filename
-        self.index = 0  # the size of the layers list
         self.saved = saved
         self.tmp_img = img  # for select task
         self.current_img = img.copy()
-        self.img_original = img.copy()
 
     def __str__(self):
         result = 'ImageObject, '
-        result += str(self.layers) + '\n'
-        result += str(self.index)
+        result += str(self.redo_stack) + '\n'
+        result += str(self.undo_stack) + '\n'
         return result
 
     def get_tmp_img(self):
@@ -29,44 +25,25 @@ class ImageObject(object):
         else:
             return self.current_img
 
-    def add_coords(self, coords):
-        self.tmp_layer.add_coords(coords)
-        # make ligne to avoid blanks
-
-    def apply_layer(self):
-        return self.tmp_layer.execute(self.current_img)
-
-    def new_layer(self):
-        print('new_layer')
-        print(type(self.tmp_layer))
-        self.layers.append(self.tmp_layer)
-        self.index += 1
-        self.img_original.save('org.png')
-        ### draw an image modify itself so even if self.img_original isn't redifined, it change at each new layer
-        # TODO: MAX_HIST
+    def new_filter(self, func, value=None):
+        print('filter')
+        layer = Filter(func, value)
+        layer.execute(self.current_img)
+        self.undo_stack.append(layer)
+        self.redo_stack.clear()
+        print(layer)
 
     def undo(self):
-        # Execute all layers to the original image.
-        print('undo')
-        self.index -= 1
-        img = self.img_original.copy()
-        img.save('org.png')
-        layer_redone = 0
-        for layer in self.layers:
-            if layer_redone < self.index:
-                img = layer.execute(img)
-                layer_redone += 1
-            else:
-                break
-                print('break')
-            print(layer_redone)
-            img.save(str(layer_redone) + '.png')
-        self.current_img = img
-        img.save('fin.png')
+        if len(self.undo_stack) > 0:
+            layer_undo = self.undo_stack.pop()
+            self.redo_stack.append(layer_undo)
+            layer_undo.reverse(self.current_img)
 
     def redo(self):
-        self.index += 1
-        self.current_img = self.layers[self.index -1].execute(self.current_img)
+        if len(self.redo_stack) > 0:
+            layer_redo = self.redo_stack.pop()
+            self.undo_stack.append(layer_redo)
+            layer_redo.execute(self.current_img)
 
 class Task(object):
     def __init__(self):
@@ -103,11 +80,20 @@ class Layer(object):
         return img
 
 class Filter(object):
-    def __init__(self, func, values):
+    def __init__(self, func, value):
         super(Filter, self).__init__()
         self.func = func
-        self.values = values
+        self.value = value
 
     def execute(self, img):
         """Apply the filter to the given im, return it."""
-        pass
+        if self.value:
+            self.func(img, self.value)
+        else:
+            self.func(img)
+
+    def reverse(self, img):
+        if self.value:
+            self.func(img, self.value, True)
+        else:
+            self.func(img, True)

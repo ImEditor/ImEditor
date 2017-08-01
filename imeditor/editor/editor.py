@@ -4,7 +4,6 @@ from PIL import Image
 from os import path
 
 from interface import dialog
-from filters import base
 from editor.image import ImageObject, Layer, Filter
 from editor.tools import get_middle_mouse, get_infos
 from editor.draw import draw_rectangle, draw_ellipse
@@ -29,7 +28,6 @@ class Editor(object):
 
     def do_change(self, img):
         self.tab.update_image(img)
-        self.image.new_layer()
         self.image.saved = False
 
     def apply_filter(self, func, params=None):
@@ -37,24 +35,21 @@ class Editor(object):
             params_dialog = dialog.params_dialog(self.win, *params)
             value = params_dialog.get_values()
             if value:
-                new_img = getattr(base, func)(self.image.current_img, value)
-                self.do_change(new_img)
+                self.image.new_filter(func, value)
+                self.do_change(self.image.current_img)
         else:
-            new_img = getattr(base, func)(self.image.current_img)
-            self.do_change(new_img)
+            self.image.new_filter(func)
+            self.do_change(self.image.current_img)
 
     def history(self, num):
         print('history')
         print(self.image)
-        if len(self.image.layers) >= 2:
-            if num == -1: # Undo:
-                if self.image.index >= 1:  # != 0  # > 0
-                    self.image.undo()
-                    self.tab.update_image(self.image.current_img)
-            else: # Redo:
-                if self.image.index < len(self.image.layers):
-                    self.image.redo()
-                    self.tab.update_image(self.image.current_img)
+        if num == -1: # Undo:
+            self.image.undo()
+            self.tab.update_image(self.image.current_img)
+        else: # Redo:
+            self.image.redo()
+            self.tab.update_image(self.image.current_img)
         print(self.image)
 
     def select(self):

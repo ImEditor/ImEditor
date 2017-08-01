@@ -8,6 +8,7 @@ from os import path
 
 from interface.tab import Tab
 from interface import dialog
+from filters import base
 
 
 class Interface(Gtk.ApplicationWindow):
@@ -126,7 +127,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Rotate left
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
-        self.rotate_left_action.connect('activate', self.apply_filter, 'rotate_left')
+        self.rotate_left_action.connect('activate', self.apply_filter, base.rotate_left)
         self.add_action(self.rotate_left_action)
         self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left', Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_left_button.set_action_name('win.rotate-left')
@@ -134,7 +135,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Rotate right
         self.rotate_right_action = Gio.SimpleAction.new('rotate-right', None)
-        self.rotate_right_action.connect('activate', self.apply_filter, 'rotate_right')
+        self.rotate_right_action.connect('activate', self.apply_filter, base.rotate_right)
         self.add_action(self.rotate_right_action)
         self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right', Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_right_button.set_action_name('win.rotate-right')
@@ -170,35 +171,35 @@ class Interface(Gtk.ApplicationWindow):
 
         # Filters
         self.black_and_white_action = Gio.SimpleAction.new('black-and-white', None)
-        self.black_and_white_action.connect('activate', self.apply_filter, 'black_white', ('Black & white', [0, 255]))
+        self.black_and_white_action.connect('activate', self.apply_filter, base.black_white, ('Black & white', [0, 255]))
         self.add_action(self.black_and_white_action)
 
         self.negative_action = Gio.SimpleAction.new('negative', None)
-        self.negative_action.connect('activate', self.apply_filter, 'negative')
+        self.negative_action.connect('activate', self.apply_filter, base.negative)
         self.add_action(self.negative_action)
 
         self.red_action = Gio.SimpleAction.new('red', None)
-        self.red_action.connect('activate', self.apply_filter, 'red')
+        self.red_action.connect('activate', self.apply_filter, base.red)
         self.add_action(self.red_action)
 
         self.green_action = Gio.SimpleAction.new('green', None)
-        self.green_action.connect('activate', self.apply_filter, 'green')
+        self.green_action.connect('activate', self.apply_filter, base.green)
         self.add_action(self.green_action)
 
         self.blue_action = Gio.SimpleAction.new('blue', None)
-        self.blue_action.connect('activate', self.apply_filter, 'blue')
+        self.blue_action.connect('activate', self.apply_filter, base.blue)
         self.add_action(self.blue_action)
 
         self.grayscale_action = Gio.SimpleAction.new('grayscale', None)
-        self.grayscale_action.connect('activate', self.apply_filter, 'grayscale')
+        self.grayscale_action.connect('activate', self.apply_filter, base.grayscale)
         self.add_action(self.grayscale_action)
 
         self.lighten_action = Gio.SimpleAction.new('lighten', None)
-        self.lighten_action.connect('activate', self.apply_filter, 'lighten', ('Lighten', [0, 255]))
+        self.lighten_action.connect('activate', self.apply_filter, base.lighten, ('Lighten', [0, 255]))
         self.add_action(self.lighten_action)
 
         self.darken_action = Gio.SimpleAction.new('darken', None)
-        self.darken_action.connect('activate', self.apply_filter, 'darken', ('Darken', [0, 255]))
+        self.darken_action.connect('activate', self.apply_filter, base.darken, ('Darken', [0, 255]))
         self.add_action(self.darken_action)
 
         hb.pack_start(box)
