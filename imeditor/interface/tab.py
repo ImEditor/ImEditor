@@ -87,8 +87,7 @@ class Tab(Gtk.Box):
 
     def update_image(self, new_img):
         self.tab_label.set_icon(new_img)
-        pixbuf = pil_to_pixbuf(new_img)
-        self.img_widget.set_from_pixbuf(pixbuf)
+        self.img_widget.set_from_pixbuf(pil_to_pixbuf(new_img))
 
     def enable_sidebar(self, enable):
         if enable:
