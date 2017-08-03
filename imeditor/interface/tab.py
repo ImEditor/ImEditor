@@ -77,7 +77,7 @@ class Tab(Gtk.Box):
         self.add(scrolled_window)
         self.add(self.sidebar_frame)
 
-        self.tab_label = TabLabel(win, title, img)
+        self.tab_label = TabLabel(win, self, title, img)
 
         self.show_all()
         self.sidebar_frame.hide()
@@ -107,12 +107,12 @@ class Tab(Gtk.Box):
 
 class TabLabel(Gtk.Box):
     """Define the label on the tab."""
-    __gsignals__ = {'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ())}
-    def __init__(self, win, title, img):
+    def __init__(self, win, tab, title, img):
         Gtk.Box.__init__(self)
         self.set_spacing(5)
 
         self.win = win
+        self.tab = tab
 
         # Preview of image
         self.icon_widget = Gtk.Image()
@@ -146,5 +146,5 @@ class TabLabel(Gtk.Box):
         self.icon_widget.set_from_pixbuf(pil_to_pixbuf(icon))
 
     def on_close_button_clicked(self, _):
-        page_num = self.win.notebook.page_num(self)
+        page_num = self.win.notebook.page_num(self.tab)
         self.win.close_tab(page_num)
