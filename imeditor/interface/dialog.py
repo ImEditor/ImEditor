@@ -88,7 +88,13 @@ def details_dialog(parent, infos):
 def new_image_dialog(parent):
     def on_template_changed(button):
         template = button.get_active_text()
-        templates = {'A3': (3508, 4960), 'A4': (3508, 2480), 'A5': (2480, 1748), 'A6': (1748, 1240)}
+        templates = {
+            'Favicon': (16, 16),
+            'A3': (3508, 4960),
+            'A4': (3508, 2480),
+            'A5': (2480, 1748),
+            'A6': (1748, 1240)
+        }
         spin_width.set_value(templates[template][0])
         spin_height.set_value(templates[template][1])
 
@@ -111,7 +117,7 @@ def new_image_dialog(parent):
     template_combo = Gtk.ComboBoxText()
     template_combo.connect('changed', on_template_changed)
     template_combo.set_entry_text_column(0)
-    templates = ['A3', 'A4', 'A5', 'A6']
+    templates = ['Favicon', 'A3', 'A4', 'A5', 'A6']
     for elt in templates:
         template_combo.append_text(elt)
     spin_width = SpinButton(640, 1, 10000)
