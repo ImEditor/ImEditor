@@ -149,8 +149,7 @@ class TabLabel(Gtk.Box):
     def set_icon(self, img):
         icon = img.copy()
         icon.thumbnail((24, 24))
-        pixbuf = pil_to_pixbuf(icon)
-        self.icon_widget.set_from_pixbuf(pixbuf)
+        self.icon_widget.set_from_pixbuf(pil_to_pixbuf(icon))
 
     def on_close_button_clicked(self, _):
         self.emit('close-clicked')
