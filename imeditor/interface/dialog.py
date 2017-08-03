@@ -88,20 +88,9 @@ def details_dialog(parent, infos):
 def new_image_dialog(parent):
     def on_template_changed(button):
         template = button.get_active_text()
-        if template == 'A3':
-            h = 3508
-            w = 4960
-        elif template == 'A4':
-            h = 3508
-            w = 2480
-        elif template == 'A5':
-            h = 2480
-            w = 1748
-        elif template == 'A6':
-            h = 1748
-            w = 1240
-        spin_width.set_value(w)
-        spin_height.set_value(h)
+        templates = {'A3': (3508, 4960), 'A4': (3508, 2480), 'A5': (2480, 1748), 'A6': (1748, 1240)}
+        spin_width.set_value(templates[template][0])
+        spin_height.set_value(templates[template][1])
 
     def callback_new_image(button, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
         name = name_entry.get_text()
