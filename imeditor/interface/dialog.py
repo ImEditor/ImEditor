@@ -36,6 +36,10 @@ class Dialog(Gtk.Dialog):
 
 
 def params_dialog(parent, title, limits):
+    def callback_apply_filter(button, h_scale, dialog):
+        dialog.values.append(int(h_scale.get_value()))
+        dialog.destroy()
+
     dialog = Dialog(parent, title)
 
     default = (limits[0] + limits[1]) / 2
@@ -82,13 +86,42 @@ def details_dialog(parent, infos):
 
 
 def new_image_dialog(parent):
+    def on_template_changed(button):
+        template = button.get_active_text()
+        templates = {
+            'Favicon': (16, 16),
+            'A3': (3508, 4960),
+            'A4': (3508, 2480),
+            'A5': (2480, 1748),
+            'A6': (1748, 1240)
+        }
+        spin_width.set_value(templates[template][0])
+        spin_height.set_value(templates[template][1])
+
+    def callback_new_image(button, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
+        name = name_entry.get_text()
+        width = spin_width.get_value_as_int()
+        height = spin_height.get_value_as_int()
+        size = (width, height)
+        color = color_button.get_rgba().to_string()
+        extension = extension_combo.get_active_text()
+        transparent = transparent_check.get_active()
+        dialog.values += [name, size, color, extension, transparent]
+        dialog.destroy()
+
     dialog = Dialog(parent, 'New image')
 
     name_entry = Gtk.Entry()
     name_entry.set_text('untitled')
 
-    spin_width = SpinButton(640, 1, 7680)
-    spin_height = SpinButton(360, 1, 4320)
+    template_combo = Gtk.ComboBoxText()
+    template_combo.connect('changed', on_template_changed)
+    template_combo.set_entry_text_column(0)
+    templates = ['Favicon', 'A3', 'A4', 'A5', 'A6']
+    for elt in templates:
+        template_combo.append_text(elt)
+    spin_width = SpinButton(640, 1, 10000)
+    spin_height = SpinButton(360, 1, 10000)
 
     color_button = Gtk.ColorButton()
     color_button.set_use_alpha(False)
@@ -107,20 +140,22 @@ def new_image_dialog(parent):
     ok_button.connect('clicked', callback_new_image, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
-    grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
-    grid.attach(Gtk.Label('Name'), 0, 0, 1, 1)
-    grid.attach(name_entry, 1, 0, 1, 1)
-    grid.attach(Gtk.Label('Width'), 0, 1, 1, 1)
-    grid.attach(spin_width, 1, 1, 1, 1)
-    grid.attach(Gtk.Label('Height'), 0, 2, 1, 1)
-    grid.attach(spin_height, 1, 2, 1, 1)
-    grid.attach(Gtk.Label('Background color'), 0, 3, 1, 1)
-    grid.attach(color_button, 1, 3, 1, 1)
-    grid.attach(Gtk.Label('Transparent'), 0, 4, 1, 1)
-    grid.attach(transparent_check, 1, 4, 1, 1)
-    grid.attach(Gtk.Label('Format'), 0, 5, 1, 1)
-    grid.attach(extension_combo, 1, 5, 1, 1)
-    grid.attach(ok_button, 0, 6, 2, 1)
+    grid = Gtk.Grid(row_spacing=12, column_spacing=12)
+    grid.attach(Gtk.Label('Name', xalign=0.0), 0, 0, 2, 1)
+    grid.attach(name_entry, 2, 0, 2, 1)
+    grid.attach(Gtk.Label('Template', xalign=0.0), 0, 1, 2, 1)
+    grid.attach(template_combo, 2, 1, 2, 1)
+    grid.attach(Gtk.Label('Width', xalign=0.0), 0, 2, 1, 1)
+    grid.attach(spin_width, 1, 2, 1, 1)
+    grid.attach(Gtk.Label('Height', xalign=0.0), 2, 2, 1, 1)
+    grid.attach(spin_height, 3, 2, 1, 1)
+    grid.attach(Gtk.Label('Background color', xalign=0.0), 0, 3, 2, 1)
+    grid.attach(color_button, 2, 3, 2, 1)
+    grid.attach(Gtk.Label('Transparent', xalign=0.0), 0, 4, 2, 1)
+    grid.attach(transparent_check, 2, 4, 2, 1)
+    grid.attach(Gtk.Label('Format', xalign=0.0), 0, 5, 2, 1)
+    grid.attach(extension_combo, 2, 5, 2, 1)
+    grid.attach(ok_button, 0, 6, 4, 1)
 
     dialog.dialog_box.add(grid)
     dialog.launch()
@@ -145,20 +180,3 @@ def file_dialog(parent, action, filename=None):
     filename = dialog.get_filename() if response == Gtk.ResponseType.OK else None
     dialog.destroy()
     return filename
-
-
-def callback_new_image(button, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
-    name = name_entry.get_text()
-    width = spin_width.get_value_as_int()
-    height = spin_height.get_value_as_int()
-    size = (width, height)
-    color = color_button.get_rgba().to_string()
-    extension = extension_combo.get_active_text()
-    transparent = transparent_check.get_active()
-    dialog.values += [name, size, color, extension, transparent]
-    dialog.destroy()
-
-
-def callback_apply_filter(button, h_scale, dialog):
-    dialog.values.append(int(h_scale.get_value()))
-    dialog.destroy()

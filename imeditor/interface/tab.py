@@ -11,12 +11,10 @@ from interface.tools import pil_to_pixbuf, SpinButton
 class Tab(Gtk.Box):
     def __init__(self, win, img, title, filename, saved):
         Gtk.Box.__init__(self)
-        self.win = win
-        self.editor = Editor(self.win, self, img, filename, saved)
+        self.editor = Editor(win, self, img, filename, saved)
 
         # Image
-        pixbuf = pil_to_pixbuf(img)
-        self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
+        self.img_widget = Gtk.Image.new_from_pixbuf(pil_to_pixbuf(img))
 
         event_box = Gtk.EventBox()
         event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
@@ -46,7 +44,7 @@ class Tab(Gtk.Box):
         self.sidebar_frame = Gtk.Frame()
 
         # Pencil
-        self.pencil_grid = Gtk.Grid(row_spacing=20, column_spacing=20, border_width=15)
+        self.pencil_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, border_width=25, spacing=10)
         pencil_label = Gtk.Label('<b>Pencil</b>', use_markup=True)
         shape_pencil_label = Gtk.Label('Shape')
         pencil_shape_combo = Gtk.ComboBoxText()
@@ -64,38 +62,36 @@ class Tab(Gtk.Box):
         size_pencil_label = Gtk.Label('Size')
         pencil_size_spin = SpinButton(8, 1, 1000, 1, 2)
         pencil_size_spin.connect('value-changed', self.on_pencil_size_changed)
-        self.pencil_grid.attach(pencil_label, 0, 0, 2, 1)
-        self.pencil_grid.attach(shape_pencil_label, 0, 1, 1, 1)
-        self.pencil_grid.attach(pencil_shape_combo, 1, 1, 2, 1)
-        self.pencil_grid.attach(color_pencil_label, 0, 2, 1, 1)
-        self.pencil_grid.attach(pencil_color_button, 1, 2, 1, 1)
-        self.pencil_grid.attach(size_pencil_label, 0, 3, 1, 1)
-        self.pencil_grid.attach(pencil_size_spin, 1, 3, 1, 1)
+        self.pencil_box.add(pencil_label)
+        self.pencil_box.add(shape_pencil_label)
+        self.pencil_box.add(pencil_shape_combo)
+        self.pencil_box.add(color_pencil_label)
+        self.pencil_box.add(pencil_color_button)
+        self.pencil_box.add(size_pencil_label)
+        self.pencil_box.add(pencil_size_spin)
 
-        self.sidebar_frame.add(self.pencil_grid)
+        self.sidebar_frame.add(self.pencil_box)
 
         # Main Box
 
         self.add(scrolled_window)
         self.add(self.sidebar_frame)
 
-        self.tab_label = TabLabel(title, img)
-        self.tab_label.connect('close-clicked', self.on_close_button_clicked)
+        self.tab_label = TabLabel(win, self, title, img)
 
         self.show_all()
         self.sidebar_frame.hide()
-        self.pencil_grid.hide()
+        self.pencil_box.hide()
 
     def update_image(self, new_img):
         self.tab_label.set_icon(new_img)
-        pixbuf = pil_to_pixbuf(new_img)
-        self.img_widget.set_from_pixbuf(pixbuf)
+        self.img_widget.set_from_pixbuf(pil_to_pixbuf(new_img))
 
     def enable_sidebar(self, enable):
         if enable:
             self.sidebar_frame.show()
             if self.editor.task == 0:
-                self.pencil_grid.show()
+                self.pencil_box.show()
         else:
             self.sidebar_frame.hide()
 
@@ -108,17 +104,15 @@ class Tab(Gtk.Box):
     def on_pencil_size_changed(self, button):
         self.editor.pencil_size = button.get_value_as_int()
 
-    def on_close_button_clicked(self, _):
-        page_num = self.win.notebook.page_num(self)
-        self.win.close_tab(page_num=page_num)
-
 
 class TabLabel(Gtk.Box):
     """Define the label on the tab."""
-    __gsignals__ = {'close-clicked': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ())}
-    def __init__(self, title, img):
+    def __init__(self, win, tab, title, img):
         Gtk.Box.__init__(self)
         self.set_spacing(5)
+
+        self.win = win
+        self.tab = tab
 
         # Preview of image
         self.icon_widget = Gtk.Image()
@@ -149,8 +143,8 @@ class TabLabel(Gtk.Box):
     def set_icon(self, img):
         icon = img.copy()
         icon.thumbnail((24, 24))
-        pixbuf = pil_to_pixbuf(icon)
-        self.icon_widget.set_from_pixbuf(pixbuf)
+        self.icon_widget.set_from_pixbuf(pil_to_pixbuf(icon))
 
     def on_close_button_clicked(self, _):
-        self.emit('close-clicked')
+        page_num = self.win.notebook.page_num(self.tab)
+        self.win.close_tab(page_num)

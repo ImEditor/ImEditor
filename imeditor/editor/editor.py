@@ -59,13 +59,13 @@ class Editor(object):
                 if tmp_img:  # is not None:
                     self.do_change(tmp_img)
                     self.image.tmp_img = None
-            self.change_cursor(0)
+            self.change_cursor('default')
             self.task = 0
 
     def pencil(self):
         if self.task != 2:
             self.task = 2
-            self.change_cursor(1)
+            self.change_cursor('draw')
 
     def get_vars(self, mouse_coords, is_tmp=False):
         """Return required variables."""
@@ -97,7 +97,7 @@ class Editor(object):
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_rectangle(img, coords, False, 'black', 0)
+            draw_rectangle(img, coords, 'black', 0, False)
             self.tab.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
@@ -121,12 +121,7 @@ class Editor(object):
 
     def change_cursor(self, cursor):
         img = self.tab.img_widget.get_window()
-        if cursor == 0:
-            img.set_cursor(self.win.default_cursor)
-        elif cursor == 1:
-            img.set_cursor(self.win.draw_cursor)
-        elif cursor == 3:
-            img.set_cursor(self.win.move_cursor)
+        img.set_cursor(self.win.cursors[cursor])
 
     def set_tmp_img(self, img):
         self.tab.update_image(img)
@@ -140,7 +135,7 @@ class Editor(object):
         if self.selected_img:
             if self.task != 1:
                 self.task = 1
-                self.change_cursor(3)
+                self.change_cursor('move')
                 xy = (0, 0)
             else:
                 xy = get_middle_mouse(self.selected_img.size, mouse_coords)
