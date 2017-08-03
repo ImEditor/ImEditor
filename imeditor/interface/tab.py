@@ -11,7 +11,8 @@ from interface.tools import pil_to_pixbuf, SpinButton
 class Tab(Gtk.Box):
     def __init__(self, win, img, title, filename, saved):
         Gtk.Box.__init__(self)
-        self.editor = Editor(win, self, img, filename, saved)
+        self.win = win
+        self.editor = Editor(self.win, self, img, filename, saved)
 
         # Image
         pixbuf = pil_to_pixbuf(img)
@@ -108,8 +109,8 @@ class Tab(Gtk.Box):
         self.editor.pencil_size = button.get_value_as_int()
 
     def on_close_button_clicked(self, _):
-        page_num = win.notebook.page_num(self)
-        win.close_tab(page_num=page_num)
+        page_num = self.win.notebook.page_num(self)
+        self.win.close_tab(page_num=page_num)
 
 
 class TabLabel(Gtk.Box):
