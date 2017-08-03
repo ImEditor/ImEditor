@@ -46,7 +46,7 @@ class Tab(Gtk.Box):
         self.sidebar_frame = Gtk.Frame()
 
         # Pencil
-        self.pencil_grid = Gtk.Grid(row_spacing=20, column_spacing=20, border_width=15)
+        self.pencil_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, border_width=25, spacing=10)
         pencil_label = Gtk.Label('<b>Pencil</b>', use_markup=True)
         shape_pencil_label = Gtk.Label('Shape')
         pencil_shape_combo = Gtk.ComboBoxText()
@@ -64,15 +64,15 @@ class Tab(Gtk.Box):
         size_pencil_label = Gtk.Label('Size')
         pencil_size_spin = SpinButton(8, 1, 1000, 1, 2)
         pencil_size_spin.connect('value-changed', self.on_pencil_size_changed)
-        self.pencil_grid.attach(pencil_label, 0, 0, 2, 1)
-        self.pencil_grid.attach(shape_pencil_label, 0, 1, 1, 1)
-        self.pencil_grid.attach(pencil_shape_combo, 1, 1, 2, 1)
-        self.pencil_grid.attach(color_pencil_label, 0, 2, 1, 1)
-        self.pencil_grid.attach(pencil_color_button, 1, 2, 1, 1)
-        self.pencil_grid.attach(size_pencil_label, 0, 3, 1, 1)
-        self.pencil_grid.attach(pencil_size_spin, 1, 3, 1, 1)
+        self.pencil_box.add(pencil_label)
+        self.pencil_box.add(shape_pencil_label)
+        self.pencil_box.add(pencil_shape_combo)
+        self.pencil_box.add(color_pencil_label)
+        self.pencil_box.add(pencil_color_button)
+        self.pencil_box.add(size_pencil_label)
+        self.pencil_box.add(pencil_size_spin)
 
-        self.sidebar_frame.add(self.pencil_grid)
+        self.sidebar_frame.add(self.pencil_box)
 
         # Main Box
 
@@ -84,7 +84,7 @@ class Tab(Gtk.Box):
 
         self.show_all()
         self.sidebar_frame.hide()
-        self.pencil_grid.hide()
+        self.pencil_box.hide()
 
     def update_image(self, new_img):
         self.tab_label.set_icon(new_img)
@@ -95,7 +95,7 @@ class Tab(Gtk.Box):
         if enable:
             self.sidebar_frame.show()
             if self.editor.task == 0:
-                self.pencil_grid.show()
+                self.pencil_box.show()
         else:
             self.sidebar_frame.hide()
 
