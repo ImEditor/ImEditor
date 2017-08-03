@@ -15,8 +15,7 @@ class Tab(Gtk.Box):
         self.editor = Editor(self.win, self, img, filename, saved)
 
         # Image
-        pixbuf = pil_to_pixbuf(img)
-        self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
+        self.img_widget = Gtk.Image.new_from_pixbuf(pil_to_pixbuf(img))
 
         event_box = Gtk.EventBox()
         event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
