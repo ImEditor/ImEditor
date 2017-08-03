@@ -104,7 +104,7 @@ class Editor(object):
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
             coords = (top_left, bottom_right)
-            draw_rectangle(img, coords, False, 'black', 0)
+            draw_rectangle(img, coords, 'black', 0, False)
             self.tab.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords=mouse_coords)
@@ -112,9 +112,9 @@ class Editor(object):
             coords = (mouse_coords[0], mouse_coords[1])
             coords = (coords, coords)
             if self.pencil_shape == 'ellipse':
-                draw_ellipse(img, coords, True, self.pencil_color, self.pencil_size)
+                draw_ellipse(img, coords, self.pencil_color, self.pencil_size)
             elif self.pencil_shape == 'rectangle':
-                draw_rectangle(img, coords, True, self.pencil_color, self.pencil_size)
+                draw_rectangle(img, coords, self.pencil_color, self.pencil_size)
             self.set_tmp_img(img)
 
     def release_task(self, widget, event):
