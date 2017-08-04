@@ -34,6 +34,9 @@ class Dialog(Gtk.Dialog):
         self.run()
         self.destroy()
 
+    def close(self, button=None):
+        self.destroy()
+
 
 def params_dialog(parent, title, limits):
     def on_apply_clicked(button, h_scale, dialog):
@@ -48,16 +51,19 @@ def params_dialog(parent, title, limits):
     h_scale.set_hexpand(True)
     h_scale.set_valign(Gtk.Align.START)
 
+    cancel_button = Gtk.Button.new_with_label('Cancel')
+    cancel_button.connect('clicked', dialog.close)
+
     ok_button = Gtk.Button.new_with_label('Apply')
     ok_button.connect('clicked', on_apply_clicked, h_scale, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
-    dialog.dialog_box.pack_start(h_scale, False, False, 0)
-
     button_box = Gtk.Box(spacing=6)
+    button_box.pack_start(cancel_button, True, True, 0)
     button_box.pack_start(ok_button, True, True, 0)
 
-    dialog.dialog_box.pack_start(button_box, False, False, 0)
+    dialog.dialog_box.add(h_scale)
+    dialog.dialog_box.add(button_box)
     dialog.launch()
     return dialog
 
@@ -66,20 +72,26 @@ def details_dialog(parent, infos):
     dialog = Dialog(parent, 'Image details')
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
-    grid.attach(Gtk.Label('<b>Mode</b>', use_markup=True), 0, 0, 1, 1)
-    grid.attach(Gtk.Label(infos['mode']), 1, 0, 1, 1)
-    grid.attach(Gtk.Label('<b>Size</b>', use_markup=True), 0, 1, 1, 1)
-    grid.attach(Gtk.Label(infos['size']), 1, 1, 1, 1)
+    grid.attach(Gtk.Label('<b>Mode</b>', use_markup=True, xalign=0.0), 0, 0, 1, 1)
+    grid.attach(Gtk.Label(infos['mode'], xalign=0.0), 1, 0, 1, 1)
+    grid.attach(Gtk.Label('<b>Size</b>', use_markup=True, xalign=0.0), 0, 1, 1, 1)
+    grid.attach(Gtk.Label(infos['size'], xalign=0.0), 1, 1, 1, 1)
 
     if len(infos) > 2:
-        grid.attach(Gtk.Label('<b>Weight</b>', use_markup=True), 0, 2, 1, 1)
-        grid.attach(Gtk.Label(infos['weight']), 1, 2, 1, 1)
-        grid.attach(Gtk.Label('<b>Path</b>', use_markup=True), 0, 3, 1, 1)
-        grid.attach(Gtk.Label(infos['path']), 1, 3, 1, 1)
-        grid.attach(Gtk.Label('<b>Last access</b>', use_markup=True), 0, 4, 1, 1)
-        grid.attach(Gtk.Label(infos['last_access']), 1, 4, 1, 1)
-        grid.attach(Gtk.Label('<b>Last change</b>', use_markup=True), 0, 5, 1, 1)
-        grid.attach(Gtk.Label(infos['last_change']), 1, 5, 1, 1)
+        grid.attach(Gtk.Label('<b>Weight</b>', use_markup=True, xalign=0.0), 0, 2, 1, 1)
+        grid.attach(Gtk.Label(infos['weight'], xalign=0.0), 1, 2, 1, 1)
+        grid.attach(Gtk.Label('<b>Path</b>', use_markup=True, xalign=0.0), 0, 3, 1, 1)
+        grid.attach(Gtk.Label(infos['path'], xalign=0.0), 1, 3, 1, 1)
+        grid.attach(Gtk.Label('<b>Last access</b>', use_markup=True, xalign=0.0), 0, 4, 1, 1)
+        grid.attach(Gtk.Label(infos['last_access'], xalign=0.0), 1, 4, 1, 1)
+        grid.attach(Gtk.Label('<b>Last change</b>', use_markup=True, xalign=0.0), 0, 5, 1, 1)
+        grid.attach(Gtk.Label(infos['last_change'], xalign=0.0), 1, 5, 1, 1)
+
+    close_button = Gtk.Button.new_with_label('Close')
+    close_button.connect('clicked', dialog.close)
+    close_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
+
+    grid.attach(close_button, 0, 6, 2, 1)
 
     dialog.dialog_box.add(grid)
     dialog.launch()
@@ -140,6 +152,9 @@ def new_image_dialog(parent):
     transparent_check = Gtk.CheckButton()
     transparent_check.connect('toggled', on_transparent_toggled)
 
+    cancel_button = Gtk.Button.new_with_label('Cancel')
+    cancel_button.connect('clicked', dialog.close)
+
     ok_button = Gtk.Button.new_with_label('Create')
     ok_button.connect('clicked', on_create_clicked, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
@@ -159,7 +174,8 @@ def new_image_dialog(parent):
     grid.attach(transparent_check, 2, 4, 2, 1)
     grid.attach(Gtk.Label('Format', xalign=0.0), 0, 5, 2, 1)
     grid.attach(extension_combo, 2, 5, 2, 1)
-    grid.attach(ok_button, 0, 6, 4, 1)
+    grid.attach(cancel_button, 0, 6, 2, 1)
+    grid.attach(ok_button, 2, 6, 2, 1)
 
     dialog.dialog_box.add(grid)
     dialog.set_focus(ok_button)
