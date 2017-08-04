@@ -158,6 +158,7 @@ def new_image_dialog(parent):
     grid.attach(ok_button, 0, 6, 4, 1)
 
     dialog.dialog_box.add(grid)
+    dialog.set_focus(ok_button)
     dialog.launch()
     return dialog
 
