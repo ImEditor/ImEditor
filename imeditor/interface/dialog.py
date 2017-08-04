@@ -36,7 +36,7 @@ class Dialog(Gtk.Dialog):
 
 
 def params_dialog(parent, title, limits):
-    def callback_apply_filter(button, h_scale, dialog):
+    def on_apply_clicked(button, h_scale, dialog):
         dialog.values.append(int(h_scale.get_value()))
         dialog.destroy()
 
@@ -49,7 +49,7 @@ def params_dialog(parent, title, limits):
     h_scale.set_valign(Gtk.Align.START)
 
     ok_button = Gtk.Button.new_with_label('Apply')
-    ok_button.connect('clicked', callback_apply_filter, h_scale, dialog)
+    ok_button.connect('clicked', on_apply_clicked, h_scale, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     dialog.dialog_box.pack_start(h_scale, False, False, 0)
