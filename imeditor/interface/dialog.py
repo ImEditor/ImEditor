@@ -98,6 +98,9 @@ def new_image_dialog(parent):
         spin_width.set_value(templates[template][0])
         spin_height.set_value(templates[template][1])
 
+    def on_transparent_toggled(button):
+        color_button.set_sensitive(not color_button.get_sensitive())
+
     def callback_new_image(button, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
         name = name_entry.get_text()
         width = spin_width.get_value_as_int()
@@ -135,6 +138,7 @@ def new_image_dialog(parent):
     extension_combo.set_active(0)
 
     transparent_check = Gtk.CheckButton()
+    transparent_check.connect('toggled', on_transparent_toggled)
 
     ok_button = Gtk.Button.new_with_label('Create')
     ok_button.connect('clicked', callback_new_image, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
