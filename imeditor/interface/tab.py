@@ -143,6 +143,5 @@ class TabLabel(Gtk.Box):
         self.label.set_text(title)
 
     def set_icon(self, img):
-        icon = img.copy()
-        icon.thumbnail((24, 24))
-        self.icon.set_from_pixbuf(pil_to_pixbuf(icon))
+        icon = pil_to_pixbuf(img.resize((24, 24)))
+        self.icon.set_from_pixbuf(icon)
