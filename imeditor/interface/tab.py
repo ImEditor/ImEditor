@@ -2,7 +2,7 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject, Gdk
+from gi.repository import Gtk, Gdk
 
 from editor.editor import Editor
 from interface.tools import pil_to_pixbuf, SpinButton
