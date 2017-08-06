@@ -113,7 +113,7 @@ def new_image_dialog(parent):
     def on_transparent_toggled(button):
         color_button.set_sensitive(not color_button.get_sensitive())
 
-    def on_create_clicked(button, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog):
+    def on_create_clicked(button):
         name = name_entry.get_text()
         width = spin_width.get_value_as_int()
         height = spin_height.get_value_as_int()
@@ -156,7 +156,7 @@ def new_image_dialog(parent):
     cancel_button.connect('clicked', dialog.close)
 
     ok_button = Gtk.Button.new_with_label('Create')
-    ok_button.connect('clicked', on_create_clicked, name_entry, spin_width, spin_height, color_button, extension_combo, transparent_check, dialog)
+    ok_button.connect('clicked', on_create_clicked)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12)
