@@ -361,7 +361,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def pencil(self, a, b):
         tab = self.get_tab()
-        tab.enable_sidebar(True)
+        tab.enable_sidebar()
         tab.editor.pencil()
 
     def apply_filter(self, a, b, func, params=None):
