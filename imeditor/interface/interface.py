@@ -302,10 +302,9 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab(page_num)
         if not tab.editor.image.saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
-                Gtk.ButtonsType.YES_NO,
-                'Save ' + path.basename(tab.editor.image.filename) + ' before closing?')
+                Gtk.ButtonsType.YES_NO, 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename)))
             dialog.format_secondary_text(
-                'Your work will be lost if you don\'t make a back up.')
+                'If you don\'t save it, the changes made will be permanently lost.')
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
