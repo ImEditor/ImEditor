@@ -383,10 +383,10 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(), Gtk.get_micro_version(), Gtk.get_minor_version())
         dialog.set_comments('Simple & versatile image editor.\n\nGtk: {}\nPillow: {}'.format(gtk_version, pil_version))
-        license = 'Distributed under the GNU GPL(v3) license.\n'
-        license += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
-        license += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
-        license += 'http://www.flaticon.com/authors/madebyoliver'
-        dialog.set_license(license)
+        free = 'Distributed under the GNU GPL(v3) license.\n'
+        free += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
+        free += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
+        free += 'http://www.flaticon.com/authors/madebyoliver'
+        dialog.set_license(free)
         dialog.run()
         dialog.destroy()
