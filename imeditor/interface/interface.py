@@ -202,7 +202,7 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.darken_action)
 
         hb.pack_start(box)
-        self.switch_toolbar(False)
+        self.enable_toolbar(False)
 
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
@@ -244,11 +244,11 @@ class Interface(Gtk.ApplicationWindow):
         self.show_all()
         self.notebook.hide()
 
-    def switch_toolbar(self, state):
+    def enable_toolbar(self, enable=True):
         # Enable / disable actions (depending on whether an image is open)
         actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'lighten', 'darken']
         for action in actions:
-            getattr(self, action + '_action').set_enabled(state)
+            getattr(self, action + '_action').set_enabled(enable)
 
     def get_tab(self, page_num=None):
         if not page_num:
@@ -264,7 +264,7 @@ class Interface(Gtk.ApplicationWindow):
             self.homepage.hide()
             self.notebook.show()
         self.notebook.set_current_page(page_num)
-        self.switch_toolbar(True)
+        self.enable_toolbar()
 
     def new_image(self, a, b):
         new_image_dialog = dialog.new_image_dialog(self)
@@ -320,7 +320,7 @@ class Interface(Gtk.ApplicationWindow):
             self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
-            self.switch_toolbar(False)
+            self.enable_toolbar(False)
 
     def on_tab_switched(self, notebook, page, page_num):
         title = '[{}] - ImEditor'.format(path.basename(page.editor.image.filename))
