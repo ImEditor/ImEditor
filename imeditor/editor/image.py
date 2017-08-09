@@ -14,9 +14,10 @@ class ImageObject(object):
         self.current_img = img.copy()
 
     def __str__(self):
-        result = 'ImageObject, '
+        result = 'ImageObject, ' + '\n'
         result += str(self.redo_stack) + '\n'
         result += str(self.undo_stack) + '\n'
+        result += str(type(self.current_img))
         return result
 
     def get_tmp_img(self):
@@ -27,35 +28,39 @@ class ImageObject(object):
 
     def new_filter(self, func, value=None):
         print('filter')
+        print(func, value)
         layer = Filter(func, value)
-        layer.execute(self.current_img)
+        self.current_img = layer.execute(self.current_img)
         self.undo_stack.append(layer)
         self.redo_stack.clear()
         print(layer)
+        print(self.undo_stack, self.redo_stack)
+
+    def new_draw(self, args):
+        print('new_draw')
+        print(args)
+        layer = Draw(args)
+        layer.execute(self.current_img)  # ?
+        self.undo_stack.append(layer)
+        self.redo_stack.clear()
+        print(layer)
+        print(self.undo_stack, self.redo_stack)
 
     def undo(self):
         if len(self.undo_stack) > 0:
             layer_undo = self.undo_stack.pop()
+            print(layer_undo)
             self.redo_stack.append(layer_undo)
-            layer_undo.reverse(self.current_img)
+            self.current_img = layer_undo.reverse(self.current_img)
 
     def redo(self):
         if len(self.redo_stack) > 0:
             layer_redo = self.redo_stack.pop()
+            print(layer_redo)
             self.undo_stack.append(layer_redo)
-            layer_redo.execute(self.current_img)
+            self.current_img = layer_redo.execute(self.current_img)
 
-class Task(object):
-    def __init__(self):
-        super(Task, self).__init__()
-
-    def execute(self, img):
-        pass
-
-    def reverse(self, img):
-        pass
-
-class Layer(object):
+class Draw(object):
     def __init__(self, shape=None, location=list(), size=8, color='#000000'):
         super(Layer, self).__init__()
         # shape : ellipse or rectangle
@@ -65,6 +70,11 @@ class Layer(object):
         # size : Editor.pencil_size
         self.size = size
         self.color = color
+
+    def __str__(self):
+        result = "Draw object \n"
+        result += self.shape + str(self.size) + str(self.color)
+        return result
 
     def add_coords(self, coords):
         self.location.append(coords)
@@ -79,21 +89,36 @@ class Layer(object):
                 draw_rectangle(img, coords, True, self.color, self.size)
         return img
 
+    def reverse(self):
+        pass
+
 class Filter(object):
     def __init__(self, func, value):
         super(Filter, self).__init__()
         self.func = func
         self.value = value
 
+    def __str__(self):
+        result = "Filter object \n"
+        result += str(self.func) + "\n"
+        result += str(self.value)
+        return result
+
     def execute(self, img):
         """Apply the filter to the given im, return it."""
-        if self.value:
-            self.func(img, self.value)
+        if self.value is not None:  # value can be 0
+            img = self.run(img, self.value)
         else:
-            self.func(img)
+            img = self.run(img)
+        return img
 
     def reverse(self, img):
-        if self.value:
-            self.func(img, self.value, True)
+        # negative and rotate:
+        if self.value is not None:  # value can be 0
+            img = self.run(img, self.value, True)
         else:
-            self.func(img, True)
+            img = self.run(img, True)
+        return img
+
+    def run(self, *args):
+        pass
