@@ -14,61 +14,83 @@ def negative(img, reverse=False):
         data[pos] = (red, green, blue)
     img.putdata(data)
     data = None
+    return img
 
-def red(img, reverse=False):
+def red(img):
     data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
-        data_m.append((pixel[0], 0, 0))
-    img.putdata(data_m)
+    for pos, pixel in enumerate(data):
+        data[pos] = (pixel[0], 0, 0)
+    img.putdata(data)
+    data = None
+    return img
 
 def green(img):
     data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
-        data_m.append((0, pixel[1], 0))
-    img.putdata(data_m)
+    for pos, pixel in enumerate(data):
+        data[pos] = (0, pixel[1], 0)
+    img.putdata(data)
+    data = None
+    return img
 
 def blue(img):
     data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
-        data_m.append((0, 0, pixel[2]))
-    img.putdata(data_m)
+    for pos, pixel in enumerate(data):
+        data[pos] = (0, 0, pixel[2])
+    img.putdata(data)
+    data = None
+    return img
 
 def grayscale(img):
     data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
+    for pos, pixel in enumerate(data):
         gray = (pixel[0] + pixel[1] + pixel[2]) // 3
-        data_m.append((gray, gray, gray))
-    img.putdata(data_m)
+        data[pos] = (gray, gray, gray)
+    img.putdata(data)
+    data = None
+    return img
 
 def black_white(img, limit):
     data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
+    for pos, pixel in enumerate(data):
         gray = (pixel[0] + pixel[1] + pixel[2]) // 3
         gray = 0 if gray < limit else 255
-        data_m.append((gray, gray, gray))
-    img.putdata(data_m)
+        data[pos] = (gray, gray, gray)
+    img.putdata(data)
+    data = None
+    return img
 
-def lighten(img, value):
+def brightness(img, value, reverse=False):
+    print('brightness')
+    print(value)
     data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
-        data_m.append((pixel[0]+value, pixel[1]+value, pixel[2]+value))
-    img.putdata(data_m)
+    if reverse:
+        value = -value
+    # !  if a pixel value is 0, do not add a positive value is reversing
+    errors = dict()
+    for pos, pixel in enumerate(data):
+        red = pixel[0] + value
+        green = pixel[1] + value
+        blue = pixel[2] + value
 
-def darken(img, value):
-    data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
-        data_m.append((pixel[0]-value, pixel[1]-value, pixel[2]-value))
-    img.putdata(data_m)
+        if red > 255 or green > 255 or blue > 255 or red < 0 or green < 0 or blue < 0:
+            errors[pos] = (red, green, blue)
 
-def rotate_left(img):
-    img.rotate(90, expand=True)
+        if reverse and errors[pos]:
+            red = errors[pos][0]
+            green = errors[pos][1]
+            blue = errors[pos][2]
+            data[pos] = (red + value, green + value, blue + value)
+        else:
+            data[pos] = (red, green, blue)
 
-def rotate_right(img):
-    img.rotate(-90, expand=True)
+    img.putdata(data)
+    data = None
+    img.save('tests 2em yo.png')
+    return img, erros
+
+def rotate(img, angle, reverse=False):
+    if not reverse:
+        img = img.rotate(angle, expand=True)
+    else:
+        img = img.rotate(-angle, expand=True)
+    return img
