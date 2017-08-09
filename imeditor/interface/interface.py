@@ -42,8 +42,7 @@ class Interface(Gtk.ApplicationWindow):
         sub_menu.append('Green', 'win.green')
         sub_menu.append('Blue', 'win.blue')
         sub_menu.append('Grayscale', 'win.grayscale')
-        sub_menu.append('Ligthen', 'win.lighten')
-        sub_menu.append('Darken', 'win.darken')
+        sub_menu.append('Brightness', 'win.brightness')
         menu_model.append_submenu('Filters', sub_menu)
         menu_model.append('Image details', 'win.details')
         menu_model.append('About', 'win.about')
@@ -127,7 +126,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Rotate left
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
-        self.rotate_left_action.connect('activate', self.apply_filter, base.rotate_left)
+        self.rotate_left_action.connect('activate', self.apply_filter, base.rotate, -90)
         self.add_action(self.rotate_left_action)
         self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left', Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_left_button.set_action_name('win.rotate-left')
@@ -135,7 +134,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Rotate right
         self.rotate_right_action = Gio.SimpleAction.new('rotate-right', None)
-        self.rotate_right_action.connect('activate', self.apply_filter, base.rotate_right)
+        self.rotate_right_action.connect('activate', self.apply_filter, base.rotate, 90)
         self.add_action(self.rotate_right_action)
         self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right', Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_right_button.set_action_name('win.rotate-right')
@@ -194,13 +193,9 @@ class Interface(Gtk.ApplicationWindow):
         self.grayscale_action.connect('activate', self.apply_filter, base.grayscale)
         self.add_action(self.grayscale_action)
 
-        self.lighten_action = Gio.SimpleAction.new('lighten', None)
-        self.lighten_action.connect('activate', self.apply_filter, base.lighten, ('Lighten', [0, 255]))
-        self.add_action(self.lighten_action)
-
-        self.darken_action = Gio.SimpleAction.new('darken', None)
-        self.darken_action.connect('activate', self.apply_filter, base.darken, ('Darken', [0, 255]))
-        self.add_action(self.darken_action)
+        self.brightness_action = Gio.SimpleAction.new('brightness', None)
+        self.brightness_action.connect('activate', self.apply_filter, base.brightness, ('Brightness', [-255, 255]))
+        self.add_action(self.brightness_action)
 
         hb.pack_start(box)
         self.switch_toolbar(False)
@@ -247,7 +242,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def switch_toolbar(self, state):
         # Enable / disable actions (depending on whether an image is open)
-        actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'lighten', 'darken']
+        actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness']
         for action in actions:
             getattr(self, action + '_action').set_enabled(state)
 
