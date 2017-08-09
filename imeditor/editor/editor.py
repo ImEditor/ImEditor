@@ -4,7 +4,7 @@ from PIL import Image
 from os import path
 
 from interface import dialog
-from editor.image import ImageObject, Layer, Filter
+from editor.image import ImageObject, Draw, Filter
 from editor.tools import get_middle_mouse, get_infos
 from editor.draw import draw_rectangle, draw_ellipse
 
@@ -32,10 +32,15 @@ class Editor(object):
 
     def apply_filter(self, func, params=None):
         if params:
-            params_dialog = dialog.params_dialog(self.win, *params)
-            value = params_dialog.get_values()
-            if value:
-                self.image.new_filter(func, value)
+            if isinstance(params, tuple):
+                params_dialog = dialog.params_dialog(self.win, *params)
+                value = params_dialog.get_values()
+                if value is not None:  # value can be 0
+                    self.image.new_filter(func, value)
+                    self.do_change(self.image.current_img)
+            else:
+                print('yo')
+                self.image.new_filter(func, params)
                 self.do_change(self.image.current_img)
         else:
             self.image.new_filter(func)
