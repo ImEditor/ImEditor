@@ -2,7 +2,7 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject, Gdk
+from gi.repository import Gtk, Gdk
 
 from editor.editor import Editor
 from interface.tools import pil_to_pixbuf, SpinButton
@@ -11,7 +11,9 @@ from interface.tools import pil_to_pixbuf, SpinButton
 class Tab(Gtk.Box):
     def __init__(self, win, img, title, filename, saved):
         Gtk.Box.__init__(self)
-        self.editor = Editor(win, self, img, filename, saved)
+        self.win = win
+
+        self.editor = Editor(self.win, self, img, filename, saved)
 
         # Image
         self.img_widget = Gtk.Image.new_from_pixbuf(pil_to_pixbuf(img))
@@ -73,21 +75,21 @@ class Tab(Gtk.Box):
         self.sidebar_frame.add(self.pencil_box)
 
         # Main Box
-
         self.add(scrolled_window)
         self.add(self.sidebar_frame)
 
-        self.tab_label = TabLabel(win, self, title, img)
+        self.tab_label = TabLabel(title, img)
+        self.tab_label.button.connect('clicked', self.on_close_button_clicked)
 
         self.show_all()
         self.sidebar_frame.hide()
         self.pencil_box.hide()
 
-    def update_image(self, new_img):
-        self.tab_label.set_icon(new_img)
-        self.img_widget.set_from_pixbuf(pil_to_pixbuf(new_img))
+    def update_image(self, img):
+        self.tab_label.set_icon(img)
+        self.img_widget.set_from_pixbuf(pil_to_pixbuf(img))
 
-    def enable_sidebar(self, enable):
+    def enable_sidebar(self, enable=True):
         if enable:
             self.sidebar_frame.show()
             if self.editor.task == 0:
@@ -104,18 +106,19 @@ class Tab(Gtk.Box):
     def on_pencil_size_changed(self, button):
         self.editor.pencil_size = button.get_value_as_int()
 
+    def on_close_button_clicked(self, button):
+        page_num = self.win.notebook.page_num(self)
+        self.win.close_tab(page_num)
+
 
 class TabLabel(Gtk.Box):
     """Define the label on the tab."""
-    def __init__(self, win, tab, title, img):
+    def __init__(self, title, img):
         Gtk.Box.__init__(self)
         self.set_spacing(5)
 
-        self.win = win
-        self.tab = tab
-
         # Preview of image
-        self.icon_widget = Gtk.Image()
+        self.icon = Gtk.Image()
         self.set_icon(img)
 
         # Title
@@ -123,14 +126,13 @@ class TabLabel(Gtk.Box):
         self.set_title(title)
 
         # Close button
-        button = Gtk.Button()
-        button.set_relief(Gtk.ReliefStyle.NONE)
-        button.add(Gtk.Image.new_from_icon_name('window-close', Gtk.IconSize.MENU))
-        button.connect('clicked', self.on_close_button_clicked)
+        self.button = Gtk.Button()
+        self.button.set_relief(Gtk.ReliefStyle.NONE)
+        self.button.add(Gtk.Image.new_from_icon_name('window-close', Gtk.IconSize.MENU))
 
-        self.add(self.icon_widget)
+        self.add(self.icon)
         self.add(self.label)
-        self.add(button)
+        self.add(self.button)
 
         self.show_all()
 
@@ -141,10 +143,5 @@ class TabLabel(Gtk.Box):
         self.label.set_text(title)
 
     def set_icon(self, img):
-        icon = img.copy()
-        icon.thumbnail((24, 24))
-        self.icon_widget.set_from_pixbuf(pil_to_pixbuf(icon))
-
-    def on_close_button_clicked(self, _):
-        page_num = self.win.notebook.page_num(self.tab)
-        self.win.close_tab(page_num)
+        icon = pil_to_pixbuf(img.resize((24, 24)))
+        self.icon.set_from_pixbuf(icon)

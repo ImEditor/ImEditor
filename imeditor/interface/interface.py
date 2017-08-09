@@ -198,7 +198,7 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.brightness_action)
 
         hb.pack_start(box)
-        self.switch_toolbar(False)
+        self.enable_toolbar(False)
 
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
@@ -240,11 +240,11 @@ class Interface(Gtk.ApplicationWindow):
         self.show_all()
         self.notebook.hide()
 
-    def switch_toolbar(self, state):
+    def enable_toolbar(self, enable=True):
         # Enable / disable actions (depending on whether an image is open)
         actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness']
         for action in actions:
-            getattr(self, action + '_action').set_enabled(state)
+            getattr(self, action + '_action').set_enabled(enable)
 
     def get_tab(self, page_num=None):
         if not page_num:
@@ -260,7 +260,7 @@ class Interface(Gtk.ApplicationWindow):
             self.homepage.hide()
             self.notebook.show()
         self.notebook.set_current_page(page_num)
-        self.switch_toolbar(True)
+        self.enable_toolbar()
 
     def new_image(self, a, b):
         new_image_dialog = dialog.new_image_dialog(self)
@@ -298,10 +298,9 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab(page_num)
         if not tab.editor.image.saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
-                Gtk.ButtonsType.YES_NO,
-                'Save ' + path.basename(tab.editor.image.filename) + ' before closing?')
+                Gtk.ButtonsType.YES_NO, 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename)))
             dialog.format_secondary_text(
-                'Your work will be lost if you don\'t make a back up.')
+                'If you don\'t save it, the changes made will be permanently lost.')
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
@@ -316,10 +315,11 @@ class Interface(Gtk.ApplicationWindow):
             self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
-            self.switch_toolbar(False)
+            self.enable_toolbar(False)
 
     def on_tab_switched(self, notebook, page, page_num):
-        self.set_title('[{}] - ImEditor'.format(path.basename(page.editor.image.filename)))
+        title = '[{}] - ImEditor'.format(path.basename(page.editor.image.filename))
+        self.set_title(title)
 
     def save(self, a, b):
         tab = self.get_tab()
@@ -356,7 +356,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def pencil(self, a, b):
         tab = self.get_tab()
-        tab.enable_sidebar(True)
+        tab.enable_sidebar()
         tab.editor.pencil()
 
     def apply_filter(self, a, b, func, params=None):
@@ -376,7 +376,12 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_version('0.1-dev')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
-        dialog.set_comments('Simple & versatile image editor.\n\nGtk: {}.{}.{}\nPillow: {}'.format(Gtk.get_major_version(), Gtk.get_micro_version(), Gtk.get_minor_version(), pil_version))
-        dialog.set_license('Distributed under the GNU GPL(v3) license. \nhttps://github.com/ImEditor/ImEditor/blob/master/LICENSE\nIcons made by Madebyoliver under CC 3.0 BY.\nhttp://www.flaticon.com/authors/madebyoliver')
+        gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(), Gtk.get_micro_version(), Gtk.get_minor_version())
+        dialog.set_comments('Simple & versatile image editor.\n\nGtk: {}\nPillow: {}'.format(gtk_version, pil_version))
+        free = 'Distributed under the GNU GPL(v3) license.\n'
+        free += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
+        free += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
+        free += 'http://www.flaticon.com/authors/madebyoliver'
+        dialog.set_license(free)
         dialog.run()
         dialog.destroy()
