@@ -306,13 +306,14 @@ class Interface(Gtk.ApplicationWindow):
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
-                self.notebook.remove_page(page_num)
                 tab.editor.close_image()
+                self.notebook.remove_page(page_num)
             elif response == Gtk.ResponseType.NO:
-                self.notebook.remove_page(page_num)
                 tab.editor.close_image()
+                self.notebook.remove_page(page_num)
             dialog.destroy()
         else:
+            tab.editor.close_image()
             self.notebook.remove_page(page_num)
 
         if self.notebook.get_n_pages() == 0:
