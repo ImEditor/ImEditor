@@ -54,7 +54,7 @@ class Interface(Gtk.ApplicationWindow):
         self.pencil_action = Gio.SimpleAction.new('pencil', None)
         self.pencil_action.connect('activate', self.pencil)
         self.add_action(self.pencil_action)
-        self.pencil_button = Gtk.Button()
+        self.pencil_button = Gtk.ToggleButton()
         self.pencil_button.set_image(Gtk.Image.new_from_file('assets/pencil.png'))
         self.pencil_button.set_action_name('win.pencil')
         hb.pack_end(self.pencil_button)
@@ -63,7 +63,8 @@ class Interface(Gtk.ApplicationWindow):
         self.select_action = Gio.SimpleAction.new('select', None)
         self.select_action.connect('activate', self.select)
         self.add_action(self.select_action)
-        self.select_button = Gtk.Button()
+        self.select_button = Gtk.ToggleButton()
+        self.select_button.set_active(True)
         self.select_button.set_image(Gtk.Image.new_from_file('assets/select.png'))
         self.select_button.set_action_name('win.select')
         hb.pack_end(self.select_button)
@@ -338,11 +339,6 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.details()
 
-    def select(self, a, b):
-        tab = self.get_tab()
-        tab.enable_sidebar(False)
-        tab.editor.select()
-
     def history(self, a, b, num):
         tab = self.get_tab()
         tab.editor.history(num)
@@ -359,10 +355,23 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.cut()
 
+    def select(self, a, b):
+        if self.select_button.get_active():
+            self.pencil_button.set_active(False)
+            tab = self.get_tab()
+            tab.enable_sidebar(False)
+            tab.editor.select()
+        elif not self.pencil_button.get_active():
+            self.select_button.set_active(True)
+
     def pencil(self, a, b):
-        tab = self.get_tab()
-        tab.enable_sidebar()
-        tab.editor.pencil()
+        if self.pencil_button.get_active():
+            self.select_button.set_active(False)
+            tab = self.get_tab()
+            tab.enable_sidebar()
+            tab.editor.pencil()
+        else:
+            self.select_button.set_active(True)
 
     def apply_filter(self, a, b, func, params=None):
         tab = self.get_tab()
