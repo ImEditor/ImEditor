@@ -309,13 +309,16 @@ class Interface(Gtk.ApplicationWindow):
                 tab.editor.save_as()
                 tab.editor.close_image()
                 self.notebook.remove_page(page_num)
+                self.select_button.set_active(True)
             elif response == Gtk.ResponseType.NO:
                 tab.editor.close_image()
                 self.notebook.remove_page(page_num)
+                self.select_button.set_active(True)
             dialog.destroy()
         else:
             tab.editor.close_image()
             self.notebook.remove_page(page_num)
+            self.select_button.set_active(True)
 
         if self.notebook.get_n_pages() == 0:
             self.set_title('ImEditor')
@@ -358,9 +361,10 @@ class Interface(Gtk.ApplicationWindow):
     def select(self, a, b):
         if self.select_button.get_active():
             self.pencil_button.set_active(False)
-            tab = self.get_tab()
-            tab.enable_sidebar(False)
-            tab.editor.select()
+            if self.notebook.get_n_pages() != 0:
+                tab = self.get_tab()
+                tab.enable_sidebar(False)
+                tab.editor.select()
         elif not self.pencil_button.get_active():
             self.select_button.set_active(True)
 
