@@ -30,7 +30,6 @@ class Editor(object):
 
     def close_image(self):
         self.image.close_all_img()
-        self.image = None
         self.select()
         self.task = 0
 
