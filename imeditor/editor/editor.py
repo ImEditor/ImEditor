@@ -30,8 +30,6 @@ class Editor(object):
 
     def close_image(self):
         self.image.close_all_img()
-        self.select()
-        self.task = 0
 
     def do_change(self, img):
         self.tab.update_image(img)
