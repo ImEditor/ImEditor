@@ -17,7 +17,7 @@ class Interface(Gtk.ApplicationWindow):
         self.app = app
         self.set_default_size(950, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
-        self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/icon.png')
+        self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/imeditor.png')
         self.set_icon(self.logo)
 
         # Header Bar
