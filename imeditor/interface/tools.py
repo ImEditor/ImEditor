@@ -6,20 +6,12 @@ from gi.repository import Gtk, GdkPixbuf, GLib
 
 
 def pil_to_pixbuf(img):
-    data = GLib.Bytes.new(img.tobytes())
+    img = img.convert('RGBA')
+    data = img.tobytes()
     w, h = img.size
-
-    if img.mode != 'RGBA':
-        if img.mode != 'RGB':
-            img = img.convert('RGB')
-        alpha = False
-        rowstride = 3
-    else:
-        alpha = True
-        rowstride = 4
-
-    return GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
-                alpha, 8, w, h, w * rowstride)
+    data = GLib.Bytes.new(data)
+    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, True, 8, w, h, w * 4)
+    return pixbuf
 
 
 class SpinButton(Gtk.SpinButton):
