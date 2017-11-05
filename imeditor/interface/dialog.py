@@ -170,7 +170,7 @@ def new_image_dialog(parent):
     grid.attach(spin_height, 3, 2, 1, 1)
     grid.attach(Gtk.Label('Background color', xalign=0.0), 0, 3, 2, 1)
     grid.attach(color_button, 2, 3, 2, 1)
-    grid.attach(Gtk.Label('Transparent', xalign=0.0), 0, 4, 2, 1)
+    grid.attach(Gtk.Label('Transparent background', xalign=0.0), 0, 4, 2, 1)
     grid.attach(transparent_check, 2, 4, 2, 1)
     grid.attach(Gtk.Label('Format', xalign=0.0), 0, 5, 2, 1)
     grid.attach(extension_combo, 2, 5, 2, 1)
