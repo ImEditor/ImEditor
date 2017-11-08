@@ -287,7 +287,7 @@ class Interface(Gtk.ApplicationWindow):
         filename = dialog.file_dialog(self, 'open')
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
-                img = Image.open(filename)
+                img = Image.open(filename).convert('RGBA')
                 self.create_tab(img, filename)
             else:
                 error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,

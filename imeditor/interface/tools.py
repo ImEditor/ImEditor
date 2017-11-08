@@ -6,7 +6,6 @@ from gi.repository import Gtk, GdkPixbuf, GLib
 
 
 def pil_to_pixbuf(img):
-    img = img.convert('RGBA')
     data = img.tobytes()
     w, h = img.size
     data = GLib.Bytes.new(data)
