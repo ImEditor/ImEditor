@@ -251,22 +251,6 @@ class Interface(Gtk.ApplicationWindow):
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
 
-    def get_tab(self, page_num=None):
-        if not page_num:
-            page_num = self.notebook.get_current_page()
-        return self.notebook.get_nth_page(page_num)
-
-    def create_tab(self, img, filename, saved=True):
-        tab = Tab(self, img, path.basename(filename), filename, saved)
-        page_num = self.notebook.get_current_page() + 1
-        nb_tabs = self.notebook.get_n_pages()
-        self.notebook.insert_page(tab, tab.tab_label, page_num)
-        if nb_tabs == 0:
-            self.homepage.hide()
-            self.notebook.show()
-        self.notebook.set_current_page(page_num)
-        self.enable_toolbar()
-
     def new_image(self, a, b):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
@@ -294,6 +278,22 @@ class Interface(Gtk.ApplicationWindow):
                     'The format of this file is not supported.')
                 error_dialog.run()
                 error_dialog.destroy()
+
+    def get_tab(self, page_num=None):
+        if not page_num:
+            page_num = self.notebook.get_current_page()
+        return self.notebook.get_nth_page(page_num)
+
+    def create_tab(self, img, filename, saved=True):
+        tab = Tab(self, img, path.basename(filename), filename, saved)
+        page_num = self.notebook.get_current_page() + 1
+        nb_tabs = self.notebook.get_n_pages()
+        self.notebook.insert_page(tab, tab.tab_label, page_num)
+        if nb_tabs == 0:
+            self.homepage.hide()
+            self.notebook.show()
+        self.notebook.set_current_page(page_num)
+        self.enable_toolbar()
 
     def close_tab(self, page_num=None):
         tab = self.get_tab(page_num)
