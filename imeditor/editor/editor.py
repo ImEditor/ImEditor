@@ -172,5 +172,5 @@ class Editor(object):
             self.image.saved = True
 
     def details(self):
-        img_infos = get_infos(self.image)
+        img_infos = get_infos(self.image.get_current_img(), self.image.filename)
         dialog.details_dialog(self.win, img_infos)

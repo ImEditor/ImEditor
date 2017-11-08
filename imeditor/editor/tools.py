@@ -11,15 +11,17 @@ def get_middle_mouse(size, mouse_coords):
     return (round(x), round(y))
 
 
-def get_infos(image):
+def get_infos(img, filename):
     img_infos = {}
-    img = image.get_current_img()
-    img_infos['mode'] = img.mode
+    # Basic infos
+    if img.mode == 'RGBA':
+        img_infos['mode'] = 'RGB'
     img_infos['size'] = '{} x {} pixels'.format(str(img.width), str(img.height))
-    if path.isfile(image.filename):
-        img_stat = stat(image.filename)
+    # Infos available only if the image is save on the disk
+    if path.isfile(filename):
+        img_stat = stat(filename)
         img_infos['weight'] = '{}ko ({}o)'.format(str(round(img_stat.st_size / 1000, 2)), str(round(img_stat.st_size, 2)))
-        img_infos['path'] = image.filename
+        img_infos['path'] = filename
         img_infos['last_access'] = datetime.datetime.fromtimestamp(img_stat.st_atime).strftime('%d/%m/%Y %Hh%M')
         img_infos['last_change'] = datetime.datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
     return img_infos
