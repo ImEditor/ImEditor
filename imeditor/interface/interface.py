@@ -272,13 +272,11 @@ class Interface(Gtk.ApplicationWindow):
         values = new_image_dialog.get_values()
         if values:
             if values[4]:
-                mode = 'RGBA'
                 color = values[2][:-1] + ',0)'
                 color = color.replace('rgb', 'rgba')
             else:
-                mode = 'RGB'
                 color = values[2]
-            img = Image.new(mode, values[1], color)
+            img = Image.new('RGBA', values[1], color)
             name = values[0] if values[0] else 'untitled'
             filename = name + '.' + values[3].lower()
             self.create_tab(img, filename, False)
