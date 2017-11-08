@@ -3,13 +3,14 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
+from os import path
 
 from editor.editor import Editor
 from interface.tools import pil_to_pixbuf, SpinButton
 
 
 class Tab(Gtk.Box):
-    def __init__(self, win, img, title, filename, saved):
+    def __init__(self, win, img, filename, saved):
         Gtk.Box.__init__(self)
         self.win = win
 
@@ -78,7 +79,7 @@ class Tab(Gtk.Box):
         self.add(scrolled_window)
         self.add(self.sidebar_frame)
 
-        self.tab_label = TabLabel(title, img)
+        self.tab_label = TabLabel(path.basename(filename), img)
         self.tab_label.button.connect('clicked', self.on_close_button_clicked)
 
         self.show_all()

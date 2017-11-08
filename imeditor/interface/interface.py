@@ -285,7 +285,7 @@ class Interface(Gtk.ApplicationWindow):
         return self.notebook.get_nth_page(page_num)
 
     def create_tab(self, img, filename, saved=True):
-        tab = Tab(self, img, path.basename(filename), filename, saved)
+        tab = Tab(self, img, filename, saved)
         page_num = self.notebook.get_current_page() + 1
         nb_tabs = self.notebook.get_n_pages()
         self.notebook.insert_page(tab, tab.tab_label, page_num)
