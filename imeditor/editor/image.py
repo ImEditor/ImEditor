@@ -2,30 +2,25 @@
 
 
 class ImageObject(object):
-    def __init__(self, img, filename, index, saved):
+    def __init__(self, img, filename, saved):
         super(ImageObject, self).__init__()
         self.images = [img]
         self.filename = filename
-        self.index = index
         self.saved = saved
+        self.index = 0
         self.tmp_img = None
-
-    def __str__(self):
-        result = str(self.images) + '\n'
-        result += str(self.index)
-        return result
 
     def add_img(self, img):
         self.images.append(img)
+
+    def get_current_img(self):
+        return self.images[self.index]
 
     def get_tmp_img(self):
         if self.tmp_img:
             return self.tmp_img
         else:
             return self.get_current_img()
-
-    def get_current_img(self):
-        return self.images[self.index]
 
     def remove_first_img(self):
         self.images = self.images[1:]

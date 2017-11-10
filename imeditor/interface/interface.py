@@ -109,7 +109,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Undo
         self.undo_action = Gio.SimpleAction.new('undo', None)
-        self.undo_action.connect('activate', self.history, -1)
+        self.undo_action.connect('activate', self.undo)
         self.add_action(self.undo_action)
         app.add_accelerator('<Primary>z', 'win.undo', None)
         self.undo_button = Gtk.Button.new_from_icon_name('edit-undo', Gtk.IconSize.SMALL_TOOLBAR)
@@ -118,7 +118,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Redo
         self.redo_action = Gio.SimpleAction.new('redo', None)
-        self.redo_action.connect('activate', self.history, 1)
+        self.redo_action.connect('activate', self.redo)
         self.add_action(self.redo_action)
         app.add_accelerator('<Primary>y', 'win.redo', None)
         self.redo_action_button = Gtk.Button.new_from_icon_name('edit-redo', Gtk.IconSize.SMALL_TOOLBAR)
@@ -340,9 +340,13 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.details()
 
-    def history(self, a, b, num):
+    def undo(self, a, b):
         tab = self.get_tab()
-        tab.editor.history(num)
+        tab.editor.undo()
+
+    def redo(self, a, b):
+        tab = self.get_tab()
+        tab.editor.redo()
 
     def copy(self, a, b):
         tab = self.get_tab()

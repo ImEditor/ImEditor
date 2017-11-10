@@ -16,9 +16,12 @@ class Editor(object):
         self.win = win
         self.tab = tab
 
-        self.image = ImageObject(img, filename, 0, saved)
+        self.image = ImageObject(img, filename, saved)
+
+        # History
         self.MAX_HIST = 20
 
+        # Tasks
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
         self.selection = list()
         self.selected_img = None
@@ -41,6 +44,22 @@ class Editor(object):
             self.image.remove_first_img()
             self.image.decrement_index()
 
+    def undo(self):
+        if self.image.get_n_img() >= 2:
+            index_img = self.image.index
+            if index_img >= 1:
+                self.image.decrement_index()
+                img = self.image.get_current_img()
+                self.tab.update_image(img)
+
+    def redo(self):
+        if self.image.get_n_img() >= 2:
+            index_img = self.image.index
+            if index_img + 1 < self.image.get_n_img():
+                self.image.increment_index()
+                img = self.image.get_current_img()
+                self.tab.update_image(img)
+
     def apply_filter(self, func, params=None):
         if params:
             params_dialog = dialog.params_dialog(self.win, *params)
@@ -49,20 +68,6 @@ class Editor(object):
         else:
             new_img = getattr(base, func)(self.image.get_current_img())
         self.do_change(new_img)
-
-    def history(self, num):
-        if self.image.get_n_img() >= 2:
-            index_img = self.image.index
-            if num == -1: # Undo:
-                if index_img >= 1:
-                    self.image.decrement_index()
-                    img = self.image.get_current_img()
-                    self.tab.update_image(img)
-            else: # Redo:
-                if index_img + 1 < self.image.get_n_img():
-                    self.image.increment_index()
-                    img = self.image.get_current_img()
-                    self.tab.update_image(img)
 
     def select(self):
         if self.task != 0:
