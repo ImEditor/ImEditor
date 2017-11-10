@@ -26,13 +26,10 @@ class Editor(object):
         self.selection = list()
         self.selected_img = None
 
-        # Settings
+        # Pencil settings
         self.pencil_shape = 'ellipse'
         self.pencil_color = 'black'
         self.pencil_size = 8
-
-    def close_image(self):
-        self.image.close_all_img()
 
     def do_tmp_change(self, img):
         self.tab.update_image(img)
@@ -176,3 +173,6 @@ class Editor(object):
     def details(self):
         img_infos = get_infos(self.image.get_current_img(), self.image.filename)
         dialog.details_dialog(self.win, img_infos)
+
+    def close_image(self):
+        self.image.close_all_img()
