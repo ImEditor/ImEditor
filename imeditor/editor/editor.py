@@ -85,21 +85,20 @@ class Editor(object):
             self.task = 2
             self.change_cursor('draw')
 
-    def get_vars(self, mouse_coords):
+    def handle_event(self, widget, event, task):
         """Return required variables."""
         img = self.image.get_tmp_img().copy()
-        return list(map(round, mouse_coords)), img
+        mouse_coords = [round(event.x), round(event.y)]
+        getattr(self, task + "_task")(img, mouse_coords)
 
-    def press_task(self, widget, event):
-        mouse_coords, img = self.get_vars((event.x, event.y))
+    def press_task(self, img, mouse_coords):
         if self.task == 0:
             self.selection = mouse_coords
             self.tab.update_image(img)
         elif (self.task == 1 and self.selected_img) or self.task == 2:
-            self.move_task(event=event)
+            self.move_task(img, mouse_coords)
 
-    def move_task(self, widget=None, event=None):
-        mouse_coords, img = self.get_vars((event.x, event.y))
+    def move_task(self, img, mouse_coords):
         if self.task == 0:
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
@@ -117,8 +116,7 @@ class Editor(object):
                 draw_rectangle(img, coords, self.pencil_color, self.pencil_size)
             self.do_tmp_change(img)
 
-    def release_task(self, widget, event):
-        mouse_coords, img = self.get_vars((event.x, event.y))
+    def release_task(self, img, mouse_coords):
         if self.task == 0:
             self.selection.extend(mouse_coords)
         elif self.task == 2:
