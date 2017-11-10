@@ -34,6 +34,10 @@ class Editor(object):
     def close_image(self):
         self.image.close_all_img()
 
+    def do_tmp_change(self, img):
+        self.tab.update_image(img)
+        self.image.tmp_img = img
+
     def do_change(self, img):
         self.tab.update_image(img)
         self.image.forget_img()
@@ -84,12 +88,9 @@ class Editor(object):
             self.task = 2
             self.change_cursor('draw')
 
-    def get_vars(self, mouse_coords, is_tmp=False):
+    def get_vars(self, mouse_coords):
         """Return required variables."""
-        if is_tmp:
-            img = self.image.get_tmp_img().copy()
-        else:
-            img = self.image.get_current_img().copy()
+        img = self.image.get_tmp_img().copy()
         return list(map(round, mouse_coords)), img
 
     def press_task(self, widget, event):
@@ -101,7 +102,7 @@ class Editor(object):
             self.move_task(event=event)
 
     def move_task(self, widget=None, event=None):
-        mouse_coords, img = self.get_vars((event.x, event.y), True)
+        mouse_coords, img = self.get_vars((event.x, event.y))
         if self.task == 0:
             top_left = (self.selection[0], self.selection[1])
             bottom_right = (mouse_coords[0], mouse_coords[1])
@@ -117,10 +118,10 @@ class Editor(object):
                 draw_ellipse(img, coords, self.pencil_color, self.pencil_size)
             elif self.pencil_shape == 'rectangle':
                 draw_rectangle(img, coords, self.pencil_color, self.pencil_size)
-            self.set_tmp_img(img)
+            self.do_tmp_change(img)
 
     def release_task(self, widget, event):
-        mouse_coords, img = self.get_vars((event.x, event.y), True)
+        mouse_coords, img = self.get_vars((event.x, event.y))
         if self.task == 0:
             self.selection.extend(mouse_coords)
         elif self.task == 2:
@@ -130,10 +131,6 @@ class Editor(object):
     def change_cursor(self, cursor):
         img = self.tab.img_widget.get_window()
         img.set_cursor(self.win.cursors[cursor])
-
-    def set_tmp_img(self, img):
-        self.tab.update_image(img)
-        self.image.tmp_img = img
 
     def copy(self):
         if self.selection != list():
@@ -149,7 +146,7 @@ class Editor(object):
                 xy = get_middle_mouse(self.selected_img.size, mouse_coords)
             new_img = self.image.get_current_img().copy()
             new_img.paste(self.selected_img, xy)
-            self.set_tmp_img(new_img)
+            self.do_tmp_change(new_img)
 
     def cut(self):
         if self.selection != list():
