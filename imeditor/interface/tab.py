@@ -113,7 +113,7 @@ class Tab(Gtk.Box):
 
 
 class TabLabel(Gtk.Box):
-    """Define the label on the tab."""
+    """Define the label of the tab."""
     def __init__(self, title, img):
         Gtk.Box.__init__(self)
         self.set_spacing(5)

@@ -12,6 +12,7 @@ def get_middle_mouse(size, mouse_coords):
 
 
 def get_infos(img, filename):
+    """Fetch informations about an image"""
     img_infos = {}
     # Basic infos
     if img.mode == 'RGBA':

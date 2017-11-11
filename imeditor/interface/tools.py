@@ -6,6 +6,7 @@ from gi.repository import Gtk, GdkPixbuf, GLib
 
 
 def pil_to_pixbuf(img):
+    """Convert the PIL image to a Pixbuf usable by Gtk"""
     data = img.tobytes()
     w, h = img.size
     data = GLib.Bytes.new(data)

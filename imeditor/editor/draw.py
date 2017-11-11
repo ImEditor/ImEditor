@@ -3,6 +3,7 @@
 from PIL import ImageDraw
 
 def draw_shape(img, coords, size):
+    """Prepare the draw object"""
     draw = ImageDraw.Draw(img)
     if size > 0:
         size /= 2
@@ -11,9 +12,11 @@ def draw_shape(img, coords, size):
     return draw, size, x + y
 
 def draw_rectangle(img, coords, size, fill_color=None, outline_color=None):
+    """Draw a rectangle on an image"""
     draw, size, xy = draw_shape(img, coords, size)
     draw.rectangle(xy, fill=fill_color, outline=outline_color)
 
 def draw_ellipse(img, coords, size, fill_color=None, outline_color=None):
+    """Draw an ellipse on an image"""
     draw, size, xy = draw_shape(img, coords, size)
     draw.ellipse(xy, fill=fill_color, outline=outline_color)

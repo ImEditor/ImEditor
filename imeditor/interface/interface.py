@@ -247,12 +247,13 @@ class Interface(Gtk.ApplicationWindow):
         self.notebook.hide()
 
     def enable_toolbar(self, enable=True):
-        # Enable / disable actions (depending on whether an image is open)
+        """Set state of actions (depending on whether an image is open)"""
         actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness']
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
 
     def new_image(self, a, b):
+        """Launch the new image dialog"""
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
         if values:
@@ -267,6 +268,7 @@ class Interface(Gtk.ApplicationWindow):
             self.create_tab(img, filename, False)
 
     def open_image(self, a, b):
+        """Open an existing image"""
         filename = dialog.file_dialog(self, 'open')
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
@@ -281,11 +283,13 @@ class Interface(Gtk.ApplicationWindow):
                 error_dialog.destroy()
 
     def get_tab(self, page_num=None):
+        """Get tab by its num or get the current one"""
         if not page_num:
             page_num = self.notebook.get_current_page()
         return self.notebook.get_nth_page(page_num)
 
     def create_tab(self, img, filename, saved=True):
+        """Instantiate a new tab"""
         tab = Tab(self, img, filename, saved)
         page_num = self.notebook.get_current_page() + 1
         nb_tabs = self.notebook.get_n_pages()
@@ -297,6 +301,7 @@ class Interface(Gtk.ApplicationWindow):
         self.enable_toolbar()
 
     def close_tab(self, a=None, b=None, page_num=None):
+        """Close tab by its num or the current one"""
         tab = self.get_tab(page_num)
         if not page_num:
             page_num = self.notebook.page_num(tab)
@@ -393,7 +398,7 @@ class Interface(Gtk.ApplicationWindow):
         tab.editor.apply_filter(func, params)
 
     def quit_app(self, a, b):
-        # Close all tabs to be sure they are saved
+        """Close all tabs to be sure they are saved"""
         for i in reversed(range(self.notebook.get_n_pages())):
             self.close_tab(page_num=i)
         self.app.quit()
