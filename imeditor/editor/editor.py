@@ -141,9 +141,10 @@ class Editor(object):
             if self.task != 1:
                 self.task = 1
                 self.change_cursor('move')
-                xy = (0, 0)
-            else:
+            if mouse_coords:
                 xy = get_middle_mouse(self.selected_img.size, mouse_coords)
+            else:
+                xy = (0, 0)
             new_img = self.image.get_current_img().copy()
             new_img.paste(self.selected_img, xy)
             self.do_tmp_change(new_img)
