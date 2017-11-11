@@ -130,8 +130,11 @@ class Editor(object):
         img.set_cursor(self.win.cursors[cursor])
 
     def copy(self):
-        if self.selection != list():
+        if self.selection != list(): # a part of the image is selected
             self.selected_img = self.image.get_current_img().crop(tuple(self.selection))
+        else: # copy the entire image
+            self.selection = (0, 0)
+            self.selected_img = self.image.get_current_img()
 
     def paste(self, mouse_coords=None):
         if self.selected_img:
@@ -146,12 +149,11 @@ class Editor(object):
             self.do_tmp_change(new_img)
 
     def cut(self):
-        if self.selection != list():
-            self.copy()
-            blank_img = Image.new('RGBA', self.selected_img.size, (255, 255, 255, 0))
-            img = self.image.get_current_img().copy()
-            img.paste(blank_img, tuple(self.selection[:2]))
-            self.do_change(img)
+        self.copy()
+        blank_img = Image.new('RGBA', self.selected_img.size, (255, 255, 255, 0))
+        img = self.image.get_current_img().copy()
+        img.paste(blank_img, tuple(self.selection[:2]))
+        self.do_change(img)
 
     def save(self):
         if path.isfile(self.image.filename):
