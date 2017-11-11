@@ -14,7 +14,7 @@ setup(
     url = 'https://imeditor.github.io/',
     packages=['imeditor'],
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Topic :: Multimedia :: Graphics :: Editors',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: OS Independent',
