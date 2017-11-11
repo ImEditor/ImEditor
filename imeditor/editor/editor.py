@@ -65,10 +65,12 @@ class Editor(object):
         if params:
             params_dialog = dialog.params_dialog(self.win, *params)
             value = params_dialog.get_values()
-            new_img = getattr(base, func)(self.image.get_current_img(), value)
+            if value:
+                new_img = getattr(base, func)(self.image.get_current_img(), value)
+                self.do_change(new_img)
         else:
             new_img = getattr(base, func)(self.image.get_current_img())
-        self.do_change(new_img)
+            self.do_change(new_img)
 
     def select(self):
         if self.task != 0:
