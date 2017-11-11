@@ -2,7 +2,7 @@
 # Author: Hugo Posnic <hugo.posnic@gmail.com>
 # Author: Nathan Seva <nathan.seva@outlook.fr>
 pkgname=imeditor
-pkgver=0.1
+pkgver=0.1.1
 pkgrel=3
 pkgdesc="Simple & versatile image editor."
 arch=("any")
