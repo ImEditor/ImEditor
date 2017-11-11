@@ -10,16 +10,10 @@ def draw_shape(img, coords, size):
     y = [coords[1][0] + size, coords[1][1] + size]
     return draw, size, x + y
 
-def draw_rectangle(img, coords, color, size, fill=True):
+def draw_rectangle(img, coords, size, fill_color=None, outline_color=None):
     draw, size, xy = draw_shape(img, coords, size)
-    if fill:
-        draw.rectangle(xy, fill=color)
-    else:
-        draw.rectangle(xy, outline=color)
+    draw.rectangle(xy, fill=fill_color, outline=outline_color)
 
-def draw_ellipse(img, coords, color, size, fill=True):
+def draw_ellipse(img, coords, size, fill_color=None, outline_color=None):
     draw, size, xy = draw_shape(img, coords, size)
-    if fill:
-        draw.ellipse(xy, fill=color)
-    else:
-        draw.ellipse(xy, outline=color)
+    draw.ellipse(xy, fill=fill_color, outline=outline_color)
