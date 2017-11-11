@@ -49,6 +49,7 @@ class Interface(Gtk.ApplicationWindow):
         hb.pack_end(menu_button)
 
         # Actions
+        # Close button of tabs
         self.close_action = Gio.SimpleAction.new('close-tab', None)
         self.close_action.connect('activate', self.close_tab)
         self.add_action(self.close_action)
@@ -255,7 +256,7 @@ class Interface(Gtk.ApplicationWindow):
         new_image_dialog = dialog.new_image_dialog(self)
         values = new_image_dialog.get_values()
         if values:
-            if values[4]:
+            if values[4]:  # if transparent background
                 color = values[2][:-1] + ',0)'
                 color = color.replace('rgb', 'rgba')
             else:
@@ -299,7 +300,7 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab(page_num)
         if not page_num:
             page_num = self.notebook.page_num(tab)
-        if not tab.editor.image.saved:
+        if not tab.editor.image.saved:  # if image is not saved
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO, 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename)))
             dialog.format_secondary_text(
@@ -320,7 +321,7 @@ class Interface(Gtk.ApplicationWindow):
             self.notebook.remove_page(page_num)
             self.select_button.set_active(True)
 
-        if self.notebook.get_n_pages() == 0:
+        if self.notebook.get_n_pages() == 0:  # re-display the homescreen
             self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
@@ -392,6 +393,7 @@ class Interface(Gtk.ApplicationWindow):
         tab.editor.apply_filter(func, params)
 
     def quit_app(self, a, b):
+        # Close all tabs to be sure they are saved
         for i in reversed(range(self.notebook.get_n_pages())):
             self.close_tab(page_num=i)
         self.app.quit()
