@@ -1,0 +1,10 @@
+[Desktop Entry]
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Graphics;
+StartupNotify=false
+Name=imeditor
+Path=/usr/share/ImEditor/imeditor
+Exec=imeditor
+Icon=/usr/share/ImEditor/imeditor/assets/imeditor.png
+Comment=Simple & versatile image editor.
