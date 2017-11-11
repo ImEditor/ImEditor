@@ -128,6 +128,7 @@ class TabLabel(Gtk.Box):
 
         # Close button
         self.button = Gtk.Button()
+        self.button.set_action_name('win.close-tab')
         self.button.set_relief(Gtk.ReliefStyle.NONE)
         self.button.add(Gtk.Image.new_from_icon_name('window-close', Gtk.IconSize.MENU))
 

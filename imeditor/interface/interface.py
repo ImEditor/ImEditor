@@ -49,6 +49,11 @@ class Interface(Gtk.ApplicationWindow):
         hb.pack_end(menu_button)
 
         # Actions
+        self.close_action = Gio.SimpleAction.new('close-tab', None)
+        self.close_action.connect('activate', self.close_tab)
+        self.add_action(self.close_action)
+        app.add_accelerator('<Primary>w', 'win.close-tab', None)
+
         # Pencil
         self.pencil_action = Gio.SimpleAction.new('pencil', None)
         self.pencil_action.connect('activate', self.pencil)
@@ -290,8 +295,10 @@ class Interface(Gtk.ApplicationWindow):
         self.notebook.set_current_page(page_num)
         self.enable_toolbar()
 
-    def close_tab(self, page_num=None):
+    def close_tab(self, a=None, b=None, page_num=None):
         tab = self.get_tab(page_num)
+        if not page_num:
+            page_num = self.notebook.page_num(tab)
         if not tab.editor.image.saved:
             dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
                 Gtk.ButtonsType.YES_NO, 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename)))
