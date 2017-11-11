@@ -126,7 +126,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Rotate left
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
-        self.rotate_left_action.connect('activate', self.apply_filter, 'rotate', (-90))
+        self.rotate_left_action.connect('activate', self.apply_filter, 'rotate_left')
         self.add_action(self.rotate_left_action)
         self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left', Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_left_button.set_action_name('win.rotate-left')
@@ -134,7 +134,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Rotate right
         self.rotate_right_action = Gio.SimpleAction.new('rotate-right', None)
-        self.rotate_right_action.connect('activate', self.apply_filter, 'rotate', (90))
+        self.rotate_right_action.connect('activate', self.apply_filter, 'rotate_right')
         self.add_action(self.rotate_right_action)
         self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right', Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_right_button.set_action_name('win.rotate-right')
