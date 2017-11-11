@@ -65,20 +65,11 @@ def black_white(img, limit):
     img_m.putdata(data_m)
     return img_m
 
-def lighten(img, value):
+def brightness(img, value):
     data = list(img.getdata())
     data_m = list()
     for pixel in data:
         data_m.append((pixel[0]+value, pixel[1]+value, pixel[2]+value))
-    img_m = Image.new(img.mode, img.size)
-    img_m.putdata(data_m)
-    return img_m
-
-def darken(img, value):
-    data = list(img.getdata())
-    data_m = list()
-    for pixel in data:
-        data_m.append((pixel[0]-value, pixel[1]-value, pixel[2]-value))
     img_m = Image.new(img.mode, img.size)
     img_m.putdata(data_m)
     return img_m
