@@ -5,11 +5,9 @@ import datetime
 
 
 def get_middle_mouse(size, mouse_coords):
-    width, height = size
-    x = mouse_coords[0] - (width / 2)
-    y = mouse_coords[1] - (height / 2)
+    x = mouse_coords[0] - (size[0] / 2)
+    y = mouse_coords[1] - (size[1] / 2)
     return (round(x), round(y))
-
 
 def get_infos(img, filename):
     """Fetch informations about an image"""
