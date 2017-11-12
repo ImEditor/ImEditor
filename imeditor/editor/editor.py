@@ -49,16 +49,16 @@ class Editor(object):
 
     def undo(self):
         """Go to the previous image in the history"""
-        if self.image.get_n_img() >= 2:
+        if self.image.get_n_img() > 1:
             index_img = self.image.index
-            if index_img >= 1:
+            if index_img > 0:
                 self.image.decrement_index()
                 img = self.image.get_current_img()
                 self.tab.update_image(img)
 
     def redo(self):
         """Go to the next image of the history"""
-        if self.image.get_n_img() >= 2:
+        if self.image.get_n_img() > 1:
             index_img = self.image.index
             if index_img + 1 < self.image.get_n_img():
                 self.image.increment_index()
