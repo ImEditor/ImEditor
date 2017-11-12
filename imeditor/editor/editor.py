@@ -80,13 +80,12 @@ class Editor(object):
     def select(self):
         """Select a part of the image"""
         if self.task != 0:
-            if self.task == 1:
-                tmp_img = self.image.get_tmp_img()
-                if tmp_img:
-                    self.do_change(tmp_img)
-                    self.image.tmp_img = None
-            self.change_cursor('default')
+            if self.task == 1:  # if user is pasting an image
+                # paste the image if the user is changing tool (select)
+                self.do_change(self.image.get_tmp_img())
+                self.image.tmp_img = None
             self.task = 0
+            self.change_cursor('default')
 
     def pencil(self):
         """Draw on the image"""
