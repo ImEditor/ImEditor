@@ -116,7 +116,7 @@ class Editor(object):
             draw_rectangle(img, coords, 0, outline_color='black')
             self.tab.update_image(img)
         elif self.task == 1:
-            self.paste(mouse_coords=mouse_coords)
+            self.paste(mouse_coords)
         elif self.task == 2:
             coords = (mouse_coords[0], mouse_coords[1])
             coords = (coords, coords)
