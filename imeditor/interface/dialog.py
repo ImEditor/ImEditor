@@ -185,7 +185,7 @@ def new_image_dialog(parent):
     grid.attach(spin_height, 3, 2, 1, 1)
     grid.attach(Gtk.Label('Background', xalign=0.0), 0, 3, 2, 1)
     grid.attach(background_combo, 2, 3, 2, 1)
-    grid.attach(Gtk.Label('Color background', xalign=0.0), 0, 4, 2, 1)
+    grid.attach(Gtk.Label('Background color ', xalign=0.0), 0, 4, 2, 1)
     grid.attach(color_button, 2, 4, 2, 1)
     grid.attach(Gtk.Label('Format', xalign=0.0), 0, 5, 2, 1)
     grid.attach(extension_combo, 2, 5, 2, 1)
