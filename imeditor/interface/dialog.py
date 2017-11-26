@@ -115,18 +115,24 @@ def new_image_dialog(parent):
         spin_width.set_value(templates[template][0])
         spin_height.set_value(templates[template][1])
 
-    def on_transparent_toggled(button):
-        color_button.set_sensitive(not color_button.get_sensitive())
+    def on_background_changed(button):
+        background = button.get_active_text()
+        if background == "Custom color":
+            color_button.set_sensitive(True)
+        else:
+            if background == "White":
+                color_button.set_rgba(Gdk.RGBA(1, 1, 1, 1))
+            color_button.set_sensitive(False)
 
     def on_create_clicked(button):
         name = name_entry.get_text()
         width = spin_width.get_value_as_int()
         height = spin_height.get_value_as_int()
         size = (width, height)
+        transparent = background_combo.get_active_text() == "Transparent"
         color = color_button.get_rgba().to_string()
         extension = extension_combo.get_active_text()
-        transparent = transparent_check.get_active()
-        dialog.values += [name, size, color, extension, transparent]
+        dialog.values += [name, size, color, transparent, extension]
         dialog.destroy()
 
     dialog = Dialog(parent, 'New image')
@@ -139,21 +145,27 @@ def new_image_dialog(parent):
     template_combo.set_entry_text_column(0)
     for elt in templates.keys():
         template_combo.append_text(elt)
+
     spin_width = SpinButton(640, 1, 10000)
     spin_height = SpinButton(360, 1, 10000)
 
     color_button = Gtk.ColorButton()
     color_button.set_use_alpha(False)
-    color_button.set_rgba(Gdk.RGBA(1, 1, 1, 1))
+    color_button.set_sensitive(False)
+
+    background_combo = Gtk.ComboBoxText()
+    background_combo.connect('changed', on_background_changed)
+    background_combo.set_entry_text_column(0)
+    background_combo.append_text("White")
+    background_combo.append_text("Custom color")
+    background_combo.append_text("Transparent")
+    background_combo.set_active(0)
 
     extension_combo = Gtk.ComboBoxText()
     extension_combo.set_entry_text_column(0)
     for elt in extensions:
         extension_combo.append_text(elt)
-    extension_combo.set_active(0)
-
-    transparent_check = Gtk.CheckButton()
-    transparent_check.connect('toggled', on_transparent_toggled)
+        extension_combo.set_active(0)
 
     cancel_button = Gtk.Button.new_with_label('Cancel')
     cancel_button.connect('clicked', dialog.close)
@@ -171,10 +183,10 @@ def new_image_dialog(parent):
     grid.attach(spin_width, 1, 2, 1, 1)
     grid.attach(Gtk.Label('Height', xalign=0.0), 2, 2, 1, 1)
     grid.attach(spin_height, 3, 2, 1, 1)
-    grid.attach(Gtk.Label('Background color', xalign=0.0), 0, 3, 2, 1)
-    grid.attach(color_button, 2, 3, 2, 1)
-    grid.attach(Gtk.Label('Transparent background', xalign=0.0), 0, 4, 2, 1)
-    grid.attach(transparent_check, 2, 4, 2, 1)
+    grid.attach(Gtk.Label('Background', xalign=0.0), 0, 3, 2, 1)
+    grid.attach(background_combo, 2, 3, 2, 1)
+    grid.attach(Gtk.Label('Color background', xalign=0.0), 0, 4, 2, 1)
+    grid.attach(color_button, 2, 4, 2, 1)
     grid.attach(Gtk.Label('Format', xalign=0.0), 0, 5, 2, 1)
     grid.attach(extension_combo, 2, 5, 2, 1)
     grid.attach(cancel_button, 0, 6, 2, 1)
