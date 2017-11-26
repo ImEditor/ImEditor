@@ -105,10 +105,10 @@ def new_image_dialog(parent):
         'A5': (2480, 1748),
         'A6': (1748, 1240)
     }
+    extensions = ('PNG', 'JPEG', 'WEBP', 'BMP', 'ICO')
 
     def on_template_changed(button):
         template = button.get_active_text()
-
         spin_width.set_value(templates[template][0])
         spin_height.set_value(templates[template][1])
 
@@ -145,7 +145,6 @@ def new_image_dialog(parent):
 
     extension_combo = Gtk.ComboBoxText()
     extension_combo.set_entry_text_column(0)
-    extensions = ['PNG', 'JPEG', 'WEBP', 'BMP', 'ICO']
     for elt in extensions:
         extension_combo.append_text(elt)
     extension_combo.set_active(0)
