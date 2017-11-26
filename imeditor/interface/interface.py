@@ -176,7 +176,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Filters
         self.black_and_white_action = Gio.SimpleAction.new('black-and-white', None)
-        self.black_and_white_action.connect('activate', self.apply_filter, 'black_white', ('Black & white', [0, 255]))
+        self.black_and_white_action.connect('activate', self.apply_filter_dialog, 'black_white', ('Black & white', [0, 255]))
         self.add_action(self.black_and_white_action)
 
         self.negative_action = Gio.SimpleAction.new('negative', None)
@@ -200,7 +200,7 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.grayscale_action)
 
         self.brightness_action = Gio.SimpleAction.new('brightness', None)
-        self.brightness_action.connect('activate', self.apply_filter, 'brightness', ('Brightness', [-255, 255]))
+        self.brightness_action.connect('activate', self.apply_filter_dialog, 'brightness', ('Brightness', [-255, 255]))
         self.add_action(self.brightness_action)
 
         hb.pack_start(box)
@@ -393,9 +393,13 @@ class Interface(Gtk.ApplicationWindow):
         else:
             self.select_button.set_active(True)
 
-    def apply_filter(self, a, b, func, params=None):
+    def apply_filter(self, a, b, func, value=None):
         tab = self.get_tab()
-        tab.editor.apply_filter(func, params)
+        tab.editor.apply_filter(func, value)
+
+    def apply_filter_dialog(self, a, b, func, params=None):
+        tab = self.get_tab()
+        tab.editor.apply_filter_dialog(func, params)
 
     def quit_app(self, a, b):
         """Close all tabs to be sure they are saved"""

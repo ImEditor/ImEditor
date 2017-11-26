@@ -65,17 +65,21 @@ class Editor(object):
                 img = self.image.get_current_img()
                 self.tab.update_image(img)
 
-    def apply_filter(self, func, params=None):
+    def apply_filter(self, func, value=None):
         """Apply a filter from filters/base.py"""
-        if params:
-            params_dialog = dialog.params_dialog(self.win, *params)
-            value = params_dialog.get_values()
-            if value:
-                new_img = getattr(base, func)(self.image.get_current_img(), value)
-                self.do_change(new_img)
+        if value:
+            new_img = getattr(base, func)(self.image.get_current_img(), value)
+            self.do_change(new_img)
         else:
             new_img = getattr(base, func)(self.image.get_current_img())
             self.do_change(new_img)
+
+    def apply_filter_dialog(self, func, params):
+        """Apply a filter from filters/base.py that need a GUI"""
+        params_dialog = dialog.params_dialog(self.win, *params)
+        value = params_dialog.get_values()
+        if value:
+            self.apply_filter(func, value)
 
     def select(self):
         """Select a part of the image"""
