@@ -82,7 +82,7 @@ class Editor(object):
         if self.task != 0:
             if self.task == 1:  # if user is pasting an image
                 # paste the image if the user is changing tool (select)
-                self.do_change(self.image.get_tmp_img())
+                self.do_change(self.image.tmp_img)
                 self.image.tmp_img = None
             self.task = 0
             self.change_cursor('default')
@@ -95,9 +95,12 @@ class Editor(object):
 
     def handle_event(self, widget, event, task):
         """Call the event with the needed vars"""
-        img = self.image.get_tmp_img().copy()
+        if not self.image.tmp_img:
+            img = self.image.get_current_img()
+        else:
+            img = self.image.tmp_img
         mouse_coords = [round(event.x), round(event.y)]
-        getattr(self, task + "_task")(img, mouse_coords)
+        getattr(self, task + "_task")(img.copy(), mouse_coords)
 
     def press_task(self, img, mouse_coords):
         """Press event"""
