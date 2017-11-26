@@ -74,8 +74,5 @@ def brightness(img, value):
     img_m.putdata(data_m)
     return img_m
 
-def rotate_left(img):
-    return img.rotate(90, expand=True)
-
-def rotate_right(img):
-    return img.rotate(-90, expand=True)
+def rotate(img, angle):
+    return img.rotate(angle, expand=True)
