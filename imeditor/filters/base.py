@@ -76,3 +76,9 @@ def brightness(img, value):
 
 def rotate(img, angle):
     return img.rotate(angle, expand=True)
+
+def horizontal_mirror(img):
+    return img.transpose(Image.FLIP_LEFT_RIGHT)
+
+def vertical_mirror(img):
+    return img.transpose(Image.FLIP_TOP_BOTTOM)
