@@ -50,20 +50,16 @@ class Editor(object):
     def undo(self):
         """Go to the previous image in the history"""
         if self.image.get_n_img() > 1:
-            index_img = self.image.index
-            if index_img > 0:
+            if self.image.index > 0:
                 self.image.decrement_index()
-                img = self.image.get_current_img()
-                self.tab.update_image(img)
+                self.tab.update_image(self.image.get_current_img())
 
     def redo(self):
         """Go to the next image of the history"""
         if self.image.get_n_img() > 1:
-            index_img = self.image.index
-            if index_img + 1 < self.image.get_n_img():
+            if self.image.index + 1 < self.image.get_n_img():
                 self.image.increment_index()
-                img = self.image.get_current_img()
-                self.tab.update_image(img)
+                self.tab.update_image(self.image.get_current_img())
 
     def apply_filter(self, func, value=None):
         """Apply a filter from filters/base.py"""
@@ -117,16 +113,15 @@ class Editor(object):
     def move_task(self, img, mouse_coords):
         """Move event"""
         if self.task == 0:
-            top_left = (self.selection[0], self.selection[1])
-            bottom_right = (mouse_coords[0], mouse_coords[1])
-            coords = (top_left, bottom_right)
+            coords = ((self.selection[0], self.selection[1]),
+                (mouse_coords[0], mouse_coords[1]))
             draw_rectangle(img, coords, 0, outline_color='black')
             self.tab.update_image(img)
         elif self.task == 1:
             self.paste(mouse_coords)
         elif self.task == 2:
-            coords = (mouse_coords[0], mouse_coords[1])
-            coords = (coords, coords)
+            coords = ((mouse_coords[0], mouse_coords[1]),
+                (mouse_coords[0], mouse_coords[1]))
             if self.pencil_shape == 'ellipse':
                 draw_ellipse(img, coords, self.pencil_size, self.pencil_color)
             elif self.pencil_shape == 'rectangle':
@@ -143,8 +138,8 @@ class Editor(object):
 
     def change_cursor(self, cursor):
         """Change cursor that hovers the image"""
-        img = self.tab.img_widget.get_window()
-        img.set_cursor(self.win.cursors[cursor])
+        img_widget = self.tab.img_widget.get_window()
+        img_widget.set_cursor(self.win.cursors[cursor])
 
     def copy(self):
         """Copy a part of/or the entire image"""
