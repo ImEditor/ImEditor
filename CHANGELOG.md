@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.3] - DEV
+-  Disable mirror actions when no image is open.
+
 ## [0.2] - 2017-11-27
 - Finally fix the high-ram usage !!!
 - Only support RGB and RGBA images to not alter the format of the original images.
