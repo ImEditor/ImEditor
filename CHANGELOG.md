@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.2] - DEV
+## [0.2] - 2017-11-27
 - Finally fix the high-ram usage !!!
 - Only support RGB and RGBA images to not alter the format of the original images.
 - Add a new submenu "Operations".
