@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.2] - DEV
+- Only support RGB and RGBA images to not alter the format of the original images.
 - Add a new submenu "Operations".
 - Add horizontal and vertical mirror features.
 - Add 1024x768, 1280x1024, 1920x1200 in template list.
