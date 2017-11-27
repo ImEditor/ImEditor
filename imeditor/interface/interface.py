@@ -288,7 +288,6 @@ class Interface(Gtk.ApplicationWindow):
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
                 img = Image.open(filename)
-                print(img.mode)
                 if img.mode in self.allowed_modes:
                     self.create_tab(img, filename)
                 else:

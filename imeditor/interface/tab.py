@@ -2,22 +2,25 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
 from os import path
 
 from editor.editor import Editor
-from interface.tools import pil_to_pixbuf, SpinButton
+from interface.tools import SpinButton
 
 
 class Tab(Gtk.Box):
     def __init__(self, win, img, filename, saved):
         Gtk.Box.__init__(self)
         self.win = win
-
         self.editor = Editor(self.win, self, img, filename, saved)
 
         # Image
-        self.img_widget = Gtk.Image.new_from_pixbuf(pil_to_pixbuf(img))
+        if img.mode == 'RGB':
+            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8, img.width, img.height)
+        elif img.mode == 'RGBA':
+            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8, img.width, img.height)
+        self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
 
         event_box = Gtk.EventBox()
         event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
@@ -82,13 +85,25 @@ class Tab(Gtk.Box):
         self.tab_label = TabLabel(path.basename(filename), img)
         self.tab_label.button.connect('clicked', self.on_close_button_clicked)
 
+        self.update_image(img)
+
         self.show_all()
         self.sidebar_frame.hide()
         self.pencil_box.hide()
 
-    def update_image(self, img):
-        self.tab_label.set_icon(img)
-        self.img_widget.set_from_pixbuf(pil_to_pixbuf(img))
+    def update_image(self, img, tmp=False):
+        """Convert the PIL image to a Pixbuf usable by Gtk"""
+        # Create pixbuf
+        data = GLib.Bytes.new(img.tobytes())
+        w, h = img.size
+        if img.mode == 'RGB':
+            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, False, 8, w, h, w * 3)
+        elif img.mode == 'RGBA':
+            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, True, 8, w, h, w * 4)
+        # Update the image and the icon
+        self.img_widget.set_from_pixbuf(pixbuf.copy())
+        if not tmp:
+            self.tab_label.set_icon(pixbuf)
 
     def enable_sidebar(self, enable=True):
         if enable:
@@ -120,7 +135,6 @@ class TabLabel(Gtk.Box):
 
         # Preview of image
         self.icon = Gtk.Image()
-        self.set_icon(img)
 
         # Title
         self.label = Gtk.Label()
@@ -144,7 +158,6 @@ class TabLabel(Gtk.Box):
             title = title[:max_size - 3] + "..."
         self.label.set_text(title)
 
-    def set_icon(self, img):
-        icon = img.copy()
-        icon.thumbnail((24, 24))
-        self.icon.set_from_pixbuf(pil_to_pixbuf(icon))
+    def set_icon(self, pixbuf):
+        pixbuf = pixbuf.scale_simple(24, 24, GdkPixbuf.InterpType.TILES)
+        self.icon.set_from_pixbuf(pixbuf)

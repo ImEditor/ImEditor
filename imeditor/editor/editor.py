@@ -33,7 +33,7 @@ class Editor(object):
 
     def do_tmp_change(self, img):
         """Update displayed image without modifying the history"""
-        self.tab.update_image(img)
+        self.tab.update_image(img, True)
         self.image.tmp_img = img
 
     def do_change(self, img):
