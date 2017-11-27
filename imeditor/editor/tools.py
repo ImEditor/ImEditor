@@ -13,8 +13,7 @@ def get_infos(img, filename):
     """Fetch informations about an image"""
     img_infos = {}
     # Basic infos
-    if img.mode == 'RGBA':
-        img_infos['mode'] = 'RGB'
+    img_infos['mode'] = img.mode
     img_infos['size'] = '{} x {} pixels'.format(str(img.width), str(img.height))
     # Infos available only if the image is save on the disk
     if path.isfile(filename):

@@ -255,6 +255,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Vars
         self.allowed_formats = ('bmp', 'ico', 'jpeg', 'jpg', 'png', 'webp')
+        self.allowed_modes = ('RGB', 'RGBA')
 
         self.show_all()
         self.notebook.hide()
@@ -271,11 +272,12 @@ class Interface(Gtk.ApplicationWindow):
         values = new_image_dialog.get_values()
         if values:
             if values[3]:  # if transparent background
-                color = values[2][:-1] + ',0)'
-                color = color.replace('rgb', 'rgba')
+                color = 'rgba(255, 255, 255, 0)'
+                mode = 'RGBA'
             else:
                 color = values[2]
-            img = Image.new('RGBA', values[1], color)
+                mode = 'RGB'
+            img = Image.new(mode, values[1], color)
             name = values[0] if values[0] else 'untitled'
             filename = name + '.' + values[4].lower()
             self.create_tab(img, filename, False)
@@ -285,8 +287,17 @@ class Interface(Gtk.ApplicationWindow):
         filename = dialog.file_dialog(self, 'open')
         if filename:
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
-                img = Image.open(filename).convert('RGBA')
-                self.create_tab(img, filename)
+                img = Image.open(filename)
+                print(img.mode)
+                if img.mode in self.allowed_modes:
+                    self.create_tab(img, filename)
+                else:
+                    error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
+                        Gtk.ButtonsType.OK, 'Unable to open this file')
+                    error_dialog.format_secondary_text(
+                        'The mode of this file is not supported.')
+                    error_dialog.run()
+                    error_dialog.destroy()
             else:
                 error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
                     Gtk.ButtonsType.OK, 'Unable to open this file')

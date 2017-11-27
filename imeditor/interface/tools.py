@@ -10,7 +10,10 @@ def pil_to_pixbuf(img):
     data = img.tobytes()
     w, h = img.size
     data = GLib.Bytes.new(data)
-    pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, True, 8, w, h, w * 4)
+    if img.mode == 'RGB':
+        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, False, 8, w, h, w * 3)
+    elif img.mode == 'RGBA':
+        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, True, 8, w, h, w * 4)
     return pixbuf
 
 
