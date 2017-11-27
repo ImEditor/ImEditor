@@ -403,12 +403,6 @@ class Interface(Gtk.ApplicationWindow):
 
     def pencil(self, a, b):
         if self.pencil_button.get_active():
-            warning_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
-                Gtk.ButtonsType.OK, 'Attention')
-            warning_dialog.format_secondary_text(
-                'The drawing feature has excessive memory consumption and is unstable. Use it at your own risk.')
-            warning_dialog.run()
-            warning_dialog.destroy()
             self.select_button.set_active(False)
             tab = self.get_tab()
             tab.enable_sidebar()
