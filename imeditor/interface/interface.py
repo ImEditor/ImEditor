@@ -262,7 +262,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def enable_toolbar(self, enable=True):
         """Set state of actions (depending on whether an image is open)"""
-        actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness']
+        actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror']
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
 
