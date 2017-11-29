@@ -217,7 +217,6 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.vertical_mirror_action)
 
         hb.pack_start(box)
-        self.enable_toolbar(False)
 
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20, margin_top=120)
@@ -245,6 +244,9 @@ class Interface(Gtk.ApplicationWindow):
         main_box.add(self.homepage)
         self.add(main_box)
 
+        self.show_all()
+        self.enable_homescreen()
+
         # Cursors
         display = Gdk.Display.get_default()
         self.cursors = {
@@ -260,14 +262,22 @@ class Interface(Gtk.ApplicationWindow):
         # Vars
         self.filenames = list()
 
-        self.show_all()
-        self.notebook.hide()
-
     def enable_toolbar(self, enable=True):
         """Set state of actions (depending on whether an image is open)"""
         actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror']
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
+
+    def enable_homescreen(self, enable=True):
+        if enable:
+            self.set_title('ImEditor')
+            self.notebook.hide()
+            self.homepage.show()
+            self.enable_toolbar(False)
+        else:
+            self.homepage.hide()
+            self.notebook.show()
+            self.enable_toolbar()
 
     def new_image(self, a, b):
         """Launch the new image dialog"""
@@ -325,8 +335,7 @@ class Interface(Gtk.ApplicationWindow):
         nb_tabs = self.notebook.get_n_pages()
         self.notebook.insert_page(tab, tab.tab_label, page_num)
         if nb_tabs == 0:
-            self.homepage.hide()
-            self.notebook.show()
+            self.enable_homescreen(False)
         self.notebook.set_current_page(page_num)
         self.enable_toolbar()
 
@@ -351,10 +360,7 @@ class Interface(Gtk.ApplicationWindow):
             self.close_tab_by_id(tab, page_num)
 
         if self.notebook.get_n_pages() == 0:  # re-display the homescreen
-            self.set_title('ImEditor')
-            self.notebook.hide()
-            self.homepage.show()
-            self.enable_toolbar(False)
+            self.enable_homescreen(True)
 
     def close_tab_by_id(self, tab, page_num):
         tab.editor.close_image()
