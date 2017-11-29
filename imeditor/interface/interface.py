@@ -253,9 +253,12 @@ class Interface(Gtk.ApplicationWindow):
             'move': Gdk.Cursor.new_from_name(display, 'move')
         }
 
-        # Vars
+        # Settings
         self.allowed_formats = ('bmp', 'ico', 'jpeg', 'jpg', 'png', 'webp')
         self.allowed_modes = ('RGB', 'RGBA')
+
+        # Vars
+        self.filenames = list()
 
         self.show_all()
         self.notebook.hide()
@@ -286,24 +289,28 @@ class Interface(Gtk.ApplicationWindow):
         """Open an existing image"""
         filename = dialog.file_dialog(self, 'open')
         if filename:
-            if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
-                img = Image.open(filename)
-                if img.mode in self.allowed_modes:
-                    self.create_tab(img, filename)
+            if filename not in self.filenames:
+                if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
+                    img = Image.open(filename)
+                    if img.mode in self.allowed_modes:
+                        self.create_tab(img, filename)
+                        self.filenames.append(filename)
+                    else:
+                        error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
+                            Gtk.ButtonsType.OK, 'Unable to open this file')
+                        error_dialog.format_secondary_text(
+                            'The mode of this file is not supported.')
+                        error_dialog.run()
+                        error_dialog.destroy()
                 else:
                     error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
                         Gtk.ButtonsType.OK, 'Unable to open this file')
                     error_dialog.format_secondary_text(
-                        'The mode of this file is not supported.')
+                        'The format of this file is not supported.')
                     error_dialog.run()
                     error_dialog.destroy()
             else:
-                error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
-                    Gtk.ButtonsType.OK, 'Unable to open this file')
-                error_dialog.format_secondary_text(
-                    'The format of this file is not supported.')
-                error_dialog.run()
-                error_dialog.destroy()
+                pass
 
     def get_tab(self, page_num=None):
         """Get tab by its num or get the current one"""
@@ -336,24 +343,25 @@ class Interface(Gtk.ApplicationWindow):
             response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
-                tab.editor.close_image()
-                self.notebook.remove_page(page_num)
-                self.select_button.set_active(True)
+                self.close_tab_by_id(tab, page_num)
             elif response == Gtk.ResponseType.NO:
-                tab.editor.close_image()
-                self.notebook.remove_page(page_num)
-                self.select_button.set_active(True)
+                self.close_tab_by_id(tab, page_num)
             dialog.destroy()
         else:
-            tab.editor.close_image()
-            self.notebook.remove_page(page_num)
-            self.select_button.set_active(True)
+            self.close_tab_by_id(tab, page_num)
 
         if self.notebook.get_n_pages() == 0:  # re-display the homescreen
             self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
             self.enable_toolbar(False)
+
+    def close_tab_by_id(self, tab, page_num):
+        tab.editor.close_image()
+        self.notebook.remove_page(page_num)
+        self.select_button.set_active(True)
+        if path.isfile(tab.editor.image.filename):
+            self.filenames.remove(tab.editor.image.filename)
 
     def on_tab_switched(self, notebook, page, page_num):
         title = '[{}] - ImEditor'.format(path.basename(page.editor.image.filename))

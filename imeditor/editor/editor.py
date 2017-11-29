@@ -186,6 +186,7 @@ class Editor(object):
         if filename:
             img = self.image.get_current_img()
             img.save(filename)
+            self.win.filenames.append(filename)
             self.image.filename = filename
             self.tab.tab_label.set_title(path.basename(filename))
             self.image.saved = True
