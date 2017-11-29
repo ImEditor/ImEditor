@@ -341,7 +341,7 @@ class Interface(Gtk.ApplicationWindow):
         self.enable_toolbar()
 
     def close_tab(self, a=None, b=None, page_num=None):
-        """Close tab by its num or the current one"""
+        """Close tab by user action"""
         tab = self.get_tab(page_num)
         if not page_num:
             page_num = self.notebook.page_num(tab)
@@ -364,6 +364,7 @@ class Interface(Gtk.ApplicationWindow):
             self.enable_homescreen(True)
 
     def close_tab_by_id(self, tab, page_num):
+        """Close tab by its id"""
         tab.editor.close_image()
         self.notebook.remove_page(page_num)
         self.select_button.set_active(True)
