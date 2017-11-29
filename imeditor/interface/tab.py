@@ -88,8 +88,7 @@ class Tab(Gtk.Box):
         self.update_image(img)
 
         self.show_all()
-        self.sidebar_frame.hide()
-        self.pencil_box.hide()
+        self.enable_sidebar(False)
 
     def update_image(self, img, tmp=False):
         """Convert the PIL image to a Pixbuf usable by Gtk"""

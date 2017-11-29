@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [0.3] - DEV
 - Don't permit to open several times the same image.
 - Disable mirror actions when no image is open.
+- Higher limit for the history (20 to 100).
 
 ## [0.2] - 2017-11-27
 - Finally fix the high-ram usage !!!
