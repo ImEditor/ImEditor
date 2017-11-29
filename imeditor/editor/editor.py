@@ -64,11 +64,10 @@ class Editor(object):
     def apply_filter(self, func, value=None):
         """Apply a filter from filters/base.py"""
         if value:
-            new_img = getattr(base, func)(self.image.get_current_img(), value)
-            self.do_change(new_img)
+            img = getattr(base, func)(self.image.get_current_img(), value)
         else:
-            new_img = getattr(base, func)(self.image.get_current_img())
-            self.do_change(new_img)
+            img = getattr(base, func)(self.image.get_current_img())
+        self.do_change(img)
 
     def apply_filter_dialog(self, func, params):
         """Apply a filter from filters/base.py that need a GUI"""
