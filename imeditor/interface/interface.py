@@ -12,7 +12,8 @@ from interface import dialog
 
 class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
-        Gtk.Window.__init__(self, title='ImEditor', application=app)
+        self.default_title = 'ImEditor'
+        Gtk.Window.__init__(self, title=self.default_title, application=app)
         self.connect('delete-event', self.quit_app)
         self.app = app
         self.set_default_size(950, 550)
@@ -23,7 +24,7 @@ class Interface(Gtk.ApplicationWindow):
         # Header Bar
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
-        hb.props.title = 'ImEditor'
+        hb.props.title = self.default_title
         hb.props.subtitle = 'Simple & versatile image editor'
         self.set_titlebar(hb)
 
@@ -270,7 +271,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def enable_homescreen(self, enable=True):
         if enable:
-            self.set_title('ImEditor')
+            self.set_title(self.default_title)
             self.notebook.hide()
             self.homepage.show()
             self.enable_toolbar(False)
@@ -370,7 +371,8 @@ class Interface(Gtk.ApplicationWindow):
             self.filenames.remove(tab.editor.image.filename)
 
     def on_tab_switched(self, notebook, page, page_num):
-        title = '[{}] - ImEditor'.format(path.basename(page.editor.image.filename))
+        title = '[{}] - {}'.format(path.basename(page.editor.image.filename),
+            self.default_title)
         self.set_title(title)
 
     def save(self, a, b):
@@ -442,7 +444,7 @@ class Interface(Gtk.ApplicationWindow):
     def about(self, a, b):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo(self.logo)
-        dialog.set_program_name('ImEditor')
+        dialog.set_program_name(self.default_title)
         dialog.set_version('0.2')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
