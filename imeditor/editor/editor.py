@@ -19,7 +19,7 @@ class Editor(object):
         self.image = ImageObject(img, filename, saved)
 
         # History
-        self.MAX_HIST = 20
+        self.MAX_HIST = 100
 
         # Tasks
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
