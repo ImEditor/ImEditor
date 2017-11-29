@@ -321,7 +321,12 @@ class Interface(Gtk.ApplicationWindow):
                     error_dialog.run()
                     error_dialog.destroy()
             else:
-                pass
+                warning_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
+                    Gtk.ButtonsType.OK, 'Already open')
+                warning_dialog.format_secondary_text(
+                    'This image is already opened in ImEditor.')
+                warning_dialog.run()
+                warning_dialog.destroy()
 
     def get_tab(self, page_num=None):
         """Get tab by its num or get the current one"""
