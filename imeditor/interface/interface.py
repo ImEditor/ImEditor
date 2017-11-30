@@ -30,7 +30,8 @@ class Interface(Gtk.ApplicationWindow):
 
         # Menu
         menu_button = Gtk.MenuButton()
-        menu_button.set_image(Gtk.Image.new_from_icon_name('open-menu-symbolic', Gtk.IconSize.MENU))
+        menu_button.set_image(Gtk.Image.new_from_icon_name('open-menu-symbolic',
+            Gtk.IconSize.MENU))
         menu_model = Gio.Menu()
         menu_model.append('Copy', 'win.copy')
         menu_model.append('Paste', 'win.paste')
@@ -88,7 +89,8 @@ class Interface(Gtk.ApplicationWindow):
         self.new_action.connect('activate', self.new_image)
         self.add_action(self.new_action)
         app.add_accelerator('<Primary>n', 'win.new', None)
-        self.new_button = Gtk.Button.new_from_icon_name('document-new', Gtk.IconSize.SMALL_TOOLBAR)
+        self.new_button = Gtk.Button.new_from_icon_name('document-new',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.new_button.set_action_name('win.new')
         box.add(self.new_button)
 
@@ -97,7 +99,8 @@ class Interface(Gtk.ApplicationWindow):
         self.open_action.connect('activate', self.open_image)
         self.add_action(self.open_action)
         app.add_accelerator('<Primary>o', 'win.open', None)
-        self.open_button = Gtk.Button.new_from_icon_name('document-open', Gtk.IconSize.SMALL_TOOLBAR)
+        self.open_button = Gtk.Button.new_from_icon_name('document-open',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.open_button.set_action_name('win.open')
         box.add(self.open_button)
 
@@ -106,7 +109,8 @@ class Interface(Gtk.ApplicationWindow):
         self.save_action.connect('activate', self.save)
         self.add_action(self.save_action)
         app.add_accelerator('<Primary>s', 'win.save', None)
-        self.save_button = Gtk.Button.new_from_icon_name('document-save', Gtk.IconSize.SMALL_TOOLBAR)
+        self.save_button = Gtk.Button.new_from_icon_name('document-save',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.save_button.set_action_name('win.save')
         box.add(self.save_button)
 
@@ -114,7 +118,8 @@ class Interface(Gtk.ApplicationWindow):
         self.save_as_action = Gio.SimpleAction.new('save-as', None)
         self.save_as_action.connect('activate', self.save_as)
         self.add_action(self.save_as_action)
-        self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as', Gtk.IconSize.SMALL_TOOLBAR)
+        self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.save_as_button.set_action_name('win.save-as')
         box.add(self.save_as_button)
 
@@ -123,7 +128,8 @@ class Interface(Gtk.ApplicationWindow):
         self.undo_action.connect('activate', self.undo)
         self.add_action(self.undo_action)
         app.add_accelerator('<Primary>z', 'win.undo', None)
-        self.undo_button = Gtk.Button.new_from_icon_name('edit-undo', Gtk.IconSize.SMALL_TOOLBAR)
+        self.undo_button = Gtk.Button.new_from_icon_name('edit-undo',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.undo_button.set_action_name('win.undo')
         box.add(self.undo_button)
 
@@ -132,7 +138,8 @@ class Interface(Gtk.ApplicationWindow):
         self.redo_action.connect('activate', self.redo)
         self.add_action(self.redo_action)
         app.add_accelerator('<Primary>y', 'win.redo', None)
-        self.redo_action_button = Gtk.Button.new_from_icon_name('edit-redo', Gtk.IconSize.SMALL_TOOLBAR)
+        self.redo_action_button = Gtk.Button.new_from_icon_name('edit-redo',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.redo_action_button.set_action_name('win.redo')
         box.add(self.redo_action_button)
 
@@ -140,7 +147,8 @@ class Interface(Gtk.ApplicationWindow):
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
         self.rotate_left_action.connect('activate', self.apply_filter, 'rotate', -90)
         self.add_action(self.rotate_left_action)
-        self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left', Gtk.IconSize.SMALL_TOOLBAR)
+        self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_left_button.set_action_name('win.rotate-left')
         box.add(self.rotate_left_button)
 
@@ -148,7 +156,8 @@ class Interface(Gtk.ApplicationWindow):
         self.rotate_right_action = Gio.SimpleAction.new('rotate-right', None)
         self.rotate_right_action.connect('activate', self.apply_filter, 'rotate', 90)
         self.add_action(self.rotate_right_action)
-        self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right', Gtk.IconSize.SMALL_TOOLBAR)
+        self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_right_button.set_action_name('win.rotate-right')
         box.add(self.rotate_right_button)
 
@@ -182,7 +191,8 @@ class Interface(Gtk.ApplicationWindow):
 
         # Filters
         self.black_and_white_action = Gio.SimpleAction.new('black-and-white', None)
-        self.black_and_white_action.connect('activate', self.apply_filter_dialog, 'black_white', ('Black & white', [0, 255]))
+        self.black_and_white_action.connect('activate', self.apply_filter_dialog,
+            'black_white', ('Black & white', [0, 255]))
         self.add_action(self.black_and_white_action)
 
         self.negative_action = Gio.SimpleAction.new('negative', None)
@@ -206,16 +216,19 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.grayscale_action)
 
         self.brightness_action = Gio.SimpleAction.new('brightness', None)
-        self.brightness_action.connect('activate', self.apply_filter_dialog, 'brightness', ('Brightness', [-255, 255]))
+        self.brightness_action.connect('activate', self.apply_filter_dialog,
+            'brightness', ('Brightness', [-255, 255]))
         self.add_action(self.brightness_action)
 
         # Operations
         self.horizontal_mirror_action = Gio.SimpleAction.new('horizontal-mirror', None)
-        self.horizontal_mirror_action.connect('activate', self.apply_filter, 'horizontal_mirror')
+        self.horizontal_mirror_action.connect('activate', self.apply_filter,
+            'horizontal_mirror')
         self.add_action(self.horizontal_mirror_action)
 
         self.vertical_mirror_action = Gio.SimpleAction.new('vertical-mirror', None)
-        self.vertical_mirror_action.connect('activate', self.apply_filter, 'vertical_mirror')
+        self.vertical_mirror_action.connect('activate', self.apply_filter,
+            'vertical_mirror')
         self.add_action(self.vertical_mirror_action)
 
         self.crop_action = Gio.SimpleAction.new('crop', None)
@@ -230,10 +243,12 @@ class Interface(Gtk.ApplicationWindow):
         label = Gtk.Label()
         label.set_markup('<span size="xx-large">What do you want to do?</span>')
         new_button = Gtk.Button('Create a new image', always_show_image=True)
-        new_button.set_image(Gtk.Image.new_from_icon_name('document-new',  Gtk.IconSize.BUTTON))
+        new_button.set_image(Gtk.Image.new_from_icon_name('document-new',
+            Gtk.IconSize.BUTTON))
         new_button.set_action_name('win.new')
         open_button = Gtk.Button('Open an existing image', always_show_image=True)
-        open_button.set_image(Gtk.Image.new_from_icon_name('document-open', Gtk.IconSize.BUTTON))
+        open_button.set_image(Gtk.Image.new_from_icon_name('document-open',
+            Gtk.IconSize.BUTTON))
         open_button.set_action_name('win.open')
         self.homepage.attach(label, 0, 0, 2, 1)
         self.homepage.attach(new_button, 0, 1, 1, 1)
@@ -270,7 +285,10 @@ class Interface(Gtk.ApplicationWindow):
 
     def enable_toolbar(self, enable=True):
         """Set state of actions (depending on whether an image is open)"""
-        actions = ('pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'crop', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror')
+        actions = ('pencil', 'select', 'save', 'save_as', 'undo', 'redo',
+            'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'crop',
+            'details', 'black_and_white', 'negative', 'red', 'green', 'blue',
+            'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror')
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
 
@@ -449,8 +467,10 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_version('0.2')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
-        gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(), Gtk.get_micro_version(), Gtk.get_minor_version())
-        dialog.set_comments('Simple & versatile image editor.\n\nGtk: {}\nPillow: {}'.format(gtk_version, pil_version))
+        gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(),
+            Gtk.get_micro_version(), Gtk.get_minor_version())
+        dialog.set_comments('Simple & versatile image editor.\n\n' \
+            'Gtk: {}\nPillow: {}'.format(gtk_version, pil_version))
         free = 'Distributed under the GNU GPL(v3) license.\n'
         free += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
         free += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
