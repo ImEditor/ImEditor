@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.3] - DEV
+## [0.3] - 2017-11-30
 ### Added
 - Add crop feature.
 
