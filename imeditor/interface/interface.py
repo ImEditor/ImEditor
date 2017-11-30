@@ -47,6 +47,7 @@ class Interface(Gtk.ApplicationWindow):
         submenu_2 = Gio.Menu()
         submenu_2.append('Horizontal mirror', 'win.horizontal-mirror')
         submenu_2.append('Vertical mirror', 'win.vertical-mirror')
+        submenu_2.append('Crop', 'win.crop')
         menu_model.append_submenu('Operations', submenu_2)
         menu_model.append('Image details', 'win.details')
         menu_model.append('About', 'win.about')
@@ -217,6 +218,10 @@ class Interface(Gtk.ApplicationWindow):
         self.vertical_mirror_action.connect('activate', self.apply_filter, 'vertical_mirror')
         self.add_action(self.vertical_mirror_action)
 
+        self.crop_action = Gio.SimpleAction.new('crop', None)
+        self.crop_action.connect('activate', self.crop)
+        self.add_action(self.crop_action)
+
         hb.pack_start(box)
 
         # Homepage
@@ -265,7 +270,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def enable_toolbar(self, enable=True):
         """Set state of actions (depending on whether an image is open)"""
-        actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror']
+        actions = ['pencil', 'select', 'save', 'save_as', 'undo', 'redo', 'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'crop', 'details', 'black_and_white', 'negative', 'red', 'green', 'blue', 'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror']
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
 
@@ -412,6 +417,10 @@ class Interface(Gtk.ApplicationWindow):
     def cut(self, a, b):
         tab = self.get_tab()
         tab.editor.cut()
+
+    def crop(self, a, b):
+        tab = self.get_tab()
+        tab.editor.crop()
 
     def select(self, a, b):
         if self.select_button.get_active():

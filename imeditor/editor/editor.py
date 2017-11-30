@@ -170,6 +170,12 @@ class Editor(object):
         img.paste(blank_img, tuple(self.selection[:2]))
         self.do_change(img)
 
+    def crop(self):
+        """Crop an image"""
+        if self.selection != list(): # a part of the image is selected
+            img = self.image.get_current_img().crop(tuple(self.selection))
+            self.do_change(img)
+
     def save(self):
         """Save the image"""
         if path.isfile(self.image.filename):
