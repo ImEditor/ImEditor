@@ -216,3 +216,22 @@ def file_dialog(parent, action, filename=None):
     filename = dialog.get_filename() if response == Gtk.ResponseType.OK else None
     dialog.destroy()
     return filename
+
+
+def message_dialog(parent, dialog_type, title, text):
+    """Simplify way to show a message in a dialog"""
+    button_type = Gtk.ButtonsType.OK
+    if dialog_type == 'info':
+        dialog_type = Gtk.MessageType.INFO
+    elif dialog_type == 'warning':
+        dialog_type = Gtk.MessageType.WARNING
+    elif dialog_type == 'error':
+        dialog_type = Gtk.MessageType.ERROR
+    elif dialog_type == 'question':
+        dialog_type = Gtk.MessageType.QUESTION
+        button_type = Gtk.ButtonsType.YES_NO
+    dialog = Gtk.MessageDialog(parent, 0, dialog_type, button_type, title)
+    dialog.format_secondary_text(text)
+    response = dialog.run()
+    dialog.destroy()
+    return response

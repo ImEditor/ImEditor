@@ -304,34 +304,23 @@ class Interface(Gtk.ApplicationWindow):
     def open_image(self, a, b):
         """Open an existing image"""
         filename = dialog.file_dialog(self, 'open')
-        if filename:
-            if filename not in self.filenames:
-                if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
-                    img = Image.open(filename)
-                    if img.mode in self.allowed_modes:
-                        self.create_tab(img, filename)
-                        self.filenames.append(filename)
-                    else:
-                        error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
-                            Gtk.ButtonsType.OK, 'Unable to open this file')
-                        error_dialog.format_secondary_text(
-                            'The mode of this image is not supported.')
-                        error_dialog.run()
-                        error_dialog.destroy()
+        if not filename:
+            return
+        if filename not in self.filenames: # is image already opened ?
+            if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
+                img = Image.open(filename)
+                if img.mode in self.allowed_modes:
+                    self.create_tab(img, filename)
+                    self.filenames.append(filename)
                 else:
-                    error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
-                        Gtk.ButtonsType.OK, 'Unable to open this image')
-                    error_dialog.format_secondary_text(
-                        'The format of this file is not supported.')
-                    error_dialog.run()
-                    error_dialog.destroy()
+                    dialog.message_dialog(self, 'error', 'Unable to open this image',
+                        'The mode of this image is not supported.')
             else:
-                warning_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
-                    Gtk.ButtonsType.OK, 'Already open')
-                warning_dialog.format_secondary_text(
-                    'This image is already opened in ImEditor.')
-                warning_dialog.run()
-                warning_dialog.destroy()
+                dialog.message_dialog(self, 'error', 'Unable to open this file',
+                    'The format of this file is not supported.')
+        else:
+            dialog.message_dialog(self, 'warning', 'Already open',
+                'This image is already opened in ImEditor.')
 
     def get_tab(self, page_num=None):
         """Get tab by its num or get the current one"""
@@ -356,17 +345,14 @@ class Interface(Gtk.ApplicationWindow):
         if not page_num:
             page_num = self.notebook.page_num(tab)
         if not tab.editor.image.saved:  # if image is not saved
-            dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.QUESTION,
-                Gtk.ButtonsType.YES_NO, 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename)))
-            dialog.format_secondary_text(
+            title = 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename))
+            response = dialog.message_dialog(self, 'question', title,
                 'If you don\'t save it, the changes made will be permanently lost.')
-            response = dialog.run()
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
                 self.close_tab_by_id(tab, page_num)
             elif response == Gtk.ResponseType.NO:
                 self.close_tab_by_id(tab, page_num)
-            dialog.destroy()
         else:
             self.close_tab_by_id(tab, page_num)
 
