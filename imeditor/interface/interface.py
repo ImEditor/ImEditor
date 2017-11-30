@@ -55,7 +55,7 @@ class Interface(Gtk.ApplicationWindow):
         hb.pack_end(menu_button)
 
         # Actions
-        # Shortcut to close a tab
+        # Close button of tabs
         self.close_action = Gio.SimpleAction.new('close-tab', None)
         self.close_action.connect('activate', self.close_tab)
         self.add_action(self.close_action)
@@ -315,12 +315,12 @@ class Interface(Gtk.ApplicationWindow):
                         error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
                             Gtk.ButtonsType.OK, 'Unable to open this file')
                         error_dialog.format_secondary_text(
-                            'The mode of this file is not supported.')
+                            'The mode of this image is not supported.')
                         error_dialog.run()
                         error_dialog.destroy()
                 else:
                     error_dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
-                        Gtk.ButtonsType.OK, 'Unable to open this file')
+                        Gtk.ButtonsType.OK, 'Unable to open this image')
                     error_dialog.format_secondary_text(
                         'The format of this file is not supported.')
                     error_dialog.run()
