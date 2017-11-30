@@ -83,7 +83,6 @@ class Tab(Gtk.Box):
         self.add(self.sidebar_frame)
 
         self.tab_label = TabLabel(path.basename(filename), img)
-        self.tab_label.button.connect('clicked', self.on_close_button_clicked)
 
         self.update_image(img)
 
@@ -120,10 +119,6 @@ class Tab(Gtk.Box):
 
     def on_pencil_size_changed(self, button):
         self.editor.pencil_size = button.get_value_as_int()
-
-    def on_close_button_clicked(self, button):
-        page_num = self.win.notebook.page_num(self)
-        self.win.close_tab(page_num)
 
 
 class TabLabel(Gtk.Box):

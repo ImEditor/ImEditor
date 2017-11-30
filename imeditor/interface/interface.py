@@ -55,7 +55,7 @@ class Interface(Gtk.ApplicationWindow):
         hb.pack_end(menu_button)
 
         # Actions
-        # Close button of tabs
+        # Shortcut to close a tab
         self.close_action = Gio.SimpleAction.new('close-tab', None)
         self.close_action.connect('activate', self.close_tab)
         self.add_action(self.close_action)
