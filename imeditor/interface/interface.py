@@ -13,6 +13,7 @@ from interface import dialog
 class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
         self.default_title = 'ImEditor'
+        self.default_description = 'Simple & versatile image editor'
         Gtk.Window.__init__(self, title=self.default_title, application=app)
         self.connect('delete-event', self.quit_app)
         self.app = app
@@ -25,7 +26,7 @@ class Interface(Gtk.ApplicationWindow):
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
         hb.props.title = self.default_title
-        hb.props.subtitle = 'Simple & versatile image editor'
+        hb.props.subtitle = self.default_description
         self.set_titlebar(hb)
 
         # Menu
@@ -469,8 +470,9 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(),
             Gtk.get_micro_version(), Gtk.get_minor_version())
-        dialog.set_comments('Simple & versatile image editor.\n\n' \
-            'Gtk: {}\nPillow: {}'.format(gtk_version, pil_version))
+        dialog.set_comments('{}\n\n' \
+            'Gtk: {}\nPillow: {}'.format(self.default_description, gtk_version,
+            pil_version))
         free = 'Distributed under the GNU GPL(v3) license.\n'
         free += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
         free += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
