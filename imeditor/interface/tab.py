@@ -23,7 +23,6 @@ class Tab(Gtk.Box):
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
 
         event_box = Gtk.EventBox()
-        event_box.set_events(Gdk.EventMask.BUTTON1_MOTION_MASK)
         event_box.connect('button-press-event', self.editor.handle_event, 'press')
         event_box.connect('motion-notify-event', self.editor.handle_event, 'move')
         event_box.connect('button-release-event', self.editor.handle_event, 'release')
