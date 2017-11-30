@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Don't permit to open several times the same image.
-- Don't call the close_tab function two times.
+- Don't call the close_tab function two times when closing a tab.
 - Disable mirror actions when no image is open.
 
 ## [0.2] - 2017-11-27
