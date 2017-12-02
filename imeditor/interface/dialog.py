@@ -46,7 +46,8 @@ def params_dialog(parent, title, limits):
     dialog = Dialog(parent, title)
 
     default = (limits[0] + limits[1]) / 2
-    h_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, limits[0], limits[1], 20)
+    h_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, limits[0],
+        limits[1], 20)
     h_scale.set_value(default)
     h_scale.set_hexpand(True)
     h_scale.set_valign(Gtk.Align.START)

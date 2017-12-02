@@ -17,9 +17,11 @@ class Tab(Gtk.Box):
 
         # Image
         if img.mode == 'RGB':
-            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8, img.width, img.height)
+            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8,
+                img.width, img.height)
         elif img.mode == 'RGBA':
-            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8, img.width, img.height)
+            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8,
+                img.width, img.height)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
 
         event_box = Gtk.EventBox()
@@ -40,7 +42,8 @@ class Tab(Gtk.Box):
         }
         """
         style_provider.load_from_data(css)
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
+            style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.add(frame)
@@ -49,7 +52,8 @@ class Tab(Gtk.Box):
         self.sidebar_frame = Gtk.Frame()
 
         # Pencil
-        self.pencil_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, border_width=25, spacing=10)
+        self.pencil_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+            border_width=25, spacing=10)
         pencil_label = Gtk.Label('<b>Pencil</b>', use_markup=True)
         shape_pencil_label = Gtk.Label('Shape')
         pencil_shape_combo = Gtk.ComboBoxText()
@@ -94,9 +98,11 @@ class Tab(Gtk.Box):
         data = GLib.Bytes.new(img.tobytes())
         w, h = img.size
         if img.mode == 'RGB':
-            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, False, 8, w, h, w * 3)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
+                False, 8, w, h, w * 3)
         elif img.mode == 'RGBA':
-            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, True, 8, w, h, w * 4)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
+                True, 8, w, h, w * 4)
         # Update the image and the icon
         self.img_widget.set_from_pixbuf(pixbuf.copy())
         if not tmp:
@@ -137,7 +143,8 @@ class TabLabel(Gtk.Box):
         self.button = Gtk.Button()
         self.button.set_action_name('win.close-tab')
         self.button.set_relief(Gtk.ReliefStyle.NONE)
-        self.button.add(Gtk.Image.new_from_icon_name('window-close', Gtk.IconSize.MENU))
+        self.button.add(Gtk.Image.new_from_icon_name('window-close',
+            Gtk.IconSize.MENU))
 
         self.add(self.icon)
         self.add(self.label)
