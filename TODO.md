@@ -7,5 +7,4 @@
 - Make packages for Windows and macOS.
 - Improve way to manager tasks.
 - Make tabs reordable.
-- Add zoom feature.
 - Add tests.

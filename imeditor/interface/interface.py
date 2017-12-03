@@ -34,6 +34,9 @@ class Interface(Gtk.ApplicationWindow):
         menu_button.set_image(Gtk.Image.new_from_icon_name('open-menu-symbolic',
             Gtk.IconSize.MENU))
         menu_model = Gio.Menu()
+        menu_model.append('Zoom -', 'win.zoom-minus')
+        menu_model.append('Zoom +', 'win.zoom-plus')
+        menu_model.append('Cut', 'win.cut')
         menu_model.append('Copy', 'win.copy')
         menu_model.append('Paste', 'win.paste')
         menu_model.append('Cut', 'win.cut')
@@ -180,6 +183,18 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.cut_action)
         app.add_accelerator('<Primary>x', 'win.cut', None)
 
+        # Zoom -
+        self.zoom_minus_action = Gio.SimpleAction.new('zoom-minus', None)
+        self.zoom_minus_action.connect('activate', self.zoom, -1)
+        self.add_action(self.zoom_minus_action)
+        app.add_accelerator('<Primary>minus', 'win.zoom-minus', None)
+
+        # Zoom +
+        self.zoom_plus_action = Gio.SimpleAction.new('zoom-plus', None)
+        self.zoom_plus_action.connect('activate', self.zoom, 1)
+        self.add_action(self.zoom_plus_action)
+        app.add_accelerator('<Primary>equal', 'win.zoom-plus', None)
+
         # Details
         self.details_action = Gio.SimpleAction.new('details', None)
         self.details_action.connect('activate', self.details)
@@ -284,12 +299,18 @@ class Interface(Gtk.ApplicationWindow):
         # Vars
         self.filenames = list()
 
+    def set_window_title(self, tab):
+        title = '[{}] - {} - {}%'.format(path.basename(tab.editor.image.filename),
+            self.default_title, tab.zoom_level)
+        self.set_title(title)
+
     def enable_toolbar(self, enable=True):
         """Set state of actions (depending on whether an image is open)"""
         actions = ('pencil', 'select', 'save', 'save_as', 'undo', 'redo',
             'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'crop',
             'details', 'black_and_white', 'negative', 'red', 'green', 'blue',
-            'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror')
+            'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror',
+            'zoom_minus', 'zoom_plus')
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
 
@@ -386,10 +407,8 @@ class Interface(Gtk.ApplicationWindow):
         if path.isfile(tab.editor.image.filename):
             self.filenames.remove(tab.editor.image.filename)
 
-    def on_tab_switched(self, notebook, page, page_num):
-        title = '[{}] - {}'.format(path.basename(page.editor.image.filename),
-            self.default_title)
-        self.set_title(title)
+    def on_tab_switched(self, notebook, tab, page_num):
+        self.set_window_title(tab)
 
     def save(self, a, b):
         tab = self.get_tab()
@@ -410,6 +429,10 @@ class Interface(Gtk.ApplicationWindow):
     def redo(self, a, b):
         tab = self.get_tab()
         tab.editor.redo()
+
+    def zoom(self, a, b, value):
+        tab = self.get_tab()
+        tab.zoom(value)
 
     def copy(self, a, b):
         tab = self.get_tab()

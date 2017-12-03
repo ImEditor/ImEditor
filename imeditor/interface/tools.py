@@ -2,7 +2,19 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, GdkPixbuf, GLib
+
+def pil_to_pixbuf(img):
+    """Convert the PIL image to a Pixbuf usable by Gtk"""
+    data = GLib.Bytes.new(img.tobytes())
+    w, h = img.size
+    if img.mode == 'RGB':
+        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
+            False, 8, w, h, w * 3)
+    elif img.mode == 'RGBA':
+        pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
+            True, 8, w, h, w * 4)
+    return pixbuf
 
 
 class SpinButton(Gtk.SpinButton):

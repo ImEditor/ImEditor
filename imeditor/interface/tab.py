@@ -2,11 +2,11 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
+from gi.repository import Gtk, Gdk, GdkPixbuf
 from os import path
 
 from editor.editor import Editor
-from interface.tools import SpinButton
+from interface.tools import pil_to_pixbuf, SpinButton
 
 
 class Tab(Gtk.Box):
@@ -87,26 +87,38 @@ class Tab(Gtk.Box):
 
         self.tab_label = TabLabel(path.basename(filename), img)
 
+        # Vars
+        self.zoom_level = 100
+        self.width = img.width
+        self.height = img.height
+        self.disp_width = img.width
+        self.disp_height = img.height
+        self.last_pixbuf = pixbuf
+
+        # Initalize image
         self.update_image(img)
 
         self.show_all()
         self.enable_sidebar(False)
 
-    def update_image(self, img, tmp=False):
-        """Convert the PIL image to a Pixbuf usable by Gtk"""
+    def update_image(self, img=None, tmp=False):
+        """Refresh the displayed image"""
+        # Vars
+        width, height = self.width, self.height
         # Create pixbuf
-        data = GLib.Bytes.new(img.tobytes())
-        w, h = img.size
-        if img.mode == 'RGB':
-            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
-                False, 8, w, h, w * 3)
-        elif img.mode == 'RGBA':
-            pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB,
-                True, 8, w, h, w * 4)
+        pixbuf = pil_to_pixbuf(img) if img else self.last_pixbuf
         # Update the image and the icon
-        self.img_widget.set_from_pixbuf(pixbuf.copy())
+        if self.zoom_level != 100:
+            # Change displaying size
+            width *= self.zoom_level / 100
+            height *= self.zoom_level / 100
+        pixbuf = pixbuf.scale_simple(width, height,
+            GdkPixbuf.InterpType.BILINEAR)
+        self.img_widget.set_from_pixbuf(pixbuf)
+        self.disp_width, self.disp_height = width, height
         if not tmp:
             self.tab_label.set_icon(pixbuf)
+            self.last_pixbuf = pixbuf
 
     def enable_sidebar(self, enable=True):
         if enable:
@@ -115,6 +127,16 @@ class Tab(Gtk.Box):
                 self.pencil_box.show()
         else:
             self.sidebar_frame.hide()
+
+    def zoom(self, value):
+        # Limit zoom between 10-300%
+        self.zoom_level += value * 10
+        if self.zoom_level < 10:
+            self.zoom_level = 10
+        elif self.zoom_level > 300:
+            self.zoom_level = 300
+        self.update_image(tmp=True)
+        self.win.set_window_title(self)
 
     def on_pencil_shape_changed(self, button):
         self.editor.pencil_shape = button.get_active_text().lower()

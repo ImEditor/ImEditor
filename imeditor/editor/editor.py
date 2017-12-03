@@ -38,7 +38,12 @@ class Editor(object):
 
     def do_change(self, img):
         """Update displayed image and save it in the history"""
+        # Update size
+        self.tab.width = img.width
+        self.tab.height = img.height
+        # Update image
         self.tab.update_image(img)
+        # Save it in the history
         self.image.forget_img()
         self.image.add_img(img)
         self.image.increment_index()
@@ -98,8 +103,14 @@ class Editor(object):
             img = self.image.get_current_img()
         else:
             img = self.image.tmp_img
-        mouse_coords = [round(event.x), round(event.y)]
-        getattr(self, task + "_task")(img.copy(), mouse_coords)
+        if self.tab.zoom_level != 100:
+            x, y = event.x, event.y
+            x = x * self.tab.width / self.tab.disp_width
+            y = y * self.tab.height / self.tab.disp_height
+            mouse_coords = [round(x), round(y)]
+        else:
+            mouse_coords = [round(event.x), round(event.y)]
+        getattr(self, task + '_task')(img.copy(), mouse_coords)
 
     def press_task(self, img, mouse_coords):
         """Press event"""
