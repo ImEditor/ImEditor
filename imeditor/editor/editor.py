@@ -82,19 +82,17 @@ class Editor(object):
 
     def select(self):
         """Select a part of the image"""
-        if self.task != 0:
-            if self.task == 1:  # if user is pasting an image
-                # paste the image if the user is changing tool (select)
-                self.do_change(self.image.tmp_img)
-                self.image.tmp_img = None
-            self.task = 0
-            self.change_cursor('default')
+        if self.task == 1:  # if user is pasting an image
+            # paste the image if the user is changing tool (select)
+            self.do_change(self.image.tmp_img)
+            self.image.tmp_img = None
+        self.task = 0
+        self.change_cursor('default')
 
     def pencil(self):
         """Draw on the image"""
-        if self.task != 2:
-            self.task = 2
-            self.change_cursor('draw')
+        self.task = 2
+        self.change_cursor('draw')
 
     def handle_event(self, widget, event, task):
         """Call the event with the needed vars"""
@@ -148,7 +146,8 @@ class Editor(object):
     def change_cursor(self, cursor):
         """Change cursor that hovers the image"""
         img_widget = self.tab.img_widget.get_window()
-        img_widget.set_cursor(self.tab.win.cursors[cursor])
+        if img_widget:
+            img_widget.set_cursor(self.tab.win.cursors[cursor])
 
     def copy(self):
         """Copy a part of/or the entire image"""

@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Add zoom feature.
 
+### Fixed
+- Fix behavior of tools buttons when switching tab.
+
 ## [0.3] - 2017-11-30
 ### Added
 - Add crop feature.

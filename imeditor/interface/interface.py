@@ -70,7 +70,7 @@ class Interface(Gtk.ApplicationWindow):
         self.pencil_action = Gio.SimpleAction.new('pencil', None)
         self.pencil_action.connect('activate', self.pencil)
         self.add_action(self.pencil_action)
-        self.pencil_button = Gtk.ToggleButton()
+        self.pencil_button = Gtk.Button()
         self.pencil_button.set_image(Gtk.Image.new_from_file('assets/pencil.png'))
         self.pencil_button.set_action_name('win.pencil')
         hb.pack_end(self.pencil_button)
@@ -79,8 +79,7 @@ class Interface(Gtk.ApplicationWindow):
         self.select_action = Gio.SimpleAction.new('select', None)
         self.select_action.connect('activate', self.select)
         self.add_action(self.select_action)
-        self.select_button = Gtk.ToggleButton()
-        self.select_button.set_active(True)
+        self.select_button = Gtk.Button()
         self.select_button.set_image(Gtk.Image.new_from_file('assets/select.png'))
         self.select_button.set_action_name('win.select')
         hb.pack_end(self.select_button)
@@ -373,11 +372,10 @@ class Interface(Gtk.ApplicationWindow):
         tab = Tab(self, img, filename, saved)
         page_num = self.notebook.get_current_page() + 1
         nb_tabs = self.notebook.get_n_pages()
-        self.notebook.insert_page(tab, tab.tab_label, page_num)
         if nb_tabs == 0:
             self.enable_homescreen(False)
+        self.notebook.insert_page(tab, tab.tab_label, page_num)
         self.notebook.set_current_page(page_num)
-        self.enable_toolbar()
 
     def close_tab(self, a=None, b=None, page_num=None):
         """Close tab by user action"""
@@ -402,13 +400,13 @@ class Interface(Gtk.ApplicationWindow):
     def close_tab_by_id(self, tab, page_num):
         """Close tab by its id"""
         tab.editor.close_image()
-        self.notebook.remove_page(page_num)
-        self.select_button.set_active(True)
         if path.isfile(tab.editor.image.filename):
             self.filenames.remove(tab.editor.image.filename)
+        self.notebook.remove_page(page_num)
 
     def on_tab_switched(self, notebook, tab, page_num):
         self.set_window_title(tab)
+        self.select_current_tool(tab)
 
     def save(self, a, b):
         tab = self.get_tab()
@@ -450,24 +448,27 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.crop()
 
-    def select(self, a, b):
-        if self.select_button.get_active():
-            self.pencil_button.set_active(False)
-            if self.notebook.get_n_pages() != 0:
-                tab = self.get_tab()
-                tab.editor.select()
-                tab.enable_sidebar(False)
-        elif not self.pencil_button.get_active():
-            self.select_button.set_active(True)
-
-    def pencil(self, a, b):
-        if self.pencil_button.get_active():
-            self.select_button.set_active(False)
+    def select(self, a=None, b=None, tab=None):
+        self.select_button.set_sensitive(False)
+        self.pencil_button.set_sensitive(True)
+        if not tab:
             tab = self.get_tab()
-            tab.editor.pencil()
-            tab.enable_sidebar()
-        else:
-            self.select_button.set_active(True)
+        tab.editor.select()
+        tab.enable_sidebar(False)
+
+    def pencil(self, a=None, b=None, tab=None):
+        self.pencil_button.set_sensitive(False)
+        self.select_button.set_sensitive(True)
+        if not tab:
+            tab = self.get_tab()
+        tab.editor.pencil()
+        tab.enable_sidebar()
+
+    def select_current_tool(self, tab):
+        if tab.editor.task == 0:
+            self.select(tab=tab)
+        elif tab.editor.task == 2:
+            self.pencil(tab=tab)
 
     def apply_filter(self, a, b, func, value=None):
         tab = self.get_tab()
