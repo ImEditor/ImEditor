@@ -73,26 +73,26 @@ def details_dialog(parent, infos):
     dialog = Dialog(parent, 'Image details')
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
-    grid.attach(Gtk.Label('<b>Mode</b>', use_markup=True, xalign=0.0), 0, 0, 1, 1)
-    grid.attach(Gtk.Label(infos['mode'], xalign=0.0), 1, 0, 1, 1)
-    grid.attach(Gtk.Label('<b>Size</b>', use_markup=True, xalign=0.0), 0, 1, 1, 1)
-    grid.attach(Gtk.Label(infos['size'], xalign=0.0), 1, 1, 1, 1)
+    grid.attach(Gtk.Label('<b>Name</b>', use_markup=True, xalign=0.0), 0, 0, 1, 1)
+    grid.attach(Gtk.Label(infos['name'], xalign=0.0), 1, 0, 1, 1)
+    grid.attach(Gtk.Label('<b>Mode</b>', use_markup=True, xalign=0.0), 0, 1, 1, 1)
+    grid.attach(Gtk.Label(infos['mode'], xalign=0.0), 1,1, 1, 1)
+    grid.attach(Gtk.Label('<b>Size</b>', use_markup=True, xalign=0.0), 0, 2, 1, 1)
+    grid.attach(Gtk.Label(infos['size'], xalign=0.0), 1, 2, 1, 1)
 
-    if len(infos) > 2:
-        grid.attach(Gtk.Label('<b>Weight</b>', use_markup=True, xalign=0.0), 0, 2, 1, 1)
-        grid.attach(Gtk.Label(infos['weight'], xalign=0.0), 1, 2, 1, 1)
-        grid.attach(Gtk.Label('<b>Path</b>', use_markup=True, xalign=0.0), 0, 3, 1, 1)
-        grid.attach(Gtk.Label(infos['path'], xalign=0.0), 1, 3, 1, 1)
-        grid.attach(Gtk.Label('<b>Last access</b>', use_markup=True, xalign=0.0), 0, 4, 1, 1)
-        grid.attach(Gtk.Label(infos['last_access'], xalign=0.0), 1, 4, 1, 1)
-        grid.attach(Gtk.Label('<b>Last change</b>', use_markup=True, xalign=0.0), 0, 5, 1, 1)
-        grid.attach(Gtk.Label(infos['last_change'], xalign=0.0), 1, 5, 1, 1)
+    if len(infos) > 3:
+        grid.attach(Gtk.Label('<b>Weight</b>', use_markup=True, xalign=0.0), 0, 3, 1, 1)
+        grid.attach(Gtk.Label(infos['weight'], xalign=0.0), 1, 3, 1, 1)
+        grid.attach(Gtk.Label('<b>Folder</b>', use_markup=True, xalign=0.0), 0, 4, 1, 1)
+        grid.attach(Gtk.Label(infos['folder'], xalign=0.0), 1, 4, 1, 1)
+        grid.attach(Gtk.Label('<b>Last change</b>', use_markup=True, xalign=0.0), 0, 6, 1, 1)
+        grid.attach(Gtk.Label(infos['last_change'], xalign=0.0), 1, 6, 1, 1)
 
     close_button = Gtk.Button.new_with_label('Close')
     close_button.connect('clicked', dialog.close)
     close_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
-    grid.attach(close_button, 0, 6, 2, 1)
+    grid.attach(close_button, 0, 7, 2, 1)
 
     dialog.dialog_box.add(grid)
     dialog.launch()

@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Add zoom feature.
 
+### Changed
+- Rework a few details in details dialog.
+
 ### Fixed
 - Fix behavior of tools buttons when switching tab.
 
