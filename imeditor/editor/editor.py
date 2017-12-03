@@ -11,9 +11,8 @@ from editor.draw import draw_rectangle, draw_ellipse
 
 
 class Editor(object):
-    def __init__(self, win, tab, img, filename, saved):
+    def __init__(self, tab, img, filename, saved):
         super(Editor, self).__init__()
-        self.win = win
         self.tab = tab
 
         self.image = ImageObject(img, filename, saved)
@@ -76,7 +75,7 @@ class Editor(object):
 
     def apply_filter_dialog(self, func, params):
         """Apply a filter from filters/base.py that need a GUI"""
-        params_dialog = dialog.params_dialog(self.win, *params)
+        params_dialog = dialog.params_dialog(self.tab.win, *params)
         value = params_dialog.get_values()
         if value:
             self.apply_filter(func, value)
@@ -149,7 +148,7 @@ class Editor(object):
     def change_cursor(self, cursor):
         """Change cursor that hovers the image"""
         img_widget = self.tab.img_widget.get_window()
-        img_widget.set_cursor(self.win.cursors[cursor])
+        img_widget.set_cursor(self.tab.win.cursors[cursor])
 
     def copy(self):
         """Copy a part of/or the entire image"""
@@ -198,11 +197,11 @@ class Editor(object):
 
     def save_as(self):
         """Ask where to save the image"""
-        filename = dialog.file_dialog(self.win, 'save', path.basename(self.image.filename))
+        filename = dialog.file_dialog(self.tab.win, 'save', path.basename(self.image.filename))
         if filename:
             img = self.image.get_current_img()
             img.save(filename)
-            self.win.filenames.append(filename)
+            self.tab.win.filenames.append(filename)
             self.image.filename = filename
             self.tab.tab_label.set_title(path.basename(filename))
             self.image.saved = True
@@ -210,7 +209,7 @@ class Editor(object):
     def details(self):
         """Get informations about the image"""
         img_infos = get_infos(self.image.get_current_img(), self.image.filename)
-        dialog.details_dialog(self.win, img_infos)
+        dialog.details_dialog(self.tab.win, img_infos)
 
     def close_image(self):
         """Close all images in the history"""

@@ -13,7 +13,7 @@ class Tab(Gtk.Box):
     def __init__(self, win, img, filename, saved):
         Gtk.Box.__init__(self)
         self.win = win
-        self.editor = Editor(self.win, self, img, filename, saved)
+        self.editor = Editor(self, img, filename, saved)
 
         # Image
         if img.mode == 'RGB':
@@ -99,6 +99,7 @@ class Tab(Gtk.Box):
         self.update_image(img)
 
         self.show_all()
+        self.pencil_box.hide()
         self.enable_sidebar(False)
 
     def update_image(self, img=None, tmp=False):
@@ -123,7 +124,7 @@ class Tab(Gtk.Box):
     def enable_sidebar(self, enable=True):
         if enable:
             self.sidebar_frame.show()
-            if self.editor.task == 0:
+            if self.editor.task == 2:
                 self.pencil_box.show()
         else:
             self.sidebar_frame.hide()

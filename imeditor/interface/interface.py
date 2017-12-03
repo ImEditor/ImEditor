@@ -455,8 +455,8 @@ class Interface(Gtk.ApplicationWindow):
             self.pencil_button.set_active(False)
             if self.notebook.get_n_pages() != 0:
                 tab = self.get_tab()
-                tab.enable_sidebar(False)
                 tab.editor.select()
+                tab.enable_sidebar(False)
         elif not self.pencil_button.get_active():
             self.select_button.set_active(True)
 
@@ -464,8 +464,8 @@ class Interface(Gtk.ApplicationWindow):
         if self.pencil_button.get_active():
             self.select_button.set_active(False)
             tab = self.get_tab()
-            tab.enable_sidebar()
             tab.editor.pencil()
+            tab.enable_sidebar()
         else:
             self.select_button.set_active(True)
 
