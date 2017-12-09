@@ -31,6 +31,7 @@ class Editor(object):
         self.pencil_size = 8
 
     def change_task(self, task='select'):
+        """Change active task and its cursor"""
         if task == 'select':
             self.task = 0
             self.change_cursor('default')
@@ -40,6 +41,12 @@ class Editor(object):
         elif task == 'pencil':
             self.task = 2
             self.change_cursor('draw')
+
+    def change_cursor(self, cursor):
+        """Change cursor that hovers the image"""
+        img_widget = self.tab.img_widget.get_window()
+        if img_widget:
+            img_widget.set_cursor(self.tab.win.cursors[cursor])
 
     def do_tmp_change(self, img):
         """Update displayed image without modifying the history"""
@@ -147,17 +154,11 @@ class Editor(object):
         elif self.task == 2:
             self.do_change(img)
 
-    def change_cursor(self, cursor):
-        """Change cursor that hovers the image"""
-        img_widget = self.tab.img_widget.get_window()
-        if img_widget:
-            img_widget.set_cursor(self.tab.win.cursors[cursor])
-
     def copy(self):
         """Copy a part of/or the entire image"""
-        if self.selection != list(): # a part of the image is selected
+        if self.selection != list():  # a part of the image is selected
             self.selected_img = self.image.get_current_img().crop(tuple(self.selection))
-        else: # copy the entire image
+        else:  # copy the entire image
             self.selection = (0, 0)
             self.selected_img = self.image.get_current_img()
 
@@ -184,7 +185,7 @@ class Editor(object):
 
     def crop(self):
         """Crop an image"""
-        if self.selection != list(): # a part of the image is selected
+        if self.selection != list():  # a part of the image is selected
             img = self.image.get_current_img().crop(tuple(self.selection))
             self.do_change(img)
 
