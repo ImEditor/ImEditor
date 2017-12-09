@@ -37,6 +37,8 @@ class Editor(object):
 
     def do_change(self, img):
         """Update displayed image and save it in the history"""
+        if self.image.tmp_img:
+            self.image.tmp_img = None  # remove tmp image
         # Update size
         self.tab.width = img.width
         self.tab.height = img.height
@@ -85,7 +87,6 @@ class Editor(object):
         if self.task == 1:  # if user is pasting an image
             # paste the image if the user is changing tool (select)
             self.do_change(self.image.tmp_img)
-            self.image.tmp_img = None
         self.task = 0
         self.change_cursor('default')
 
@@ -142,13 +143,11 @@ class Editor(object):
         if self.task == 0:
             self.selection.extend(mouse_coords)
         elif self.task == 1:
-            self.image.tmp_img = None
             self.selected_img = None
             self.do_change(img)
             self.task = 0
             self.change_cursor('default')
         elif self.task == 2:
-            self.image.tmp_img = None
             self.do_change(img)
 
     def change_cursor(self, cursor):
