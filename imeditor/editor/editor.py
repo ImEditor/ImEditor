@@ -114,7 +114,9 @@ class Editor(object):
         if self.task == 0:
             self.selection = mouse_coords
             self.tab.update_image(img)
-        elif (self.task == 1 and self.selected_img) or self.task == 2:
+        elif (self.task == 1 and self.selected_img):
+            self.move_task(img, mouse_coords)
+        elif self.task == 2:
             self.move_task(img, mouse_coords)
 
     def move_task(self, img, mouse_coords):
@@ -139,6 +141,12 @@ class Editor(object):
         """Release event"""
         if self.task == 0:
             self.selection.extend(mouse_coords)
+        elif self.task == 1:
+            self.image.tmp_img = None
+            self.selected_img = None
+            self.do_change(img)
+            self.task = 0
+            self.change_cursor('default')
         elif self.task == 2:
             self.image.tmp_img = None
             self.do_change(img)
@@ -167,9 +175,9 @@ class Editor(object):
                 xy = get_middle_mouse(self.selected_img.size, mouse_coords)
             else:
                 xy = (0, 0)
-            new_img = self.image.get_current_img().copy()
-            new_img.paste(self.selected_img, xy)
-            self.do_tmp_change(new_img)
+            img = self.image.get_current_img().copy()
+            img.paste(self.selected_img, xy)
+            self.do_tmp_change(img)
 
     def cut(self):
         """Copy in removing the selected part"""

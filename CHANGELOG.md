@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Rework a few details in details dialog.
+- Improve behavior of copy/paste/cut actions.
 
 ### Fixed
 - Fix behavior of tools buttons when switching tab.
