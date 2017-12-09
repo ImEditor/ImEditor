@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Fix behavior of tools buttons when switching tab.
+- Various optimizations.
 
 ## [0.3] - 2017-11-30
 ### Added

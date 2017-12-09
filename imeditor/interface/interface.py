@@ -299,8 +299,10 @@ class Interface(Gtk.ApplicationWindow):
         self.filenames = list()
 
     def set_window_title(self, tab):
-        title = '[{}] - {} - {}%'.format(path.basename(tab.editor.image.filename),
-            self.default_title, tab.zoom_level)
+        title = '[{}] - {}'.format(path.basename(tab.editor.image.filename),
+            self.default_title)
+        if tab.zoom_level != 100:
+            title += '- {}%'.format(tab.zoom_level)
         self.set_title(title)
 
     def enable_toolbar(self, enable=True):
