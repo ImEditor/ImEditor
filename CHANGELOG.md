@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.4] - DEV
+## [0.4] - 2017-12-09
 ### Added
 - Add zoom feature.
 
