@@ -24,7 +24,7 @@ class Editor(object):
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
 
         # Selection vars
-        self.selection = [0, 0]
+        self.selection = list()
         self.selected_img = None
 
         # Pencil settings
@@ -152,7 +152,7 @@ class Editor(object):
         elif self.task == 1:
             self.do_change(img)
             self.change_task()
-            self.selection = [0, 0]
+            self.selection = list()
         elif self.task == 2:
             self.do_change(img)
 
@@ -162,6 +162,7 @@ class Editor(object):
         if len(self.selection) == 4:  # a part of the image is selected
             self.selected_img = img.crop(tuple(self.selection))
         else:  # copy the entire image
+            self.selection = [0, 0]
             self.selected_img = img
 
     def paste(self, mouse_coords=None):
@@ -176,6 +177,7 @@ class Editor(object):
             img = self.image.get_current_img().copy()
             img.paste(self.selected_img, xy)
             self.do_tmp_change(img)
+            self.selection = list()
 
     def cut(self):
         """Copy in removing the selected part"""
@@ -185,6 +187,7 @@ class Editor(object):
             'rgba(255, 255, 255, 0)')
         img.paste(blank_img, tuple(self.selection[:2]))
         self.do_change(img)
+        self.selection = list()
 
     def crop(self):
         """Crop an image"""
