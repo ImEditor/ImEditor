@@ -22,7 +22,9 @@ class Editor(object):
 
         # Tasks
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
-        self.selection = list()
+
+        # Selection vars
+        self.selection = [0, 0]
         self.selected_img = None
 
         # Pencil settings
@@ -120,7 +122,7 @@ class Editor(object):
         if self.task == 0:
             self.selection = mouse_coords
             self.tab.update_image(img)
-        elif (self.task == 1 and self.selected_img):
+        elif (self.task == 1 and self.selection):
             self.move_task(img, mouse_coords)
         elif self.task == 2:
             self.move_task(img, mouse_coords)
@@ -148,19 +150,19 @@ class Editor(object):
         if self.task == 0:
             self.selection.extend(mouse_coords)
         elif self.task == 1:
-            self.selected_img = None
             self.do_change(img)
             self.change_task()
+            self.selection = [0, 0]
         elif self.task == 2:
             self.do_change(img)
 
     def copy(self):
         """Copy a part of/or the entire image"""
-        if self.selection != list():  # a part of the image is selected
-            self.selected_img = self.image.get_current_img().crop(tuple(self.selection))
+        img = self.image.get_current_img().copy()
+        if len(self.selection) == 4:  # a part of the image is selected
+            self.selected_img = img.crop(tuple(self.selection))
         else:  # copy the entire image
-            self.selection = (0, 0)
-            self.selected_img = self.image.get_current_img()
+            self.selected_img = img
 
     def paste(self, mouse_coords=None):
         """Paste the copied image"""
@@ -178,14 +180,15 @@ class Editor(object):
     def cut(self):
         """Copy in removing the selected part"""
         self.copy()
-        blank_img = Image.new('RGBA', self.selected_img.size, (255, 255, 255, 0))
         img = self.image.get_current_img().copy()
+        blank_img = Image.new(img.mode, self.selected_img.size,
+            'rgba(255, 255, 255, 0)')
         img.paste(blank_img, tuple(self.selection[:2]))
         self.do_change(img)
 
     def crop(self):
         """Crop an image"""
-        if self.selection != list():  # a part of the image is selected
+        if self.selection:  # a part of the image is selected
             img = self.image.get_current_img().crop(tuple(self.selection))
             self.do_change(img)
 
