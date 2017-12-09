@@ -93,17 +93,6 @@ class Editor(object):
         if value:
             self.apply_filter(func, value)
 
-    def select(self):
-        """Select a part of the image"""
-        if self.task == 1:  # if user is pasting an image
-            # paste the image if the user is changing tool (select)
-            self.do_change(self.image.tmp_img)
-        self.change_task()
-
-    def pencil(self):
-        """Draw on the image"""
-        self.change_task('pencil')
-
     def handle_event(self, widget, event, task):
         """Call the event with the needed vars"""
         if not self.image.tmp_img:

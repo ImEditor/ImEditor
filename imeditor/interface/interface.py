@@ -455,7 +455,7 @@ class Interface(Gtk.ApplicationWindow):
         self.pencil_button.set_sensitive(True)
         if not tab:
             tab = self.get_tab()
-        tab.editor.select()
+        tab.editor.change_task()
         tab.enable_sidebar(False)
 
     def pencil(self, a=None, b=None, tab=None):
@@ -463,7 +463,7 @@ class Interface(Gtk.ApplicationWindow):
         self.select_button.set_sensitive(True)
         if not tab:
             tab = self.get_tab()
-        tab.editor.pencil()
+        tab.editor.change_task('pencil')
         tab.enable_sidebar()
 
     def select_current_tool(self, tab):
