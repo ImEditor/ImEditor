@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - Add zoom feature.
 
 ### Changed
-- Rework a few details in details dialog.
+- Rework a few things in details dialog.
 - Improve behavior of copy/paste/cut actions.
 
 ### Fixed
