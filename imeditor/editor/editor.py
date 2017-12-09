@@ -30,6 +30,17 @@ class Editor(object):
         self.pencil_color = 'black'
         self.pencil_size = 8
 
+    def change_task(self, task='select'):
+        if task == 'select':
+            self.task = 0
+            self.change_cursor('default')
+        elif task == 'paste':
+            self.task = 1
+            self.change_cursor('move')
+        elif task == 'pencil':
+            self.task = 2
+            self.change_cursor('draw')
+
     def do_tmp_change(self, img):
         """Update displayed image without modifying the history"""
         self.tab.update_image(img, True)
@@ -87,13 +98,11 @@ class Editor(object):
         if self.task == 1:  # if user is pasting an image
             # paste the image if the user is changing tool (select)
             self.do_change(self.image.tmp_img)
-        self.task = 0
-        self.change_cursor('default')
+        self.change_task()
 
     def pencil(self):
         """Draw on the image"""
-        self.task = 2
-        self.change_cursor('draw')
+        self.change_task('pencil')
 
     def handle_event(self, widget, event, task):
         """Call the event with the needed vars"""
@@ -145,8 +154,7 @@ class Editor(object):
         elif self.task == 1:
             self.selected_img = None
             self.do_change(img)
-            self.task = 0
-            self.change_cursor('default')
+            self.change_task()
         elif self.task == 2:
             self.do_change(img)
 
@@ -168,8 +176,7 @@ class Editor(object):
         """Paste the copied image"""
         if self.selected_img:
             if self.task != 1:
-                self.task = 1
-                self.change_cursor('move')
+                self.change_task('paste')
             if mouse_coords:
                 xy = get_middle_mouse(self.selected_img.size, mouse_coords)
             else:
