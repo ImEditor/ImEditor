@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.5] - DEV
+### Fixed
+- Fix copying of entire image when selecting a 0px area.
+
 ## [0.4] - 2017-12-09
 ### Added
 - Add zoom feature.

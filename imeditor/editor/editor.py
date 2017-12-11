@@ -147,7 +147,7 @@ class Editor(object):
 
     def release_task(self, img, mouse_coords):
         """Release event"""
-        if self.task == 0:
+        if self.task == 0 and mouse_coords != self.selection:
             self.selection.extend(mouse_coords)
         elif self.task == 1:
             self.do_change(img)
