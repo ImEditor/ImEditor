@@ -130,8 +130,7 @@ class Editor(object):
     def move_task(self, img, mouse_coords):
         """Move event"""
         if self.task == 0:
-            coords = ((self.selection[0], self.selection[1]),
-                (mouse_coords[0], mouse_coords[1]))
+            coords = (self.selection, mouse_coords)
             draw_rectangle(img, coords, 0, outline_color='black')
             self.tab.update_image(img)
         elif self.task == 1:
