@@ -499,10 +499,10 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_comments('{}\n\n' \
             'Gtk: {}\nPillow: {}'.format(self.default_description, gtk_version,
             pil_version))
-        free = 'Distributed under the GNU GPL(v3) license.\n'
-        free += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
-        free += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
-        free += 'http://www.flaticon.com/authors/madebyoliver'
-        dialog.set_license(free)
+        text = 'Distributed under the GNU GPL(v3) license.\n'
+        text += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
+        text += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
+        text += 'http://www.flaticon.com/authors/madebyoliver'
+        dialog.set_license(text)
         dialog.run()
         dialog.destroy()
