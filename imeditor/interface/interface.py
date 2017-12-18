@@ -12,9 +12,9 @@ from interface import dialog
 
 class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
-        self.default_title = 'ImEditor'
-        self.default_description = 'Simple & versatile image editor'
-        Gtk.Window.__init__(self, title=self.default_title, application=app)
+        self.program_title = 'ImEditor'
+        self.program_description = 'Simple & versatile image editor'
+        Gtk.Window.__init__(self, title=self.program_title, application=app)
         self.connect('delete-event', self.quit_app)
         self.app = app
         self.set_default_size(950, 550)
@@ -25,8 +25,8 @@ class Interface(Gtk.ApplicationWindow):
         # Header Bar
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
-        hb.props.title = self.default_title
-        hb.props.subtitle = self.default_description
+        hb.props.title = self.program_title
+        hb.props.subtitle = self.program_description
         self.set_titlebar(hb)
 
         # Menu
@@ -300,7 +300,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def set_window_title(self, tab):
         title = '[{}] - {}'.format(path.basename(tab.editor.image.filename),
-            self.default_title)
+            self.program_title)
         if tab.zoom_level != 100:
             title += '- {}%'.format(tab.zoom_level)
         self.set_title(title)
@@ -317,7 +317,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def enable_homescreen(self, enable=True):
         if enable:
-            self.set_title(self.default_title)
+            self.set_title(self.program_title)
             self.notebook.hide()
             self.homepage.show()
             self.enable_toolbar(False)
@@ -490,14 +490,14 @@ class Interface(Gtk.ApplicationWindow):
     def about(self, a, b):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo(self.logo)
-        dialog.set_program_name(self.default_title)
+        dialog.set_program_name(self.program_title)
         dialog.set_version('0.4')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(),
             Gtk.get_micro_version(), Gtk.get_minor_version())
         dialog.set_comments('{}\n\n' \
-            'Gtk: {}\nPillow: {}'.format(self.default_description, gtk_version,
+            'Gtk: {}\nPillow: {}'.format(self.program_description, gtk_version,
             pil_version))
         text = 'Distributed under the GNU GPL(v3) license.\n'
         text += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
