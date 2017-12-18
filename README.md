@@ -1,4 +1,4 @@
-# ImEditor
+# ImEditor 0.4
 
 [![Code Health](https://landscape.io/github/ImEditor/ImEditor/master/landscape.svg?style=flat)](https://landscape.io/github/ImEditor/ImEditor/master)
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
@@ -7,9 +7,29 @@
 
 ImEditor is a simple & versatile image editor.
 
-## Version
+### Functionalities
 
-Current version is 0.4.
+- Tabs
+- Create or open an image
+- Drawing capacities
+- Apply filters on an image
+- History feature
+- Copy/paste/cut features
+- Selection feature
+- Few basic operations (rotate, image details,…)
+
+### Supported formats
+
+- PNG
+- JPEG
+- WEBP
+- BMP
+- ICO
+
+### Supported modes
+
+- RGB
+- RGBA
 
 ## Tech
 
