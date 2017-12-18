@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from os import stat, path
-import datetime
+from datetime import datetime
 
 
 def get_middle_mouse(size, mouse_coords):
@@ -11,16 +11,17 @@ def get_middle_mouse(size, mouse_coords):
 
 def get_infos(img, filename):
     """Fetch informations about an image"""
-    img_infos = {}
     # Basic infos
-    img_infos['name'] = path.basename(filename)
-    img_infos['mode'] = img.mode
-    img_infos['size'] = '{} x {} pixels'.format(str(img.width), str(img.height))
-    # Infos available only if the image is save on the disk
+    img_infos = {
+        'name': path.basename(filename),
+        'mode': img.mode,
+        'size': '{} x {} pixels'.format(str(img.width), str(img.height))
+    }
+    # Infos available only if the image is saved on the disk
     if path.isfile(filename):
         img_stat = stat(filename)
         img_infos['weight'] = '{}ko ({}o)'.format(str(round(img_stat.st_size / 1000, 2)),
                                                     str(round(img_stat.st_size, 2)))
         img_infos['folder'] = path.dirname(filename)
-        img_infos['last_change'] = datetime.datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
+        img_infos['last_change'] = datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
     return img_infos
