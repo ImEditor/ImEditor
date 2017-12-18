@@ -169,12 +169,15 @@ class TabLabel(Gtk.Box):
         self.show_all()
 
     def set_title(self, title):
-        max_size = 30
+        """Change the title of a tab"""
+        max_size = 30  # limit the length of the title
         if len(title) > max_size:
             title = title[:max_size - 3] + "..."
         self.label.set_text(title)
 
     def set_icon(self, pixbuf):
+        """Change the preview icon"""
+        # Find height and width to preserve ration of the image in the icon
         width, height = pixbuf.get_width(), pixbuf.get_height()
         if width > height:
             icon_width = 24
