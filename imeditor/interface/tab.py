@@ -84,10 +84,8 @@ class Tab(Gtk.Box):
 
         # Vars
         self.zoom_level = 100
-        self.width = img.width
-        self.height = img.height
-        self.disp_width = img.width
-        self.disp_height = img.height
+        self.width = self.disp_width = img.width
+        self.height = self.disp_height = img.height
         self.last_pixbuf = pixbuf
 
         # Initalize image
