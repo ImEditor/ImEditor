@@ -7,6 +7,7 @@ import sys
 
 from interface.interface import Interface
 
+
 class Application(Gtk.Application):
     def __init__(self):
         Gtk.Application.__init__(self)

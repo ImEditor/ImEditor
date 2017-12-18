@@ -2,6 +2,7 @@
 
 from PIL import ImageDraw
 
+
 def draw_shape(img, coords, size):
     """Prepare the draw object"""
     draw = ImageDraw.Draw(img)
