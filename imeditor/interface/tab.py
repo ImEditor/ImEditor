@@ -175,5 +175,13 @@ class TabLabel(Gtk.Box):
         self.label.set_text(title)
 
     def set_icon(self, pixbuf):
-        pixbuf = pixbuf.scale_simple(24, 24, GdkPixbuf.InterpType.TILES)
+        width, height = pixbuf.get_width(), pixbuf.get_height()
+        if width > height:
+            icon_width = 24
+            icon_height = icon_width * height / width
+        else:
+            icon_height = 24
+            icon_width =  icon_height * width / height
+        pixbuf = pixbuf.scale_simple(icon_width, icon_height,
+            GdkPixbuf.InterpType.TILES)
         self.icon.set_from_pixbuf(pixbuf)

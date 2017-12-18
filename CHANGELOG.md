@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.5] - DEV
 ### Changed
+- Preserve ratio of the image in the preview icon.
 - Compress images used by the app.
 
 ### Fixed
