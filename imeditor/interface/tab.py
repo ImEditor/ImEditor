@@ -6,7 +6,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf
 from os import path
 
 from editor.editor import Editor
-from interface.tools import pil_to_pixbuf, SpinButton
+from interface.tools import create_empty_pixbuf, pil_to_pixbuf, SpinButton
 
 
 class Tab(Gtk.Box):
@@ -16,12 +16,7 @@ class Tab(Gtk.Box):
         self.editor = Editor(self, img, filename, saved)
 
         # Image
-        if img.mode == 'RGB':
-            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8,
-                img.width, img.height)
-        elif img.mode == 'RGBA':
-            pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, True, 8,
-                img.width, img.height)
+        pixbuf = create_empty_pixbuf(img)
         self.img_widget = Gtk.Image.new_from_pixbuf(pixbuf)
 
         event_box = Gtk.EventBox()
