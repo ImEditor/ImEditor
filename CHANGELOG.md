@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.5] - DEV
+### Changed
+- Compress images used by the app.
+
 ### Fixed
 - Fix copying of entire image when selecting a 0px area.
 
