@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Preserve ratio of the image in the preview icon.
 - Compress images used by the app.
+- Add a bottom margin to the homescreen.
 
 ### Fixed
 - Fix copying of entire image when selecting a 0px area.
