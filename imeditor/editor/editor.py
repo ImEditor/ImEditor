@@ -220,5 +220,5 @@ class Editor(object):
         dialog.details_dialog(self.tab.win, img_infos)
 
     def close_image(self):
-        """Close all images in the history"""
+        """Close the image and all its history"""
         self.image.close_all_img()
