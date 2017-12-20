@@ -6,6 +6,8 @@
 - Allow to share information between tabs (copy, paste, cut).
 - Improve select, copy, paste and cut features.
 - Make packages for Windows and MacOS.
+- Create a flatpack package.
 - Improve way to manage tasks.
 - Make tabs reordable.
+- Better documentation of the code.
 - Add tests.
