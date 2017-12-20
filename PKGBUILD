@@ -7,8 +7,8 @@ pkgrel=1
 pkgdesc="Simple & versatile image editor."
 arch=("any")
 url="https://github.com/ImEditor/ImEditor"
-license=('GPL')
-depends=('python' 'gtk3' 'python-pillow')
+license=("GPL")
+depends=("python" "gtk3" "python-pillow")
 source=("$url/archive/$pkgver.tar.gz")
 md5sums=("9c600f208d61597d8294b78fabf04317")
 
