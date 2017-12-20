@@ -1,5 +1,4 @@
 # TODO
-- Only left button of the mouse can be used to draw and select.
 - Fix cropying and copying when not starting selection by the top-left corner.
 - Make the pencil tool draw a continuous line instead of a trace of dots.
 - Improve the PKGBUILD and use standard folders to store the app.

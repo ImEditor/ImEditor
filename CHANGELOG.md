@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Preserve ratio of the image in the preview icon.
 - Compress images used by the app.
 - Add a bottom margin to the homescreen.
+- Only allow the left mouse button to do actions.
 
 ### Fixed
 - Fix copying of entire image when selecting a 0px area.

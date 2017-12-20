@@ -32,6 +32,9 @@ class Editor(object):
         self.pencil_color = 'black'
         self.pencil_size = 8
 
+        # Various vars
+        self.pressed = False
+
     def change_task(self, task='select'):
         """Change active task and its cursor"""
         if task == 'select':
@@ -104,10 +107,15 @@ class Editor(object):
 
     def handle_event(self, widget, event, task):
         """Call the event with the needed vars"""
+        # Only allow the left mouse button to do actions
+        if hasattr(event, 'button') and event.button != 1:
+            return
+        # Get the good image
         if not self.image.tmp_img:
             img = self.image.get_current_img()
         else:
             img = self.image.tmp_img
+        # Handle mouse coords
         if self.tab.zoom_level != 100:
             x, y = event.x, event.y
             x = x * self.tab.width / self.tab.disp_width
@@ -115,6 +123,7 @@ class Editor(object):
             mouse_coords = [round(x), round(y)]
         else:
             mouse_coords = [round(event.x), round(event.y)]
+        # Call the good function to handle the event
         getattr(self, task + '_task')(img.copy(), mouse_coords)
 
     def press_task(self, img, mouse_coords):
@@ -126,9 +135,12 @@ class Editor(object):
             self.move_task(img, mouse_coords)
         elif self.task == 2:
             self.move_task(img, mouse_coords)
+        self.pressed = True
 
     def move_task(self, img, mouse_coords):
         """Move event"""
+        if not self.pressed:  # need that press_task have been called
+            return
         if self.task == 0:
             coords = (self.selection, mouse_coords)
             draw_rectangle(img, coords, 0, outline_color='black')
@@ -154,6 +166,7 @@ class Editor(object):
             self.selection = list()
         elif self.task == 2:
             self.do_change(img)
+        self.pressed = False
 
     def copy(self):
         """Copy a part of/or the entire image"""
