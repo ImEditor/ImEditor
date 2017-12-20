@@ -22,6 +22,7 @@ class Editor(object):
 
         # Tasks
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
+        self.left_button_pressed = False
 
         # Selection vars
         self.selection = list()
@@ -32,8 +33,6 @@ class Editor(object):
         self.pencil_color = 'black'
         self.pencil_size = 8
 
-        # Various vars
-        self.pressed = False
 
     def change_task(self, task='select'):
         """Change active task and its cursor"""
@@ -135,11 +134,11 @@ class Editor(object):
             self.move_task(img, mouse_coords)
         elif self.task == 2:
             self.move_task(img, mouse_coords)
-        self.pressed = True
+        self.left_button_pressed = True
 
     def move_task(self, img, mouse_coords):
         """Move event"""
-        if not self.pressed:  # need that press_task have been called
+        if not self.left_button_pressed:  # need that press_task have been called
             return
         if self.task == 0:
             coords = (self.selection, mouse_coords)
@@ -166,7 +165,7 @@ class Editor(object):
             self.selection = list()
         elif self.task == 2:
             self.do_change(img)
-        self.pressed = False
+        self.left_button_pressed = False
 
     def copy(self):
         """Copy a part of/or the entire image"""
