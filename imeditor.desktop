@@ -1,9 +1,10 @@
 [Desktop Entry]
-Terminal=false
 Type=Application
 Categories=GNOME;GTK;Graphics;
 StartupNotify=true
+Encoding=UTF-8
 Name=ImEditor
+Comment=Simple & versatile image editor.
 Exec=python /usr/share/imeditor/main.py
 Icon=/usr/share/imeditor/assets/imeditor.png
-Comment=Simple & versatile image editor.
+Terminal=false
