@@ -2,7 +2,7 @@
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;Graphics;
-StartupNotify=false
+StartupNotify=true
 Name=ImEditor
 Path=/usr/share/imeditor
 Exec=python main.py
