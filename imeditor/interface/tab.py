@@ -101,6 +101,10 @@ class Tab(Gtk.Box):
         width, height = self.width, self.height
         # Create pixbuf
         pixbuf = pil_to_pixbuf(img) if img else self.last_pixbuf
+        # Update preview and save pixbuf if it's not a temp change
+        if not tmp:
+            self.tab_label.set_icon(pixbuf)
+            self.last_pixbuf = pixbuf
         # Update the image and the icon
         if self.zoom_level != 100:
             # Change displaying size
@@ -110,9 +114,6 @@ class Tab(Gtk.Box):
             GdkPixbuf.InterpType.BILINEAR)
         self.img_widget.set_from_pixbuf(pixbuf)
         self.disp_width, self.disp_height = width, height
-        if not tmp:
-            self.tab_label.set_icon(pixbuf)
-            self.last_pixbuf = pixbuf
 
     def enable_sidebar(self, enable=True):
         if enable:

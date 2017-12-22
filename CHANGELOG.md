@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Fix copying of entire image when selecting a 0px area.
+- Fix the problem of the crappy display when zooming.
 
 ## [0.4] - 2017-12-09
 ### Added
