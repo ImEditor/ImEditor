@@ -1,4 +1,4 @@
-# ImEditor 0.4
+# ImEditor 0.5
 
 [![Code Health](https://landscape.io/github/ImEditor/ImEditor/master/landscape.svg?style=flat)](https://landscape.io/github/ImEditor/ImEditor/master)
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)

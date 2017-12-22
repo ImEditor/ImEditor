@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.5] - DEV
+## [0.5] - 2017-12-22
 ### Changed
 - Preserve ratio of the image in the preview icon.
 - Compress images used by the app.
