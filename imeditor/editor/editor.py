@@ -157,7 +157,16 @@ class Editor(object):
     def release_task(self, img, mouse_coords):
         """Release event"""
         if self.task == 0 and mouse_coords != self.selection:
-            self.selection.extend(mouse_coords)
+            m0, m1 = mouse_coords[0], mouse_coords[1]
+            s0, s1 = self.selection[0], self.selection[1]
+            if m0 >= s0 and m1 > s1:  # top-left
+                self.selection = [s0, s1, m0, m1]
+            elif m0 <= s0 and m1 <= s1:  # bottom-right
+                self.selection = [m0, m1, s0, s1]
+            elif m0 >= s0 and m1 <= s1:  # bottom-left
+                self.selection = [s0, m1, m0, s1]
+            elif m0 <= s0 and m1 >= s1:  # top-right
+                self.selection = [m0, s1, s0, m1]
         elif self.task == 1:
             self.do_change(img)
             self.change_task()
