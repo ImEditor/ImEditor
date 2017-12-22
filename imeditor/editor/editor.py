@@ -33,7 +33,6 @@ class Editor(object):
         self.pencil_color = 'black'
         self.pencil_size = 8
 
-
     def change_task(self, task='select'):
         """Change active task and its cursor"""
         if task == 'select':
@@ -127,6 +126,7 @@ class Editor(object):
 
     def press_task(self, img, mouse_coords):
         """Press event"""
+        self.left_button_pressed = True
         if self.task == 0:
             self.selection = mouse_coords
             self.tab.update_image(img)
@@ -134,7 +134,6 @@ class Editor(object):
             self.move_task(img, mouse_coords)
         elif self.task == 2:
             self.move_task(img, mouse_coords)
-        self.left_button_pressed = True
 
     def move_task(self, img, mouse_coords):
         """Move event"""
