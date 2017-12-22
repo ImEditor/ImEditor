@@ -19,7 +19,9 @@ class Interface(Gtk.ApplicationWindow):
         self.app = app
         self.set_default_size(950, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
-        self.logo = GdkPixbuf.Pixbuf.new_from_file('assets/imeditor.png')
+        self.bpath = path.dirname(path.dirname(path.abspath(__file__))) + '/'
+        self.logo = GdkPixbuf.Pixbuf.new_from_file(
+                        '{}assets/imeditor.png'.format(self.bpath))
         self.set_icon(self.logo)
 
         # Header Bar
@@ -71,7 +73,8 @@ class Interface(Gtk.ApplicationWindow):
         self.pencil_action.connect('activate', self.pencil)
         self.add_action(self.pencil_action)
         self.pencil_button = Gtk.Button()
-        self.pencil_button.set_image(Gtk.Image.new_from_file('assets/pencil.png'))
+        self.pencil_button.set_image(Gtk.Image.new_from_file(
+                                    '{}assets/pencil.png'.format(self.bpath)))
         self.pencil_button.set_action_name('win.pencil')
         hb.pack_end(self.pencil_button)
 
@@ -80,7 +83,8 @@ class Interface(Gtk.ApplicationWindow):
         self.select_action.connect('activate', self.select)
         self.add_action(self.select_action)
         self.select_button = Gtk.Button()
-        self.select_button.set_image(Gtk.Image.new_from_file('assets/select.png'))
+        self.select_button.set_image(Gtk.Image.new_from_file(
+                                    '{}assets/select.png'.format(self.bpath)))
         self.select_button.set_action_name('win.select')
         hb.pack_end(self.select_button)
 

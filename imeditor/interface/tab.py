@@ -31,15 +31,11 @@ class Tab(Gtk.Box):
         frame.set_name('TabFrame')
         frame.add(event_box)
         style_provider = Gtk.CssProvider()
-        css = b"""
-        #TabFrame {
-            background: url('assets/transparent.png');
-        }
-        """
-        style_provider.load_from_data(css)
+        css = "#TabFrame {{ background: url('{}assets/transparent.png'); }}"
+        style_provider.load_from_data(css.format(self.win.bpath).encode())
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
             style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
+        
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.add(frame)
 
