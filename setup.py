@@ -16,6 +16,14 @@ setup(
         'Programming Language :: Python :: 3 :: Only'
     ],
     keywords = 'image editor picture imeditor',
-    packages=['imeditor'],
+    package_dir = {'imeditor' : 'src/imeditor'},
+    packages=['imeditor',
+            'imeditor.editor',
+            'imeditor.filters',
+            'imeditor.interface'],
+    package_data = {"imeditor" : ["assets/*.*"] },
+    data_files=[('share/pixmaps', ['assets/imeditor.png']),
+            ('share/applications', ['imeditor.desktop'])],
+    scripts = ["imeditor"],
     install_requires=['Pillow']
 )
