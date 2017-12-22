@@ -22,7 +22,7 @@ setup(
             'imeditor.filters',
             'imeditor.interface'],
     package_data = {"imeditor" : ["assets/*.*"] },
-    data_files=[('share/pixmaps', ['assets/imeditor.png']),
+    data_files=[('share/pixmaps', ['src/imeditor/assets/imeditor.png']),
             ('share/applications', ['imeditor.desktop'])],
     scripts = ["imeditor"],
     install_requires=['Pillow']
