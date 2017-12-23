@@ -5,7 +5,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import sys
 
-from interface.interface import Interface
+from imeditor.interface.interface import Interface
 
 
 def main():

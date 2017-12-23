@@ -3,11 +3,11 @@
 from PIL import Image
 from os import path
 
-from interface import dialog
-from filters import base
-from editor.image import ImageObject
-from editor.tools import get_middle_mouse, get_infos
-from editor.draw import draw_rectangle, draw_ellipse
+from imeditor.interface import dialog
+from imeditor.filters import base
+from .image import ImageObject
+from .tools import get_middle_mouse, get_infos
+from .draw import draw_rectangle, draw_ellipse
 
 
 class Editor(object):

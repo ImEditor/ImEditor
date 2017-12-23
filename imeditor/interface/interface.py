@@ -6,8 +6,8 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, Gio
 from PIL import Image, __version__ as pil_version
 from os import path
 
-from interface.tab import Tab
-from interface import dialog
+from .tab import Tab
+from imeditor.interface import dialog
 
 
 class Interface(Gtk.ApplicationWindow):

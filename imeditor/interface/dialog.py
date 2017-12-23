@@ -4,7 +4,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
-from interface.tools import SpinButton
+from .tools import SpinButton
 
 
 class Dialog(Gtk.Dialog):

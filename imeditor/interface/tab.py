@@ -5,8 +5,8 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from os import path
 
-from editor.editor import Editor
-from interface.tools import create_empty_pixbuf, pil_to_pixbuf, SpinButton
+from imeditor.editor.editor import Editor
+from .tools import create_empty_pixbuf, pil_to_pixbuf, SpinButton
 
 
 class Tab(Gtk.Box):
@@ -35,7 +35,7 @@ class Tab(Gtk.Box):
         style_provider.load_from_data(css.format(self.win.bpath).encode())
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
             style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-        
+
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.add(frame)
 
