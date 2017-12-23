@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(
-    name='ImEditor',
+    name='imeditor',
     version='0.5',
     description='Simple & versatile image editor.',
     url='https://imeditor.github.io',
