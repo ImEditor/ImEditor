@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.6] - DEV
+### Fixed
+- Remove duplicated "cut" entry from the menu.
+
 ## [0.5.2] - 2017-12-13
 ### Changed
 - Improve way to launch the app.

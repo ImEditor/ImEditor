@@ -38,7 +38,6 @@ class Interface(Gtk.ApplicationWindow):
         menu_model = Gio.Menu()
         menu_model.append('Zoom -', 'win.zoom-minus')
         menu_model.append('Zoom +', 'win.zoom-plus')
-        menu_model.append('Cut', 'win.cut')
         menu_model.append('Copy', 'win.copy')
         menu_model.append('Paste', 'win.paste')
         menu_model.append('Cut', 'win.cut')
