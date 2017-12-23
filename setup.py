@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='imeditor',
@@ -16,10 +16,12 @@ setup(
         'Programming Language :: Python :: 3 :: Only'
     ],
     keywords = 'image editor picture imeditor',
-    package_dir = {'imeditor' : 'src/imeditor'},
-    packages=find_packages(),
+    packages=['imeditor',
+            'imeditor.editor',
+            'imeditor.filters',
+            'imeditor.interface'],
     package_data = {'imeditor' : ['assets/*.*'] },
-    data_files=[('share/pixmaps', ['src/imeditor/assets/imeditor.png']),
+    data_files=[('share/pixmaps', ['imeditor/assets/imeditor.png']),
             ('share/applications', ['imeditor.desktop'])],
     entry_points={
         'gui_scripts': [
