@@ -8,7 +8,7 @@ pkgdesc="Simple & versatile image editor."
 arch=("any")
 url="https://github.com/ImEditor/ImEditor"
 license=("GPL")
-depends=("python" "gtk3" "python-pillow")
+depends=("python" "python-setuptools" "python-pillow" "gtk3")
 source=("$url/archive/$pkgver.tar.gz")
 md5sums=("98db5756c25e2f1981ddce3974a7eee8")
 
@@ -20,5 +20,5 @@ build() {
 
 package() {
     cd "$srcdir/ImEditor-$pkgver"
-    python setup.py install --root="${pkgdir}" --optimize=1
+    python setup.py install --prefix=/usr --root="$pkgdir" --optimize=1
 }
