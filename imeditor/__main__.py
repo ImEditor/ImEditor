@@ -8,6 +8,12 @@ import sys
 from interface.interface import Interface
 
 
+def main():
+    app = Application()
+    exit_status = app.run(sys.argv)
+    sys.exit(exit_status)
+
+
 class Application(Gtk.Application):
     def __init__(self):
         Gtk.Application.__init__(self)
@@ -20,6 +26,4 @@ class Application(Gtk.Application):
 
 
 if __name__ == '__main__':
-    app = Application()
-    exit_status = app.run(sys.argv)
-    sys.exit(exit_status)
+    main()
