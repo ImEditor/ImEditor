@@ -21,4 +21,5 @@ class Application(Gtk.Application):
 
 if __name__ == '__main__':
     app = Application()
-    app.run(sys.argv)
+    exit_status = app.run(sys.argv)
+    sys.exit(exit_status)
