@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='imeditor',
-    version='0.5.1',
+    version='0.5.2',
     description='Simple & versatile image editor.',
     url='https://imeditor.github.io',
     author='Nathan Seva, Hugo Posnic',

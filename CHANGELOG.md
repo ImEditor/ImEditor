@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.5.2] - 2017-12-13
+### Changed
+- Improve way to launch the app.
+
 ## [0.5.1] - 2017-12-13
 ### Fixed
 - Improve the PKGBUILD and use standard folders to store the app.
