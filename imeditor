@@ -5,5 +5,5 @@ import subprocess
 import imeditor
 
 if __name__ == "__main__":
-    path = os.path.join(os.path.dirname(imeditor.__file__), "main.py")
+    path = os.path.join(os.path.dirname(imeditor.__file__), "imeditor.py")
     subprocess.call([sys.executable, path] + sys.argv[1:])
