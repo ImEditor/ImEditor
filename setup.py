@@ -25,7 +25,7 @@ setup(
             ('share/applications', ['imeditor.desktop'])],
     entry_points={
         'gui_scripts': [
-            'imeditor = imeditor.__main__:main',
+            'imeditor = imeditor.main:main',
         ]
     },
     install_requires=['Pillow']
