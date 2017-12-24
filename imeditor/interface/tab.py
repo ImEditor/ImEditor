@@ -94,6 +94,9 @@ class Tab(Gtk.Box):
 
     def update_image(self, img=None, tmp=False):
         """Refresh the displayed image"""
+        if img:  # Update size
+            self.width = img.width
+            self.height = img.height
         # Vars
         width, height = self.width, self.height
         # Create pixbuf

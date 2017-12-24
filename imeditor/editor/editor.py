@@ -60,9 +60,6 @@ class Editor(object):
         """Update displayed image and save it in the history"""
         if self.image.tmp_img:
             self.image.tmp_img = None  # remove tmp image
-        # Update size
-        self.tab.width = img.width
-        self.tab.height = img.height
         # Update image
         self.tab.update_image(img)
         # Save it in the history

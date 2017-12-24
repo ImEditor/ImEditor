@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Remove duplicated "cut" entry from the menu.
+- Make undo/redo rework for crop and rotate functions.
 
 ## [0.5.2] - 2017-12-13
 ### Changed
