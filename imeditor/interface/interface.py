@@ -51,6 +51,8 @@ class Interface(Gtk.ApplicationWindow):
         submenu_1.append('Brightness', 'win.brightness')
         menu_model.append_submenu('Filters', submenu_1)
         submenu_2 = Gio.Menu()
+        submenu_2.append('Rotate -90°', 'win.rotate-left')
+        submenu_2.append('Rotate 90°', 'win.rotate-right')
         submenu_2.append('Horizontal mirror', 'win.horizontal-mirror')
         submenu_2.append('Vertical mirror', 'win.vertical-mirror')
         submenu_2.append('Crop', 'win.crop')
