@@ -87,8 +87,8 @@ class Interface(Gtk.ApplicationWindow):
         self.select_button.set_action_name('win.select')
         hb.pack_end(self.select_button)
 
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        Gtk.StyleContext.add_class(box.get_style_context(), 'linked')
+        toolbar_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        Gtk.StyleContext.add_class(toolbar_box.get_style_context(), 'linked')
 
         # New
         self.new_action = Gio.SimpleAction.new('new', None)
@@ -98,7 +98,7 @@ class Interface(Gtk.ApplicationWindow):
         self.new_button = Gtk.Button.new_from_icon_name('document-new',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.new_button.set_action_name('win.new')
-        box.add(self.new_button)
+        toolbar_box.add(self.new_button)
 
         # Open
         self.open_action = Gio.SimpleAction.new('open', None)
@@ -108,7 +108,7 @@ class Interface(Gtk.ApplicationWindow):
         self.open_button = Gtk.Button.new_from_icon_name('document-open',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.open_button.set_action_name('win.open')
-        box.add(self.open_button)
+        toolbar_box.add(self.open_button)
 
         # Save
         self.save_action = Gio.SimpleAction.new('save', None)
@@ -118,7 +118,7 @@ class Interface(Gtk.ApplicationWindow):
         self.save_button = Gtk.Button.new_from_icon_name('document-save',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.save_button.set_action_name('win.save')
-        box.add(self.save_button)
+        toolbar_box.add(self.save_button)
 
         # Save as
         self.save_as_action = Gio.SimpleAction.new('save-as', None)
@@ -127,7 +127,7 @@ class Interface(Gtk.ApplicationWindow):
         self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.save_as_button.set_action_name('win.save-as')
-        box.add(self.save_as_button)
+        toolbar_box.add(self.save_as_button)
 
         # Undo
         self.undo_action = Gio.SimpleAction.new('undo', None)
@@ -137,7 +137,7 @@ class Interface(Gtk.ApplicationWindow):
         self.undo_button = Gtk.Button.new_from_icon_name('edit-undo',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.undo_button.set_action_name('win.undo')
-        box.add(self.undo_button)
+        toolbar_box.add(self.undo_button)
 
         # Redo
         self.redo_action = Gio.SimpleAction.new('redo', None)
@@ -147,7 +147,7 @@ class Interface(Gtk.ApplicationWindow):
         self.redo_action_button = Gtk.Button.new_from_icon_name('edit-redo',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.redo_action_button.set_action_name('win.redo')
-        box.add(self.redo_action_button)
+        toolbar_box.add(self.redo_action_button)
 
         # Rotate left
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
@@ -156,7 +156,7 @@ class Interface(Gtk.ApplicationWindow):
         self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_left_button.set_action_name('win.rotate-left')
-        box.add(self.rotate_left_button)
+        toolbar_box.add(self.rotate_left_button)
 
         # Rotate right
         self.rotate_right_action = Gio.SimpleAction.new('rotate-right', None)
@@ -165,7 +165,7 @@ class Interface(Gtk.ApplicationWindow):
         self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.rotate_right_button.set_action_name('win.rotate-right')
-        box.add(self.rotate_right_button)
+        toolbar_box.add(self.rotate_right_button)
 
         # Copy
         self.copy_action = Gio.SimpleAction.new('copy', None)
@@ -253,7 +253,7 @@ class Interface(Gtk.ApplicationWindow):
         self.crop_action.connect('activate', self.crop)
         self.add_action(self.crop_action)
 
-        hb.pack_start(box)
+        hb.pack_start(toolbar_box)
 
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20,
