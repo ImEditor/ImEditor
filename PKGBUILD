@@ -14,7 +14,6 @@ md5sums=("016821ad66de8b4e6c1127795e6e32ab")
 
 build() {
     cd "$srcdir/ImEditor-$pkgver"
-
     python setup.py build
 }
 
