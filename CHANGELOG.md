@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.6] - DEV
+### Added
+- Make the opened image fit the window.
+
 ### Fixed
 - Remove duplicated "cut" entry from the menu.
 

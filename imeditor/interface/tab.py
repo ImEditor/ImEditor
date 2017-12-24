@@ -79,13 +79,14 @@ class Tab(Gtk.Box):
         self.tab_label = TabLabel(path.basename(filename), img)
 
         # Vars
-        self.zoom_level = 100
         self.width = self.disp_width = img.width
         self.height = self.disp_height = img.height
+        self.zoom_level = self.best_zoom_level()
         self.last_pixbuf = pixbuf
 
         # Initalize image
         self.update_image(img)
+        self.set_zoom_level()
 
         self.show_all()
         self.pencil_box.hide()
@@ -126,6 +127,24 @@ class Tab(Gtk.Box):
             self.zoom_level = 10
         elif self.zoom_level > 300:
             self.zoom_level = 300
+        self.set_zoom_level()
+
+    def best_zoom_level(self):
+        """Find the best zoom level at start"""
+        w, h = self.width, self.height
+        ww = self.win.get_allocation().width
+        wh = self.win.get_allocation().height
+        zoom = 100
+
+        while w > ww or h > wh:
+            w -= 10 * w / 100
+            h -= 10 * h / 100
+            zoom -= 10
+        if zoom < 10:
+            zoom = 10
+        return zoom
+
+    def set_zoom_level(self):
         self.update_image(tmp=True)
         self.win.set_window_title(self)
 
