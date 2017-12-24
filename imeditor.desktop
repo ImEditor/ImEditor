@@ -1,10 +1,11 @@
 [Desktop Entry]
+Encoding=UTF-8
 Type=Application
 Categories=GNOME;GTK;Graphics;
 StartupNotify=true
-Encoding=UTF-8
+Terminal=false
 Name=ImEditor
 Comment=Simple & versatile image editor.
 Exec=imeditor
 Icon=imeditor
-Terminal=false
+MimeType=image/bmp;image/x-icon;image/jpeg;image/png;image/webp;

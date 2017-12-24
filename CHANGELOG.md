@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Make the opened image fit the window.
 - Add rotate functions in the "operations" submenu.
+- Add image mimetypes to .desktop file.
 
 ### Fixed
 - Remove duplicated "cut" entry from the menu.
