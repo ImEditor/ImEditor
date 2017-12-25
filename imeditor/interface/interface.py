@@ -114,7 +114,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Save
         self.save_action = Gio.SimpleAction.new('save', None)
-        self.save_action.connect('activate', self.save)
+        self.save_action.connect('activate', lambda *args:self.get_tab().editor.save())
         self.add_action(self.save_action)
         app.add_accelerator('<Primary>s', 'win.save', None)
         self.save_button = Gtk.Button.new_from_icon_name('document-save',
@@ -124,7 +124,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Save as
         self.save_as_action = Gio.SimpleAction.new('save-as', None)
-        self.save_as_action.connect('activate', self.save_as)
+        self.save_as_action.connect('activate', lambda *args:self.get_tab().editor.save_as())
         self.add_action(self.save_as_action)
         self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as',
             Gtk.IconSize.SMALL_TOOLBAR)
@@ -133,7 +133,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Undo
         self.undo_action = Gio.SimpleAction.new('undo', None)
-        self.undo_action.connect('activate', self.undo)
+        self.undo_action.connect('activate', lambda *args:self.get_tab().editor.undo())
         self.add_action(self.undo_action)
         app.add_accelerator('<Primary>z', 'win.undo', None)
         self.undo_button = Gtk.Button.new_from_icon_name('edit-undo',
@@ -143,7 +143,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Redo
         self.redo_action = Gio.SimpleAction.new('redo', None)
-        self.redo_action.connect('activate', self.redo)
+        self.redo_action.connect('activate', lambda *args:self.get_tab().editor.redo())
         self.add_action(self.redo_action)
         app.add_accelerator('<Primary>y', 'win.redo', None)
         self.redo_action_button = Gtk.Button.new_from_icon_name('edit-redo',
@@ -171,19 +171,19 @@ class Interface(Gtk.ApplicationWindow):
 
         # Copy
         self.copy_action = Gio.SimpleAction.new('copy', None)
-        self.copy_action.connect('activate', self.copy)
+        self.copy_action.connect('activate', lambda *args:self.get_tab().editor.copy())
         self.add_action(self.copy_action)
         app.add_accelerator('<Primary>c', 'win.copy', None)
 
         # Paste
         self.paste_action = Gio.SimpleAction.new('paste', None)
-        self.paste_action.connect('activate', self.paste)
+        self.paste_action.connect('activate', lambda *args:self.get_tab().editor.paste())
         self.add_action(self.paste_action)
         app.add_accelerator('<Primary>v', 'win.paste', None)
 
         # Cut
         self.cut_action = Gio.SimpleAction.new('cut', None)
-        self.cut_action.connect('activate', self.cut)
+        self.cut_action.connect('activate', lambda *args:self.get_tab().editor.cut())
         self.add_action(self.cut_action)
         app.add_accelerator('<Primary>x', 'win.cut', None)
 
@@ -201,7 +201,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Details
         self.details_action = Gio.SimpleAction.new('details', None)
-        self.details_action.connect('activate', self.details)
+        self.details_action.connect('activate', lambda *args:self.get_tab().editor.details())
         self.add_action(self.details_action)
 
         # About
@@ -252,7 +252,7 @@ class Interface(Gtk.ApplicationWindow):
         self.add_action(self.vertical_mirror_action)
 
         self.crop_action = Gio.SimpleAction.new('crop', None)
-        self.crop_action.connect('activate', self.crop)
+        self.crop_action.connect('activate', lambda *args:self.get_tab().editor.crop())
         self.add_action(self.crop_action)
 
         hb.pack_start(toolbar_box)
@@ -416,45 +416,9 @@ class Interface(Gtk.ApplicationWindow):
         self.set_window_title(tab)
         self.select_current_tool(tab)
 
-    def save(self, a, b):
-        tab = self.get_tab()
-        tab.editor.save()
-
-    def save_as(self, a, b):
-        tab = self.get_tab()
-        tab.editor.save_as()
-
-    def details(self, a, b):
-        tab = self.get_tab()
-        tab.editor.details()
-
-    def undo(self, a, b):
-        tab = self.get_tab()
-        tab.editor.undo()
-
-    def redo(self, a, b):
-        tab = self.get_tab()
-        tab.editor.redo()
-
     def zoom(self, a, b, value):
         tab = self.get_tab()
         tab.zoom(value)
-
-    def copy(self, a, b):
-        tab = self.get_tab()
-        tab.editor.copy()
-
-    def paste(self, a, b):
-        tab = self.get_tab()
-        tab.editor.paste()
-
-    def cut(self, a, b):
-        tab = self.get_tab()
-        tab.editor.cut()
-
-    def crop(self, a, b):
-        tab = self.get_tab()
-        tab.editor.crop()
 
     def select(self, a=None, b=None, tab=None):
         self.select_button.set_sensitive(False)
