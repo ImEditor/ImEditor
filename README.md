@@ -20,16 +20,30 @@ ImEditor is a simple & versatile image editor.
 
 ### Supported formats
 
-- PNG
-- JPEG
-- WEBP
-- BMP
-- ICO
+PNG, JPEG, WEBP, BMP, ICO
 
 ### Supported modes
 
-- RGB
-- RGBA
+RGB, RGBA
+
+## Installation instructions
+
+### Archlinux-based distributions (AUR)
+
+    yaourt -S imeditor
+
+### Build from source
+
+Build and install by running:
+
+    python setup.py build
+    sudo python setup.py install
+
+### Developer install
+
+Installing ImEditor with develop mode creates binaries that link back to source code. Therefore changes will be reflected immediately with no need to repeatedly install.
+
+    python setup.py develop
 
 ## Tech
 
