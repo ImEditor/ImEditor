@@ -348,10 +348,13 @@ class Interface(Gtk.ApplicationWindow):
             filename = name + '.' + values[4].lower()
             self.create_tab(img, filename, False)
 
-    def open_image(self, a, b):
+    def open_image(self, a=None, b=None, filename=None):
         """Open an existing image"""
-        filename = dialog.file_dialog(self, 'open')
         if not filename:
+            filename = dialog.file_dialog(self, 'open')
+        else:
+            filename = filename.get_path()
+        if not filename or not path.isfile(filename):
             return
         if filename not in self.filenames: # is image already opened ?
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
