@@ -3,20 +3,20 @@ All notable changes to this project will be documented in this file.
 
 ## [0.6] - DEV
 ### Added
+- Allow to open files in ImEditor from your favorite file manager.
+- Allow to open files by using the command line.
 - Make the opened image fit the window.
-- Add rotate functions in the "operations" submenu.
-- Allow to open files in your favorite file manager and by command line.
-- Add image mimetypes to .desktop file.
+- Add rotate functions also in the "operations" submenu.
 
 ### Fixed
 - Remove duplicated "cut" entry from the menu.
 - Make undo/redo rework for crop and rotate functions.
 
-## [0.5.2] - 2017-12-13
+## [0.5.2] - 2017-12-23
 ### Changed
 - Improve way to launch the app.
 
-## [0.5.1] - 2017-12-13
+## [0.5.1] - 2017-12-23
 ### Fixed
 - Improve the PKGBUILD and use standard folders to store the app.
 
