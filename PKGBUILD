@@ -19,5 +19,5 @@ build() {
 
 package() {
     cd "$srcdir/ImEditor-$pkgver"
-    python setup.py install --root="$pkgdir" --optimize=1
+    python setup.py install --prefix=/usr --root="$pkgdir" --optimize=1
 }
