@@ -43,7 +43,7 @@ Build and install by running:
 
 Installing ImEditor with develop mode creates binaries that link back to source code. Therefore changes will be reflected immediately with no need to repeatedly install.
 
-    python setup.py develop
+    sudo python setup.py develop
 
 ## Tech
 
