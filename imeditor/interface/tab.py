@@ -76,7 +76,7 @@ class Tab(Gtk.Box):
         self.add(scrolled_window)
         self.add(self.sidebar_frame)
 
-        self.tab_label = TabLabel(path.basename(filename), img)
+        self.tab_label = TabLabel(win, self, path.basename(filename), img)
 
         # Vars
         self.width = self.disp_width = img.width
@@ -163,9 +163,12 @@ class Tab(Gtk.Box):
 
 class TabLabel(Gtk.Box):
     """Define the label of the tab."""
-    def __init__(self, title, img):
+    def __init__(self, win, tab, title, img):
         Gtk.Box.__init__(self)
         self.set_spacing(5)
+
+        self.win = win
+        self.tab = tab
 
         # Preview of image
         self.icon = Gtk.Image()
@@ -175,17 +178,20 @@ class TabLabel(Gtk.Box):
         self.set_title(title)
 
         # Close button
-        self.button = Gtk.Button()
-        self.button.set_action_name('win.close-tab')
-        self.button.set_relief(Gtk.ReliefStyle.NONE)
-        self.button.add(Gtk.Image.new_from_icon_name('window-close',
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
+        button.add(Gtk.Image.new_from_icon_name('window-close',
             Gtk.IconSize.MENU))
-
+        button.connect('clicked', self.on_close_button_clicked)
         self.add(self.icon)
         self.add(self.label)
-        self.add(self.button)
+        self.add(button)
 
         self.show_all()
+
+    def on_close_button_clicked(self, _):
+        page_num = self.win.notebook.page_num(self.tab)
+        self.win.close_tab(page_num=page_num)
 
     def set_title(self, title):
         """Change the title of a tab"""

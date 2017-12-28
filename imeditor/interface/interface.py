@@ -391,7 +391,7 @@ class Interface(Gtk.ApplicationWindow):
     def close_tab(self, a=None, b=None, page_num=None):
         """Close tab by user action"""
         tab = self.get_tab(page_num)
-        if not page_num:
+        if not page_num and page_num != 0:
             page_num = self.notebook.page_num(tab)
         if not tab.editor.image.saved:  # if image is not saved
             title = 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename))

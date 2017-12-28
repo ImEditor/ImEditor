@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.7] - DEV
+### Fixed
+- Finally fix the closing bug.
+
 ## [0.6] - 2017-12-27
 ### Added
 - Allow to open files in ImEditor from your favorite file manager.
