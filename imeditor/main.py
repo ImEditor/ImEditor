@@ -21,16 +21,16 @@ class App(Gtk.Application):
 
         self.connect('activate', self.show_window)
         self.connect('open', self.open_files)
+        self.window = None
 
     def show_window(self, *args):
-        if not hasattr(self, 'window'):
+        if not self.window:
             self.window = Interface(self)
         else:
             self.window.present()
 
     def open_files(self, app, files, hint, *args):
-        if not hasattr(self, 'window'):
-            self.show_window()
+        self.show_window()
         for image in files:
             self.window.open_image(filename=image)
 
