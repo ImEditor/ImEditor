@@ -16,7 +16,7 @@ def main():
 class App(Gtk.Application):
     def __init__(self):
         Gtk.Application.__init__(self,
-                                application_id='org.imeditor.imeditor',
+                                application_id='io.github.imeditor',
                                 flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
         self.connect('activate', self.show_window)
