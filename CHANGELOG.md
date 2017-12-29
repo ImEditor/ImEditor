@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.6.2] - 2017-12-29
+### Fixed
+- Finally fix the closing bug (really ...).
+
 ## [0.6.1] - 2017-12-29
 ### Fixed
 - Fix the bug that caused the wrong tab to close.

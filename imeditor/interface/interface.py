@@ -464,7 +464,7 @@ class Interface(Gtk.ApplicationWindow):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo(self.logo)
         dialog.set_program_name(self.program_title)
-        dialog.set_version('0.6.1')
+        dialog.set_version('0.6.2')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(),
