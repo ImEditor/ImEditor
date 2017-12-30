@@ -3,7 +3,7 @@
 - Allow to share information between tabs (copy, paste, cut).
 - Improve select, copy, paste and cut features.
 - Try to make packages for Windows and MacOS.
-- Create a flatpak package.
+- Create a snap package.
 - Improve way to manage tasks.
 - Make tabs reordable.
 - Better documentation of the code.
