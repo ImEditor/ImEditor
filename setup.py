@@ -2,6 +2,10 @@
 
 from setuptools import setup, find_packages
 
+
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 setup(
     name='imeditor',
     version='0.6.2',
@@ -25,5 +29,5 @@ setup(
             'imeditor = imeditor.main:main',
         ]
     },
-    install_requires=['Pillow']
+    install_requires=requirements
 )
