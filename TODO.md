@@ -8,4 +8,5 @@
 - Improve way to manage tasks.
 - Make tabs reordable.
 - Better documentation of the code.
+- Handle a dark header bar (icons not visible).
 - Add tests.
