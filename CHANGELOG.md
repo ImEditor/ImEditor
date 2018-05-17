@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Allow copy/paste things betweens tabs.
 - Permit to handle zoom with the ctrl key + mouse wheel.
+- Make tabs reordable.
 
 ### Fixed
 - Make icons of the header bar visbile even with a dark background.

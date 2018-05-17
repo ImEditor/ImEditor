@@ -5,6 +5,5 @@
 - Try to make packages for Windows and MacOS.
 - Create a snap package.
 - Improve way to manage tasks.
-- Make tabs reordable.
 - Better documentation of the code.
 - Add tests.

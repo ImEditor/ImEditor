@@ -385,6 +385,7 @@ class Interface(Gtk.ApplicationWindow):
         if nb_tabs == 0:
             self.enable_homescreen(False)
         self.notebook.insert_page(tab, tab.tab_label, page_num)
+        self.notebook.set_tab_reorderable(tab, True)
         self.notebook.set_current_page(page_num)
 
     def close_tab(self, a=None, b=None, page_num=None):
