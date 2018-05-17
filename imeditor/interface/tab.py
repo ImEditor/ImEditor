@@ -117,6 +117,7 @@ class Tab(Gtk.Box):
         self.disp_width, self.disp_height = width, height
 
     def enable_sidebar(self, enable=True):
+        """Show or hide the sidebar"""
         if enable:
             self.sidebar_frame.show()
             if self.editor.task == 2:
@@ -125,6 +126,7 @@ class Tab(Gtk.Box):
             self.sidebar_frame.hide()
 
     def zoom(self, value):
+        """Change the zoom value"""
         # Limit zoom between 10-300%
         self.zoom_level += value * 10
         if self.zoom_level < 10:
@@ -134,12 +136,13 @@ class Tab(Gtk.Box):
         self.set_zoom_level()
 
     def scroll_zoom(self, widget, event):
+        """Handle zoom with scroll wheel"""
         if event.state & Gdk.ModifierType.CONTROL_MASK:
             is_smooth, dx, dy = Gdk.Event.get_scroll_deltas(event)
             if is_smooth:
                 if dy > 0:
                     self.zoom(-1)
-                else:
+                elif dy < 0:
                     self.zoom(1)
             elif event.direction == Gdk.ScrollDirection.UP:
                 self.zoom(1)
@@ -162,6 +165,7 @@ class Tab(Gtk.Box):
         return zoom
 
     def set_zoom_level(self):
+        """Make the zoom level change"""
         self.update_image(tmp=True)
         self.win.set_window_title(self)
 
