@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.7] - DEV
+### Added
+- Allow copy/paste things betweens tabs.
+
 ## [0.6.2] - 2017-12-29
 ### Fixed
 - Finally fix the closing bug (really ...).

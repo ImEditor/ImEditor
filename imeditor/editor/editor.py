@@ -13,6 +13,7 @@ from .draw import draw_rectangle, draw_ellipse
 class Editor(object):
     def __init__(self, tab, img, filename, saved):
         super(Editor, self).__init__()
+        self.win = tab.win
         self.tab = tab
 
         self.image = ImageObject(img, filename, saved)
@@ -24,9 +25,8 @@ class Editor(object):
         self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
         self.left_button_pressed = False
 
-        # Selection vars
+        # Coords of selected region
         self.selection = list()
-        self.selected_img = None
 
         # Pencil settings
         self.pencil_shape = 'ellipse'
@@ -49,7 +49,7 @@ class Editor(object):
         """Change cursor that hovers the image"""
         img_widget = self.tab.img_widget.get_window()
         if img_widget:
-            img_widget.set_cursor(self.tab.win.cursors[cursor])
+            img_widget.set_cursor(self.win.cursors[cursor])
 
     def do_tmp_change(self, img):
         """Update displayed image without modifying the history"""
@@ -95,7 +95,7 @@ class Editor(object):
 
     def apply_filter_dialog(self, func, params):
         """Apply a filter from filters/base.py that need a GUI"""
-        params_dialog = dialog.params_dialog(self.tab.win, *params)
+        params_dialog = dialog.params_dialog(self.win, *params)
         value = params_dialog.get_values()
         if value:
             self.apply_filter(func, value)
@@ -176,22 +176,22 @@ class Editor(object):
         """Copy a part of/or the entire image"""
         img = self.image.get_current_img().copy()
         if len(self.selection) == 4:  # a part of the image is selected
-            self.selected_img = img.crop(tuple(self.selection))
+            self.win.selected_img = img.crop(tuple(self.selection))
         else:  # copy the entire image
             self.selection = [0, 0]
-            self.selected_img = img
+            self.win.selected_img = img
 
     def paste(self, mouse_coords=None):
         """Paste the copied image"""
-        if self.selected_img:
+        if self.win.selected_img:
             if self.task != 1:
                 self.change_task('paste')
             if mouse_coords:
-                xy = get_middle_mouse(self.selected_img.size, mouse_coords)
+                xy = get_middle_mouse(self.win.selected_img.size, mouse_coords)
             else:
                 xy = (0, 0)
             img = self.image.get_current_img().copy()
-            img.paste(self.selected_img, xy)
+            img.paste(self.win.selected_img, xy)
             self.do_tmp_change(img)
             self.selection = list()
 
@@ -199,7 +199,7 @@ class Editor(object):
         """Copy in removing the selected part"""
         self.copy()
         img = self.image.get_current_img().copy()
-        blank_img = Image.new(img.mode, self.selected_img.size,
+        blank_img = Image.new(img.mode, self.win.selected_img.size,
             'rgba(255, 255, 255, 0)')
         img.paste(blank_img, tuple(self.selection[:2]))
         self.do_change(img)
@@ -222,11 +222,11 @@ class Editor(object):
 
     def save_as(self):
         """Ask where to save the image"""
-        filename = dialog.file_dialog(self.tab.win, 'save', path.basename(self.image.filename))
+        filename = dialog.file_dialog(self.win, 'save', path.basename(self.image.filename))
         if filename:
             img = self.image.get_current_img()
             img.save(filename)
-            self.tab.win.filenames.append(filename)
+            self.win.filenames.append(filename)
             self.image.filename = filename
             self.tab.tab_label.set_title(path.basename(filename))
             self.image.saved = True
@@ -234,7 +234,7 @@ class Editor(object):
     def details(self):
         """Get informations about the image"""
         img_infos = get_infos(self.image.get_current_img(), self.image.filename)
-        dialog.details_dialog(self.tab.win, img_infos)
+        dialog.details_dialog(self.win, img_infos)
 
     def close_image(self):
         """Close the image and all its history"""

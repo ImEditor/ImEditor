@@ -1,7 +1,6 @@
 # TODO
 - Make the pencil tool draw a continuous line instead of a trace of dots.
 - Rework filters from scratch.
-- Allow to share information between tabs (copy, paste, cut).
 - Improve select, copy, paste and cut features.
 - Try to make packages for Windows and MacOS.
 - Create a snap package.

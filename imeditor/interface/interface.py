@@ -303,6 +303,7 @@ class Interface(Gtk.ApplicationWindow):
 
         # Vars
         self.filenames = list()
+        self.selected_img = None  # Selected image
 
     def set_window_title(self, tab):
         title = '[{}] - {}'.format(path.basename(tab.editor.image.filename),
