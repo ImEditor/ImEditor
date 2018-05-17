@@ -37,6 +37,7 @@ class Tab(Gtk.Box):
             style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.connect('scroll-event', self.scroll_zoom)
         scrolled_window.add(frame)
 
         # Sidebar
@@ -131,6 +132,19 @@ class Tab(Gtk.Box):
         elif self.zoom_level > 300:
             self.zoom_level = 300
         self.set_zoom_level()
+
+    def scroll_zoom(self, widget, event):
+        if event.state & Gdk.ModifierType.CONTROL_MASK:
+            is_smooth, dx, dy = Gdk.Event.get_scroll_deltas(event)
+            if is_smooth:
+                if dy > 0:
+                    self.zoom(-1)
+                else:
+                    self.zoom(1)
+            elif event.direction == Gdk.ScrollDirection.UP:
+                self.zoom(1)
+            elif event.direction == Gdk.ScrollDirection.DOWN:
+                self.zoom(-1)
 
     def best_zoom_level(self):
         """Find the best zoom level at start"""

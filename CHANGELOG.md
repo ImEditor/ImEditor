@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [0.7] - DEV
 ### Added
 - Allow copy/paste things betweens tabs.
+- Permit to handle zoom with the ctrl key + mouse wheel.
 
 ### Fixed
 - Make icons of the header bar visbile even with a dark background.
