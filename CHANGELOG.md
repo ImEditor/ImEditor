@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Allow copy/paste things betweens tabs.
 
+### Fixed
+- Make icons of the header bar visbile even with a dark background.
+
 ## [0.6.2] - 2017-12-29
 ### Fixed
 - Finally fix the closing bug (really ...).

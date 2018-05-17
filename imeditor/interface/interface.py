@@ -73,9 +73,8 @@ class Interface(Gtk.ApplicationWindow):
         self.pencil_action = Gio.SimpleAction.new('pencil', None)
         self.pencil_action.connect('activate', self.pencil)
         self.add_action(self.pencil_action)
-        self.pencil_button = Gtk.Button()
-        self.pencil_button.set_image(Gtk.Image.new_from_file(
-                                    '{}assets/pencil.png'.format(self.bpath)))
+        self.pencil_button = Gtk.Button.new_from_icon_name('applications-graphics-symbolic',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.pencil_button.set_action_name('win.pencil')
         hb.pack_end(self.pencil_button)
 
@@ -83,9 +82,8 @@ class Interface(Gtk.ApplicationWindow):
         self.select_action = Gio.SimpleAction.new('select', None)
         self.select_action.connect('activate', self.select)
         self.add_action(self.select_action)
-        self.select_button = Gtk.Button()
-        self.select_button.set_image(Gtk.Image.new_from_file(
-                                    '{}assets/select.png'.format(self.bpath)))
+        self.select_button = Gtk.Button.new_from_icon_name('input-mouse-symbolic',
+            Gtk.IconSize.SMALL_TOOLBAR)
         self.select_button.set_action_name('win.select')
         hb.pack_end(self.select_button)
 
