@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 - Permit to handle zoom with the ctrl key + mouse wheel.
 - Make tabs reordable.
 
+### Changed
+- Better adjust the zoom level when an image is opened.
+
 ### Fixed
 - Make icons of the header bar visbile even with a dark background.
 
