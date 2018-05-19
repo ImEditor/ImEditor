@@ -48,7 +48,7 @@ class Editor(object):
     def change_cursor(self, cursor):
         """Change cursor that hovers the image"""
         img_widget = self.tab.img_widget.get_window()
-        if img_widget:
+        if img_widget and self.win.cursors:
             img_widget.set_cursor(self.win.cursors[cursor])
 
     def do_tmp_change(self, img):

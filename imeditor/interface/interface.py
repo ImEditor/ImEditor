@@ -289,11 +289,14 @@ class Interface(Gtk.ApplicationWindow):
 
         # Cursors
         display = Gdk.Display.get_default()
-        self.cursors = {
-            'default': Gdk.Cursor.new_from_name(display, 'default'),
-            'draw': Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL),
-            'move': Gdk.Cursor.new_from_name(display, 'move')
-        }
+        try:
+            self.cursors = {
+                'default': Gdk.Cursor.new_from_name(display, 'default'),
+                'draw': Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL),
+                'move': Gdk.Cursor.new_from_name(display, 'move')
+            }
+        except TypeError as e:
+            self.cursors = None
 
         # Settings
         self.allowed_formats = ('bmp', 'ico', 'jpeg', 'jpg', 'png', 'webp')
