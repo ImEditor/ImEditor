@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Better adjust the zoom level when an image is opened.
+- Open the color selector directly when choosing a custom background color.
 
 ### Fixed
 - Make icons of the header bar visbile even with a dark background.

@@ -118,10 +118,11 @@ def new_image_dialog(parent):
 
     def on_background_changed(button):
         background = button.get_active_text()
-        if background == "Custom color":
+        if background == 'Custom color':
             color_button.set_sensitive(True)
+            color_button.emit('clicked')
         else:
-            if background == "White":
+            if background == 'White':
                 color_button.set_rgba(Gdk.RGBA(1, 1, 1, 1))
             color_button.set_sensitive(False)
 
@@ -130,7 +131,7 @@ def new_image_dialog(parent):
         width = spin_width.get_value_as_int()
         height = spin_height.get_value_as_int()
         size = (width, height)
-        transparent = background_combo.get_active_text() == "Transparent"
+        transparent = background_combo.get_active_text() == 'Transparent'
         color = color_button.get_rgba().to_string()
         extension = extension_combo.get_active_text()
         dialog.values += [name, size, color, transparent, extension]
