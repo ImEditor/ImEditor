@@ -111,13 +111,11 @@ class Editor(object):
         else:
             img = self.image.tmp_img
         # Handle mouse coords
+        x, y = event.x, event.y
         if self.tab.zoom_level != 100:
-            x, y = event.x, event.y
-            x = x * self.tab.width / self.tab.disp_width
-            y = y * self.tab.height / self.tab.disp_height
-            mouse_coords = [round(x), round(y)]
-        else:
-            mouse_coords = [round(event.x), round(event.y)]
+            x *= self.tab.width / self.tab.disp_width
+            y *= self.tab.height / self.tab.disp_height
+        mouse_coords = [round(x), round(y)]
         # Call the good function to handle the event
         getattr(self, task + '_task')(img.copy(), mouse_coords)
 
