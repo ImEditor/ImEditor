@@ -8,7 +8,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='imeditor',
-    version='0.7-dev',
+    version='0.7',
     description='Simple & versatile image editor.',
     url='https://imeditor.github.io',
     author='Nathan Seva, Hugo Posnic',

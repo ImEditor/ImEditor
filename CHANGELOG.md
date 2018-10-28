@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.7] - DEV
+## [0.7] - 2018-10-28
 ### Added
 - Allow copy/paste things betweens tabs.
 - Permit to handle zoom with the ctrl key + mouse wheel.
