@@ -12,6 +12,8 @@ from imeditor.interface import dialog
 
 class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
+        settings = Gtk.Settings.get_default()
+        settings.set_property("gtk-application-prefer-dark-theme", True)
         self.program_title = 'ImEditor'
         self.program_description = 'Simple & versatile image editor'
         Gtk.Window.__init__(self, title=self.program_title, application=app)
