@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Make icons of the header bar visbile even with a dark background.
+- Change window's title if an image have changed of name during saving.
 
 ## [0.6.2] - 2017-12-29
 ### Fixed

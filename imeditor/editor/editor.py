@@ -227,6 +227,7 @@ class Editor(object):
             self.win.filenames.append(filename)
             self.image.filename = filename
             self.tab.tab_label.set_title(path.basename(filename))
+            self.win.set_window_title(self.tab)
             self.image.saved = True
 
     def details(self):
