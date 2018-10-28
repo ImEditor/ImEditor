@@ -350,7 +350,7 @@ class Interface(Gtk.ApplicationWindow):
             img = Image.new(mode, values[1], color)
             name = values[0] if values[0] else 'untitled'
             filename = name + '.' + values[4].lower()
-            self.create_tab(img, filename, False)
+            self.create_tab(img, filename)
 
     def open_image(self, a=None, b=None, filename=None):
         """Open an existing image"""
@@ -364,7 +364,7 @@ class Interface(Gtk.ApplicationWindow):
             if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
                 img = Image.open(filename)
                 if img.mode in self.allowed_modes:
-                    self.create_tab(img, filename)
+                    self.create_tab(img, filename, True)
                     self.filenames.append(filename)
                 else:
                     dialog.message_dialog(self, 'error', 'Unable to open this image',
