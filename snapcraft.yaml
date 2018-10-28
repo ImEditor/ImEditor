@@ -1,0 +1,20 @@
+name: imeditor
+version: '0.7'
+summary: Simple & versatile image editor.
+description: |
+  ImEditor, the image editor you need. An ingenious lightweight software...
+  With ImEditor, the image editing finally becomes easy.
+
+grade: stable
+confinement: strict
+
+parts:
+  imeditor:
+    source: https://github.com/imeditor/imeditor.git
+    source-tag: '0.7'
+    plugin: python
+    after: [desktop-gtk3]
+
+apps:
+  imeditor:
+    command: imeditor
