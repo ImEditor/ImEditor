@@ -398,8 +398,6 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab(page_num)
         if page_num is None:
             page_num = self.notebook.page_num(tab)
-        print (tab.editor.image.filename)
-        print(path.exists(tab.editor.image.filename))
         if not tab.editor.image.saved or not path.exists(tab.editor.image.filename):  # if image is not saved
             title = 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename))
             response = dialog.message_dialog(self, 'question', title,
