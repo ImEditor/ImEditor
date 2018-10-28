@@ -382,7 +382,7 @@ class Interface(Gtk.ApplicationWindow):
             page_num = self.notebook.get_current_page()
         return self.notebook.get_nth_page(page_num)
 
-    def create_tab(self, img, filename, saved=True):
+    def create_tab(self, img, filename, saved=False):
         """Instantiate a new tab"""
         tab = Tab(self, img, filename, saved)
         page_num = self.notebook.get_current_page() + 1
@@ -398,7 +398,9 @@ class Interface(Gtk.ApplicationWindow):
         tab = self.get_tab(page_num)
         if page_num is None:
             page_num = self.notebook.page_num(tab)
-        if not tab.editor.image.saved:  # if image is not saved
+        print (tab.editor.image.filename)
+        print(path.exists(tab.editor.image.filename))
+        if not tab.editor.image.saved or not path.exists(tab.editor.image.filename):  # if image is not saved
             title = 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename))
             response = dialog.message_dialog(self, 'question', title,
                 'If you don\'t save it, the changes made will be permanently lost.')
