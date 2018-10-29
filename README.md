@@ -28,9 +28,9 @@ RGB, RGBA
 
 ## Installation instructions
 
-### Archlinux-based distributions (AUR)
+### Universal package for Linux (recommended)
 
-    yaourt -S imeditor
+    snap intall imeditor
 
 ### Build from source
 

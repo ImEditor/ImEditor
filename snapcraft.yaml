@@ -8,13 +8,24 @@ description: |
 grade: stable
 confinement: strict
 
+build-packages:
+  - python3
+  - python3-gi
+  - gir1.2-gtk-3.0
+
 parts:
   imeditor:
     source: https://github.com/imeditor/imeditor.git
-    source-tag: '0.7'
+    #source-tag: '0.7'
     plugin: python
     after: [desktop-gtk3]
 
+    stage-packages:
+      - python3
+      - python3-gi
+      - gir1.2-gtk-3.0
+
 apps:
   imeditor:
-    command: imeditor
+    command: bin/imeditor.py
+    desktop: usr/share/applications/imeditor.desktop

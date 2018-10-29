@@ -22,12 +22,8 @@ setup(
     keywords = 'image editor picture imeditor',
     packages=find_packages(),
     package_data = {'imeditor' : ['assets/*.*'] },
-    data_files=[('share/pixmaps', ['imeditor/assets/imeditor.png']),
-            ('share/applications', ['imeditor.desktop'])],
-    entry_points={
-        'gui_scripts': [
-            'imeditor = imeditor.main:main',
-        ]
-    },
+    data_files=[('usr/share/pixmaps', ['imeditor/assets/imeditor.png']),
+            ('usr/share/applications', ['imeditor.desktop']),
+            ('bin', ['bin/imeditor.py'])],
     install_requires=requirements
 )
