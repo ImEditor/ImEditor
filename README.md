@@ -30,7 +30,7 @@ RGB, RGBA
 
 ### Universal package for Linux (recommended)
 
-    snap intall imeditor
+    snap install imeditor
 
 ### Build from source
 
