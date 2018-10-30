@@ -18,6 +18,7 @@ parts:
     source: https://github.com/imeditor/imeditor.git
     #source-tag: '0.7'
     plugin: python
+    after: [desktop-gtk3]
     stage-packages:
       - python3
       - python3-pil
