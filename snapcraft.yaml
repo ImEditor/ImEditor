@@ -11,10 +11,6 @@ confinement: strict
 
 build-packages:
   - python3
-  - python3-pil
-  - python3-gi
-  - gir1.2-gtk-3.0
-  - gir1.2-gdkpixbuf-2.0
 
 parts:
   imeditor:
@@ -23,13 +19,19 @@ parts:
     plugin: python
     after: [desktop-gtk3]
     stage-packages:
-      - python3
       - python3-pil
       - python3-gi
       - gir1.2-gtk-3.0
       - gir1.2-gdkpixbuf-2.0
+    override-prime: |
+      set -eu
+
+      snapcraftctl prime
+
+      # Fix-up application icon lookup
+      sed --in-place 's|^Icon=.*|Icon=\${SNAP}/meta/gui/icon.png|' usr/share/applications/imeditor.desktop
 
 apps:
   imeditor:
-    command: desktop-launch bin/imeditor.py
+    command: desktop-launch $SNAP/bin/imeditor.py
     desktop: usr/share/applications/imeditor.desktop
