@@ -7,7 +7,7 @@ description: |
 icon: imeditor/assets/imeditor.png
 
 grade: stable
-confinement: strict
+confinement: devmode
 
 build-packages:
   - python3
