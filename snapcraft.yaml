@@ -29,7 +29,7 @@ apps:
   imeditor:
     environment:
       DISABLE_WAYLAND: 1
-    command: desktop-launch $SNAP/bin/imeditor.py
+    command: desktop-launch $SNAP/bin/imeditor
     desktop: usr/share/applications/imeditor.desktop
     plugs:
       - desktop
