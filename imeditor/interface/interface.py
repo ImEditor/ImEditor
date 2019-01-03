@@ -7,7 +7,7 @@ from PIL import Image, __version__ as pil_version
 from os import path
 
 from .tab import Tab
-from imeditor.interface import dialog
+from . import dialog
 
 
 class Interface(Gtk.ApplicationWindow):

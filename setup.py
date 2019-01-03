@@ -19,11 +19,18 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3 :: Only'
     ],
-    keywords = 'image editor picture imeditor',
+    keywords='image editor picture imeditor',
     packages=find_packages(),
-    package_data = {'imeditor' : ['assets/*.*'] },
-    data_files=[('usr/share/pixmaps', ['imeditor/assets/imeditor.png']),
-            ('usr/share/applications', ['imeditor.desktop']),
-            ('bin', ['bin/imeditor.py'])],
-    install_requires=requirements
+    install_requires=requirements,
+    include_package_data=True,
+    package_data={'imeditor' : ['assets/*.*']},
+    data_files=[
+        ('usr/share/pixmaps', ['imeditor/assets/imeditor.png']),
+        ('usr/share/applications', ['imeditor.desktop'])
+    ],
+    entry_points={
+        'gui_scripts': [
+            'imeditor = imeditor.main:main',
+        ]
+    }
 )
