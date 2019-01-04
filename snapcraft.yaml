@@ -6,7 +6,7 @@ description: >
   With ImEditor, the image editing finally becomes easy.
 icon: imeditor/assets/imeditor.png
 grade: devel
-confinement: devmode
+confinement: strict
 
 plugs:
   gtk-3-themes:
@@ -42,6 +42,7 @@ apps:
     command: desktop-launch $SNAP/bin/imeditor
     desktop: usr/share/applications/imeditor.desktop
     plugs:
+      - home
       - gsettings
       - desktop
       - desktop-legacy
