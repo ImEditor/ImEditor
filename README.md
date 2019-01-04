@@ -4,8 +4,6 @@
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
 [![Snap Status](https://build.snapcraft.io/badge/ImEditor/ImEditor.svg)](https://build.snapcraft.io/user/ImEditor/ImEditor)
 
-## Description
-
 ImEditor is a simple & versatile image editor.
 
 ### Functionalities
@@ -30,6 +28,8 @@ RGB, RGBA
 ## Installation instructions
 
 ### Universal package for Linux (recommended)
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/imeditor)
 
     snap install imeditor
 
