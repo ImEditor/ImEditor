@@ -1,11 +1,11 @@
 name: imeditor
-version: git
+version: 0.7
 summary: Simple & versatile image editor.
 description: >
   ImEditor, the image editor you need. An ingenious lightweight software...
   With ImEditor, the image editing finally becomes easy.
 icon: imeditor/assets/imeditor.png
-grade: devel
+grade: stable
 confinement: strict
 
 plugs:
