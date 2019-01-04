@@ -8,6 +8,16 @@ icon: imeditor/assets/imeditor.png
 grade: devel
 confinement: devmode
 
+plugs:
+  gtk-3-themes:
+    default-provider: gtk-common-themes
+    interface: content
+    target: $SNAP/data-dir/themes
+  icon-themes:
+    default-provider: gtk-common-themes
+    interface: content
+    target: $SNAP/data-dir/icons
+
 parts:
   imeditor:
     source: .
@@ -32,6 +42,7 @@ apps:
     command: desktop-launch $SNAP/bin/imeditor
     desktop: usr/share/applications/imeditor.desktop
     plugs:
+      - gsettings
       - desktop
       - desktop-legacy
       - unity7
