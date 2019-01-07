@@ -12,10 +12,6 @@ architectures:
   - build-on: i386
 
 plugs:
-  gnome-3-26-1604:
-    interface: content
-    target: $SNAP/gnome-platform
-    default-provider: gnome-3-26-1604:gnome-3-26-1604
   gtk-3-themes:
     default-provider: gtk-common-themes
     interface: content
@@ -44,6 +40,8 @@ parts:
 
 apps:
   imeditor:
+    environment:
+      DISABLE_WAYLAND: 1
     command: desktop-launch $SNAP/bin/imeditor
     desktop: usr/share/applications/imeditor.desktop
     plugs:
@@ -51,5 +49,5 @@ apps:
       - gsettings
       - desktop
       - desktop-legacy
-      - wayland
+      - unity7
       - x11
