@@ -473,7 +473,7 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(),
-            Gtk.get_minor_version(), Gtk.get_macro_version())
+            Gtk.get_minor_version(), Gtk.get_micro_version())
         dialog.set_comments('{}\n\n' \
             'Gtk: {}\nPillow: {}'.format(self.program_description, gtk_version,
             pil_version))
