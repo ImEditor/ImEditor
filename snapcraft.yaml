@@ -7,6 +7,9 @@ description: >
 icon: imeditor/assets/imeditor.png
 grade: stable
 confinement: strict
+architectures:
+  - build-on: amd64
+  - build-on: i386
 
 plugs:
   gtk-3-themes:
