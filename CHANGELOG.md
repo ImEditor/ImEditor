@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8] - DEV
+- Better packaging to create a snap package.
+
 ## [0.7] - 2018-10-28
 ### Added
 - Allow copy/paste things betweens tabs.
