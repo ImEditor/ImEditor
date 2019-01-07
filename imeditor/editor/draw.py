@@ -16,8 +16,15 @@ def draw_rectangle(img, coords, size, fill_color=None, outline_color=None):
     """Draw a rectangle on an image"""
     draw, xy = draw_shape(img, coords, size)
     draw.rectangle(xy, fill=fill_color, outline=outline_color)
+    return xy
 
 def draw_ellipse(img, coords, size, fill_color=None, outline_color=None):
     """Draw an ellipse on an image"""
     draw, xy = draw_shape(img, coords, size)
     draw.ellipse(xy, fill=fill_color, outline=outline_color)
+    return xy
+
+def draw_line(img, coords, size, fill_color=None):
+    """Draw a line on an image"""
+    draw, xy = draw_shape(img, coords, size)
+    draw.line(xy, fill=fill_color, width=size)

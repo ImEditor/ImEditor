@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.8] - DEV
 ### Changed
+- Make the pencil tool draw a continuous line instead of a trace of dots.
 - Better packaging to create a snap package.
 
 ### Fixed

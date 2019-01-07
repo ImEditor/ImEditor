@@ -7,7 +7,7 @@ from imeditor.interface import dialog
 from imeditor.filters import base
 from .image import ImageObject
 from .tools import get_middle_mouse, get_infos
-from .draw import draw_rectangle, draw_ellipse
+from .draw import draw_rectangle, draw_ellipse, draw_line
 
 
 class Editor(object):
@@ -22,8 +22,7 @@ class Editor(object):
         self.MAX_HIST = 100
 
         # Tasks
-        self.task = 0  # 0 -> select, 1 -> paste, 2 -> pencil
-        self.left_button_pressed = False
+        self.task = 0  # 0 -> select, 1 -> paste, 2 -> draw
 
         # Coords of selected region
         self.selection = list()
@@ -33,6 +32,10 @@ class Editor(object):
         self.pencil_color = 'black'
         self.pencil_size = 8
 
+        # Temp vars
+        self.left_button_pressed = False
+        self.last_drawn_point = None
+
     def change_task(self, task='select'):
         """Change active task and its cursor"""
         if task == 'select':
@@ -41,7 +44,7 @@ class Editor(object):
         elif task == 'paste':
             self.task = 1
             self.change_cursor('move')
-        elif task == 'pencil':
+        elif task == 'draw':
             self.task = 2
             self.change_cursor('draw')
 
@@ -128,6 +131,7 @@ class Editor(object):
         elif (self.task == 1 and self.selection):
             self.move_task(img, mouse_coords)
         elif self.task == 2:
+            self.last_drawn_point = mouse_coords
             self.move_task(img, mouse_coords)
 
     def move_task(self, img, mouse_coords):
@@ -152,9 +156,17 @@ class Editor(object):
             coords = ((mouse_coords[0], mouse_coords[1]),
                 (mouse_coords[0], mouse_coords[1]))
             if self.pencil_shape == 'ellipse':
-                draw_ellipse(img, coords, self.pencil_size, self.pencil_color)
+                new_coords = draw_ellipse(img, coords, self.pencil_size, self.pencil_color)
             elif self.pencil_shape == 'rectangle':
-                draw_rectangle(img, coords, self.pencil_size, self.pencil_color)
+                new_coords = draw_rectangle(img, coords, self.pencil_size, self.pencil_color)
+
+            # Draw a line between the last and the newer points
+            # Continuous drawing
+            if mouse_coords != self.last_drawn_point:
+                coords2 = (self.last_drawn_point, new_coords)
+                draw_line(img, coords2, self.pencil_size, self.pencil_color)
+
+            self.last_drawn_point = mouse_coords
             self.do_tmp_change(img)
 
     def release_task(self, img, mouse_coords):
@@ -162,6 +174,7 @@ class Editor(object):
         if self.task == 0 and mouse_coords != self.selection:
             m0, m1 = mouse_coords[0], mouse_coords[1]
             s0, s1 = self.selection[0], self.selection[1]
+            # Allow selection from all corners
             if m0 >= s0 and m1 > s1:  # top-left
                 self.selection = [s0, s1, m0, m1]
             elif m0 <= s0 and m1 <= s1:  # bottom-right
@@ -176,6 +189,7 @@ class Editor(object):
             self.selection = list()
         elif self.task == 2:
             self.do_change(img)
+            self.last_drawn_point = None
         self.left_button_pressed = False
 
     def copy(self):
