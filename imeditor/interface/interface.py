@@ -25,8 +25,8 @@ class Interface(Gtk.ApplicationWindow):
         self.set_position(Gtk.WindowPosition.CENTER)
 
         # Paths
-        prefix = path.dirname(path.dirname(path.abspath(__file__))) + '/'
-        logo_path = path.join(prefix + 'assets/imeditor.png')
+        self.prefix = path.dirname(path.dirname(path.abspath(__file__))) + '/'
+        logo_path = path.join(self.prefix + 'assets/imeditor.png')
 
         # Assets
         self.logo = GdkPixbuf.Pixbuf.new_from_file(logo_path)

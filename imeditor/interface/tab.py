@@ -32,7 +32,7 @@ class Tab(Gtk.Box):
         frame.add(event_box)
         style_provider = Gtk.CssProvider()
         css = "#TabFrame {{ background: url('{}assets/transparent.png'); }}"
-        style_provider.load_from_data(css.format(self.win.bpath).encode())
+        style_provider.load_from_data(css.format(self.win.prefix).encode())
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
             style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
