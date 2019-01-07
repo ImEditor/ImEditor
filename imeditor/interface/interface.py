@@ -12,8 +12,10 @@ from . import dialog
 
 class Interface(Gtk.ApplicationWindow):
     def __init__(self, app):
+        # Prefer a dark theme if available
         settings = Gtk.Settings.get_default()
         settings.set_property("gtk-application-prefer-dark-theme", True)
+        # Init the app
         self.program_title = 'ImEditor'
         self.program_description = 'Simple & versatile image editor'
         Gtk.Window.__init__(self, title=self.program_title, application=app)
@@ -21,9 +23,13 @@ class Interface(Gtk.ApplicationWindow):
         self.app = app
         self.set_default_size(950, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
-        self.bpath = path.dirname(path.dirname(path.abspath(__file__))) + '/'
-        self.logo = GdkPixbuf.Pixbuf.new_from_file(
-                        '{}assets/imeditor.png'.format(self.bpath))
+
+        # Paths
+        prefix = path.dirname(path.dirname(path.abspath(__file__))) + '/'
+        logo_path = path.join(prefix + 'assets/imeditor.png')
+
+        # Assets
+        self.logo = GdkPixbuf.Pixbuf.new_from_file(logo_path)
         self.set_icon(self.logo)
 
         # Header Bar
