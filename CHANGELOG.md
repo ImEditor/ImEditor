@@ -2,7 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.8] - DEV
+### Changed
 - Better packaging to create a snap package.
+
+### Fixed
+- Fix Gtk version string in about dialog.
 
 ## [0.7] - 2018-10-28
 ### Added
