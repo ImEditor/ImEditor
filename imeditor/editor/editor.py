@@ -134,15 +134,15 @@ class Editor(object):
         """Move event"""
         if not self.left_button_pressed:  # need that press_task have been called
             return
-        if self.task == 0:
-            # Ensure that coords are in the image area
-            for i in range(2):
-                # Higher than the image
-                if mouse_coords[i] > self.image.get_current_img().size[i]:
-                    mouse_coords[i] = self.image.get_current_img().size[i]
+        # Ensure that coords are in the image area
+        for i in range(2):
+            # Higher than the image
+            if mouse_coords[i] > self.image.get_current_img().size[i]:
+                mouse_coords[i] = self.image.get_current_img().size[i]
                 # Lower than 0
-                elif mouse_coords[i] < 0:
-                    mouse_coords[i] = 0
+            elif mouse_coords[i] < 0:
+                mouse_coords[i] = 0
+        if self.task == 0:
             coords = (self.selection, mouse_coords)
             draw_rectangle(img, coords, 0, outline_color='black')
             self.tab.update_image(img)
