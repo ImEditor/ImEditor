@@ -485,8 +485,6 @@ class Interface(Gtk.ApplicationWindow):
             pil_version))
         text = 'Distributed under the GNU GPL(v3) license.\n'
         text += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
-        text += 'Icons made by Madebyoliver under CC 3.0 BY.\n'
-        text += 'http://www.flaticon.com/authors/madebyoliver'
         dialog.set_license(text)
         dialog.run()
         dialog.destroy()
