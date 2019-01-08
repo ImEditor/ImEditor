@@ -227,7 +227,8 @@ class Editor(object):
 
     def crop(self):
         """Crop an image"""
-        if self.selection:  # a part of the image is selected
+        # Check if a part of the image is selected
+        if self.selection and len(self.selection) == 4:
             img = self.image.get_current_img().crop(tuple(self.selection))
             self.do_change(img)
 
