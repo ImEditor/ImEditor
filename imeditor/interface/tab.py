@@ -95,11 +95,10 @@ class Tab(Gtk.Box):
 
     def update_image(self, img=None, tmp=False):
         """Refresh the displayed image"""
-        if img:  # Update size
-            self.width = img.width
-            self.height = img.height
+        if img:
+            self.editor.image.size = img.size  # in case it changed
         # Vars
-        width, height = self.width, self.height
+        width, height = self.editor.image.size
         # Create pixbuf
         pixbuf = pil_to_pixbuf(img) if img else self.last_pixbuf
         # Update preview and save pixbuf if it's not a temp change
@@ -153,7 +152,7 @@ class Tab(Gtk.Box):
     def best_zoom_level(self):
         """Find the best zoom level at start"""
         zoom = 100  # default zoom
-        w, h = self.width, self.height  # size of the image
+        w, h = self.editor.image.size  # size of the image
         ww = self.win.get_allocation().width  # width of the window
         wh = self.win.get_allocation().height  # height of the window
         ww -= ww * 20 / 100  # add a margin of 20%

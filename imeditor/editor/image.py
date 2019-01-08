@@ -6,6 +6,7 @@ class ImageObject(object):
         super(ImageObject, self).__init__()
         self.images = [img]
         self.filename = filename
+        self.size = img.size
         self.saved = saved
         self.index = 0
         self.tmp_img = None
