@@ -20,6 +20,11 @@ plugs:
     default-provider: gtk-common-themes
     interface: content
     target: $SNAP/data-dir/icons
+slots:
+  imeditor:
+    interface: dbus
+    bus: session
+    name: io.github.imeditor
 
 parts:
   imeditor:
