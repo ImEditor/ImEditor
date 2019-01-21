@@ -66,7 +66,7 @@ class Interface(Gtk.ApplicationWindow):
         submenu_2.append('Crop', 'win.crop')
         menu_model.append_submenu('Operations', submenu_2)
         menu_model.append('Image details', 'win.details')
-        menu_model.append('About', 'win.about')
+        menu_model.append('About {}'.format(self.program_title), 'win.about')
         menu_button.set_menu_model(menu_model)
         hb.pack_end(menu_button)
 
