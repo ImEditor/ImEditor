@@ -157,7 +157,7 @@ class Editor(object):
                 (mouse_coords[0], mouse_coords[1]))
             if self.pencil_shape == 'ellipse':
                 new_coords = draw_ellipse(img, coords, self.pencil_size, self.pencil_color)
-            elif self.pencil_shape == 'rectangle':
+            elif self.pencil_shape == 'square':
                 new_coords = draw_rectangle(img, coords, self.pencil_size, self.pencil_color)
 
             # Draw a line between the last and the newer points

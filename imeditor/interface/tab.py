@@ -50,7 +50,7 @@ class Tab(Gtk.Box):
         shape_pencil_label = Gtk.Label('Shape')
         pencil_shape_combo = Gtk.ComboBoxText()
         pencil_shape_combo.set_entry_text_column(0)
-        shapes = ['Ellipse', 'Rectangle']
+        shapes = ['Ellipse', 'Square']
         for shape in shapes:
             pencil_shape_combo.append_text(shape)
         pencil_shape_combo.set_active(0)
