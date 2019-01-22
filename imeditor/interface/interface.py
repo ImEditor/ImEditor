@@ -361,7 +361,11 @@ class Interface(Gtk.ApplicationWindow):
             filename = dialog.file_dialog(self, 'open')
         else:
             filename = filename.get_path()
-        if not filename or not path.isfile(filename):
+        if not filename:
+            return
+        if not path.isfile(filename):
+            dialog.message_dialog(self, 'error', 'Unable to open this image',
+                'This image doesn\'t exists. Please verify the path.')
             return
         if filename not in self.filenames: # is image already opened ?
             if path.splitext(filename)[-1][1:].lower() in SUPPORTED_EXTENSIONS:
