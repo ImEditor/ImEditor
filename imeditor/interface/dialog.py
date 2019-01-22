@@ -5,6 +5,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
 from .tools import SpinButton
+from .vars import DEFAULT_TEMPLATES, PROPOSED_EXTENSIONS
 
 
 class Dialog(Gtk.Dialog):
@@ -99,22 +100,10 @@ def details_dialog(parent, infos):
 
 
 def new_image_dialog(parent):
-    templates = {
-        'Favicon': (16, 16),
-        'A3': (3508, 4960),
-        'A4': (3508, 2480),
-        'A5': (2480, 1748),
-        'A6': (1748, 1240),
-        '1024x768': (1024, 768),
-        '1280x1024': (1280, 1024),
-        '1920x1200': (1920, 1200)
-    }
-    extensions = ('PNG', 'JPEG', 'WEBP', 'BMP', 'ICO')
-
     def on_template_changed(button):
         template = button.get_active_text()
-        spin_width.set_value(templates[template][0])
-        spin_height.set_value(templates[template][1])
+        spin_width.set_value(DEFAULT_TEMPLATES[template][0])
+        spin_height.set_value(DEFAULT_TEMPLATES[template][1])
 
     def on_background_changed(button):
         background = button.get_active_text()
@@ -145,7 +134,7 @@ def new_image_dialog(parent):
     template_combo = Gtk.ComboBoxText()
     template_combo.connect('changed', on_template_changed)
     template_combo.set_entry_text_column(0)
-    for elt in templates.keys():
+    for elt in DEFAULT_TEMPLATES.keys():
         template_combo.append_text(elt)
 
     spin_width = SpinButton(640, 1, 10000)
@@ -165,7 +154,7 @@ def new_image_dialog(parent):
 
     extension_combo = Gtk.ComboBoxText()
     extension_combo.set_entry_text_column(0)
-    for elt in extensions:
+    for elt in PROPOSED_EXTENSIONS:
         extension_combo.append_text(elt)
         extension_combo.set_active(0)
 

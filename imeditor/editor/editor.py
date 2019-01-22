@@ -143,7 +143,7 @@ class Editor(object):
             # Higher than the image
             if mouse_coords[i] > self.image.size[i]:
                 mouse_coords[i] = self.image.size[i]
-                # Lower than 0
+            # Lower than 0
             elif mouse_coords[i] < 0:
                 mouse_coords[i] = 0
         if self.task == 0:

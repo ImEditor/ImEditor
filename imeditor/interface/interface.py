@@ -7,6 +7,7 @@ from PIL import Image, __version__ as pil_version
 from os import path
 
 from .tab import Tab
+from .vars import SUPPORTED_EXTENSIONS, SUPPORTED_MODES
 from . import dialog
 
 
@@ -306,10 +307,6 @@ class Interface(Gtk.ApplicationWindow):
         except TypeError as e:
             self.cursors = None
 
-        # Settings
-        self.allowed_formats = ('bmp', 'ico', 'jpeg', 'jpg', 'png', 'webp')
-        self.allowed_modes = ('RGB', 'RGBA')
-
         # Vars
         self.filenames = list()
         self.selected_img = None  # Selected image
@@ -367,9 +364,9 @@ class Interface(Gtk.ApplicationWindow):
         if not filename or not path.isfile(filename):
             return
         if filename not in self.filenames: # is image already opened ?
-            if path.splitext(filename)[-1][1:].lower() in self.allowed_formats:
+            if path.splitext(filename)[-1][1:].lower() in SUPPORTED_EXTENSIONS:
                 img = Image.open(filename)
-                if img.mode in self.allowed_modes:
+                if img.mode in SUPPORTED_MODES:
                     self.create_tab(img, filename, True)
                     self.filenames.append(filename)
                 else:
