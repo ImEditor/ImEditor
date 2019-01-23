@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.8] - 2019-01-23
 ### Changed
-- Make the pencil tool draw a continuous line instead of a trace of dots (need improvements).
+- Make the pencil tool draw a continuous line instead of a trace of dots (needs improvements).
 - Mouse tools (selection and drawing) can't go outside the image area.
 - Better packaging to create a snap package.
 
