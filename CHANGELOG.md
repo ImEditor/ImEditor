@@ -1,14 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.8] - DEV
+## [0.8] - 2019-01-23
 ### Changed
-- Make the pencil tool draw a continuous line instead of a trace of dots.
+- Make the pencil tool draw a continuous line instead of a trace of dots (need improvements).
 - Mouse tools (selection and drawing) can't go outside the image area.
 - Better packaging to create a snap package.
 
 ### Fixed
 - Fix Gtk version string in about dialog.
+- Others minor fixes.
 
 ## [0.7] - 2018-10-28
 ### Added
