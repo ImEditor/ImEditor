@@ -48,10 +48,10 @@ apps:
       - home
       - unity7
       - wayland
+    slots: [ imeditor ]
     desktop: usr/share/applications/imeditor.desktop
     environment:
       GSETTINGS_SCHEMA_DIR: $SNAP/share/glib-2.0/schemas
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/imeditor
 
 parts:
   desktop-gnome-platform:
