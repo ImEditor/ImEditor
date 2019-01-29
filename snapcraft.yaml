@@ -5,22 +5,29 @@ description: >
   ImEditor, the image editor you need. An ingenious lightweight software...
   With ImEditor, the image editing finally becomes easy.
 icon: imeditor/assets/imeditor.png
+
 grade: stable
 confinement: strict
+base: core18
 architectures:
   - build-on: amd64
   - build-on: i386
 
 plugs:
   gtk-3-themes:
-    default-provider: gtk-common-themes
     interface: content
     target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes:gtk-3-themes
   icon-themes:
-    default-provider: gtk-common-themes
     interface: content
     target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes:icon-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes:sounds-themes
 slots:
+  # for GtkApplication registration
   imeditor:
     interface: dbus
     bus: session
