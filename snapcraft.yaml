@@ -74,7 +74,8 @@ parts:
       - python3-gi
       - gir1.2-gtk-3.0
       - gir1.2-gdkpixbuf-2.0
-    requirements: requirements.txt
+    python-packages:
+      - Pillow==5.4.1
     override-prime: |
       set -eu
       snapcraftctl prime
