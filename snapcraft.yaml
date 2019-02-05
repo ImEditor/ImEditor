@@ -71,6 +71,7 @@ parts:
     source: .
     plugin: python
     stage-packages:
+      - gir1.2-glib-2.0
       - python3-gi
     python-packages:
       - Pillow==5.4.1
