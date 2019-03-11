@@ -9,4 +9,5 @@ Comment=Simple & versatile image editor.
 Path=/usr/bin
 Exec=imeditor
 Icon=usr/share/pixmaps/imeditor.png
+StartupWMClass=imeditor
 MimeType=image/bmp;image/x-icon;image/jpeg;image/png;image/webp;
