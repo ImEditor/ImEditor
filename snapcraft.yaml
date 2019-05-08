@@ -74,7 +74,7 @@ parts:
       - gir1.2-glib-2.0
       - python3-gi
     python-packages:
-      - Pillow==5.4.1
+      - Pillow==6.0.0
     override-prime: |
       set -eu
       snapcraftctl prime
