@@ -1,6 +1,5 @@
 # ImEditor
 
-[![Code Health](https://landscape.io/github/ImEditor/ImEditor/master/landscape.svg?style=flat)](https://landscape.io/github/ImEditor/ImEditor/master)
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
 [![Snap Status](https://build.snapcraft.io/badge/ImEditor/ImEditor.svg)](https://build.snapcraft.io/user/ImEditor/ImEditor)
 
