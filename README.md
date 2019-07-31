@@ -27,7 +27,7 @@ RGB, RGBA
 
 ### Universal package for Linux (recommended)
 
-    flatpak install io.github.imeditor
+    flatpak install io.github.ImEditor
 
 ## Tech
 

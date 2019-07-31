@@ -30,12 +30,18 @@ class Tab(Gtk.Box):
         frame.set_valign(Gtk.Align.CENTER)
         frame.set_name('TabFrame')
         frame.add(event_box)
-        # style_provider = Gtk.CssProvider()
-        # css = "#TabFrame {{ background: url('assets/transparent.png'); }}"
-        # style_provider.load_from_data(css.encode())
-        # Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-        #     style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
+        css = b"""#TabFrame {
+          background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+          background-size: 20px 20px;
+          background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }"""
+        style_provider = Gtk.CssProvider()
+        style_provider.load_from_data(css)
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            style_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.connect('scroll-event', self.scroll_zoom)
         scrolled_window.add(frame)

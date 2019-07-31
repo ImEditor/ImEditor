@@ -26,7 +26,7 @@ class Interface(Gtk.ApplicationWindow):
         self.set_position(Gtk.WindowPosition.CENTER)
 
         # Assets
-        self.logo = None
+        self.logo = GdkPixbuf.Pixbuf.new_from_resource('/io/github/ImEditor/assets/imeditor.png')
         self.set_icon(self.logo)
 
         # Header Bar
