@@ -39,3 +39,21 @@ if compile_schemas.found()
     args: ['--strict', '--dry-run', meson.current_source_dir()]
   )
 endif
+
+# Installing the icons
+icon_sizes = ['scalable']
+
+foreach i : icon_sizes
+  install_data(
+    join_paths('icons/hicolor', i , 'apps', 'io.github.ImEditor.svg'),
+    install_dir: join_paths(get_option('prefix'), get_option('datadir'), 'icons', 'hicolor', i , 'apps'),
+    rename: '@0@.svg'.format('io.github.ImEditor')
+  )
+endforeach
+
+# Installing the symbolic icon
+install_data(
+    join_paths('icons/hicolor/symbolic/apps', 'io.github.ImEditor-symbolic.svg'),
+    install_dir: join_paths(get_option('prefix'), get_option('datadir'), 'icons/hicolor/symbolic/apps'),
+    rename: '@0@-symbolic.svg'.format('io.github.ImEditor')
+)

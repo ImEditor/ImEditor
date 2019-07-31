@@ -25,10 +25,6 @@ class Interface(Gtk.ApplicationWindow):
         self.set_default_size(950, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
 
-        # Assets
-        self.logo = GdkPixbuf.Pixbuf.new_from_resource('/io/github/ImEditor/assets/imeditor.png')
-        self.set_icon(self.logo)
-
         # Header Bar
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
@@ -470,7 +466,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def about(self, a, b):
         dialog = Gtk.AboutDialog(transient_for=self)
-        dialog.set_logo(self.logo)
+        dialog.set_logo_icon_name('io.github.ImEditor')
         dialog.set_program_name(self.program_title)
         dialog.set_version('0.8')
         dialog.set_website('https://imeditor.github.io')
