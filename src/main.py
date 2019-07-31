@@ -1,22 +1,19 @@
 #!/usr/bin/env python3
 
-import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
 import sys
+import gi
 
-from imeditor.interface.interface import Interface
+gi.require_version('Gtk', '3.0')
+
+from gi.repository import Gtk, Gio
+
+from .interface import Interface
 
 
-def main():
-    app = App()
-    app.run(sys.argv)
-
-
-class App(Gtk.Application):
+class Application(Gtk.Application):
     def __init__(self):
         Gtk.Application.__init__(self,
-                                application_id='io.github.imeditor',
+                                application_id='io.github.ImEditor',
                                 flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
         self.connect('activate', self.show_window)
@@ -35,5 +32,6 @@ class App(Gtk.Application):
             self.window.open_image(filename=image)
 
 
-if __name__ == '__main__':
-    main()
+def main(version):
+    app = Application()
+    return app.run(sys.argv)

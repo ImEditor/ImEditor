@@ -1,7 +1,6 @@
 # ImEditor
 
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
-[![Snap Status](https://build.snapcraft.io/badge/ImEditor/ImEditor.svg)](https://build.snapcraft.io/user/ImEditor/ImEditor)
 
 ImEditor is a simple & versatile image editor.
 
@@ -28,22 +27,7 @@ RGB, RGBA
 
 ### Universal package for Linux (recommended)
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/imeditor)
-
-    snap install imeditor
-
-### Build from source
-
-Build and install by running:
-
-    python setup.py build
-    sudo python setup.py install
-
-### Developer install
-
-Installing ImEditor with develop mode creates binaries that link back to source code. Therefore changes will be reflected immediately with no need to repeatedly install.
-
-    sudo python setup.py develop
+    flatpak install io.github.imeditor
 
 ## Tech
 
