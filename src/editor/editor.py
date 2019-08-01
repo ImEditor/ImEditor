@@ -7,7 +7,7 @@ from datetime import datetime
 from .dialog import *
 from .base import *
 from .image import ImageObject
-from .draw import draw_rectangle, draw_ellipse, draw_line
+from .draw import draw_rectangle, draw_ellipse
 
 
 class Editor(object):
@@ -34,7 +34,6 @@ class Editor(object):
 
         # Temp vars
         self.left_button_pressed = False
-        self.last_drawn_point = None
 
     def change_task(self, task='select'):
         """Change active task and its cursor"""
@@ -160,13 +159,6 @@ class Editor(object):
             elif self.pencil_shape == 'square':
                 new_coords = draw_rectangle(img, coords, self.pencil_size, self.pencil_color)
 
-            # Draw a line between the last and the newer points
-            # Continuous drawing
-            if mouse_coords != self.last_drawn_point:
-                coords2 = (self.last_drawn_point, new_coords)
-                draw_line(img, coords2, self.pencil_size, self.pencil_color)
-
-            self.last_drawn_point = mouse_coords
             self.do_tmp_change(img)
 
     def release_task(self, img, mouse_coords):
@@ -189,7 +181,6 @@ class Editor(object):
             self.selection = list()
         elif self.task == 2:
             self.do_change(img)
-            self.last_drawn_point = None
         self.left_button_pressed = False
 
     def copy(self):
