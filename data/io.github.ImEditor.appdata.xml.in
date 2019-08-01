@@ -3,6 +3,25 @@
 	<id>io.github.ImEditor.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+	<content_rating type="oars-1.1" />
+	<name>ImEditor</name>
+	<summary>Simple &amp; versatile image editor.</summary>
 	<description>
+		<p>ImEditor is simple image editor, supporting PNG, JPEG, WEBP, BMP, ICO file types.</p>
+		<p>It offers several tools to modify an image.</p>
 	</description>
+
+	<developer_name>Hugo Posnic</developer_name>
+	<update_contact>hugo.posnic@gmail.com</update_contact>
+	<url type="bugtracker">https://github.com/ImEditor/ImEditor/issues</url>
+	<url type="homepage">https://imeditor.github.io</url>
+
+	<screenshots>
+		<screenshot type="default">
+      		<image type="source">https://raw.githubusercontent.com/ImEditor/ImEditor/master/data/screenshots/screen1.png</image>
+		</screenshot>
+	</screenshots>
+
+	<translation type="gettext">imeditor</translation>
+	<launchable type="desktop-id">io.github.ImEditor.desktop</launchable>
 </component>
