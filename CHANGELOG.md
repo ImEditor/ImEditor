@@ -1,12 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.9-dev] -
+## [0.9] - 2019-08-01
 ### Added
 - Adopt meson and flatpak over snap.
 - Better GNOME integration.
-- Translations (add French language).
+- Translations (add French as first additional language).
 - New icon.
+
+### Changed
+- Revert continuous line (too bad).
 
 ## [0.8] - 2019-01-23
 ### Changed

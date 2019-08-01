@@ -1,5 +1,5 @@
 project('imeditor',
-        version: '0.8.0',
+        version: '0.9.0',
   meson_version: '>= 0.50.0',
 )
 
