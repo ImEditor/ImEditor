@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=ImEditor
+Exec=imeditor
+Comment=Simple & versatile image editor.
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Graphics;
+Icon=io.github.ImEditor
+StartupWMClass=imeditor
+MimeType=image/bmp;image/x-icon;image/jpeg;image/png;image/webp;
+StartupNotify=true

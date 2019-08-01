@@ -7,8 +7,8 @@ from PIL import Image, __version__ as pil_version
 from os import path
 
 from .tab import Tab
+from .dialog import *
 from .vars import SUPPORTED_EXTENSIONS, SUPPORTED_MODES
-from . import dialog
 
 
 class Interface(Gtk.ApplicationWindow):
@@ -24,14 +24,6 @@ class Interface(Gtk.ApplicationWindow):
         self.app = app
         self.set_default_size(950, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
-
-        # Paths
-        self.prefix = path.dirname(path.dirname(path.abspath(__file__))) + '/'
-        logo_path = path.join(self.prefix + 'assets/imeditor.png')
-
-        # Assets
-        self.logo = GdkPixbuf.Pixbuf.new_from_file(logo_path)
-        self.set_icon(self.logo)
 
         # Header Bar
         hb = Gtk.HeaderBar()
@@ -341,8 +333,8 @@ class Interface(Gtk.ApplicationWindow):
 
     def new_image(self, a, b):
         """Launch the new image dialog"""
-        new_image_dialog = dialog.new_image_dialog(self)
-        values = new_image_dialog.get_values()
+        dialog = new_image_dialog(self)
+        values = dialog.get_values()
         if values:
             if values[3]:  # if transparent background
                 color = 'rgba(255, 255, 255, 0)'
@@ -358,13 +350,13 @@ class Interface(Gtk.ApplicationWindow):
     def open_image(self, a=None, b=None, filename=None):
         """Open an existing image"""
         if not filename:
-            filename = dialog.file_dialog(self, 'open')
+            filename = file_dialog(self, 'open')
         else:
             filename = filename.get_path()
         if not filename:
             return
         if not path.isfile(filename):
-            dialog.message_dialog(self, 'error', 'Unable to open this image',
+            message_dialog(self, 'error', 'Unable to open this image',
                 'This image doesn\'t exists. Please verify the path.')
             return
         if filename not in self.filenames: # is image already opened ?
@@ -374,13 +366,13 @@ class Interface(Gtk.ApplicationWindow):
                     self.create_tab(img, filename, True)
                     self.filenames.append(filename)
                 else:
-                    dialog.message_dialog(self, 'error', 'Unable to open this image',
+                    message_dialog(self, 'error', 'Unable to open this image',
                         'The mode of this image is not supported.')
             else:
-                dialog.message_dialog(self, 'error', 'Unable to open this file',
+                message_dialog(self, 'error', 'Unable to open this file',
                     'The format of this file is not supported.')
         else:
-            dialog.message_dialog(self, 'warning', 'Already open',
+            message_dialog(self, 'warning', 'Already open',
                 'This image is already opened in ImEditor.')
 
     def get_tab(self, page_num=None):
@@ -407,7 +399,7 @@ class Interface(Gtk.ApplicationWindow):
             page_num = self.notebook.page_num(tab)
         if not tab.editor.image.saved or not path.exists(tab.editor.image.filename):  # if image is not saved
             title = 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename))
-            response = dialog.message_dialog(self, 'question', title,
+            response = message_dialog(self, 'question', title,
                 'If you don\'t save it, the changes made will be permanently lost.')
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
@@ -474,7 +466,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def about(self, a, b):
         dialog = Gtk.AboutDialog(transient_for=self)
-        dialog.set_logo(self.logo)
+        dialog.set_logo_icon_name('io.github.ImEditor')
         dialog.set_program_name(self.program_title)
         dialog.set_version('0.8')
         dialog.set_website('https://imeditor.github.io')

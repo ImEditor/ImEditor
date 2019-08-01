@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 from PIL import Image
-from os import path
+from os import stat, path
+from datetime import datetime
 
-from imeditor.interface import dialog
-from imeditor.filters import base
+from .dialog import *
+from .base import *
 from .image import ImageObject
-from .tools import get_middle_mouse, get_infos
 from .draw import draw_rectangle, draw_ellipse, draw_line
 
 
@@ -91,15 +91,15 @@ class Editor(object):
     def apply_filter(self, func, value=None):
         """Apply a filter from filters/base.py"""
         if value:
-            img = getattr(base, func)(self.image.get_current_img(), value)
+            img = globals()[func](self.image.get_current_img(), value)
         else:
-            img = getattr(base, func)(self.image.get_current_img())
+            img = globals()[func](self.image.get_current_img())
         self.do_change(img)
 
     def apply_filter_dialog(self, func, params):
         """Apply a filter from filters/base.py that need a GUI"""
-        params_dialog = dialog.params_dialog(self.win, *params)
-        value = params_dialog.get_values()
+        dialog = params_dialog(self.win, *params)
+        value = dialog.get_values()
         if value:
             self.apply_filter(func, value)
 
@@ -242,7 +242,7 @@ class Editor(object):
 
     def save_as(self):
         """Ask where to save the image"""
-        filename = dialog.file_dialog(self.win, 'save', path.basename(self.image.filename))
+        filename = file_dialog(self.win, 'save', path.basename(self.image.filename))
         if filename:
             img = self.image.get_current_img()
             img.save(filename)
@@ -255,8 +255,32 @@ class Editor(object):
     def details(self):
         """Get informations about the image"""
         img_infos = get_infos(self.image.get_current_img(), self.image.filename)
-        dialog.details_dialog(self.win, img_infos)
+        details_dialog(self.win, img_infos)
 
     def close_image(self):
         """Close the image and all its history"""
         self.image.close_all_img()
+
+
+def get_middle_mouse(size, mouse_coords):
+    x = mouse_coords[0] - (size[0] / 2)
+    y = mouse_coords[1] - (size[1] / 2)
+    return (round(x), round(y))
+
+
+def get_infos(img, filename):
+    """Fetch informations about an image"""
+    # Basic infos
+    img_infos = {
+        'name': path.basename(filename),
+        'mode': img.mode,
+        'size': '{} x {} pixels'.format(str(img.width), str(img.height))
+    }
+    # Infos available only if the image is saved on the disk
+    if path.isfile(filename):
+        img_stat = stat(filename)
+        img_infos['weight'] = '{}ko ({}o)'.format(str(round(img_stat.st_size / 1000, 2)),
+                                                    str(round(img_stat.st_size, 2)))
+        img_infos['folder'] = path.dirname(filename)
+        img_infos['last_change'] = datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
+    return img_infos

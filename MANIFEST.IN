@@ -1,4 +1,0 @@
-include setup.py
-include imeditor.desktop
-include imeditor/*.py
-include imeditor/assets/*.png
