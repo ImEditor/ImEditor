@@ -5,7 +5,7 @@
 	<project_license>GPL-3.0-or-later</project_license>
 	<content_rating type="oars-1.1" />
 	<name>ImEditor</name>
-	<summary>Simple &amp; versatile image editor.</summary>
+	<summary>Simple &amp; versatile image editor</summary>
 	<description>
 		<p>ImEditor is simple image editor, supporting PNG, JPEG, WEBP, BMP, ICO file types.</p>
 		<p>It offers several tools to modify an image.</p>
@@ -29,11 +29,11 @@
 		<release version="0.9" date="2019-08-01">
 			<description>
 				<ul>
-					<li>Adopt meson and flatpak over snap.</li>
-					<li>Better GNOME integration.</li>
-					<li>Translations (add French as first additional language).</li>
-					<li>New icon.</li>
-					<li>Revert continuous line (too bad).</li>
+					<li>Adopt meson and flatpak over snap</li>
+					<li>Better GNOME integration</li>
+					<li>Translations (add French as first additional language)</li>
+					<li>New icon</li>
+					<li>Revert continuous line (too bad)</li>
 				</ul>
 			</description>
 	​    </release>
