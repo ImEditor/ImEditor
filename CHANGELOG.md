@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9-dev] -
+### Added
+- Adopt meson and flatpak over snap.
+- Better GNOME integration.
+
 ## [0.8] - 2019-01-23
 ### Changed
 - Make the pencil tool draw a continuous line instead of a trace of dots (needs improvements).
