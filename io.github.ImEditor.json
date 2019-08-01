@@ -54,7 +54,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "file:///home/hugoposnic/Documents/Dev/ImEditor"
+                    "url": "https://github.com/ImEditor/ImEditor"
                 }
             ]
         }
