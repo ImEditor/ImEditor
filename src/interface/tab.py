@@ -52,16 +52,16 @@ class Tab(Gtk.Box):
         # Pencil
         self.pencil_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
             border_width=25, spacing=10)
-        pencil_label = Gtk.Label('<b>Pencil</b>', use_markup=True)
-        shape_pencil_label = Gtk.Label('Shape')
+        pencil_label = Gtk.Label('<b>' + _("Pencil") + '</b>', use_markup=True)
+        shape_pencil_label = Gtk.Label(_("Shape"))
         pencil_shape_combo = Gtk.ComboBoxText()
         pencil_shape_combo.set_entry_text_column(0)
-        shapes = ['Ellipse', 'Square']
+        shapes = [_("Ellipse"), _("Square")]
         for shape in shapes:
             pencil_shape_combo.append_text(shape)
         pencil_shape_combo.set_active(0)
         pencil_shape_combo.connect('changed', self.on_pencil_shape_changed)
-        color_pencil_label = Gtk.Label('Color')
+        color_pencil_label = Gtk.Label(_("Color"))
         pencil_color_button = Gtk.ColorButton()
         pencil_color_button.set_use_alpha(False)
         pencil_color_button.set_rgba(Gdk.RGBA(0, 0, 0, 1))

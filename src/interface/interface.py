@@ -18,7 +18,7 @@ class Interface(Gtk.ApplicationWindow):
         settings.set_property('gtk-application-prefer-dark-theme', True)
         # Init the app
         self.program_title = 'ImEditor'
-        self.program_description = 'Simple & versatile image editor'
+        self.program_description = _("Simple & versatile image editor")
         Gtk.Window.__init__(self, title=self.program_title, application=app)
         self.connect('delete-event', self.quit_app)
         self.app = app
@@ -37,29 +37,29 @@ class Interface(Gtk.ApplicationWindow):
         menu_button.set_image(Gtk.Image.new_from_icon_name('open-menu-symbolic',
             Gtk.IconSize.MENU))
         menu_model = Gio.Menu()
-        menu_model.append('Zoom -', 'win.zoom-minus')
-        menu_model.append('Zoom +', 'win.zoom-plus')
-        menu_model.append('Copy', 'win.copy')
-        menu_model.append('Paste', 'win.paste')
-        menu_model.append('Cut', 'win.cut')
+        menu_model.append(_("Zoom -"), 'win.zoom-minus')
+        menu_model.append(_("Zoom +"), 'win.zoom-plus')
+        menu_model.append(_("Copy"), 'win.copy')
+        menu_model.append(_("Paste"), 'win.paste')
+        menu_model.append(_("Cut"), 'win.cut')
         submenu_1 = Gio.Menu()
-        submenu_1.append('Black & white', 'win.black-and-white')
-        submenu_1.append('Negative', 'win.negative')
-        submenu_1.append('Red', 'win.red')
-        submenu_1.append('Green', 'win.green')
-        submenu_1.append('Blue', 'win.blue')
-        submenu_1.append('Grayscale', 'win.grayscale')
-        submenu_1.append('Brightness', 'win.brightness')
-        menu_model.append_submenu('Filters', submenu_1)
+        submenu_1.append(_("Black & white"), 'win.black-and-white')
+        submenu_1.append(_("Negative"), 'win.negative')
+        submenu_1.append(_("Red"), 'win.red')
+        submenu_1.append(_("Green"), 'win.green')
+        submenu_1.append(_("Blue"), 'win.blue')
+        submenu_1.append(_("Grayscale"), 'win.grayscale')
+        submenu_1.append(_("Brightness"), 'win.brightness')
+        menu_model.append_submenu(_("Filters"), submenu_1)
         submenu_2 = Gio.Menu()
-        submenu_2.append('Rotate -90°', 'win.rotate-left')
-        submenu_2.append('Rotate 90°', 'win.rotate-right')
-        submenu_2.append('Horizontal mirror', 'win.horizontal-mirror')
-        submenu_2.append('Vertical mirror', 'win.vertical-mirror')
-        submenu_2.append('Crop', 'win.crop')
-        menu_model.append_submenu('Operations', submenu_2)
-        menu_model.append('Image details', 'win.details')
-        menu_model.append('About {}'.format(self.program_title), 'win.about')
+        submenu_2.append(_("Rotate -90°"), 'win.rotate-left')
+        submenu_2.append(_("Rotate 90°"), 'win.rotate-right')
+        submenu_2.append(_("Horizontal mirror"), 'win.horizontal-mirror')
+        submenu_2.append(_("Vertical mirror"), 'win.vertical-mirror')
+        submenu_2.append(_("Crop"), 'win.crop')
+        menu_model.append_submenu(_("Operations"), submenu_2)
+        menu_model.append(_("Image details"), 'win.details')
+        menu_model.append(_("About") + ' {}'.format(self.program_title), 'win.about')
         menu_button.set_menu_model(menu_model)
         hb.pack_end(menu_button)
 
@@ -261,12 +261,12 @@ class Interface(Gtk.ApplicationWindow):
             margin_top=120, margin_bottom=120)
         self.homepage.set_halign(Gtk.Align.CENTER)
         label = Gtk.Label()
-        label.set_markup('<span size="xx-large">What do you want to do?</span>')
-        new_button = Gtk.Button('Create a new image', always_show_image=True)
+        label.set_markup('<span size="xx-large">' + _("What do you want to do?") + '</span>')
+        new_button = Gtk.Button(_("Create a new image"), always_show_image=True)
         new_button.set_image(Gtk.Image.new_from_icon_name('document-new',
             Gtk.IconSize.BUTTON))
         new_button.set_action_name('win.new')
-        open_button = Gtk.Button('Open an existing image', always_show_image=True)
+        open_button = Gtk.Button(_("Open an existing image"), always_show_image=True)
         open_button.set_image(Gtk.Image.new_from_icon_name('document-open',
             Gtk.IconSize.BUTTON))
         open_button.set_action_name('win.open')
@@ -356,8 +356,8 @@ class Interface(Gtk.ApplicationWindow):
         if not filename:
             return
         if not path.isfile(filename):
-            message_dialog(self, 'error', 'Unable to open this image',
-                'This image doesn\'t exists. Please verify the path.')
+            message_dialog(self, 'error', _("Unable to open this image"),
+                _("This image doesn't exists. Please verify the path."))
             return
         if filename not in self.filenames: # is image already opened ?
             if path.splitext(filename)[-1][1:].lower() in SUPPORTED_EXTENSIONS:
@@ -366,14 +366,14 @@ class Interface(Gtk.ApplicationWindow):
                     self.create_tab(img, filename, True)
                     self.filenames.append(filename)
                 else:
-                    message_dialog(self, 'error', 'Unable to open this image',
-                        'The mode of this image is not supported.')
+                    message_dialog(self, 'error', _("Unable to open this image"),
+                        _("The mode of this image is not supported."))
             else:
-                message_dialog(self, 'error', 'Unable to open this file',
-                    'The format of this file is not supported.')
+                message_dialog(self, 'error', _("Unable to open this file"),
+                    _("The format of this file is not supported."))
         else:
-            message_dialog(self, 'warning', 'Already open',
-                'This image is already opened in ImEditor.')
+            message_dialog(self, 'warning', _("Already open"),
+                _("This image is already opened in ImEditor."))
 
     def get_tab(self, page_num=None):
         """Get tab by its num or get the current one"""
@@ -398,9 +398,9 @@ class Interface(Gtk.ApplicationWindow):
         if page_num is None:
             page_num = self.notebook.page_num(tab)
         if not tab.editor.image.saved or not path.exists(tab.editor.image.filename):  # if image is not saved
-            title = 'Do you want to save the changes to the « {} » image before closing it?'.format(path.basename(tab.editor.image.filename))
+            title = _("Do you want to save the changes to the « {} » image before closing it?").format(path.basename(tab.editor.image.filename))
             response = message_dialog(self, 'question', title,
-                'If you don\'t save it, the changes made will be permanently lost.')
+                _("If you don't save it, the changes made will be permanently lost."))
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
                 self.close_tab_by_id(tab, page_num)
@@ -476,7 +476,7 @@ class Interface(Gtk.ApplicationWindow):
         dialog.set_comments('{}\n\n' \
             'Gtk: {}\nPillow: {}'.format(self.program_description, gtk_version,
             pil_version))
-        text = 'Distributed under the GNU GPL(v3) license.\n'
+        text = _("Distributed under the GNU GPL(v3) license.\n")
         text += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
         dialog.set_license(text)
         dialog.run()

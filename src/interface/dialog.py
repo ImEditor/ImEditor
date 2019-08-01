@@ -53,10 +53,10 @@ def params_dialog(parent, title, limits):
     h_scale.set_hexpand(True)
     h_scale.set_valign(Gtk.Align.START)
 
-    cancel_button = Gtk.Button.new_with_label('Cancel')
+    cancel_button = Gtk.Button.new_with_label(_("Cancel"))
     cancel_button.connect('clicked', dialog.close)
 
-    ok_button = Gtk.Button.new_with_label('Apply')
+    ok_button = Gtk.Button.new_with_label(_("Apply"))
     ok_button.connect('clicked', on_apply_clicked, h_scale, dialog)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
@@ -71,25 +71,31 @@ def params_dialog(parent, title, limits):
 
 
 def details_dialog(parent, infos):
-    dialog = Dialog(parent, 'Image details')
+    dialog = Dialog(parent, _("Image details"))
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12, column_homogeneous=True)
-    grid.attach(Gtk.Label('<b>Name</b>', use_markup=True, xalign=0.0), 0, 0, 1, 1)
+    grid.attach(Gtk.Label('<b>' + _("Name") + '</b>',
+        use_markup=True, xalign=0.0), 0, 0, 1, 1)
     grid.attach(Gtk.Label(infos['name'], xalign=0.0), 1, 0, 1, 1)
-    grid.attach(Gtk.Label('<b>Mode</b>', use_markup=True, xalign=0.0), 0, 1, 1, 1)
+    grid.attach(Gtk.Label('<b>' + _("Mode") + '</b>',
+        use_markup=True, xalign=0.0), 0, 1, 1, 1)
     grid.attach(Gtk.Label(infos['mode'], xalign=0.0), 1,1, 1, 1)
-    grid.attach(Gtk.Label('<b>Size</b>', use_markup=True, xalign=0.0), 0, 2, 1, 1)
+    grid.attach(Gtk.Label('<b>' + _("Size") + '</b>',
+        use_markup=True, xalign=0.0), 0, 2, 1, 1)
     grid.attach(Gtk.Label(infos['size'], xalign=0.0), 1, 2, 1, 1)
 
     if len(infos) > 3:
-        grid.attach(Gtk.Label('<b>Weight</b>', use_markup=True, xalign=0.0), 0, 3, 1, 1)
+        grid.attach(Gtk.Label('<b>' + _("Weight") + '</b>',
+            use_markup=True, xalign=0.0), 0, 3, 1, 1)
         grid.attach(Gtk.Label(infos['weight'], xalign=0.0), 1, 3, 1, 1)
-        grid.attach(Gtk.Label('<b>Folder</b>', use_markup=True, xalign=0.0), 0, 4, 1, 1)
+        grid.attach(Gtk.Label('<b>' + _("Folder") + '</b>',
+            use_markup=True, xalign=0.0), 0, 4, 1, 1)
         grid.attach(Gtk.Label(infos['folder'], xalign=0.0), 1, 4, 1, 1)
-        grid.attach(Gtk.Label('<b>Last change</b>', use_markup=True, xalign=0.0), 0, 6, 1, 1)
+        grid.attach(Gtk.Label('<b>' + _("Last change") + '</b>',
+            use_markup=True, xalign=0.0), 0, 6, 1, 1)
         grid.attach(Gtk.Label(infos['last_change'], xalign=0.0), 1, 6, 1, 1)
 
-    close_button = Gtk.Button.new_with_label('Close')
+    close_button = Gtk.Button.new_with_label(_("Close"))
     close_button.connect('clicked', dialog.close)
     close_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
@@ -107,11 +113,11 @@ def new_image_dialog(parent):
 
     def on_background_changed(button):
         background = button.get_active_text()
-        if background == 'Custom color':
+        if background == _("Custom color"):
             color_button.set_sensitive(True)
             color_button.emit('clicked')
         else:
-            if background == 'White':
+            if background == _("White"):
                 color_button.set_rgba(Gdk.RGBA(1, 1, 1, 1))
             color_button.set_sensitive(False)
 
@@ -120,13 +126,13 @@ def new_image_dialog(parent):
         width = spin_width.get_value_as_int()
         height = spin_height.get_value_as_int()
         size = (width, height)
-        transparent = background_combo.get_active_text() == 'Transparent'
+        transparent = background_combo.get_active_text() == _("Transparent")
         color = color_button.get_rgba().to_string()
         extension = extension_combo.get_active_text()
         dialog.values += [name, size, color, transparent, extension]
         dialog.destroy()
 
-    dialog = Dialog(parent, 'New image')
+    dialog = Dialog(parent, _("New image"))
 
     name_entry = Gtk.Entry()
     name_entry.set_text('untitled')
@@ -147,9 +153,9 @@ def new_image_dialog(parent):
     background_combo = Gtk.ComboBoxText()
     background_combo.connect('changed', on_background_changed)
     background_combo.set_entry_text_column(0)
-    background_combo.append_text("White")
-    background_combo.append_text("Custom color")
-    background_combo.append_text("Transparent")
+    background_combo.append_text(_("White"))
+    background_combo.append_text(_("Custom color"))
+    background_combo.append_text(_("Transparent"))
     background_combo.set_active(0)
 
     extension_combo = Gtk.ComboBoxText()
@@ -158,27 +164,27 @@ def new_image_dialog(parent):
         extension_combo.append_text(elt)
         extension_combo.set_active(0)
 
-    cancel_button = Gtk.Button.new_with_label('Cancel')
+    cancel_button = Gtk.Button.new_with_label(_("Cancel"))
     cancel_button.connect('clicked', dialog.close)
 
-    ok_button = Gtk.Button.new_with_label('Create')
+    ok_button = Gtk.Button.new_with_label(_("Create"))
     ok_button.connect('clicked', on_create_clicked)
     ok_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
     grid = Gtk.Grid(row_spacing=12, column_spacing=12)
-    grid.attach(Gtk.Label('Name', xalign=0.0), 0, 0, 2, 1)
+    grid.attach(Gtk.Label(_("Name"), xalign=0.0), 0, 0, 2, 1)
     grid.attach(name_entry, 2, 0, 2, 1)
-    grid.attach(Gtk.Label('Template', xalign=0.0), 0, 1, 2, 1)
+    grid.attach(Gtk.Label(_("Template"), xalign=0.0), 0, 1, 2, 1)
     grid.attach(template_combo, 2, 1, 2, 1)
-    grid.attach(Gtk.Label('Width (px)', xalign=0.0), 0, 2, 1, 1)
+    grid.attach(Gtk.Label(_("Width") + ' (px)', xalign=0.0), 0, 2, 1, 1)
     grid.attach(spin_width, 1, 2, 1, 1)
-    grid.attach(Gtk.Label('Height (px)', xalign=0.0), 2, 2, 1, 1)
+    grid.attach(Gtk.Label(_("Height") + ' (px)', xalign=0.0), 2, 2, 1, 1)
     grid.attach(spin_height, 3, 2, 1, 1)
-    grid.attach(Gtk.Label('Background', xalign=0.0), 0, 3, 2, 1)
+    grid.attach(Gtk.Label(_("Background"), xalign=0.0), 0, 3, 2, 1)
     grid.attach(background_combo, 2, 3, 2, 1)
-    grid.attach(Gtk.Label('Background color ', xalign=0.0), 0, 4, 2, 1)
+    grid.attach(Gtk.Label(_("Background color"), xalign=0.0), 0, 4, 2, 1)
     grid.attach(color_button, 2, 4, 2, 1)
-    grid.attach(Gtk.Label('Format', xalign=0.0), 0, 5, 2, 1)
+    grid.attach(Gtk.Label(_("Format"), xalign=0.0), 0, 5, 2, 1)
     grid.attach(extension_combo, 2, 5, 2, 1)
     grid.attach(cancel_button, 0, 6, 2, 1)
     grid.attach(ok_button, 2, 6, 2, 1)
@@ -191,17 +197,17 @@ def new_image_dialog(parent):
 
 def file_dialog(parent, action, filename=None):
     if action == 'open':
-        dialog = Gtk.FileChooserDialog('Open image',
+        dialog = Gtk.FileChooserDialog(_("Open image"),
             parent,
             Gtk.FileChooserAction.OPEN,
-            ('Cancel', Gtk.ResponseType.CANCEL,
-            'Open', Gtk.ResponseType.OK))
+            (_("Cancel"), Gtk.ResponseType.CANCEL,
+            _("Open"), Gtk.ResponseType.OK))
     elif action == 'save':
-        dialog = Gtk.FileChooserDialog('Save image',
+        dialog = Gtk.FileChooserDialog(_("Save image"),
             parent,
             Gtk.FileChooserAction.SAVE,
-            ('Cancel', Gtk.ResponseType.CANCEL,
-            'Save', Gtk.ResponseType.OK))
+            (_("Cancel"), Gtk.ResponseType.CANCEL,
+            _("Save"), Gtk.ResponseType.OK))
         dialog.set_current_name(filename)
     response = dialog.run()
     filename = dialog.get_filename() if response == Gtk.ResponseType.OK else None

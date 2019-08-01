@@ -6,6 +6,7 @@ Terminal=false
 Type=Application
 Keywords=Pencil;Drawing;
 Categories=GNOME;GTK;Graphics;
+# Icon name, do not translate
 Icon=io.github.ImEditor
 StartupWMClass=imeditor
 MimeType=image/bmp;image/x-icon;image/jpeg;image/png;image/webp;

@@ -10,6 +10,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+_build/
 build/
 develop-eggs/
 dist/
@@ -47,7 +48,6 @@ coverage.xml
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
 *.log

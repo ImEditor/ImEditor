@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Adopt meson and flatpak over snap.
 - Better GNOME integration.
+- Translations (add French language).
+- New icon.
 
 ## [0.8] - 2019-01-23
 ### Changed

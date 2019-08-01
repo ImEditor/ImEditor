@@ -1,0 +1,298 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the imeditor package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: imeditor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-01 17:05+0200\n"
+"PO-Revision-Date: 2019-08-01 17:08+0200\n"
+"Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: data/io.github.ImEditor.desktop.in:3
+msgid "ImEditor"
+msgstr ""
+
+#: data/io.github.ImEditor.desktop.in:5
+msgid "Simple & versatile image editor."
+msgstr "Éditeur d'images simple et polyvalent."
+
+#: data/io.github.ImEditor.desktop.in:8
+msgid "Pencil;Drawing;"
+msgstr "Crayon;Dessin;"
+
+#. Icon name, do not translate
+#: data/io.github.ImEditor.desktop.in:11
+msgid "io.github.ImEditor"
+msgstr ""
+
+#: src/interface/dialog.py:56 src/interface/dialog.py:167
+#: src/interface/dialog.py:203 src/interface/dialog.py:209
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/interface/dialog.py:59
+msgid "Apply"
+msgstr "Appliquer"
+
+#: src/interface/dialog.py:74 src/interface/interface.py:61
+msgid "Image details"
+msgstr "Informations sur l'image"
+
+#: src/interface/dialog.py:77 src/interface/dialog.py:175
+msgid "Name"
+msgstr "Nom"
+
+#: src/interface/dialog.py:80
+msgid "Mode"
+msgstr "Mode"
+
+#: src/interface/dialog.py:83
+msgid "Size"
+msgstr "Taille"
+
+#: src/interface/dialog.py:88
+msgid "Weight"
+msgstr "Poids"
+
+#: src/interface/dialog.py:91
+msgid "Folder"
+msgstr "Dossier"
+
+#: src/interface/dialog.py:94
+msgid "Last change"
+msgstr "Dernier changement"
+
+#: src/interface/dialog.py:98
+msgid "Close"
+msgstr "Fermer"
+
+#: src/interface/dialog.py:116 src/interface/dialog.py:157
+msgid "Custom color"
+msgstr "Couleur personnalisée"
+
+#: src/interface/dialog.py:120 src/interface/dialog.py:156
+msgid "White"
+msgstr "Blanc"
+
+#: src/interface/dialog.py:129 src/interface/dialog.py:158
+msgid "Transparent"
+msgstr "Transparent"
+
+#: src/interface/dialog.py:135
+msgid "New image"
+msgstr "Nouvelle image"
+
+#: src/interface/dialog.py:170
+msgid "Create"
+msgstr "Créer"
+
+#: src/interface/dialog.py:177
+msgid "Template"
+msgstr "Modèle"
+
+#: src/interface/dialog.py:179
+msgid "Width"
+msgstr "Largeur"
+
+#: src/interface/dialog.py:181
+msgid "Height"
+msgstr "Hauteur"
+
+#: src/interface/dialog.py:183
+msgid "Background"
+msgstr "Fond"
+
+#: src/interface/dialog.py:185
+msgid "Background color"
+msgstr "Couleur de fond"
+
+#: src/interface/dialog.py:187
+msgid "Format"
+msgstr "Format"
+
+#: src/interface/dialog.py:200
+msgid "Open image"
+msgstr "Ouvrir une image"
+
+#: src/interface/dialog.py:204
+msgid "Open"
+msgstr "Ouvrir"
+
+#: src/interface/dialog.py:206
+msgid "Save image"
+msgstr "Sauvegarder l'image"
+
+#: src/interface/dialog.py:210
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: src/interface/interface.py:21
+msgid "Simple & versatile image editor"
+msgstr "Éditeur d'images simple et polyvalent"
+
+#: src/interface/interface.py:40
+msgid "Zoom -"
+msgstr "Zoom -"
+
+#: src/interface/interface.py:41
+msgid "Zoom +"
+msgstr "Zoom +"
+
+#: src/interface/interface.py:42
+msgid "Copy"
+msgstr "Copier"
+
+#: src/interface/interface.py:43
+msgid "Paste"
+msgstr "Coller"
+
+#: src/interface/interface.py:44
+msgid "Cut"
+msgstr "Couper"
+
+#: src/interface/interface.py:46
+msgid "Black & white"
+msgstr "Noir & blanc"
+
+#: src/interface/interface.py:47
+msgid "Negative"
+msgstr "Négatif"
+
+#: src/interface/interface.py:48
+msgid "Red"
+msgstr "Rouge"
+
+#: src/interface/interface.py:49
+msgid "Green"
+msgstr "Vert"
+
+#: src/interface/interface.py:50
+msgid "Blue"
+msgstr "Bleu"
+
+#: src/interface/interface.py:51
+msgid "Grayscale"
+msgstr "Nuances de gris"
+
+#: src/interface/interface.py:52
+msgid "Brightness"
+msgstr "Luminosité"
+
+#: src/interface/interface.py:53
+msgid "Filters"
+msgstr "Filtres"
+
+#: src/interface/interface.py:55
+msgid "Rotate -90°"
+msgstr "Rotation -90°"
+
+#: src/interface/interface.py:56
+msgid "Rotate 90°"
+msgstr "Rotation +90°"
+
+#: src/interface/interface.py:57
+msgid "Horizontal mirror"
+msgstr "Miroir horizontal"
+
+#: src/interface/interface.py:58
+msgid "Vertical mirror"
+msgstr "Miroir vertical"
+
+#: src/interface/interface.py:59
+msgid "Crop"
+msgstr "Recadrer"
+
+#: src/interface/interface.py:60
+msgid "Operations"
+msgstr "Opérations"
+
+#: src/interface/interface.py:62
+msgid "About"
+msgstr "À propos"
+
+#: src/interface/interface.py:264
+msgid "What do you want to do?"
+msgstr "Que souhaitez-vous faire ?"
+
+#: src/interface/interface.py:265
+msgid "Create a new image"
+msgstr "Créer une nouvelle image"
+
+#: src/interface/interface.py:269
+msgid "Open an existing image"
+msgstr "Ouvrir une image existante"
+
+#: src/interface/interface.py:359 src/interface/interface.py:369
+msgid "Unable to open this image"
+msgstr "Impossible d'ouvrir cette image"
+
+#: src/interface/interface.py:360
+msgid "This image doesn't exists. Please verify the path."
+msgstr "Cette image n'existe pas. Veuillez vérifier le chemin."
+
+#: src/interface/interface.py:370
+msgid "The mode of this image is not supported."
+msgstr "Le mode de cette image n'est pas supporté."
+
+#: src/interface/interface.py:372
+msgid "Unable to open this file"
+msgstr "Impossible d'ouvrir ce fichier"
+
+#: src/interface/interface.py:373
+msgid "The format of this file is not supported."
+msgstr "Le format de ce fichier n'est pas supporté."
+
+#: src/interface/interface.py:375
+msgid "Already open"
+msgstr "Déjà ouvert"
+
+#: src/interface/interface.py:376
+msgid "This image is already opened in ImEditor."
+msgstr "Cette image est déjà ouverte dans ImEditor."
+
+#. if image is not saved
+#: src/interface/interface.py:401
+msgid "Do you want to save the changes to the « {} » image before closing it?"
+msgstr ""
+"Voulez vous sauvegarder les changements apportés à l'image {} avant de le "
+"fermer ?"
+
+#: src/interface/interface.py:403
+msgid "If you don't save it, the changes made will be permanently lost."
+msgstr ""
+"Si vous ne la sauvegarder pas, tous vos changements seront perdus "
+"définitivement."
+
+#: src/interface/interface.py:479
+msgid "Distributed under the GNU GPL(v3) license.\n"
+msgstr "Distribué sous la licence GNU GPL(v3).\n"
+
+#: src/interface/tab.py:55
+msgid "Pencil"
+msgstr "Crayon"
+
+#: src/interface/tab.py:56
+msgid "Shape"
+msgstr "Forme"
+
+#: src/interface/tab.py:59
+msgid "Ellipse"
+msgstr "Ellipse"
+
+#: src/interface/tab.py:59
+msgid "Square"
+msgstr "Carré"
+
+#: src/interface/tab.py:64
+msgid "Color"
+msgstr "Couleur"

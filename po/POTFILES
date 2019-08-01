@@ -1,0 +1,9 @@
+data/io.github.ImEditor.desktop.in
+data/io.github.ImEditor.appdata.xml.in
+data/io.github.ImEditor.gschema.xml
+
+src/main.py
+
+src/interface/dialog.py
+src/interface/interface.py
+src/interface/tab.py
