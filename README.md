@@ -1,8 +1,8 @@
 # ImEditor
 
-[![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
+## Simple & versatile image editor.
 
-ImEditor is a simple & versatile image editor.
+[![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
 
 ### Functionalities
 
@@ -23,11 +23,19 @@ PNG, JPEG, WEBP, BMP, ICO
 
 RGB, RGBA
 
+## Screenshot
+
+![ImEditor](data/screenshots/screen1.png)
+
 ## Installation instructions
 
 ### Universal package for Linux (recommended)
 
-    flatpak install io.github.ImEditor
+For now, ImEditor is available on the Snap Store:
+
+    sudo snap install imeditor
+    
+This snap package will be replaced by a flatpak package soon.
 
 ## Tech
 
