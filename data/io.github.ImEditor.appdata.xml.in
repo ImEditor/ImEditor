@@ -24,4 +24,18 @@
 
 	<translation type="gettext">imeditor</translation>
 	<launchable type="desktop-id">io.github.ImEditor.desktop</launchable>
+
+	<releases>
+		<release version="0.9" date="2019-08-01">
+			<description>
+				<ul>
+					<li>Adopt meson and flatpak over snap.</li>
+					<li>Better GNOME integration.</li>
+					<li>Translations (add French as first additional language).</li>
+					<li>New icon.</li>
+					<li>Revert continuous line (too bad).</li>
+				</ul>
+			</description>
+	​    </release>
+	</releases>
 </component>
