@@ -59,7 +59,7 @@ class Interface(Gtk.ApplicationWindow):
         submenu_2.append(_("Crop"), 'win.crop')
         menu_model.append_submenu(_("Operations"), submenu_2)
         menu_model.append(_("Image details"), 'win.details')
-        menu_model.append(_("About") + ' {}'.format(self.program_title), 'win.about')
+        menu_model.append(_("About ImEditor"), 'win.about')
         menu_button.set_menu_model(menu_model)
         hb.pack_end(menu_button)
 
