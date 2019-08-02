@@ -396,6 +396,8 @@ class Interface(Gtk.ApplicationWindow):
 
     def close_tab(self, a=None, b=None, page_num=None):
         """Close tab by user action"""
+        if self.notebook.get_n_pages() == 0:
+            return
         tab = self.get_tab(page_num)
         if page_num is None:
             page_num = self.notebook.page_num(tab)
