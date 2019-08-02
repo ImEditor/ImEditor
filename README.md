@@ -33,12 +33,25 @@ RGB, RGBA
 ## Installation instructions
 
 ### Universal package for Linux (recommended)
-
-For now, ImEditor is available on the Snap Store:
-
-    sudo snap install imeditor
     
-This snap package will be replaced by a flatpak package soon.
+A flatpak package will be available soon :
+
+https://github.com/flathub/flathub/pull/1089
+
+### Build from source (nightly)
+
+Build and install by running:
+
+    git clone https://github.com/ImEditor/ImEditor.git
+    cd ImEditor
+    meson _build
+    cd _build
+    ninja
+    sudo ninja install
+
+The app can then be removed with:
+
+    sudo ninja uninstall
 
 ## Tech
 
