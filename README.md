@@ -4,6 +4,9 @@
 
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
 
+ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, and ICO file types.
+It offers several tools to easily modify an image.
+
 ### Functionalities
 
 - Tabs
