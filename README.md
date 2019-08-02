@@ -34,9 +34,11 @@ RGB, RGBA
 
 ### Universal package for Linux (recommended)
     
-A flatpak package will be available soon :
-
-https://github.com/flathub/flathub/pull/1089
+ImEditor is available as a flatpak package:
+    
+    flatpak install flathub io.github.ImEditor
+    
+More details on [flathub](https://flathub.org/apps/details/io.github.ImEditor).
 
 ### Build from source (nightly)
 
