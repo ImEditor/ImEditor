@@ -135,7 +135,7 @@ def new_image_dialog(parent):
     dialog = Dialog(parent, _("New image"))
 
     name_entry = Gtk.Entry()
-    name_entry.set_text('untitled')
+    name_entry.set_text(_("untitled"))
 
     template_combo = Gtk.ComboBoxText()
     template_combo.connect('changed', on_template_changed)

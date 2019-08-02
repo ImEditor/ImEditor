@@ -344,7 +344,7 @@ class Interface(Gtk.ApplicationWindow):
                 color = values[2]
                 mode = 'RGB'
             img = Image.new(mode, values[1], color)
-            name = values[0] if values[0] else 'untitled'
+            name = values[0] if values[0] else _("untitled")
             filename = name + '.' + values[4].lower()
             self.create_tab(img, filename)
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 00:44+0200\n"
-"PO-Revision-Date: 2019-08-03 00:44+0200\n"
+"POT-Creation-Date: 2019-08-03 00:53+0200\n"
+"PO-Revision-Date: 2019-08-03 00:53+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -107,6 +107,10 @@ msgstr "Transparent"
 #: src/interface/dialog.py:135
 msgid "New image"
 msgstr "Nouvelle image"
+
+#: src/interface/dialog.py:138 src/interface/interface.py:347
+msgid "untitled"
+msgstr "sans-titre"
 
 #: src/interface/dialog.py:170
 msgid "Create"
