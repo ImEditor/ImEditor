@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-01 17:05+0200\n"
-"PO-Revision-Date: 2019-08-01 17:08+0200\n"
+"POT-Creation-Date: 2019-08-02 13:12+0200\n"
+"PO-Revision-Date: 2019-08-02 13:13+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/io.github.ImEditor.desktop.in:3
+#: data/io.github.ImEditor.appdata.xml.in:7
 msgid "ImEditor"
 msgstr ""
 
@@ -35,8 +36,23 @@ msgstr "Crayon;Dessin;"
 msgid "io.github.ImEditor"
 msgstr ""
 
+#: data/io.github.ImEditor.appdata.xml.in:8
+msgid "Simple &amp; versatile image editor"
+msgstr "Éditeur d'images simple & polyvalent"
+
+#: data/io.github.ImEditor.appdata.xml.in:10
+msgid ""
+"ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, ICO file "
+"types."
+msgstr ""
+"ImEditor est un éditeur d'image simple qui supporte les fichier de type PNG, "
+"JPEG, WEBP, BMP, ICO."
+
+#: data/io.github.ImEditor.appdata.xml.in:11
+msgid "It offers several tools to modify an image."
+msgstr "Il propose plusieurs outils pour modifier une image."
+
 #: src/interface/dialog.py:56 src/interface/dialog.py:167
-#: src/interface/dialog.py:203 src/interface/dialog.py:209
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -119,22 +135,6 @@ msgstr "Couleur de fond"
 #: src/interface/dialog.py:187
 msgid "Format"
 msgstr "Format"
-
-#: src/interface/dialog.py:200
-msgid "Open image"
-msgstr "Ouvrir une image"
-
-#: src/interface/dialog.py:204
-msgid "Open"
-msgstr "Ouvrir"
-
-#: src/interface/dialog.py:206
-msgid "Save image"
-msgstr "Sauvegarder l'image"
-
-#: src/interface/dialog.py:210
-msgid "Save"
-msgstr "Sauvegarder"
 
 #: src/interface/interface.py:21
 msgid "Simple & versatile image editor"
@@ -296,3 +296,15 @@ msgstr "Carré"
 #: src/interface/tab.py:64
 msgid "Color"
 msgstr "Couleur"
+
+#~ msgid "Open image"
+#~ msgstr "Ouvrir une image"
+
+#~ msgid "Open"
+#~ msgstr "Ouvrir"
+
+#~ msgid "Save image"
+#~ msgstr "Sauvegarder l'image"
+
+#~ msgid "Save"
+#~ msgstr "Sauvegarder"

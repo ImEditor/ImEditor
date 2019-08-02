@@ -196,23 +196,30 @@ def new_image_dialog(parent):
 
 
 def file_dialog(parent, action, filename=None):
+    file_chooser = Gtk.FileChooserNative()
+    file_chooser.set_transient_for(parent)
     if action == 'open':
-        dialog = Gtk.FileChooserDialog(_("Open image"),
-            parent,
-            Gtk.FileChooserAction.OPEN,
-            (_("Cancel"), Gtk.ResponseType.CANCEL,
-            _("Open"), Gtk.ResponseType.OK))
+        file_chooser.set_action(Gtk.FileChooserAction.OPEN)
+        file_filter = Gtk.FileFilter()
+        file_filter.set_name("Images")
+        file_filter.add_mime_type('image/bmp')
+        file_filter.add_mime_type('image/jpeg')
+        file_filter.add_mime_type('image/jpg')
+        file_filter.add_mime_type('image/png')
+        file_filter.add_mime_type('image/webp')
+        file_filter.add_mime_type('image/ico')
+        file_chooser.add_filter(file_filter)
     elif action == 'save':
-        dialog = Gtk.FileChooserDialog(_("Save image"),
-            parent,
-            Gtk.FileChooserAction.SAVE,
-            (_("Cancel"), Gtk.ResponseType.CANCEL,
-            _("Save"), Gtk.ResponseType.OK))
-        dialog.set_current_name(filename)
-    response = dialog.run()
-    filename = dialog.get_filename() if response == Gtk.ResponseType.OK else None
-    dialog.destroy()
-    return filename
+        file_chooser.set_action(Gtk.FileChooserAction.SAVE)
+        file_chooser.set_do_overwrite_confirmation(True)
+        file_chooser.set_current_name(filename)
+
+    response = file_chooser.run()
+    if response == Gtk.ResponseType.ACCEPT:
+        filename = file_chooser.get_filename()
+        return filename
+    file_chooser.destroy()
+    return None
 
 
 def message_dialog(parent, dialog_type, title, text):

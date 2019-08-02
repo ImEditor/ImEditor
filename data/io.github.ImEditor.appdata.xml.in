@@ -7,7 +7,7 @@
 	<name>ImEditor</name>
 	<summary>Simple &amp; versatile image editor</summary>
 	<description>
-		<p>ImEditor is simple image editor, supporting PNG, JPEG, WEBP, BMP, ICO file types.</p>
+		<p>ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, ICO file types.</p>
 		<p>It offers several tools to modify an image.</p>
 	</description>
 

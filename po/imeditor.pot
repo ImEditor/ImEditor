@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-01 17:05+0200\n"
+"POT-Creation-Date: 2019-08-02 13:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/io.github.ImEditor.desktop.in:3
+#: data/io.github.ImEditor.appdata.xml.in:7
 msgid "ImEditor"
 msgstr ""
 
@@ -34,8 +35,21 @@ msgstr ""
 msgid "io.github.ImEditor"
 msgstr ""
 
+#: data/io.github.ImEditor.appdata.xml.in:8
+msgid "Simple &amp; versatile image editor"
+msgstr ""
+
+#: data/io.github.ImEditor.appdata.xml.in:10
+msgid ""
+"ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, ICO file "
+"types."
+msgstr ""
+
+#: data/io.github.ImEditor.appdata.xml.in:11
+msgid "It offers several tools to modify an image."
+msgstr ""
+
 #: src/interface/dialog.py:56 src/interface/dialog.py:167
-#: src/interface/dialog.py:203 src/interface/dialog.py:209
 msgid "Cancel"
 msgstr ""
 
@@ -117,22 +131,6 @@ msgstr ""
 
 #: src/interface/dialog.py:187
 msgid "Format"
-msgstr ""
-
-#: src/interface/dialog.py:200
-msgid "Open image"
-msgstr ""
-
-#: src/interface/dialog.py:204
-msgid "Open"
-msgstr ""
-
-#: src/interface/dialog.py:206
-msgid "Save image"
-msgstr ""
-
-#: src/interface/dialog.py:210
-msgid "Save"
 msgstr ""
 
 #: src/interface/interface.py:21
