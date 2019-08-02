@@ -277,6 +277,7 @@ class Interface(Gtk.ApplicationWindow):
         # Tabs
         self.notebook = Gtk.Notebook()
         self.notebook.set_scrollable(True)
+        self.notebook.set_show_tabs(False)
         self.notebook.connect('switch-page', self.on_tab_switched)
 
         # Main Box
@@ -391,6 +392,7 @@ class Interface(Gtk.ApplicationWindow):
         self.notebook.insert_page(tab, tab.tab_label, page_num)
         self.notebook.set_tab_reorderable(tab, True)
         self.notebook.set_current_page(page_num)
+        self.switch_show_tabs()
 
     def close_tab(self, a=None, b=None, page_num=None):
         """Close tab by user action"""
@@ -412,12 +414,18 @@ class Interface(Gtk.ApplicationWindow):
         if self.notebook.get_n_pages() == 0:  # re-display the homescreen
             self.enable_homescreen(True)
 
+        self.switch_show_tabs()
+
     def close_tab_by_id(self, tab, page_num):
         """Close tab by its id"""
         tab.editor.close_image()
         if path.isfile(tab.editor.image.filename):
             self.filenames.remove(tab.editor.image.filename)
         self.notebook.remove_page(page_num)
+
+    def switch_show_tabs(self):
+        show_tabs = self.notebook.get_n_pages() > 1
+        self.notebook.set_show_tabs(show_tabs)
 
     def on_tab_switched(self, notebook, tab, page_num):
         self.set_window_title(tab)
