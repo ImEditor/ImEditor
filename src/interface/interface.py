@@ -402,9 +402,9 @@ class Interface(Gtk.ApplicationWindow):
         if page_num is None:
             page_num = self.notebook.page_num(tab)
         if not tab.editor.image.saved or not path.exists(tab.editor.image.filename):  # if image is not saved
-            title = _("Do you want to save the changes to the « {} » image before closing it?").format(path.basename(tab.editor.image.filename))
-            response = message_dialog(self, 'question', title,
-                _("If you don't save it, the changes made will be permanently lost."))
+            description = ('Do you want to save the changes of the "{}" image before closing it?').format(path.basename(tab.editor.image.filename))
+            response = message_dialog(self, 'question', _("There are unsaved changes to this image"),
+                description)
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
                 self.close_tab_by_id(tab, page_num)
