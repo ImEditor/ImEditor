@@ -10,58 +10,30 @@ from .tab import Tab
 from .dialog import *
 from .vars import SUPPORTED_EXTENSIONS, SUPPORTED_MODES
 
+from .headerbar import ImEditorHeaderBar
 
-class Interface(Gtk.ApplicationWindow):
-    def __init__(self, app):
+UI_PATH = '/io/github/ImEditor/ui/'
+
+@Gtk.Template(resource_path=UI_PATH + 'window.ui')
+class ImEditorWindow(Gtk.ApplicationWindow):
+    __gtype_name__ = 'ImEditorWindow'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        app = kwargs['application']
+
         # Prefer a dark theme if available
         settings = Gtk.Settings.get_default()
         settings.set_property('gtk-application-prefer-dark-theme', True)
+
         # Init the app
-        self.program_title = 'ImEditor'
-        self.program_description = _("Simple & versatile image editor")
-        Gtk.Window.__init__(self, title=self.program_title, application=app)
         self.connect('delete-event', self.quit_app)
-        self.app = app
-        self.set_default_size(950, 550)
-        self.set_position(Gtk.WindowPosition.CENTER)
 
-        # Header Bar
-        hb = Gtk.HeaderBar()
-        hb.set_show_close_button(True)
-        hb.props.title = self.program_title
-        hb.props.subtitle = self.program_description
-        self.set_titlebar(hb)
+        # Init UI objects
+        self.header_bar = None
 
-        # Menu
-        menu_button = Gtk.MenuButton()
-        menu_button.set_image(Gtk.Image.new_from_icon_name('open-menu-symbolic',
-            Gtk.IconSize.MENU))
-        menu_model = Gio.Menu()
-        menu_model.append(_("Zoom -"), 'win.zoom-minus')
-        menu_model.append(_("Zoom +"), 'win.zoom-plus')
-        menu_model.append(_("Copy"), 'win.copy')
-        menu_model.append(_("Paste"), 'win.paste')
-        menu_model.append(_("Cut"), 'win.cut')
-        submenu_1 = Gio.Menu()
-        submenu_1.append(_("Black & white"), 'win.black-and-white')
-        submenu_1.append(_("Negative"), 'win.negative')
-        submenu_1.append(_("Red"), 'win.red')
-        submenu_1.append(_("Green"), 'win.green')
-        submenu_1.append(_("Blue"), 'win.blue')
-        submenu_1.append(_("Grayscale"), 'win.grayscale')
-        submenu_1.append(_("Brightness"), 'win.brightness')
-        menu_model.append_submenu(_("Filters"), submenu_1)
-        submenu_2 = Gio.Menu()
-        submenu_2.append(_("Rotate -90°"), 'win.rotate-left')
-        submenu_2.append(_("Rotate 90°"), 'win.rotate-right')
-        submenu_2.append(_("Horizontal mirror"), 'win.horizontal-mirror')
-        submenu_2.append(_("Vertical mirror"), 'win.vertical-mirror')
-        submenu_2.append(_("Crop"), 'win.crop')
-        menu_model.append_submenu(_("Operations"), submenu_2)
-        menu_model.append(_("Image details"), 'win.details')
-        menu_model.append(_("About ImEditor"), 'win.about')
-        menu_button.set_menu_model(menu_model)
-        hb.pack_end(menu_button)
+        # Build UI
+        self.build_ui()
 
         # Actions
         # Close button of tabs
@@ -74,109 +46,56 @@ class Interface(Gtk.ApplicationWindow):
         self.pencil_action = Gio.SimpleAction.new('pencil', None)
         self.pencil_action.connect('activate', self.pencil)
         self.add_action(self.pencil_action)
-        self.pencil_button = Gtk.Button.new_from_icon_name('applications-graphics-symbolic',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.pencil_button.set_action_name('win.pencil')
-        self.pencil_button.set_tooltip_text(_("Pencil"))
-        hb.pack_end(self.pencil_button)
 
         # Select
         self.select_action = Gio.SimpleAction.new('select', None)
         self.select_action.connect('activate', self.select)
         self.add_action(self.select_action)
-        self.select_button = Gtk.Button.new_from_icon_name('input-mouse-symbolic',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.select_button.set_action_name('win.select')
-        self.select_button.set_tooltip_text(_("Selection"))
-        hb.pack_end(self.select_button)
-
-        toolbar_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        Gtk.StyleContext.add_class(toolbar_box.get_style_context(), 'linked')
 
         # New
         self.new_action = Gio.SimpleAction.new('new', None)
         self.new_action.connect('activate', self.new_image)
         self.add_action(self.new_action)
         app.add_accelerator('<Primary>n', 'win.new', None)
-        self.new_button = Gtk.Button.new_from_icon_name('document-new',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.new_button.set_action_name('win.new')
-        self.new_button.set_tooltip_text(_("New"))
-        toolbar_box.add(self.new_button)
 
         # Open
         self.open_action = Gio.SimpleAction.new('open', None)
         self.open_action.connect('activate', self.open_image)
         self.add_action(self.open_action)
         app.add_accelerator('<Primary>o', 'win.open', None)
-        self.open_button = Gtk.Button.new_from_icon_name('document-open',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.open_button.set_action_name('win.open')
-        self.open_button.set_tooltip_text(_("Open"))
-        toolbar_box.add(self.open_button)
 
         # Save
         self.save_action = Gio.SimpleAction.new('save', None)
         self.save_action.connect('activate', lambda *args:self.get_tab().editor.save())
         self.add_action(self.save_action)
         app.add_accelerator('<Primary>s', 'win.save', None)
-        self.save_button = Gtk.Button.new_from_icon_name('document-save',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.save_button.set_action_name('win.save')
-        self.save_button.set_tooltip_text(_("Save"))
-        toolbar_box.add(self.save_button)
 
         # Save as
         self.save_as_action = Gio.SimpleAction.new('save-as', None)
         self.save_as_action.connect('activate', lambda *args:self.get_tab().editor.save_as())
         self.add_action(self.save_as_action)
-        self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.save_as_button.set_action_name('win.save-as')
-        self.save_as_button.set_tooltip_text(_("Save as..."))
-        toolbar_box.add(self.save_as_button)
 
         # Undo
         self.undo_action = Gio.SimpleAction.new('undo', None)
         self.undo_action.connect('activate', lambda *args:self.get_tab().editor.undo())
         self.add_action(self.undo_action)
         app.add_accelerator('<Primary>z', 'win.undo', None)
-        self.undo_button = Gtk.Button.new_from_icon_name('edit-undo',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.undo_button.set_action_name('win.undo')
-        self.undo_button.set_tooltip_text(_("Undo"))
-        toolbar_box.add(self.undo_button)
 
         # Redo
         self.redo_action = Gio.SimpleAction.new('redo', None)
         self.redo_action.connect('activate', lambda *args:self.get_tab().editor.redo())
         self.add_action(self.redo_action)
         app.add_accelerator('<Primary>y', 'win.redo', None)
-        self.redo_button = Gtk.Button.new_from_icon_name('edit-redo',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.redo_button.set_action_name('win.redo')
-        self.redo_button.set_tooltip_text(_("Redo"))
-        toolbar_box.add(self.redo_button)
 
         # Rotate left
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
         self.rotate_left_action.connect('activate', self.apply_filter, 'rotate', -90)
         self.add_action(self.rotate_left_action)
-        self.rotate_left_button = Gtk.Button.new_from_icon_name('object-rotate-left',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.rotate_left_button.set_action_name('win.rotate-left')
-        self.rotate_left_button.set_tooltip_text(_("Rotate -90°"))
-        toolbar_box.add(self.rotate_left_button)
 
         # Rotate right
         self.rotate_right_action = Gio.SimpleAction.new('rotate-right', None)
         self.rotate_right_action.connect('activate', self.apply_filter, 'rotate', 90)
         self.add_action(self.rotate_right_action)
-        self.rotate_right_button = Gtk.Button.new_from_icon_name('object-rotate-right',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.rotate_right_button.set_action_name('win.rotate-right')
-        self.rotate_right_button.set_tooltip_text(_("Rotate 90°"))
-        toolbar_box.add(self.rotate_right_button)
 
         # Copy
         self.copy_action = Gio.SimpleAction.new('copy', None)
@@ -264,8 +183,6 @@ class Interface(Gtk.ApplicationWindow):
         self.crop_action.connect('activate', lambda *args:self.get_tab().editor.crop())
         self.add_action(self.crop_action)
 
-        hb.pack_start(toolbar_box)
-
         # Homepage
         self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20,
             margin_top=120, margin_bottom=120)
@@ -314,9 +231,13 @@ class Interface(Gtk.ApplicationWindow):
         self.filenames = list()
         self.selected_img = None  # Selected image
 
+    def build_ui(self):
+        self.header_bar = ImEditorHeaderBar()
+        self.set_titlebar(self.header_bar.header_bar)
+
     def set_window_title(self, tab):
         title = '[{}] - {}'.format(path.basename(tab.editor.image.filename),
-            self.program_title)
+            'ImEditor')
         if tab.zoom_level != 100:
             title += ' - {}%'.format(tab.zoom_level)
         self.set_title(title)
@@ -333,7 +254,7 @@ class Interface(Gtk.ApplicationWindow):
 
     def enable_homescreen(self, enable=True):
         if enable:
-            self.set_title(self.program_title)
+            self.set_title('ImEditor')
             self.notebook.hide()
             self.homepage.show()
             self.enable_toolbar(False)
@@ -448,16 +369,16 @@ class Interface(Gtk.ApplicationWindow):
         tab.zoom(value)
 
     def select(self, a=None, b=None, tab=None):
-        self.select_button.set_sensitive(False)
-        self.pencil_button.set_sensitive(True)
+        self.header_bar.select_button.set_sensitive(False)
+        self.header_bar.pencil_button.set_sensitive(True)
         if not tab:
             tab = self.get_tab()
         tab.editor.change_task()
         tab.enable_sidebar(False)
 
     def pencil(self, a=None, b=None, tab=None):
-        self.pencil_button.set_sensitive(False)
-        self.select_button.set_sensitive(True)
+        self.header_bar.pencil_button.set_sensitive(False)
+        self.header_bar.select_button.set_sensitive(True)
         if not tab:
             tab = self.get_tab()
         tab.editor.change_task('draw')
@@ -481,20 +402,19 @@ class Interface(Gtk.ApplicationWindow):
         """Close all tabs to be sure they are saved"""
         for i in reversed(range(self.notebook.get_n_pages())):
             self.close_tab(page_num=i)
-        self.app.quit()
         return False
 
     def about(self, a, b):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo_icon_name('io.github.ImEditor')
-        dialog.set_program_name(self.program_title)
+        dialog.set_program_name('ImEditor')
         dialog.set_version('0.9.1')
         dialog.set_website('https://imeditor.github.io')
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(),
             Gtk.get_minor_version(), Gtk.get_micro_version())
         dialog.set_comments('{}\n\n' \
-            'Gtk: {}\nPillow: {}'.format(self.program_description, gtk_version,
+            'Gtk: {}\nPillow: {}'.format(_("Simple & versatile image editor"), gtk_version,
             pil_version))
         text = _("Distributed under the GNU GPL(v3) license.\n")
         text += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'

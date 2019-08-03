@@ -5,5 +5,5 @@ data/io.github.ImEditor.gschema.xml
 src/main.py
 
 src/interface/dialog.py
-src/interface/interface.py
+src/interface/window.py
 src/interface/tab.py

@@ -34,8 +34,9 @@ imeditor_sources = [
   'editor/editor.py',
   'editor/image.py',
 
+  'interface/window.py',
+  'interface/headerbar.py',
   'interface/dialog.py',
-  'interface/interface.py',
   'interface/tab.py',
   'interface/tools.py',
   'interface/vars.py',
