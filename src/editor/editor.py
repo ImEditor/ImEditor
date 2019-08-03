@@ -1,3 +1,6 @@
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gdk
 from PIL import Image
 from os import stat, path
 from datetime import datetime
@@ -33,6 +36,17 @@ class Editor(object):
         # Temp vars
         self.left_button_pressed = False
 
+        # Cursors
+        display = Gdk.Display.get_default()
+        try:
+            self.cursors = {
+                'default': Gdk.Cursor.new_from_name(display, 'default'),
+                'draw': Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL),
+                'move': Gdk.Cursor.new_from_name(display, 'move')
+            }
+        except TypeError as e:
+            self.cursors = None
+
     def change_task(self, task='select'):
         """Change active task and its cursor"""
         if task == 'select':
@@ -48,8 +62,8 @@ class Editor(object):
     def change_cursor(self, cursor):
         """Change cursor that hovers the image"""
         img_widget = self.tab.img_widget.get_window()
-        if img_widget and self.win.cursors:
-            img_widget.set_cursor(self.win.cursors[cursor])
+        if img_widget and self.cursors:
+            img_widget.set_cursor(self.cursors[cursor])
 
     def do_tmp_change(self, img):
         """Update displayed image without modifying the history"""

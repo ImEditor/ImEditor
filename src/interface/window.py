@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GdkPixbuf, Gio
+from gi.repository import Gtk, GdkPixbuf, Gio
 from PIL import Image, __version__ as pil_version
 from os import path
 
@@ -42,17 +42,6 @@ class ImEditorWindow(Gtk.ApplicationWindow):
 
         self.show_all()
         self.enable_homescreen()
-
-        # Cursors
-        display = Gdk.Display.get_default()
-        try:
-            self.cursors = {
-                'default': Gdk.Cursor.new_from_name(display, 'default'),
-                'draw': Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL),
-                'move': Gdk.Cursor.new_from_name(display, 'move')
-            }
-        except TypeError as e:
-            self.cursors = None
 
         # Vars
         self.filenames = list()
