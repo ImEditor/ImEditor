@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 02:33+0200\n"
-"PO-Revision-Date: 2019-08-03 02:34+0200\n"
+"POT-Creation-Date: 2019-08-03 12:53+0200\n"
+"PO-Revision-Date: 2019-08-03 12:54+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -52,271 +52,271 @@ msgstr ""
 msgid "It offers several tools to easily modify an image."
 msgstr "Il propose plusieurs outils pour modifier facilement une image."
 
-#: src/interface/dialog.py:56 src/interface/dialog.py:167
-msgid "Cancel"
-msgstr "Annuler"
-
-#: src/interface/dialog.py:59
-msgid "Apply"
-msgstr "Appliquer"
-
-#: src/interface/dialog.py:74 src/interface/interface.py:61
-msgid "Image details"
-msgstr "Informations sur l'image"
-
-#: src/interface/dialog.py:77 src/interface/dialog.py:175
-msgid "Name"
-msgstr "Nom"
-
-#: src/interface/dialog.py:80
-msgid "Mode"
-msgstr "Mode"
-
-#: src/interface/dialog.py:83
-msgid "Size"
-msgstr "Taille"
-
-#: src/interface/dialog.py:88
-msgid "Weight"
-msgstr "Poids"
-
-#: src/interface/dialog.py:91
-msgid "Folder"
-msgstr "Dossier"
-
-#: src/interface/dialog.py:94
-msgid "Last change"
-msgstr "Dernier changement"
-
-#: src/interface/dialog.py:98
-msgid "Close"
-msgstr "Fermer"
-
-#: src/interface/dialog.py:116 src/interface/dialog.py:157
-msgid "Custom color"
-msgstr "Couleur personnalisée"
-
-#: src/interface/dialog.py:120 src/interface/dialog.py:156
-msgid "White"
-msgstr "Blanc"
-
-#: src/interface/dialog.py:129 src/interface/dialog.py:158
-msgid "Transparent"
-msgstr "Transparent"
-
-#: src/interface/dialog.py:135
-msgid "New image"
-msgstr "Nouvelle image"
-
-#: src/interface/dialog.py:138 src/interface/interface.py:357
-msgid "untitled"
-msgstr "sans-titre"
-
-#: src/interface/dialog.py:170
-msgid "Create"
-msgstr "Créer"
-
-#: src/interface/dialog.py:177
-msgid "Template"
-msgstr "Modèle"
-
-#: src/interface/dialog.py:179
-msgid "Width"
-msgstr "Largeur"
-
-#: src/interface/dialog.py:181
-msgid "Height"
-msgstr "Hauteur"
-
-#: src/interface/dialog.py:183
-msgid "Background"
-msgstr "Fond"
-
-#: src/interface/dialog.py:185
-msgid "Background color"
-msgstr "Couleur de fond"
-
-#: src/interface/dialog.py:187
-msgid "Format"
-msgstr "Format"
-
-#: src/interface/interface.py:21
-msgid "Simple & versatile image editor"
-msgstr "Éditeur d'images simple et polyvalent"
-
-#: src/interface/interface.py:40
-msgid "Zoom -"
-msgstr "Zoom -"
-
-#: src/interface/interface.py:41
-msgid "Zoom +"
-msgstr "Zoom +"
-
-#: src/interface/interface.py:42
-msgid "Copy"
-msgstr "Copier"
-
-#: src/interface/interface.py:43
-msgid "Paste"
-msgstr "Coller"
-
-#: src/interface/interface.py:44
-msgid "Cut"
-msgstr "Couper"
-
-#: src/interface/interface.py:46
-msgid "Black & white"
-msgstr "Noir & blanc"
-
-#: src/interface/interface.py:47
-msgid "Negative"
-msgstr "Négatif"
-
-#: src/interface/interface.py:48
-msgid "Red"
-msgstr "Rouge"
-
-#: src/interface/interface.py:49
-msgid "Green"
-msgstr "Vert"
-
-#: src/interface/interface.py:50
-msgid "Blue"
-msgstr "Bleu"
-
-#: src/interface/interface.py:51
-msgid "Grayscale"
-msgstr "Nuances de gris"
-
-#: src/interface/interface.py:52
-msgid "Brightness"
-msgstr "Luminosité"
-
-#: src/interface/interface.py:53
-msgid "Filters"
-msgstr "Filtres"
-
-#: src/interface/interface.py:55 src/interface/interface.py:168
-msgid "Rotate -90°"
-msgstr "Rotation -90°"
-
-#: src/interface/interface.py:56 src/interface/interface.py:178
-msgid "Rotate 90°"
-msgstr "Rotation +90°"
-
-#: src/interface/interface.py:57
-msgid "Horizontal mirror"
-msgstr "Miroir horizontal"
-
-#: src/interface/interface.py:58
-msgid "Vertical mirror"
-msgstr "Miroir vertical"
-
-#: src/interface/interface.py:59
-msgid "Crop"
-msgstr "Recadrer"
-
-#: src/interface/interface.py:60
-msgid "Operations"
-msgstr "Opérations"
-
-#: src/interface/interface.py:62
-msgid "About ImEditor"
-msgstr "À propos d'ImEditor"
-
-#: src/interface/interface.py:80 src/interface/tab.py:55
-msgid "Pencil"
-msgstr "Crayon"
-
-#: src/interface/interface.py:90
-msgid "Selection"
-msgstr "Sélection"
-
-#: src/interface/interface.py:104
-msgid "New"
-msgstr "Nouveau"
-
-#: src/interface/interface.py:115
-msgid "Open"
-msgstr "Ouvrir"
-
-#: src/interface/interface.py:126
-msgid "Save"
-msgstr "Sauvegarder"
-
-#: src/interface/interface.py:136
-msgid "Save as..."
-msgstr "Sauvegarder sous..."
-
-#: src/interface/interface.py:147
-msgid "Undo"
-msgstr "Annuler"
-
-#: src/interface/interface.py:158
-msgid "Redo"
-msgstr "Rétablir"
-
-#: src/interface/interface.py:274
+#: src/ui/window.ui:40
 msgid "What do you want to do?"
 msgstr "Que souhaitez-vous faire ?"
 
-#: src/interface/interface.py:275
+#: src/ui/window.ui:54
 msgid "Create a new image"
 msgstr "Créer une nouvelle image"
 
-#: src/interface/interface.py:279
+#: src/ui/window.ui:69
 msgid "Open an existing image"
 msgstr "Ouvrir une image existante"
 
-#: src/interface/interface.py:370 src/interface/interface.py:380
+#: src/ui/headerbar.ui:9 src/interface/window.py:384
+msgid "Simple & versatile image editor"
+msgstr "Éditeur d'images simple et polyvalent"
+
+#: src/interface/window.py:245 src/interface/dialog.py:136
+msgid "untitled"
+msgstr "sans-titre"
+
+#: src/interface/window.py:258 src/interface/window.py:268
 msgid "Unable to open this image"
 msgstr "Impossible d'ouvrir cette image"
 
-#: src/interface/interface.py:371
+#: src/interface/window.py:259
 msgid "This image doesn't exists. Please verify the path."
 msgstr "Cette image n'existe pas. Veuillez vérifier le chemin."
 
-#: src/interface/interface.py:381
+#: src/interface/window.py:269
 msgid "The mode of this image is not supported."
 msgstr "Le mode de cette image n'est pas supporté."
 
-#: src/interface/interface.py:383
+#: src/interface/window.py:271
 msgid "Unable to open this file"
 msgstr "Impossible d'ouvrir ce fichier"
 
-#: src/interface/interface.py:384
+#: src/interface/window.py:272
 msgid "The format of this file is not supported."
 msgstr "Le format de ce fichier n'est pas supporté."
 
-#: src/interface/interface.py:386
+#: src/interface/window.py:274
 msgid "Already open"
 msgstr "Déjà ouvert"
 
-#: src/interface/interface.py:387
+#: src/interface/window.py:275
 msgid "This image is already opened in ImEditor."
 msgstr "Cette image est déjà ouverte dans ImEditor."
 
-#: src/interface/interface.py:416
+#: src/interface/window.py:304
 msgid "There are unsaved changes to this image"
 msgstr "Des changements sur l'image n'ont pas été sauvegardés."
 
-#: src/interface/interface.py:499
+#: src/interface/window.py:386
 msgid "Distributed under the GNU GPL(v3) license.\n"
 msgstr "Distribué sous la licence GNU GPL(v3).\n"
 
-#: src/interface/tab.py:56
+#: src/interface/headerbar.py:20
+msgid "Zoom -"
+msgstr "Zoom -"
+
+#: src/interface/headerbar.py:21
+msgid "Zoom +"
+msgstr "Zoom +"
+
+#: src/interface/headerbar.py:22
+msgid "Copy"
+msgstr "Copier"
+
+#: src/interface/headerbar.py:23
+msgid "Paste"
+msgstr "Coller"
+
+#: src/interface/headerbar.py:24
+msgid "Cut"
+msgstr "Couper"
+
+#: src/interface/headerbar.py:26
+msgid "Black & white"
+msgstr "Noir & blanc"
+
+#: src/interface/headerbar.py:27
+msgid "Negative"
+msgstr "Négatif"
+
+#: src/interface/headerbar.py:28
+msgid "Red"
+msgstr "Rouge"
+
+#: src/interface/headerbar.py:29
+msgid "Green"
+msgstr "Vert"
+
+#: src/interface/headerbar.py:30
+msgid "Blue"
+msgstr "Bleu"
+
+#: src/interface/headerbar.py:31
+msgid "Grayscale"
+msgstr "Nuances de gris"
+
+#: src/interface/headerbar.py:32
+msgid "Brightness"
+msgstr "Luminosité"
+
+#: src/interface/headerbar.py:33
+msgid "Filters"
+msgstr "Filtres"
+
+#: src/interface/headerbar.py:35 src/interface/headerbar.py:111
+msgid "Rotate -90°"
+msgstr "Rotation -90°"
+
+#: src/interface/headerbar.py:36 src/interface/headerbar.py:118
+msgid "Rotate 90°"
+msgstr "Rotation +90°"
+
+#: src/interface/headerbar.py:37
+msgid "Horizontal mirror"
+msgstr "Miroir horizontal"
+
+#: src/interface/headerbar.py:38
+msgid "Vertical mirror"
+msgstr "Miroir vertical"
+
+#: src/interface/headerbar.py:39
+msgid "Crop"
+msgstr "Recadrer"
+
+#: src/interface/headerbar.py:40
+msgid "Operations"
+msgstr "Opérations"
+
+#: src/interface/headerbar.py:41 src/interface/dialog.py:72
+msgid "Image details"
+msgstr "Informations sur l'image"
+
+#: src/interface/headerbar.py:42
+msgid "About ImEditor"
+msgstr "À propos d'ImEditor"
+
+#: src/interface/headerbar.py:51 src/interface/tab.py:53
+msgid "Pencil"
+msgstr "Crayon"
+
+#: src/interface/headerbar.py:58
+msgid "Selection"
+msgstr "Sélection"
+
+#: src/interface/headerbar.py:69
+msgid "New"
+msgstr "Nouveau"
+
+#: src/interface/headerbar.py:76
+msgid "Open"
+msgstr "Ouvrir"
+
+#: src/interface/headerbar.py:83
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: src/interface/headerbar.py:90
+msgid "Save as..."
+msgstr "Sauvegarder sous..."
+
+#: src/interface/headerbar.py:97
+msgid "Undo"
+msgstr "Annuler"
+
+#: src/interface/headerbar.py:104
+msgid "Redo"
+msgstr "Rétablir"
+
+#: src/interface/dialog.py:54 src/interface/dialog.py:165
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/interface/dialog.py:57
+msgid "Apply"
+msgstr "Appliquer"
+
+#: src/interface/dialog.py:75 src/interface/dialog.py:173
+msgid "Name"
+msgstr "Nom"
+
+#: src/interface/dialog.py:78
+msgid "Mode"
+msgstr "Mode"
+
+#: src/interface/dialog.py:81
+msgid "Size"
+msgstr "Taille"
+
+#: src/interface/dialog.py:86
+msgid "Weight"
+msgstr "Poids"
+
+#: src/interface/dialog.py:89
+msgid "Folder"
+msgstr "Dossier"
+
+#: src/interface/dialog.py:92
+msgid "Last change"
+msgstr "Dernier changement"
+
+#: src/interface/dialog.py:96
+msgid "Close"
+msgstr "Fermer"
+
+#: src/interface/dialog.py:114 src/interface/dialog.py:155
+msgid "Custom color"
+msgstr "Couleur personnalisée"
+
+#: src/interface/dialog.py:118 src/interface/dialog.py:154
+msgid "White"
+msgstr "Blanc"
+
+#: src/interface/dialog.py:127 src/interface/dialog.py:156
+msgid "Transparent"
+msgstr "Transparent"
+
+#: src/interface/dialog.py:133
+msgid "New image"
+msgstr "Nouvelle image"
+
+#: src/interface/dialog.py:168
+msgid "Create"
+msgstr "Créer"
+
+#: src/interface/dialog.py:175
+msgid "Template"
+msgstr "Modèle"
+
+#: src/interface/dialog.py:177
+msgid "Width"
+msgstr "Largeur"
+
+#: src/interface/dialog.py:179
+msgid "Height"
+msgstr "Hauteur"
+
+#: src/interface/dialog.py:181
+msgid "Background"
+msgstr "Fond"
+
+#: src/interface/dialog.py:183
+msgid "Background color"
+msgstr "Couleur de fond"
+
+#: src/interface/dialog.py:185
+msgid "Format"
+msgstr "Format"
+
+#: src/interface/tab.py:54
 msgid "Shape"
 msgstr "Forme"
 
-#: src/interface/tab.py:59
+#: src/interface/tab.py:57
 msgid "Ellipse"
 msgstr "Ellipse"
 
-#: src/interface/tab.py:59
+#: src/interface/tab.py:57
 msgid "Square"
 msgstr "Carré"
 
-#: src/interface/tab.py:64
+#: src/interface/tab.py:62
 msgid "Color"
 msgstr "Couleur"
 

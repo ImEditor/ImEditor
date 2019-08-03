@@ -2,8 +2,12 @@ data/io.github.ImEditor.desktop.in
 data/io.github.ImEditor.appdata.xml.in
 data/io.github.ImEditor.gschema.xml
 
+src/ui/window.ui
+src/ui/headerbar.ui
+
 src/main.py
 
-src/interface/dialog.py
 src/interface/window.py
+src/interface/headerbar.py
+src/interface/dialog.py
 src/interface/tab.py
