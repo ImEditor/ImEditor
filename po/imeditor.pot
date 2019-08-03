@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 00:53+0200\n"
+"POT-Creation-Date: 2019-08-03 02:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,7 +105,7 @@ msgstr ""
 msgid "New image"
 msgstr ""
 
-#: src/interface/dialog.py:138 src/interface/interface.py:347
+#: src/interface/dialog.py:138 src/interface/interface.py:357
 msgid "untitled"
 msgstr ""
 
@@ -193,11 +193,11 @@ msgstr ""
 msgid "Filters"
 msgstr ""
 
-#: src/interface/interface.py:55
+#: src/interface/interface.py:55 src/interface/interface.py:168
 msgid "Rotate -90°"
 msgstr ""
 
-#: src/interface/interface.py:56
+#: src/interface/interface.py:56 src/interface/interface.py:178
 msgid "Rotate 90°"
 msgstr ""
 
@@ -221,56 +221,84 @@ msgstr ""
 msgid "About ImEditor"
 msgstr ""
 
-#: src/interface/interface.py:264
+#: src/interface/interface.py:80 src/interface/tab.py:55
+msgid "Pencil"
+msgstr ""
+
+#: src/interface/interface.py:90
+msgid "Selection"
+msgstr ""
+
+#: src/interface/interface.py:104
+msgid "New"
+msgstr ""
+
+#: src/interface/interface.py:115
+msgid "Open"
+msgstr ""
+
+#: src/interface/interface.py:126
+msgid "Save"
+msgstr ""
+
+#: src/interface/interface.py:136
+msgid "Save as..."
+msgstr ""
+
+#: src/interface/interface.py:147
+msgid "Undo"
+msgstr ""
+
+#: src/interface/interface.py:158
+msgid "Redo"
+msgstr ""
+
+#: src/interface/interface.py:274
 msgid "What do you want to do?"
 msgstr ""
 
-#: src/interface/interface.py:265
+#: src/interface/interface.py:275
 msgid "Create a new image"
 msgstr ""
 
-#: src/interface/interface.py:269
+#: src/interface/interface.py:279
 msgid "Open an existing image"
 msgstr ""
 
-#: src/interface/interface.py:360 src/interface/interface.py:370
+#: src/interface/interface.py:370 src/interface/interface.py:380
 msgid "Unable to open this image"
 msgstr ""
 
-#: src/interface/interface.py:361
+#: src/interface/interface.py:371
 msgid "This image doesn't exists. Please verify the path."
 msgstr ""
 
-#: src/interface/interface.py:371
+#: src/interface/interface.py:381
 msgid "The mode of this image is not supported."
 msgstr ""
 
-#: src/interface/interface.py:373
+#: src/interface/interface.py:383
 msgid "Unable to open this file"
 msgstr ""
 
-#: src/interface/interface.py:374
+#: src/interface/interface.py:384
 msgid "The format of this file is not supported."
 msgstr ""
 
-#: src/interface/interface.py:376
+#: src/interface/interface.py:386
 msgid "Already open"
 msgstr ""
 
-#: src/interface/interface.py:377
+#: src/interface/interface.py:387
 msgid "This image is already opened in ImEditor."
 msgstr ""
 
-#: src/interface/interface.py:406
+#: src/interface/interface.py:416
 msgid "There are unsaved changes to this image"
 msgstr ""
 
-#: src/interface/interface.py:489
+#: src/interface/interface.py:499
 msgid "Distributed under the GNU GPL(v3) license.\n"
-msgstr ""
-
-#: src/interface/tab.py:55
-msgid "Pencil"
 msgstr ""
 
 #: src/interface/tab.py:56

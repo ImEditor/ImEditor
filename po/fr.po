@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 00:53+0200\n"
-"PO-Revision-Date: 2019-08-03 00:53+0200\n"
+"POT-Creation-Date: 2019-08-03 02:33+0200\n"
+"PO-Revision-Date: 2019-08-03 02:34+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -108,7 +108,7 @@ msgstr "Transparent"
 msgid "New image"
 msgstr "Nouvelle image"
 
-#: src/interface/dialog.py:138 src/interface/interface.py:347
+#: src/interface/dialog.py:138 src/interface/interface.py:357
 msgid "untitled"
 msgstr "sans-titre"
 
@@ -196,11 +196,11 @@ msgstr "Luminosité"
 msgid "Filters"
 msgstr "Filtres"
 
-#: src/interface/interface.py:55
+#: src/interface/interface.py:55 src/interface/interface.py:168
 msgid "Rotate -90°"
 msgstr "Rotation -90°"
 
-#: src/interface/interface.py:56
+#: src/interface/interface.py:56 src/interface/interface.py:178
 msgid "Rotate 90°"
 msgstr "Rotation +90°"
 
@@ -224,57 +224,85 @@ msgstr "Opérations"
 msgid "About ImEditor"
 msgstr "À propos d'ImEditor"
 
-#: src/interface/interface.py:264
+#: src/interface/interface.py:80 src/interface/tab.py:55
+msgid "Pencil"
+msgstr "Crayon"
+
+#: src/interface/interface.py:90
+msgid "Selection"
+msgstr "Sélection"
+
+#: src/interface/interface.py:104
+msgid "New"
+msgstr "Nouveau"
+
+#: src/interface/interface.py:115
+msgid "Open"
+msgstr "Ouvrir"
+
+#: src/interface/interface.py:126
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: src/interface/interface.py:136
+msgid "Save as..."
+msgstr "Sauvegarder sous..."
+
+#: src/interface/interface.py:147
+msgid "Undo"
+msgstr "Annuler"
+
+#: src/interface/interface.py:158
+msgid "Redo"
+msgstr "Rétablir"
+
+#: src/interface/interface.py:274
 msgid "What do you want to do?"
 msgstr "Que souhaitez-vous faire ?"
 
-#: src/interface/interface.py:265
+#: src/interface/interface.py:275
 msgid "Create a new image"
 msgstr "Créer une nouvelle image"
 
-#: src/interface/interface.py:269
+#: src/interface/interface.py:279
 msgid "Open an existing image"
 msgstr "Ouvrir une image existante"
 
-#: src/interface/interface.py:360 src/interface/interface.py:370
+#: src/interface/interface.py:370 src/interface/interface.py:380
 msgid "Unable to open this image"
 msgstr "Impossible d'ouvrir cette image"
 
-#: src/interface/interface.py:361
+#: src/interface/interface.py:371
 msgid "This image doesn't exists. Please verify the path."
 msgstr "Cette image n'existe pas. Veuillez vérifier le chemin."
 
-#: src/interface/interface.py:371
+#: src/interface/interface.py:381
 msgid "The mode of this image is not supported."
 msgstr "Le mode de cette image n'est pas supporté."
 
-#: src/interface/interface.py:373
+#: src/interface/interface.py:383
 msgid "Unable to open this file"
 msgstr "Impossible d'ouvrir ce fichier"
 
-#: src/interface/interface.py:374
+#: src/interface/interface.py:384
 msgid "The format of this file is not supported."
 msgstr "Le format de ce fichier n'est pas supporté."
 
-#: src/interface/interface.py:376
+#: src/interface/interface.py:386
 msgid "Already open"
 msgstr "Déjà ouvert"
 
-#: src/interface/interface.py:377
+#: src/interface/interface.py:387
 msgid "This image is already opened in ImEditor."
 msgstr "Cette image est déjà ouverte dans ImEditor."
 
-#: src/interface/interface.py:406
+#: src/interface/interface.py:416
 msgid "There are unsaved changes to this image"
 msgstr "Des changements sur l'image n'ont pas été sauvegardés."
 
-#: src/interface/interface.py:489
+#: src/interface/interface.py:499
 msgid "Distributed under the GNU GPL(v3) license.\n"
 msgstr "Distribué sous la licence GNU GPL(v3).\n"
-
-#: src/interface/tab.py:55
-msgid "Pencil"
-msgstr "Crayon"
 
 #: src/interface/tab.py:56
 msgid "Shape"
@@ -291,3 +319,18 @@ msgstr "Carré"
 #: src/interface/tab.py:64
 msgid "Color"
 msgstr "Couleur"
+
+#, fuzzy
+#~| msgid "Rotate 90°"
+#~ msgid "Rotate +90°"
+#~ msgstr "Rotation +90°"
+
+#, fuzzy
+#~| msgid "Rotate -90°"
+#~ msgid "Rotate -90"
+#~ msgstr "Rotation -90°"
+
+#, fuzzy
+#~| msgid "Rotate 90°"
+#~ msgid "Rotate +90"
+#~ msgstr "Rotation +90°"
