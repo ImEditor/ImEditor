@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9.1] - DEV
+### Changed
+- Only show tabs if there is more than one image opened.
+
+### Fixed
+- Fix some translation issues.
+- Minor fixes.
+
 ## [0.9] - 2019-08-01
 ### Added
 - Adopt meson and flatpak over snap.
