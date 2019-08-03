@@ -1,5 +1,5 @@
 # TODO
-- Move ui in a ui file.
+- Move dialogs in ui files.
 - Rework filters from scratch.
 - Improve select, copy, paste and cut features.
 - Implement libhandy.

@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.10] - DEV
+### Changed
+- Improve look & feel of the menu.
+- Improve image filters of opening dialog.
+
 ## [0.9.1] - 2019-08-03
 ### Added
 - Add tooltips on toolbar icons.
