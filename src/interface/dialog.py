@@ -2,7 +2,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
-from .tools import SpinButton
+from .tools import SpinButton, add_filechooser_filters
 from .vars import DEFAULT_TEMPLATES, PROPOSED_EXTENSIONS
 
 
@@ -198,15 +198,7 @@ def file_dialog(parent, action, filename=None):
     file_chooser.set_transient_for(parent)
     if action == 'open':
         file_chooser.set_action(Gtk.FileChooserAction.OPEN)
-        file_filter = Gtk.FileFilter()
-        file_filter.set_name("Images")
-        file_filter.add_mime_type('image/bmp')
-        file_filter.add_mime_type('image/jpeg')
-        file_filter.add_mime_type('image/jpg')
-        file_filter.add_mime_type('image/png')
-        file_filter.add_mime_type('image/webp')
-        file_filter.add_mime_type('image/ico')
-        file_chooser.add_filter(file_filter)
+        add_filechooser_filters(file_chooser)
     elif action == 'save':
         file_chooser.set_action(Gtk.FileChooserAction.SAVE)
         file_chooser.set_do_overwrite_confirmation(True)
