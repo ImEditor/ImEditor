@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 13:56+0200\n"
+"POT-Creation-Date: 2019-08-03 15:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,10 @@ msgstr ""
 msgid "It offers several tools to easily modify an image."
 msgstr ""
 
+#: data/io.github.ImEditor.gschema.xml:6
+msgid "Enable or disable dark mode"
+msgstr ""
+
 #: src/ui/window.ui:40
 msgid "What do you want to do?"
 msgstr ""
@@ -61,7 +65,7 @@ msgstr ""
 msgid "Open an existing image"
 msgstr ""
 
-#: src/ui/headerbar.ui:9 src/interface/window.py:384
+#: src/ui/headerbar.ui:9 src/interface/window.py:402
 msgid "Simple & versatile image editor"
 msgstr ""
 
@@ -146,46 +150,50 @@ msgid "Image details"
 msgstr ""
 
 #: src/ui/menu.ui:99
+msgid "Dark mode"
+msgstr ""
+
+#: src/ui/menu.ui:105
 msgid "About ImEditor"
 msgstr ""
 
-#: src/interface/window.py:245 src/interface/dialog.py:136
+#: src/interface/window.py:252 src/interface/dialog.py:136
 msgid "untitled"
 msgstr ""
 
-#: src/interface/window.py:258 src/interface/window.py:268
+#: src/interface/window.py:265 src/interface/window.py:275
 msgid "Unable to open this image"
 msgstr ""
 
-#: src/interface/window.py:259
+#: src/interface/window.py:266
 msgid "This image doesn't exists. Please verify the path."
 msgstr ""
 
-#: src/interface/window.py:269
+#: src/interface/window.py:276
 msgid "The mode of this image is not supported."
 msgstr ""
 
-#: src/interface/window.py:271
+#: src/interface/window.py:278
 msgid "Unable to open this file"
 msgstr ""
 
-#: src/interface/window.py:272
+#: src/interface/window.py:279
 msgid "The format of this file is not supported."
 msgstr ""
 
-#: src/interface/window.py:274
+#: src/interface/window.py:281
 msgid "Already open"
 msgstr ""
 
-#: src/interface/window.py:275
+#: src/interface/window.py:282
 msgid "This image is already opened in ImEditor."
 msgstr ""
 
-#: src/interface/window.py:304
+#: src/interface/window.py:311
 msgid "There are unsaved changes to this image"
 msgstr ""
 
-#: src/interface/window.py:386
+#: src/interface/window.py:404
 msgid "Distributed under the GNU GPL(v3) license.\n"
 msgstr ""
 

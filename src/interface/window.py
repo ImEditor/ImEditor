@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GdkPixbuf, Gio
+from gi.repository import Gtk, GdkPixbuf, Gio, GLib
 from PIL import Image, __version__ as pil_version
 from os import path
 
@@ -24,11 +24,10 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         super().__init__(**kwargs)
         self.app = kwargs['application']
 
-        # Prefer a dark theme if available
-        settings = Gtk.Settings.get_default()
-        settings.set_property('gtk-application-prefer-dark-theme', True)
-
         # Init the app
+        self.settings = Gio.Settings.new('io.github.ImEditor')
+        self.gtk_settings = Gtk.Settings.get_default()
+
         self.connect('delete-event', self.quit_app)
 
         # Init UI objects
@@ -37,15 +36,17 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         # Build UI
         self.build_ui()
 
+        # Vars
+        self.is_dark_mode = self.settings.get_boolean('dark-mode')
+        self.filenames = list()
+        self.selected_img = None  # Selected image
+
         # Create actions
         self.create_actions()
 
+        self.switch_theme(self.is_dark_mode)
         self.show_all()
         self.enable_homescreen()
-
-        # Vars
-        self.filenames = list()
-        self.selected_img = None  # Selected image
 
     def build_ui(self):
         self.header_bar = ImEditorHeaderBar()
@@ -150,6 +151,12 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.details_action = Gio.SimpleAction.new('details', None)
         self.details_action.connect('activate', lambda *args:self.get_tab().editor.details())
         self.add_action(self.details_action)
+
+        # Dark mode
+        self.dark_mode_action = Gio.SimpleAction.new_stateful('dark-mode',
+            None, GLib.Variant.new_boolean(self.is_dark_mode))
+        self.dark_mode_action.connect('activate', self.toggle_dark_theme)
+        self.add_action(self.dark_mode_action)
 
         # About
         self.about_action = Gio.SimpleAction.new('about', None)
@@ -364,6 +371,17 @@ class ImEditorWindow(Gtk.ApplicationWindow):
     def apply_filter_dialog(self, a, b, func, params=None):
         tab = self.get_tab()
         tab.editor.apply_filter_dialog(func, params)
+
+    def toggle_dark_theme(self, a, b):
+        self.switch_theme(not self.is_dark_mode)
+
+    def switch_theme(self, is_dark=False):
+        self.settings.set_boolean('dark-mode', is_dark)
+        property = 'gtk-application-prefer-dark-theme'
+        self.gtk_settings.set_property(property, is_dark)
+        variant = GLib.Variant.new_boolean(is_dark)
+        self.dark_mode_action.set_state(variant)
+        self.is_dark_mode = is_dark
 
     def quit_app(self, a, b):
         """Close all tabs to be sure they are saved"""

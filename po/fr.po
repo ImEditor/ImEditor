@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 13:56+0200\n"
-"PO-Revision-Date: 2019-08-03 13:57+0200\n"
+"POT-Creation-Date: 2019-08-03 15:10+0200\n"
+"PO-Revision-Date: 2019-08-03 15:11+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -52,6 +52,10 @@ msgstr ""
 msgid "It offers several tools to easily modify an image."
 msgstr "Il propose plusieurs outils pour modifier facilement une image."
 
+#: data/io.github.ImEditor.gschema.xml:6
+msgid "Enable or disable dark mode"
+msgstr "Activer ou désactiver le mode sombre"
+
 #: src/ui/window.ui:40
 msgid "What do you want to do?"
 msgstr "Que souhaitez-vous faire ?"
@@ -64,7 +68,7 @@ msgstr "Créer une nouvelle image"
 msgid "Open an existing image"
 msgstr "Ouvrir une image existante"
 
-#: src/ui/headerbar.ui:9 src/interface/window.py:384
+#: src/ui/headerbar.ui:9 src/interface/window.py:402
 msgid "Simple & versatile image editor"
 msgstr "Éditeur d'images simple et polyvalent"
 
@@ -149,46 +153,50 @@ msgid "Image details"
 msgstr "Informations sur l'image"
 
 #: src/ui/menu.ui:99
+msgid "Dark mode"
+msgstr "Mode sombre"
+
+#: src/ui/menu.ui:105
 msgid "About ImEditor"
 msgstr "À propos d'ImEditor"
 
-#: src/interface/window.py:245 src/interface/dialog.py:136
+#: src/interface/window.py:252 src/interface/dialog.py:136
 msgid "untitled"
 msgstr "sans-titre"
 
-#: src/interface/window.py:258 src/interface/window.py:268
+#: src/interface/window.py:265 src/interface/window.py:275
 msgid "Unable to open this image"
 msgstr "Impossible d'ouvrir cette image"
 
-#: src/interface/window.py:259
+#: src/interface/window.py:266
 msgid "This image doesn't exists. Please verify the path."
 msgstr "Cette image n'existe pas. Veuillez vérifier le chemin."
 
-#: src/interface/window.py:269
+#: src/interface/window.py:276
 msgid "The mode of this image is not supported."
 msgstr "Le mode de cette image n'est pas supporté."
 
-#: src/interface/window.py:271
+#: src/interface/window.py:278
 msgid "Unable to open this file"
 msgstr "Impossible d'ouvrir ce fichier"
 
-#: src/interface/window.py:272
+#: src/interface/window.py:279
 msgid "The format of this file is not supported."
 msgstr "Le format de ce fichier n'est pas supporté."
 
-#: src/interface/window.py:274
+#: src/interface/window.py:281
 msgid "Already open"
 msgstr "Déjà ouvert"
 
-#: src/interface/window.py:275
+#: src/interface/window.py:282
 msgid "This image is already opened in ImEditor."
 msgstr "Cette image est déjà ouverte dans ImEditor."
 
-#: src/interface/window.py:304
+#: src/interface/window.py:311
 msgid "There are unsaved changes to this image"
 msgstr "Des changements sur l'image n'ont pas été sauvegardés."
 
-#: src/interface/window.py:386
+#: src/interface/window.py:404
 msgid "Distributed under the GNU GPL(v3) license.\n"
 msgstr "Distribué sous la licence GNU GPL(v3).\n"
 

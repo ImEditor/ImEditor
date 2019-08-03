@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="imeditor">
 	<schema id="io.github.ImEditor" path="/io/github/ImEditor/">
+	  <key name="dark-mode" type="b">
+      <default>true</default>
+      <summary>Enable or disable dark mode</summary>
+    </key>
 	</schema>
 </schemalist>

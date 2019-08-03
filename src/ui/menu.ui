@@ -96,6 +96,12 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">Dark mode</attribute>
+        <attribute name="action">win.dark-mode</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="label" translatable="yes">About ImEditor</attribute>
         <attribute name="action">win.about</attribute>
       </item>
