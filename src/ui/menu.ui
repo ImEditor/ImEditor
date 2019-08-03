@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<interface>
+  <menu id="window-menu">
+    <section>
+      <attribute name="display-hint">horizontal-buttons</attribute>
+      <item>
+        <attribute name="label" translatable="yes">Zoom -</attribute>
+        <attribute name="action">win.zoom-minus</attribute>
+        <attribute name="verb-icon">zoom-out-symbolic</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Zoom +</attribute>
+        <attribute name="action">win.zoom-plus</attribute>
+        <attribute name="verb-icon">zoom-in-symbolic</attribute>
+      </item>
+    </section>
+    <section id="actions-section">
+      <item>
+        <attribute name="label" translatable="yes">Copy</attribute>
+        <attribute name="action">win.copy</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Paste</attribute>
+        <attribute name="action">win.paste</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Cut</attribute>
+        <attribute name="action">win.cut</attribute>
+      </item>
+    </section>
+    <section>
+      <submenu>
+        <attribute name="label" translatable="yes">Filters</attribute>
+        <section id="operations-section">
+          <item>
+            <attribute name="label" translatable="yes">Black &amp; white</attribute>
+            <attribute name="action">win.black-and-white</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Negative</attribute>
+            <attribute name="action">win.negative</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Red</attribute>
+            <attribute name="action">win.red</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Green</attribute>
+            <attribute name="action">win.green</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Blue</attribute>
+            <attribute name="action">win.blue</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Grayscale</attribute>
+            <attribute name="action">win.grayscale</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Brightness</attribute>
+            <attribute name="action">win.brightness</attribute>
+          </item>
+        </section>
+      </submenu>
+      <submenu>
+        <attribute name="label" translatable="yes">Operations</attribute>
+        <section id="operations-section">
+          <item>
+            <attribute name="label" translatable="yes">Rotate -90°</attribute>
+            <attribute name="action">win.rotate-left</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Rotate 90°</attribute>
+            <attribute name="action">win.rotate-right</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Horizontal mirror</attribute>
+            <attribute name="action">win.horizontal-mirror</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Vertical mirror</attribute>
+            <attribute name="action">win.vertical-mirror</attribute>
+          </item>
+          <item>
+            <attribute name="label" translatable="yes">Crop</attribute>
+            <attribute name="action">win.crop</attribute>
+          </item>
+        </section>
+      </submenu>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Image details</attribute>
+        <attribute name="action">win.details</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">About ImEditor</attribute>
+        <attribute name="action">win.about</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

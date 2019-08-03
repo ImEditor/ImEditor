@@ -12,35 +12,13 @@ class ImEditorHeaderBar():
         self.header_bar = builder.get_object('header_bar')
         self.menu_button = builder.get_object('menu_button')
 
+        builder.add_from_resource(UI_PATH + 'menu.ui')
+        self.window_menu = builder.get_object('window-menu')
+
         self.build_headerbar()
 
     def build_headerbar(self):
-        # Main menu
-        menu_model = Gio.Menu()
-        menu_model.append(_("Zoom -"), 'win.zoom-minus')
-        menu_model.append(_("Zoom +"), 'win.zoom-plus')
-        menu_model.append(_("Copy"), 'win.copy')
-        menu_model.append(_("Paste"), 'win.paste')
-        menu_model.append(_("Cut"), 'win.cut')
-        submenu_1 = Gio.Menu()
-        submenu_1.append(_("Black & white"), 'win.black-and-white')
-        submenu_1.append(_("Negative"), 'win.negative')
-        submenu_1.append(_("Red"), 'win.red')
-        submenu_1.append(_("Green"), 'win.green')
-        submenu_1.append(_("Blue"), 'win.blue')
-        submenu_1.append(_("Grayscale"), 'win.grayscale')
-        submenu_1.append(_("Brightness"), 'win.brightness')
-        menu_model.append_submenu(_("Filters"), submenu_1)
-        submenu_2 = Gio.Menu()
-        submenu_2.append(_("Rotate -90°"), 'win.rotate-left')
-        submenu_2.append(_("Rotate 90°"), 'win.rotate-right')
-        submenu_2.append(_("Horizontal mirror"), 'win.horizontal-mirror')
-        submenu_2.append(_("Vertical mirror"), 'win.vertical-mirror')
-        submenu_2.append(_("Crop"), 'win.crop')
-        menu_model.append_submenu(_("Operations"), submenu_2)
-        menu_model.append(_("Image details"), 'win.details')
-        menu_model.append(_("About ImEditor"), 'win.about')
-        self.menu_button.set_menu_model(menu_model)
+        self.menu_button.set_menu_model(self.window_menu)
         self.header_bar.pack_end(self.menu_button)
 
         # Tasks buttons

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 12:53+0200\n"
-"PO-Revision-Date: 2019-08-03 12:54+0200\n"
+"POT-Creation-Date: 2019-08-03 13:56+0200\n"
+"PO-Revision-Date: 2019-08-03 13:57+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -68,6 +68,90 @@ msgstr "Ouvrir une image existante"
 msgid "Simple & versatile image editor"
 msgstr "Éditeur d'images simple et polyvalent"
 
+#: src/ui/menu.ui:7
+msgid "Zoom -"
+msgstr "Zoom -"
+
+#: src/ui/menu.ui:12
+msgid "Zoom +"
+msgstr "Zoom +"
+
+#: src/ui/menu.ui:19
+msgid "Copy"
+msgstr "Copier"
+
+#: src/ui/menu.ui:23
+msgid "Paste"
+msgstr "Coller"
+
+#: src/ui/menu.ui:27
+msgid "Cut"
+msgstr "Couper"
+
+#: src/ui/menu.ui:33
+msgid "Filters"
+msgstr "Filtres"
+
+#: src/ui/menu.ui:36
+msgid "Black & white"
+msgstr "Noir & blanc"
+
+#: src/ui/menu.ui:40
+msgid "Negative"
+msgstr "Négatif"
+
+#: src/ui/menu.ui:44
+msgid "Red"
+msgstr "Rouge"
+
+#: src/ui/menu.ui:48
+msgid "Green"
+msgstr "Vert"
+
+#: src/ui/menu.ui:52
+msgid "Blue"
+msgstr "Bleu"
+
+#: src/ui/menu.ui:56
+msgid "Grayscale"
+msgstr "Nuances de gris"
+
+#: src/ui/menu.ui:60
+msgid "Brightness"
+msgstr "Luminosité"
+
+#: src/ui/menu.ui:66
+msgid "Operations"
+msgstr "Opérations"
+
+#: src/ui/menu.ui:69 src/interface/headerbar.py:89
+msgid "Rotate -90°"
+msgstr "Rotation -90°"
+
+#: src/ui/menu.ui:73 src/interface/headerbar.py:96
+msgid "Rotate 90°"
+msgstr "Rotation +90°"
+
+#: src/ui/menu.ui:77
+msgid "Horizontal mirror"
+msgstr "Miroir horizontal"
+
+#: src/ui/menu.ui:81
+msgid "Vertical mirror"
+msgstr "Miroir vertical"
+
+#: src/ui/menu.ui:85
+msgid "Crop"
+msgstr "Recadrer"
+
+#: src/ui/menu.ui:93 src/interface/dialog.py:72
+msgid "Image details"
+msgstr "Informations sur l'image"
+
+#: src/ui/menu.ui:99
+msgid "About ImEditor"
+msgstr "À propos d'ImEditor"
+
 #: src/interface/window.py:245 src/interface/dialog.py:136
 msgid "untitled"
 msgstr "sans-titre"
@@ -108,119 +192,35 @@ msgstr "Des changements sur l'image n'ont pas été sauvegardés."
 msgid "Distributed under the GNU GPL(v3) license.\n"
 msgstr "Distribué sous la licence GNU GPL(v3).\n"
 
-#: src/interface/headerbar.py:20
-msgid "Zoom -"
-msgstr "Zoom -"
-
-#: src/interface/headerbar.py:21
-msgid "Zoom +"
-msgstr "Zoom +"
-
-#: src/interface/headerbar.py:22
-msgid "Copy"
-msgstr "Copier"
-
-#: src/interface/headerbar.py:23
-msgid "Paste"
-msgstr "Coller"
-
-#: src/interface/headerbar.py:24
-msgid "Cut"
-msgstr "Couper"
-
-#: src/interface/headerbar.py:26
-msgid "Black & white"
-msgstr "Noir & blanc"
-
-#: src/interface/headerbar.py:27
-msgid "Negative"
-msgstr "Négatif"
-
-#: src/interface/headerbar.py:28
-msgid "Red"
-msgstr "Rouge"
-
-#: src/interface/headerbar.py:29
-msgid "Green"
-msgstr "Vert"
-
-#: src/interface/headerbar.py:30
-msgid "Blue"
-msgstr "Bleu"
-
-#: src/interface/headerbar.py:31
-msgid "Grayscale"
-msgstr "Nuances de gris"
-
-#: src/interface/headerbar.py:32
-msgid "Brightness"
-msgstr "Luminosité"
-
-#: src/interface/headerbar.py:33
-msgid "Filters"
-msgstr "Filtres"
-
-#: src/interface/headerbar.py:35 src/interface/headerbar.py:111
-msgid "Rotate -90°"
-msgstr "Rotation -90°"
-
-#: src/interface/headerbar.py:36 src/interface/headerbar.py:118
-msgid "Rotate 90°"
-msgstr "Rotation +90°"
-
-#: src/interface/headerbar.py:37
-msgid "Horizontal mirror"
-msgstr "Miroir horizontal"
-
-#: src/interface/headerbar.py:38
-msgid "Vertical mirror"
-msgstr "Miroir vertical"
-
-#: src/interface/headerbar.py:39
-msgid "Crop"
-msgstr "Recadrer"
-
-#: src/interface/headerbar.py:40
-msgid "Operations"
-msgstr "Opérations"
-
-#: src/interface/headerbar.py:41 src/interface/dialog.py:72
-msgid "Image details"
-msgstr "Informations sur l'image"
-
-#: src/interface/headerbar.py:42
-msgid "About ImEditor"
-msgstr "À propos d'ImEditor"
-
-#: src/interface/headerbar.py:51 src/interface/tab.py:53
+#: src/interface/headerbar.py:29 src/interface/tab.py:53
 msgid "Pencil"
 msgstr "Crayon"
 
-#: src/interface/headerbar.py:58
+#: src/interface/headerbar.py:36
 msgid "Selection"
 msgstr "Sélection"
 
-#: src/interface/headerbar.py:69
+#: src/interface/headerbar.py:47
 msgid "New"
 msgstr "Nouveau"
 
-#: src/interface/headerbar.py:76
+#: src/interface/headerbar.py:54
 msgid "Open"
 msgstr "Ouvrir"
 
-#: src/interface/headerbar.py:83
+#: src/interface/headerbar.py:61
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: src/interface/headerbar.py:90
+#: src/interface/headerbar.py:68
 msgid "Save as..."
 msgstr "Sauvegarder sous..."
 
-#: src/interface/headerbar.py:97
+#: src/interface/headerbar.py:75
 msgid "Undo"
 msgstr "Annuler"
 
-#: src/interface/headerbar.py:104
+#: src/interface/headerbar.py:82
 msgid "Redo"
 msgstr "Rétablir"
 
