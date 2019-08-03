@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # Predefined sizes for a new image
 DEFAULT_TEMPLATES = {
     'Favicon': (16, 16),

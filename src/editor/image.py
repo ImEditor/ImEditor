@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-
-
 class ImageObject(object):
     def __init__(self, img, filename, saved):
         super(ImageObject, self).__init__()
