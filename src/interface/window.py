@@ -16,9 +16,13 @@ UI_PATH = '/io/github/ImEditor/ui/'
 class ImEditorWindow(Gtk.ApplicationWindow):
     __gtype_name__ = 'ImEditorWindow'
 
+    main_box = Gtk.Template.Child()
+    homepage = Gtk.Template.Child()
+    notebook = Gtk.Template.Child()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        app = kwargs['application']
+        self.app = kwargs['application']
 
         # Prefer a dark theme if available
         settings = Gtk.Settings.get_default()
@@ -33,12 +37,40 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         # Build UI
         self.build_ui()
 
-        # Actions
+        # Create actions
+        self.create_actions()
+
+        self.show_all()
+        self.enable_homescreen()
+
+        # Cursors
+        display = Gdk.Display.get_default()
+        try:
+            self.cursors = {
+                'default': Gdk.Cursor.new_from_name(display, 'default'),
+                'draw': Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL),
+                'move': Gdk.Cursor.new_from_name(display, 'move')
+            }
+        except TypeError as e:
+            self.cursors = None
+
+        # Vars
+        self.filenames = list()
+        self.selected_img = None  # Selected image
+
+    def build_ui(self):
+        self.header_bar = ImEditorHeaderBar()
+        self.set_titlebar(self.header_bar.header_bar)
+
+        self.notebook.set_scrollable(True)
+        self.notebook.connect('switch-page', self.on_tab_switched)
+
+    def create_actions(self):
         # Close button of tabs
         self.close_action = Gio.SimpleAction.new('close-tab', None)
         self.close_action.connect('activate', self.close_tab)
         self.add_action(self.close_action)
-        app.add_accelerator('<Primary>w', 'win.close-tab', None)
+        self.app.add_accelerator('<Primary>w', 'win.close-tab', None)
 
         # Pencil
         self.pencil_action = Gio.SimpleAction.new('pencil', None)
@@ -54,19 +86,19 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.new_action = Gio.SimpleAction.new('new', None)
         self.new_action.connect('activate', self.new_image)
         self.add_action(self.new_action)
-        app.add_accelerator('<Primary>n', 'win.new', None)
+        self.app.add_accelerator('<Primary>n', 'win.new', None)
 
         # Open
         self.open_action = Gio.SimpleAction.new('open', None)
         self.open_action.connect('activate', self.open_image)
         self.add_action(self.open_action)
-        app.add_accelerator('<Primary>o', 'win.open', None)
+        self.app.add_accelerator('<Primary>o', 'win.open', None)
 
         # Save
         self.save_action = Gio.SimpleAction.new('save', None)
         self.save_action.connect('activate', lambda *args:self.get_tab().editor.save())
         self.add_action(self.save_action)
-        app.add_accelerator('<Primary>s', 'win.save', None)
+        self.app.add_accelerator('<Primary>s', 'win.save', None)
 
         # Save as
         self.save_as_action = Gio.SimpleAction.new('save-as', None)
@@ -77,13 +109,13 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.undo_action = Gio.SimpleAction.new('undo', None)
         self.undo_action.connect('activate', lambda *args:self.get_tab().editor.undo())
         self.add_action(self.undo_action)
-        app.add_accelerator('<Primary>z', 'win.undo', None)
+        self.app.add_accelerator('<Primary>z', 'win.undo', None)
 
         # Redo
         self.redo_action = Gio.SimpleAction.new('redo', None)
         self.redo_action.connect('activate', lambda *args:self.get_tab().editor.redo())
         self.add_action(self.redo_action)
-        app.add_accelerator('<Primary>y', 'win.redo', None)
+        self.app.add_accelerator('<Primary>y', 'win.redo', None)
 
         # Rotate left
         self.rotate_left_action = Gio.SimpleAction.new('rotate-left', None)
@@ -99,31 +131,31 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.copy_action = Gio.SimpleAction.new('copy', None)
         self.copy_action.connect('activate', lambda *args:self.get_tab().editor.copy())
         self.add_action(self.copy_action)
-        app.add_accelerator('<Primary>c', 'win.copy', None)
+        self.app.add_accelerator('<Primary>c', 'win.copy', None)
 
         # Paste
         self.paste_action = Gio.SimpleAction.new('paste', None)
         self.paste_action.connect('activate', lambda *args:self.get_tab().editor.paste())
         self.add_action(self.paste_action)
-        app.add_accelerator('<Primary>v', 'win.paste', None)
+        self.app.add_accelerator('<Primary>v', 'win.paste', None)
 
         # Cut
         self.cut_action = Gio.SimpleAction.new('cut', None)
         self.cut_action.connect('activate', lambda *args:self.get_tab().editor.cut())
         self.add_action(self.cut_action)
-        app.add_accelerator('<Primary>x', 'win.cut', None)
+        self.app.add_accelerator('<Primary>x', 'win.cut', None)
 
         # Zoom -
         self.zoom_minus_action = Gio.SimpleAction.new('zoom-minus', None)
         self.zoom_minus_action.connect('activate', self.zoom, -1)
         self.add_action(self.zoom_minus_action)
-        app.add_accelerator('<Primary>minus', 'win.zoom-minus', None)
+        self.app.add_accelerator('<Primary>minus', 'win.zoom-minus', None)
 
         # Zoom +
         self.zoom_plus_action = Gio.SimpleAction.new('zoom-plus', None)
         self.zoom_plus_action.connect('activate', self.zoom, 1)
         self.add_action(self.zoom_plus_action)
-        app.add_accelerator('<Primary>equal', 'win.zoom-plus', None)
+        self.app.add_accelerator('<Primary>equal', 'win.zoom-plus', None)
 
         # Details
         self.details_action = Gio.SimpleAction.new('details', None)
@@ -180,58 +212,6 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.crop_action = Gio.SimpleAction.new('crop', None)
         self.crop_action.connect('activate', lambda *args:self.get_tab().editor.crop())
         self.add_action(self.crop_action)
-
-        # Homepage
-        self.homepage = Gtk.Grid(row_spacing=20, column_spacing=20,
-            margin_top=120, margin_bottom=120)
-        self.homepage.set_halign(Gtk.Align.CENTER)
-        label = Gtk.Label()
-        label.set_markup('<span size="xx-large">' + _("What do you want to do?") + '</span>')
-        new_button = Gtk.Button(_("Create a new image"), always_show_image=True)
-        new_button.set_image(Gtk.Image.new_from_icon_name('document-new',
-            Gtk.IconSize.BUTTON))
-        new_button.set_action_name('win.new')
-        open_button = Gtk.Button(_("Open an existing image"), always_show_image=True)
-        open_button.set_image(Gtk.Image.new_from_icon_name('document-open',
-            Gtk.IconSize.BUTTON))
-        open_button.set_action_name('win.open')
-        self.homepage.attach(label, 0, 0, 2, 1)
-        self.homepage.attach(new_button, 0, 1, 1, 1)
-        self.homepage.attach(open_button, 1, 1, 1, 1)
-
-        # Tabs
-        self.notebook = Gtk.Notebook()
-        self.notebook.set_scrollable(True)
-        self.notebook.set_show_tabs(False)
-        self.notebook.connect('switch-page', self.on_tab_switched)
-
-        # Main Box
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        main_box.add(self.notebook)
-        main_box.add(self.homepage)
-        self.add(main_box)
-
-        self.show_all()
-        self.enable_homescreen()
-
-        # Cursors
-        display = Gdk.Display.get_default()
-        try:
-            self.cursors = {
-                'default': Gdk.Cursor.new_from_name(display, 'default'),
-                'draw': Gdk.Cursor.new_for_display(display, Gdk.CursorType.PENCIL),
-                'move': Gdk.Cursor.new_from_name(display, 'move')
-            }
-        except TypeError as e:
-            self.cursors = None
-
-        # Vars
-        self.filenames = list()
-        self.selected_img = None  # Selected image
-
-    def build_ui(self):
-        self.header_bar = ImEditorHeaderBar()
-        self.set_titlebar(self.header_bar.header_bar)
 
     def set_window_title(self, tab):
         title = '[{}] - {}'.format(path.basename(tab.editor.image.filename),
