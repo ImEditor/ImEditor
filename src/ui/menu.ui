@@ -15,17 +15,21 @@
       </item>
     </section>
     <section id="actions-section">
+      <attribute name="display-hint">horizontal-buttons</attribute>
       <item>
         <attribute name="label" translatable="yes">Copy</attribute>
         <attribute name="action">win.copy</attribute>
+        <attribute name="verb-icon">edit-copy-symbolic</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Paste</attribute>
         <attribute name="action">win.paste</attribute>
+        <attribute name="verb-icon">edit-paste-symbolic</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Cut</attribute>
         <attribute name="action">win.cut</attribute>
+        <attribute name="verb-icon">edit-cut-symbolic</attribute>
       </item>
     </section>
     <section>
