@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.9.1] - DEV
+## [0.9.1] - 2019-08-03
 ### Added
 - Add tooltips on toolbar icons.
 

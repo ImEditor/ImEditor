@@ -36,6 +36,16 @@
 	<launchable type="desktop-id">io.github.ImEditor.desktop</launchable>
 
 	<releases>
+		<release version="0.9.1" date="2019-08-03">
+			<description>
+				<ul>
+					<li>Add tooltips on toolbar icons</li>
+					<li>Only show tabs if there is more than one image opened</li>
+					<li>Fix some translation issues</li>
+					<li>Minor fixes</li>
+				</ul>
+			</description>
+	​    </release>
 		<release version="0.9" date="2019-08-01">
 			<description>
 				<ul>
