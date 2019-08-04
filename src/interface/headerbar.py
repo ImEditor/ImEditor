@@ -11,6 +11,8 @@ class ImEditorHeaderBar():
         builder = Gtk.Builder.new_from_resource(UI_PATH + 'headerbar.ui')
         self.header_bar = builder.get_object('header_bar')
         self.menu_button = builder.get_object('menu_button')
+        self.select_button = builder.get_object('select_button')
+        self.pencil_button = builder.get_object('pencil_button')
 
         builder.add_from_resource(UI_PATH + 'menu.ui')
         self.window_menu = builder.get_object('window-menu')
@@ -19,22 +21,10 @@ class ImEditorHeaderBar():
 
     def build_headerbar(self):
         self.menu_button.set_menu_model(self.window_menu)
-        self.header_bar.pack_end(self.menu_button)
 
         # Tasks buttons
-        # Pencil
-        self.pencil_button = Gtk.Button.new_from_icon_name('applications-graphics-symbolic',
-            Gtk.IconSize.SMALL_TOOLBAR)
-        self.pencil_button.set_action_name('win.pencil')
-        self.pencil_button.set_tooltip_text(_("Pencil"))
-        self.header_bar.pack_end(self.pencil_button)
-
-        # Select
-        self.select_button = Gtk.Button.new_from_icon_name('input-mouse-symbolic',
-            Gtk.IconSize.SMALL_TOOLBAR)
         self.select_button.set_action_name('win.select')
-        self.select_button.set_tooltip_text(_("Selection"))
-        self.header_bar.pack_end(self.select_button)
+        self.pencil_button.set_action_name('win.pencil')
 
         # Toolbar
         toolbar_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
