@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 15:10+0200\n"
+"POT-Creation-Date: 2019-08-04 15:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,176 +57,200 @@ msgstr ""
 msgid "What do you want to do?"
 msgstr ""
 
-#: src/ui/window.ui:54
+#: src/ui/window.ui:54 src/ui/shortcuts.ui:42
 msgid "Create a new image"
 msgstr ""
 
-#: src/ui/window.ui:69
+#: src/ui/window.ui:69 src/ui/shortcuts.ui:49
 msgid "Open an existing image"
 msgstr ""
 
-#: src/ui/headerbar.ui:9 src/interface/window.py:402
-msgid "Simple & versatile image editor"
-msgstr ""
-
-#: src/ui/menu.ui:7
-msgid "Zoom -"
-msgstr ""
-
-#: src/ui/menu.ui:12
-msgid "Zoom +"
-msgstr ""
-
-#: src/ui/menu.ui:19
-msgid "Copy"
-msgstr ""
-
-#: src/ui/menu.ui:23
-msgid "Paste"
-msgstr ""
-
-#: src/ui/menu.ui:27
-msgid "Cut"
-msgstr ""
-
-#: src/ui/menu.ui:33
-msgid "Filters"
-msgstr ""
-
-#: src/ui/menu.ui:36
-msgid "Black & white"
-msgstr ""
-
-#: src/ui/menu.ui:40
-msgid "Negative"
-msgstr ""
-
-#: src/ui/menu.ui:44
-msgid "Red"
-msgstr ""
-
-#: src/ui/menu.ui:48
-msgid "Green"
-msgstr ""
-
-#: src/ui/menu.ui:52
-msgid "Blue"
-msgstr ""
-
-#: src/ui/menu.ui:56
-msgid "Grayscale"
-msgstr ""
-
-#: src/ui/menu.ui:60
-msgid "Brightness"
-msgstr ""
-
-#: src/ui/menu.ui:66
-msgid "Operations"
-msgstr ""
-
-#: src/ui/menu.ui:69 src/interface/headerbar.py:89
-msgid "Rotate -90°"
-msgstr ""
-
-#: src/ui/menu.ui:73 src/interface/headerbar.py:96
-msgid "Rotate 90°"
-msgstr ""
-
-#: src/ui/menu.ui:77
-msgid "Horizontal mirror"
-msgstr ""
-
-#: src/ui/menu.ui:81
-msgid "Vertical mirror"
-msgstr ""
-
-#: src/ui/menu.ui:85
-msgid "Crop"
-msgstr ""
-
-#: src/ui/menu.ui:93 src/interface/dialog.py:72
-msgid "Image details"
-msgstr ""
-
-#: src/ui/menu.ui:99
-msgid "Dark mode"
-msgstr ""
-
-#: src/ui/menu.ui:105
-msgid "About ImEditor"
-msgstr ""
-
-#: src/interface/window.py:252 src/interface/dialog.py:136
-msgid "untitled"
-msgstr ""
-
-#: src/interface/window.py:265 src/interface/window.py:275
-msgid "Unable to open this image"
-msgstr ""
-
-#: src/interface/window.py:266
-msgid "This image doesn't exists. Please verify the path."
-msgstr ""
-
-#: src/interface/window.py:276
-msgid "The mode of this image is not supported."
-msgstr ""
-
-#: src/interface/window.py:278
-msgid "Unable to open this file"
-msgstr ""
-
-#: src/interface/window.py:279
-msgid "The format of this file is not supported."
-msgstr ""
-
-#: src/interface/window.py:281
-msgid "Already open"
-msgstr ""
-
-#: src/interface/window.py:282
-msgid "This image is already opened in ImEditor."
-msgstr ""
-
-#: src/interface/window.py:311
-msgid "There are unsaved changes to this image"
-msgstr ""
-
-#: src/interface/window.py:404
-msgid "Distributed under the GNU GPL(v3) license.\n"
-msgstr ""
-
-#: src/interface/headerbar.py:29 src/interface/tab.py:53
+#: src/ui/headerbar.ui:8 src/interface/tab.py:53
 msgid "Pencil"
 msgstr ""
 
-#: src/interface/headerbar.py:36
+#: src/ui/headerbar.ui:20 src/interface/window.py:417
+msgid "Simple & versatile image editor"
+msgstr ""
+
+#: src/ui/headerbar.ui:59
 msgid "Selection"
 msgstr ""
 
-#: src/interface/headerbar.py:47
-msgid "New"
+#: src/ui/menu.ui:7 src/ui/shortcuts.ui:15
+msgid "Zoom -"
 msgstr ""
 
-#: src/interface/headerbar.py:54
-msgid "Open"
+#: src/ui/menu.ui:12 src/ui/shortcuts.ui:22
+msgid "Zoom +"
 msgstr ""
 
-#: src/interface/headerbar.py:61
+#: src/ui/menu.ui:20 src/ui/shortcuts.ui:97
+msgid "Copy"
+msgstr ""
+
+#: src/ui/menu.ui:25 src/ui/shortcuts.ui:104
+msgid "Paste"
+msgstr ""
+
+#: src/ui/menu.ui:30 src/ui/shortcuts.ui:111
+msgid "Cut"
+msgstr ""
+
+#: src/ui/menu.ui:37
+msgid "Filters"
+msgstr ""
+
+#: src/ui/menu.ui:40
+msgid "Black & white"
+msgstr ""
+
+#: src/ui/menu.ui:44
+msgid "Negative"
+msgstr ""
+
+#: src/ui/menu.ui:48
+msgid "Red"
+msgstr ""
+
+#: src/ui/menu.ui:52
+msgid "Green"
+msgstr ""
+
+#: src/ui/menu.ui:56
+msgid "Blue"
+msgstr ""
+
+#: src/ui/menu.ui:60
+msgid "Grayscale"
+msgstr ""
+
+#: src/ui/menu.ui:64
+msgid "Brightness"
+msgstr ""
+
+#: src/ui/menu.ui:70
+msgid "Operations"
+msgstr ""
+
+#: src/ui/menu.ui:73 src/interface/headerbar.py:79
+msgid "Rotate -90°"
+msgstr ""
+
+#: src/ui/menu.ui:77 src/interface/headerbar.py:86
+msgid "Rotate 90°"
+msgstr ""
+
+#: src/ui/menu.ui:81
+msgid "Horizontal mirror"
+msgstr ""
+
+#: src/ui/menu.ui:85
+msgid "Vertical mirror"
+msgstr ""
+
+#: src/ui/menu.ui:89
+msgid "Crop"
+msgstr ""
+
+#: src/ui/menu.ui:97 src/interface/dialog.py:72
+msgid "Image details"
+msgstr ""
+
+#: src/ui/menu.ui:103
+msgid "Dark mode"
+msgstr ""
+
+#: src/ui/menu.ui:109
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: src/ui/menu.ui:113
+msgid "About ImEditor"
+msgstr ""
+
+#: src/ui/shortcuts.ui:10
+msgid "General"
+msgstr ""
+
+#: src/ui/shortcuts.ui:29
+msgid "Close the window"
+msgstr ""
+
+#: src/ui/shortcuts.ui:37
+msgid "Image"
+msgstr ""
+
+#: src/ui/shortcuts.ui:56
+msgid "Close an image"
+msgstr ""
+
+#: src/ui/shortcuts.ui:63 src/interface/headerbar.py:51
 msgid "Save"
 msgstr ""
 
-#: src/interface/headerbar.py:68
-msgid "Save as..."
+#: src/ui/shortcuts.ui:70 src/interface/headerbar.py:58
+msgid "Save as"
 msgstr ""
 
-#: src/interface/headerbar.py:75
+#: src/ui/shortcuts.ui:78
+msgid "Edition"
+msgstr ""
+
+#: src/ui/shortcuts.ui:83 src/interface/headerbar.py:65
 msgid "Undo"
 msgstr ""
 
-#: src/interface/headerbar.py:82
+#: src/ui/shortcuts.ui:90 src/interface/headerbar.py:72
 msgid "Redo"
+msgstr ""
+
+#: src/interface/window.py:259 src/interface/dialog.py:136
+msgid "untitled"
+msgstr ""
+
+#: src/interface/window.py:272 src/interface/window.py:282
+msgid "Unable to open this image"
+msgstr ""
+
+#: src/interface/window.py:273
+msgid "This image doesn't exists. Please verify the path."
+msgstr ""
+
+#: src/interface/window.py:283
+msgid "The mode of this image is not supported."
+msgstr ""
+
+#: src/interface/window.py:285
+msgid "Unable to open this file"
+msgstr ""
+
+#: src/interface/window.py:286
+msgid "The format of this file is not supported."
+msgstr ""
+
+#: src/interface/window.py:288
+msgid "Already open"
+msgstr ""
+
+#: src/interface/window.py:289
+msgid "This image is already opened in ImEditor."
+msgstr ""
+
+#: src/interface/window.py:318
+msgid "There are unsaved changes to this image"
+msgstr ""
+
+#: src/interface/window.py:419
+msgid "Distributed under the GNU GPL(v3) license.\n"
+msgstr ""
+
+#: src/interface/headerbar.py:37
+msgid "New"
+msgstr ""
+
+#: src/interface/headerbar.py:44
+msgid "Open"
 msgstr ""
 
 #: src/interface/dialog.py:54 src/interface/dialog.py:165

@@ -67,7 +67,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;s</property>
-                <property name="title" translatable="yes">Save as..</property>
+                <property name="title" translatable="yes">Save as</property>
                 <property name="visible">True</property>
               </object>
             </child>
@@ -118,4 +118,3 @@
     </child>
   </object>
 </interface>
-

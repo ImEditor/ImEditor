@@ -55,7 +55,7 @@ class ImEditorHeaderBar():
         self.save_as_button = Gtk.Button.new_from_icon_name('document-save-as',
             Gtk.IconSize.SMALL_TOOLBAR)
         self.save_as_button.set_action_name('win.save-as')
-        self.save_as_button.set_tooltip_text(_("Save as..."))
+        self.save_as_button.set_tooltip_text(_("Save as"))
         toolbar_box.add(self.save_as_button)
 
         # Undo
