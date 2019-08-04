@@ -94,6 +94,7 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.save_as_action = Gio.SimpleAction.new('save-as', None)
         self.save_as_action.connect('activate', lambda *args:self.get_tab().editor.save_as())
         self.add_action(self.save_as_action)
+        self.app.add_accelerator('<Primary><Shift>s', 'win.save-as', None)
 
         # Undo
         self.undo_action = Gio.SimpleAction.new('undo', None)
