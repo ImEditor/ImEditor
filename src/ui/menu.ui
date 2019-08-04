@@ -106,6 +106,10 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">Keyboard shortcuts</attribute>
+        <attribute name="action">win.shortcuts</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">About ImEditor</attribute>
         <attribute name="action">win.about</attribute>
       </item>

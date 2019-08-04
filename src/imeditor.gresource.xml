@@ -4,5 +4,6 @@
     <file>ui/window.ui</file>
     <file>ui/headerbar.ui</file>
     <file>ui/menu.ui</file>
+    <file>ui/shortcuts.ui</file>
   </gresource>
 </gresources>

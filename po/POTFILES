@@ -5,6 +5,7 @@ data/io.github.ImEditor.gschema.xml
 src/ui/window.ui
 src/ui/headerbar.ui
 src/ui/menu.ui
+src/ui/shortcuts.ui
 
 src/main.py
 

@@ -32,6 +32,7 @@ class ImEditorWindow(Gtk.ApplicationWindow):
 
         # Init UI objects
         self.header_bar = None
+        self.shortcuts_window = None
 
         # Build UI
         self.build_ui()
@@ -146,7 +147,7 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.zoom_plus_action = Gio.SimpleAction.new('zoom-plus', None)
         self.zoom_plus_action.connect('activate', self.zoom, 1)
         self.add_action(self.zoom_plus_action)
-        self.app.add_accelerator('<Primary>equal', 'win.zoom-plus', None)
+        self.app.add_accelerator('<Primary>plus', 'win.zoom-plus', None)
 
         # Details
         self.details_action = Gio.SimpleAction.new('details', None)
@@ -163,6 +164,11 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.about_action = Gio.SimpleAction.new('about', None)
         self.about_action.connect('activate', self.about)
         self.add_action(self.about_action)
+
+        # Shortcuts
+        self.shortcuts_action = Gio.SimpleAction.new('shortcuts', None)
+        self.shortcuts_action.connect('activate', self.shortcuts)
+        self.add_action(self.shortcuts_action)
 
         # Filters
         self.black_and_white_action = Gio.SimpleAction.new('black-and-white', None)
@@ -389,6 +395,14 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         for i in reversed(range(self.notebook.get_n_pages())):
             self.close_tab(page_num=i)
         return False
+
+    def shortcuts(self, a, b):
+        if self.shortcuts_window is not None:
+            self.shortcuts_window.destroy()
+        builder = Gtk.Builder().new_from_resource( \
+                                '/io/github/ImEditor/ui/shortcuts.ui')
+        self.shortcuts_window = builder.get_object('shortcuts-window')
+        self.shortcuts_window.present()
 
     def about(self, a, b):
         dialog = Gtk.AboutDialog(transient_for=self)
