@@ -29,7 +29,7 @@ class Editor(object):
         self.selection = list()
 
         # Pencil settings
-        self.pencil_shape = 'ellipse'
+        self.pencil_shape = 0 # 0 -> ellipse, 1 -> square
         self.pencil_color = 'black'
         self.pencil_size = 8
 
@@ -166,9 +166,9 @@ class Editor(object):
         elif self.task == 2:
             coords = ((mouse_coords[0], mouse_coords[1]),
                 (mouse_coords[0], mouse_coords[1]))
-            if self.pencil_shape == 'ellipse':
+            if self.pencil_shape == 0:
                 new_coords = draw_ellipse(img, coords, self.pencil_size, self.pencil_color)
-            elif self.pencil_shape == 'square':
+            elif self.pencil_shape == 1:
                 new_coords = draw_rectangle(img, coords, self.pencil_size, self.pencil_color)
 
             self.do_tmp_change(img)

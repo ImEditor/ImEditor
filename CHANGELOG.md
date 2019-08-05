@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - Improve look & feel of the menu.
 - Improve image filters of opening dialog.
 
+### Fixed
+- Fix square brush.
+
 ## [0.9.1] - 2019-08-03
 ### Added
 - Add tooltips on toolbar icons.

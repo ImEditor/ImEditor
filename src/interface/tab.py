@@ -180,7 +180,11 @@ class Tab(Gtk.Box):
         self.win.set_window_title(self)
 
     def on_pencil_shape_changed(self, button):
-        self.editor.pencil_shape = button.get_active_text().lower()
+        shape = button.get_active_text()
+        if shape == _("Ellipse"):
+            self.editor.pencil_shape = 0
+        elif shape == _("Square"):
+            self.editor.pencil_shape = 1
 
     def on_pencil_color_changed(self, button):
         self.editor.pencil_color = button.get_rgba().to_string()
