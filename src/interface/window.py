@@ -65,6 +65,12 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.is_dark_mode = is_dark
 
     def create_actions(self):
+        # Quit app
+        self.quit_action = Gio.SimpleAction.new('quit', None)
+        self.quit_action.connect('activate', self.quit_app)
+        self.add_action(self.quit_action)
+        self.app.add_accelerator('<Primary>q', 'win.quit', None)
+
         # Close button of tabs
         self.close_action = Gio.SimpleAction.new('close-tab', None)
         self.close_action.connect('activate', self.close_tab)
@@ -420,4 +426,4 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         """Close all tabs to be sure they are saved"""
         for i in reversed(range(self.notebook.get_n_pages())):
             self.close_tab(page_num=i)
-        return False
+        self.app.quit()
