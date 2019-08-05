@@ -56,6 +56,14 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.notebook.set_scrollable(True)
         self.notebook.connect('switch-page', self.on_tab_switched)
 
+    def switch_theme(self, is_dark=False):
+        self.settings.set_boolean('dark-mode', is_dark)
+        property = 'gtk-application-prefer-dark-theme'
+        self.gtk_settings.set_property(property, is_dark)
+        variant = GLib.Variant.new_boolean(is_dark)
+        self.dark_mode_action.set_state(variant)
+        self.is_dark_mode = is_dark
+
     def create_actions(self):
         # Close button of tabs
         self.close_action = Gio.SimpleAction.new('close-tab', None)
@@ -272,7 +280,7 @@ class ImEditorWindow(Gtk.ApplicationWindow):
             message_dialog(self, 'error', _("Unable to open this image"),
                 _("This image doesn't exists. Please verify the path."))
             return
-        if filename not in self.filenames: # is image already opened ?
+        if filename not in self.filenames: # is image already opened?
             if path.splitext(filename)[-1][1:].lower() in SUPPORTED_EXTENSIONS:
                 img = Image.open(filename)
                 if img.mode in SUPPORTED_MODES:
@@ -345,9 +353,11 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.set_window_title(tab)
         self.select_current_tool(tab)
 
-    def zoom(self, a, b, value):
-        tab = self.get_tab()
-        tab.zoom(value)
+    def select_current_tool(self, tab):
+        if tab.editor.task == 0:
+            self.select(tab=tab)
+        elif tab.editor.task == 2:
+            self.pencil(tab=tab)
 
     def select(self, a=None, b=None, tab=None):
         self.header_bar.select_button.set_sensitive(False)
@@ -365,12 +375,6 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         tab.editor.change_task('draw')
         tab.enable_sidebar()
 
-    def select_current_tool(self, tab):
-        if tab.editor.task == 0:
-            self.select(tab=tab)
-        elif tab.editor.task == 2:
-            self.pencil(tab=tab)
-
     def apply_filter(self, a, b, func, value=None):
         tab = self.get_tab()
         tab.editor.apply_filter(func, value)
@@ -379,24 +383,14 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         tab = self.get_tab()
         tab.editor.apply_filter_dialog(func, params)
 
-    def toggle_dark_theme(self, a, b):
+    def zoom(self, a, b, value):
+        tab = self.get_tab()
+        tab.zoom(value)
+
+    def toggle_dark_theme(self, *args):
         self.switch_theme(not self.is_dark_mode)
 
-    def switch_theme(self, is_dark=False):
-        self.settings.set_boolean('dark-mode', is_dark)
-        property = 'gtk-application-prefer-dark-theme'
-        self.gtk_settings.set_property(property, is_dark)
-        variant = GLib.Variant.new_boolean(is_dark)
-        self.dark_mode_action.set_state(variant)
-        self.is_dark_mode = is_dark
-
-    def quit_app(self, a, b):
-        """Close all tabs to be sure they are saved"""
-        for i in reversed(range(self.notebook.get_n_pages())):
-            self.close_tab(page_num=i)
-        return False
-
-    def shortcuts(self, a, b):
+    def shortcuts(self, *args):
         if self.shortcuts_window is not None:
             self.shortcuts_window.destroy()
         builder = Gtk.Builder().new_from_resource( \
@@ -404,7 +398,7 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.shortcuts_window = builder.get_object('shortcuts-window')
         self.shortcuts_window.present()
 
-    def about(self, a, b):
+    def about(self, *args):
         dialog = Gtk.AboutDialog(transient_for=self)
         dialog.set_logo_icon_name('io.github.ImEditor')
         dialog.set_program_name('ImEditor')
@@ -421,3 +415,9 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         dialog.set_license(text)
         dialog.run()
         dialog.destroy()
+
+    def quit_app(self, *args):
+        """Close all tabs to be sure they are saved"""
+        for i in reversed(range(self.notebook.get_n_pages())):
+            self.close_tab(page_num=i)
+        return False
