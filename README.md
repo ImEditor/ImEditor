@@ -3,6 +3,7 @@
 ## Simple & versatile image editor.
 
 [![Requirements Status](https://requires.io/github/ImEditor/ImEditor/requirements.svg?branch=master)](https://requires.io/github/ImEditor/ImEditor/requirements/?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0b9e7af147bd50c8f76d/maintainability)](https://codeclimate.com/github/ImEditor/ImEditor/maintainability)
 
 ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, and ICO file types.
 It offers several tools to easily modify an image.
