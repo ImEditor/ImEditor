@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<interface>
+<interface domain="imeditor">
   <menu id="window-menu">
     <section>
       <attribute name="display-hint">horizontal-buttons</attribute>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 15:32+0200\n"
+"POT-Creation-Date: 2019-08-05 22:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,15 +65,47 @@ msgstr ""
 msgid "Open an existing image"
 msgstr ""
 
-#: src/ui/headerbar.ui:8 src/interface/tab.py:53
+#: src/ui/headerbar.ui:18 src/interface/tab.py:53
 msgid "Pencil"
 msgstr ""
 
-#: src/ui/headerbar.ui:20 src/interface/window.py:417
+#: src/ui/headerbar.ui:60 src/interface/window.py:407
 msgid "Simple & versatile image editor"
 msgstr ""
 
-#: src/ui/headerbar.ui:59
+#: src/ui/headerbar.ui:71
+msgid "New"
+msgstr ""
+
+#: src/ui/headerbar.ui:87
+msgid "Open"
+msgstr ""
+
+#: src/ui/headerbar.ui:103 src/ui/shortcuts.ui:63
+msgid "Save"
+msgstr ""
+
+#: src/ui/headerbar.ui:119 src/ui/shortcuts.ui:70
+msgid "Save as"
+msgstr ""
+
+#: src/ui/headerbar.ui:135 src/ui/shortcuts.ui:83
+msgid "Undo"
+msgstr ""
+
+#: src/ui/headerbar.ui:151 src/ui/shortcuts.ui:90
+msgid "Redo"
+msgstr ""
+
+#: src/ui/headerbar.ui:167 src/ui/menu.ui:73
+msgid "Rotate -90°"
+msgstr ""
+
+#: src/ui/headerbar.ui:183 src/ui/menu.ui:77
+msgid "Rotate 90°"
+msgstr ""
+
+#: src/ui/headerbar.ui:240
 msgid "Selection"
 msgstr ""
 
@@ -133,14 +165,6 @@ msgstr ""
 msgid "Operations"
 msgstr ""
 
-#: src/ui/menu.ui:73 src/interface/headerbar.py:79
-msgid "Rotate -90°"
-msgstr ""
-
-#: src/ui/menu.ui:77 src/interface/headerbar.py:86
-msgid "Rotate 90°"
-msgstr ""
-
 #: src/ui/menu.ui:81
 msgid "Horizontal mirror"
 msgstr ""
@@ -185,72 +209,48 @@ msgstr ""
 msgid "Close an image"
 msgstr ""
 
-#: src/ui/shortcuts.ui:63 src/interface/headerbar.py:51
-msgid "Save"
-msgstr ""
-
-#: src/ui/shortcuts.ui:70 src/interface/headerbar.py:58
-msgid "Save as"
-msgstr ""
-
 #: src/ui/shortcuts.ui:78
 msgid "Edition"
 msgstr ""
 
-#: src/ui/shortcuts.ui:83 src/interface/headerbar.py:65
-msgid "Undo"
-msgstr ""
-
-#: src/ui/shortcuts.ui:90 src/interface/headerbar.py:72
-msgid "Redo"
-msgstr ""
-
-#: src/interface/window.py:259 src/interface/dialog.py:136
+#: src/interface/window.py:263 src/interface/dialog.py:136
 msgid "untitled"
 msgstr ""
 
-#: src/interface/window.py:272 src/interface/window.py:282
+#: src/interface/window.py:276 src/interface/window.py:286
 msgid "Unable to open this image"
 msgstr ""
 
-#: src/interface/window.py:273
+#: src/interface/window.py:277
 msgid "This image doesn't exists. Please verify the path."
 msgstr ""
 
-#: src/interface/window.py:283
+#: src/interface/window.py:287
 msgid "The mode of this image is not supported."
 msgstr ""
 
-#: src/interface/window.py:285
+#: src/interface/window.py:289
 msgid "Unable to open this file"
 msgstr ""
 
-#: src/interface/window.py:286
+#: src/interface/window.py:290
 msgid "The format of this file is not supported."
 msgstr ""
 
-#: src/interface/window.py:288
+#: src/interface/window.py:292
 msgid "Already open"
 msgstr ""
 
-#: src/interface/window.py:289
+#: src/interface/window.py:293
 msgid "This image is already opened in ImEditor."
 msgstr ""
 
-#: src/interface/window.py:318
+#: src/interface/window.py:322
 msgid "There are unsaved changes to this image"
 msgstr ""
 
-#: src/interface/window.py:419
+#: src/interface/window.py:409
 msgid "Distributed under the GNU GPL(v3) license.\n"
-msgstr ""
-
-#: src/interface/headerbar.py:37
-msgid "New"
-msgstr ""
-
-#: src/interface/headerbar.py:44
-msgid "Open"
 msgstr ""
 
 #: src/interface/dialog.py:54 src/interface/dialog.py:165
@@ -337,11 +337,11 @@ msgstr ""
 msgid "Shape"
 msgstr ""
 
-#: src/interface/tab.py:57
+#: src/interface/tab.py:57 src/interface/tab.py:184
 msgid "Ellipse"
 msgstr ""
 
-#: src/interface/tab.py:57
+#: src/interface/tab.py:57 src/interface/tab.py:186
 msgid "Square"
 msgstr ""
 
