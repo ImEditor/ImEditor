@@ -36,6 +36,18 @@
 	<launchable type="desktop-id">io.github.ImEditor.desktop</launchable>
 
 	<releases>
+		<release version="0.9.2" date="2019-08-05">
+			<description>
+				<ul>
+					<li>Add a shortcuts window</li>
+					<li>Add an option to toggle the dark theme</li>
+					<li>Add a quit shortcut (Ctrl+q)</li>
+					<li>Improve look &amp; feel of the menu</li>
+					<li>Improve image filters of opening dialog</li>
+					<li>Fix square brush</li>
+				</ul>
+			</description>
+	​    </release>
 		<release version="0.9.1" date="2019-08-03">
 			<description>
 				<ul>
