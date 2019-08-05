@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Add a shortcuts window.
 - Add an option to toggle the dark theme.
+- Add a quit shortcut (Ctrl+q).
 
 ### Changed
 - Improve look & feel of the menu.

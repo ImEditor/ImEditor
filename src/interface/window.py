@@ -64,18 +64,18 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.dark_mode_action.set_state(variant)
         self.is_dark_mode = is_dark
 
-    def create_actions(self):
-        # Quit app
-        self.quit_action = Gio.SimpleAction.new('quit', None)
-        self.quit_action.connect('activate', self.quit_app)
-        self.add_action(self.quit_action)
-        self.app.add_accelerator('<Primary>q', 'win.quit', None)
+    def create_simple_action(self, action_name, callback, shortcut=None):
+        action = Gio.SimpleAction.new(action_name, None)
+        action.connect('activate', callback)
+        self.add_action(action)
+        if shortcut is not None:
+            self.app.add_accelerator(shortcut, 'win.' + action_name, None)
 
-        # Close button of tabs
-        self.close_action = Gio.SimpleAction.new('close-tab', None)
-        self.close_action.connect('activate', self.close_tab)
-        self.add_action(self.close_action)
-        self.app.add_accelerator('<Primary>w', 'win.close-tab', None)
+    def create_actions(self):
+        self.create_simple_action('quit', self.quit_app, '<Primary>q')
+        self.create_simple_action('close-tab', self.close_tab, '<Primary>w')
+        self.create_simple_action('shortcuts', self.shortcuts)
+        self.create_simple_action('about', self.about)
 
         # Pencil
         self.pencil_action = Gio.SimpleAction.new('pencil', None)
@@ -173,16 +173,6 @@ class ImEditorWindow(Gtk.ApplicationWindow):
             None, GLib.Variant.new_boolean(self.is_dark_mode))
         self.dark_mode_action.connect('activate', self.toggle_dark_theme)
         self.add_action(self.dark_mode_action)
-
-        # About
-        self.about_action = Gio.SimpleAction.new('about', None)
-        self.about_action.connect('activate', self.about)
-        self.add_action(self.about_action)
-
-        # Shortcuts
-        self.shortcuts_action = Gio.SimpleAction.new('shortcuts', None)
-        self.shortcuts_action.connect('activate', self.shortcuts)
-        self.add_action(self.shortcuts_action)
 
         # Filters
         self.black_and_white_action = Gio.SimpleAction.new('black-and-white', None)
