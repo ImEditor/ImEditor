@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-05 19:58+0200\n"
-"PO-Revision-Date: 2019-08-05 20:00+0200\n"
+"POT-Creation-Date: 2019-08-06 18:59+0200\n"
+"PO-Revision-Date: 2019-08-06 19:00+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -351,6 +351,30 @@ msgstr "Carré"
 #: src/interface/tab.py:62
 msgid "Color"
 msgstr "Couleur"
+
+#: src/interface/tools.py:30
+msgid "All images"
+msgstr "Toutes les images"
+
+#: src/interface/tools.py:38
+msgid "BMP images"
+msgstr "Image BMP"
+
+#: src/interface/tools.py:42
+msgid "PNG images"
+msgstr "Images PNG"
+
+#: src/interface/tools.py:46
+msgid "JPEG images"
+msgstr "Images JPEG"
+
+#: src/interface/tools.py:50
+msgid "WEBP images"
+msgstr "Images WEBP"
+
+#: src/interface/tools.py:54
+msgid "ICO images"
+msgstr "Images ICO"
 
 #, fuzzy
 #~| msgid "Rotate 90°"

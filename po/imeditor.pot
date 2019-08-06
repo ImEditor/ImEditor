@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-05 22:28+0200\n"
+"POT-Creation-Date: 2019-08-06 18:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -347,4 +347,28 @@ msgstr ""
 
 #: src/interface/tab.py:62
 msgid "Color"
+msgstr ""
+
+#: src/interface/tools.py:30
+msgid "All images"
+msgstr ""
+
+#: src/interface/tools.py:38
+msgid "BMP images"
+msgstr ""
+
+#: src/interface/tools.py:42
+msgid "PNG images"
+msgstr ""
+
+#: src/interface/tools.py:46
+msgid "JPEG images"
+msgstr ""
+
+#: src/interface/tools.py:50
+msgid "WEBP images"
+msgstr ""
+
+#: src/interface/tools.py:54
+msgid "ICO images"
 msgstr ""

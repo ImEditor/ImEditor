@@ -13,3 +13,4 @@ src/interface/window.py
 src/interface/headerbar.py
 src/interface/dialog.py
 src/interface/tab.py
+src/interface/tools.py
