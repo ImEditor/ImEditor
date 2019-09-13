@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9.3] - 2019-09-13
+### Fixed
+- Translate some untranslated strings.
+- Fix the opening of images from the file manager (#20).
+
+### Removed
+- Remove the "folder" info from the details dialog.
+
 ## [0.9.2] - 2019-08-05
 ### Added
 - Add a shortcuts window.
