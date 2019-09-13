@@ -30,10 +30,9 @@ class Application(Gtk.Application):
         self.win.present()
 
     def file_open_handler(self, app, g_file_list, amount, ukwn):
+        self.do_activate()
         for g_file in g_file_list:
             self.win.open_image(filename=g_file.get_path())
-
-        self.do_activate()
 
 
 def main(version):
