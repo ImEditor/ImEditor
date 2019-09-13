@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=ImEditor
-Exec=imeditor
+Exec=imeditor %U
 Comment=Simple & versatile image editor.
 Terminal=false
 Type=Application
