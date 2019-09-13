@@ -268,8 +268,6 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         """Open an existing image"""
         if not filename:
             filename = file_dialog(self, 'open')
-        else:
-            filename = filename.get_path()
         if not filename:
             return
         if not path.isfile(filename):

@@ -3,30 +3,37 @@ import gi
 
 gi.require_version('Gtk', '3.0')
 
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, GLib
 
 from .window import ImEditorWindow
 
 
+APP_ID = 'io.github.ImEditor'
+
+
 class Application(Gtk.Application):
     def __init__(self):
-        super().__init__(application_id='io.github.ImEditor',
+        super().__init__(application_id=APP_ID,
                         flags=Gio.ApplicationFlags.HANDLES_OPEN)
-
-        self.connect('activate', self.show_window)
-        self.connect('open', self.open_files)
         self.win = None
 
-    def show_window(self, *args):
-        self.win = self.props.active_window
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
+        GLib.set_application_name('ImEditor')
+        GLib.set_prgname(APP_ID)
+
+        self.connect('open', self.file_open_handler)
+
+    def do_activate(self):
         if not self.win:
             self.win = ImEditorWindow(application=self)
         self.win.present()
 
-    def open_files(self, app, files, hint, *args):
-        self.show_window()
-        for image in files:
-            self.win.open_image(filename=image)
+    def file_open_handler(self, app, g_file_list, amount, ukwn):
+        for g_file in g_file_list:
+            self.win.open_image(filename=g_file.get_path())
+
+        self.do_activate()
 
 
 def main(version):
