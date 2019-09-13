@@ -34,12 +34,14 @@ RGB, RGBA
 ## Installation instructions
 
 ### Universal package for Linux (recommended)
-    
-ImEditor is available as a flatpak package:
-    
+
+ImEditor is available as a flatpak package.
+
+<a href='https://flathub.org/apps/details/io.github.ImEditor'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+
+You can also install it by using the following command-line:
+
     flatpak install flathub io.github.ImEditor
-    
-More details on [flathub](https://flathub.org/apps/details/io.github.ImEditor).
 
 ### Build from source (nightly)
 
