@@ -86,18 +86,15 @@ def details_dialog(parent, infos):
         grid.attach(Gtk.Label('<b>' + _("Weight") + '</b>',
             use_markup=True, xalign=0.0), 0, 3, 1, 1)
         grid.attach(Gtk.Label(infos['weight'], xalign=0.0), 1, 3, 1, 1)
-        grid.attach(Gtk.Label('<b>' + _("Folder") + '</b>',
-            use_markup=True, xalign=0.0), 0, 4, 1, 1)
-        grid.attach(Gtk.Label(infos['folder'], xalign=0.0), 1, 4, 1, 1)
         grid.attach(Gtk.Label('<b>' + _("Last change") + '</b>',
-            use_markup=True, xalign=0.0), 0, 6, 1, 1)
-        grid.attach(Gtk.Label(infos['last_change'], xalign=0.0), 1, 6, 1, 1)
+            use_markup=True, xalign=0.0), 0, 4, 1, 1)
+        grid.attach(Gtk.Label(infos['last_change'], xalign=0.0), 1, 4, 1, 1)
 
     close_button = Gtk.Button.new_with_label(_("Close"))
     close_button.connect('clicked', dialog.close)
     close_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
 
-    grid.attach(close_button, 0, 7, 2, 1)
+    grid.attach(close_button, 0, 5, 2, 1)
 
     dialog.dialog_box.add(grid)
     dialog.launch()

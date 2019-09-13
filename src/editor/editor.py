@@ -284,6 +284,5 @@ def get_infos(img, filename):
         img_stat = stat(filename)
         img_infos['weight'] = '{}ko ({}o)'.format(str(round(img_stat.st_size / 1000, 2)),
                                                     str(round(img_stat.st_size, 2)))
-        img_infos['folder'] = path.dirname(filename)
         img_infos['last_change'] = datetime.fromtimestamp(img_stat.st_mtime).strftime('%d/%m/%Y %Hh%M')
     return img_infos
