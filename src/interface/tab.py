@@ -159,8 +159,8 @@ class Tab(Gtk.Box):
         w, h = self.editor.image.size  # size of the image
         ww = self.win.get_allocation().width  # width of the window
         wh = self.win.get_allocation().height  # height of the window
-        ww -= ww * 20 / 100  # add a margin of 20%
-        wh -= wh * 20 / 100  # add a margin of 20%
+        ww -= ww * 35 / 100  # add a margin
+        wh -= wh * 35 / 100  # add a margin
         # If the image is higher than the window
         if w > ww or h > wh:
             # Calculate the ratio image/window
