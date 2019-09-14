@@ -1,7 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.9.3] - 2019-09-13
+## [0.10] - DEV
+### Changed
+- Use light theme by default (still provide dark theme as an option).
+
+### [0.9.3] - 2019-09-13
 ### Fixed
 - Translate some untranslated strings.
 - Fix the opening of images from the file manager (#20).

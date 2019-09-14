@@ -2,7 +2,7 @@
 <schemalist gettext-domain="imeditor">
 	<schema id="io.github.ImEditor" path="/io/github/ImEditor/">
 	  <key name="dark-mode" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>Enable or disable dark mode</summary>
     </key>
 	</schema>
