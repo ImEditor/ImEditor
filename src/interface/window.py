@@ -315,9 +315,12 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         tab = self.get_tab(page_num)
         if page_num is None:
             page_num = self.notebook.page_num(tab)
-        if not tab.editor.image.saved or not path.exists(tab.editor.image.filename):  # if image is not saved
-            description = ('Do you want to save the changes of the "{}" image before closing it?').format(path.basename(tab.editor.image.filename))
-            response = message_dialog(self, 'question', _("There are unsaved changes to this image"),
+        if not tab.editor.image.saved or \
+           not path.exists(tab.editor.image.filename):  # if image is not saved
+            description = _("Do you want to save the changes of the \"{}\" image before closing it?") \
+                .format(path.basename(tab.editor.image.filename))
+            response = message_dialog(self, 'question', \
+                _("There are unsaved changes to this image"),
                 description)
             if response == Gtk.ResponseType.YES:
                 tab.editor.save_as()
