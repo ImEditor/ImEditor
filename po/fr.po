@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-19 17:23+0200\n"
-"PO-Revision-Date: 2019-09-19 17:24+0200\n"
+"PO-Revision-Date: 2019-09-21 01:53+0200\n"
 "Last-Translator: Hugo Posnic <hugo.posnic@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -378,21 +378,3 @@ msgstr "Images WEBP"
 #: src/interface/tools.py:54
 msgid "ICO images"
 msgstr "Images ICO"
-
-#~ msgid "Folder"
-#~ msgstr "Dossier"
-
-#, fuzzy
-#~| msgid "Rotate 90°"
-#~ msgid "Rotate +90°"
-#~ msgstr "Rotation +90°"
-
-#, fuzzy
-#~| msgid "Rotate -90°"
-#~ msgid "Rotate -90"
-#~ msgstr "Rotation -90°"
-
-#, fuzzy
-#~| msgid "Rotate 90°"
-#~ msgid "Rotate +90"
-#~ msgstr "Rotation +90°"
