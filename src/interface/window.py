@@ -268,27 +268,29 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         """Open an existing image"""
         if not filename:
             filename = file_dialog(self, 'open')
-        if not filename:
-            return
+            if not filename:
+                return
+        ext = path.splitext(filename)[-1][1:].lower()
+
         if not path.isfile(filename):
             message_dialog(self, 'error', _("Unable to open this image"),
                 _("This image doesn't exists. Please verify the path."))
             return
-        if filename not in self.filenames: # is image already opened?
-            if path.splitext(filename)[-1][1:].lower() in SUPPORTED_EXTENSIONS:
-                img = Image.open(filename)
-                if img.mode in SUPPORTED_MODES:
-                    self.create_tab(img, filename, True)
-                    self.filenames.append(filename)
-                else:
-                    message_dialog(self, 'error', _("Unable to open this image"),
-                        _("The mode of this image is not supported."))
-            else:
-                message_dialog(self, 'error', _("Unable to open this file"),
-                    _("The format of this file is not supported."))
-        else:
+        elif filename in self.filenames: # is image already opened?
             message_dialog(self, 'warning', _("Already open"),
                 _("This image is already opened in ImEditor."))
+            return
+        elif ext not in SUPPORTED_EXTENSIONS:
+            message_dialog(self, 'error', _("Unable to open this file"),
+                    _("The format of this file is not supported."))
+            return
+        img = Image.open(filename)
+        if img.mode not in SUPPORTED_MODES:
+            message_dialog(self, 'error', _("Unable to open this image"),
+                _("The mode of this image is not supported."))
+
+        self.create_tab(img, filename, True)
+        self.filenames.append(filename)
 
     def get_tab(self, page_num=None):
         """Get tab by its num or get the current one"""
