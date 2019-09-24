@@ -404,9 +404,9 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         dialog.set_authors(['Nathan Seva', 'Hugo Posnic'])
         gtk_version = '{}.{}.{}'.format(Gtk.get_major_version(),
             Gtk.get_minor_version(), Gtk.get_micro_version())
-        dialog.set_comments('{}\n\n' \
-            'Gtk: {}\nPillow: {}'.format(_("Simple & versatile image editor"), gtk_version,
-            pil_version))
+        comment = '{}\n\n'.format(_("Simple & versatile image editor"))
+        comment += 'Gtk: {} Pillow: {}'.format(gtk_version, pil_version)
+        dialog.set_comments(comment)
         text = _("Distributed under the GNU GPL(v3) license.\n")
         text += 'https://github.com/ImEditor/ImEditor/blob/master/LICENSE\n'
         dialog.set_license(text)
