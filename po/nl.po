@@ -1,0 +1,381 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the imeditor package.
+#
+# Heimen Stoffels <vistausss@outlook.com>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: imeditor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-19 17:23+0200\n"
+"PO-Revision-Date: 2019-10-12 18:33+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Language-Team: Dutch <vistausss@outlook.com>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 19.08.2\n"
+
+#: data/io.github.ImEditor.desktop.in:3
+#: data/io.github.ImEditor.appdata.xml.in:7
+msgid "ImEditor"
+msgstr "ImEditor"
+
+#: data/io.github.ImEditor.desktop.in:5
+msgid "Simple & versatile image editor."
+msgstr "Eenvoudige afbeeldingsbewerker met alle benodigde functies."
+
+#: data/io.github.ImEditor.desktop.in:8
+msgid "Pencil;Drawing;"
+msgstr "Potlood;Tekenen;"
+
+#. Icon name, do not translate
+#: data/io.github.ImEditor.desktop.in:11
+msgid "io.github.ImEditor"
+msgstr "io.github.ImEditor"
+
+#: data/io.github.ImEditor.appdata.xml.in:8
+msgid "Simple &amp; versatile image editor"
+msgstr "Eenvoudige afbeeldingsbewerker met alle benodigde functies."
+
+#: data/io.github.ImEditor.appdata.xml.in:10
+msgid ""
+"ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, and ICO "
+"file types."
+msgstr ""
+"ImEditor is een eenvoudige afbeeldingsbewerker, met ondersteuning voor PNG-,"
+" JPEG-, "
+"WEBP-, BMP- en ICO-bestanden."
+
+#: data/io.github.ImEditor.appdata.xml.in:11
+msgid "It offers several tools to easily modify an image."
+msgstr ""
+"ImEditor bevat een aantal gereedschappen om afbeeldingen gemakkelijk te"
+" bewerken."
+
+#: data/io.github.ImEditor.gschema.xml:6
+msgid "Enable or disable dark mode"
+msgstr "Gebruik het donkere thema (of niet)"
+
+#: src/ui/window.ui:40
+msgid "What do you want to do?"
+msgstr "Wat wil je doen?"
+
+#: src/ui/window.ui:54 src/ui/shortcuts.ui:42
+msgid "Create a new image"
+msgstr "Een afbeelding maken"
+
+#: src/ui/window.ui:69 src/ui/shortcuts.ui:49
+msgid "Open an existing image"
+msgstr "Een afbeelding openen"
+
+#: src/ui/headerbar.ui:18 src/interface/tab.py:53
+msgid "Pencil"
+msgstr "Potlood"
+
+#: src/ui/headerbar.ui:60 src/interface/window.py:408
+msgid "Simple & versatile image editor"
+msgstr "Eenvoudige afbeeldingsbewerker met alle benodigde functies."
+
+#: src/ui/headerbar.ui:71
+msgid "New"
+msgstr "Nieuw"
+
+#: src/ui/headerbar.ui:87
+msgid "Open"
+msgstr "Openen"
+
+#: src/ui/headerbar.ui:103 src/ui/shortcuts.ui:63
+msgid "Save"
+msgstr "Opslaan"
+
+#: src/ui/headerbar.ui:119 src/ui/shortcuts.ui:70
+msgid "Save as"
+msgstr "Opslaan als"
+
+#: src/ui/headerbar.ui:135 src/ui/shortcuts.ui:83
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#: src/ui/headerbar.ui:151 src/ui/shortcuts.ui:90
+msgid "Redo"
+msgstr "Opnieuw uitvoeren"
+
+#: src/ui/headerbar.ui:167 src/ui/menu.ui:73
+msgid "Rotate -90°"
+msgstr "-90° draaien"
+
+#: src/ui/headerbar.ui:183 src/ui/menu.ui:77
+msgid "Rotate 90°"
+msgstr "90° draaien"
+
+#: src/ui/headerbar.ui:240
+msgid "Selection"
+msgstr "Selectie"
+
+#: src/ui/menu.ui:7 src/ui/shortcuts.ui:15
+msgid "Zoom -"
+msgstr "Uitzoomen"
+
+#: src/ui/menu.ui:12 src/ui/shortcuts.ui:22
+msgid "Zoom +"
+msgstr "Inzoomen"
+
+#: src/ui/menu.ui:20 src/ui/shortcuts.ui:97
+msgid "Copy"
+msgstr "Kopiëren"
+
+#: src/ui/menu.ui:25 src/ui/shortcuts.ui:104
+msgid "Paste"
+msgstr "Plakken"
+
+#: src/ui/menu.ui:30 src/ui/shortcuts.ui:111
+msgid "Cut"
+msgstr "Knippen"
+
+#: src/ui/menu.ui:37
+msgid "Filters"
+msgstr "Filters"
+
+#: src/ui/menu.ui:40
+msgid "Black & white"
+msgstr "Zwart-wit"
+
+#: src/ui/menu.ui:44
+msgid "Negative"
+msgstr "Negatief"
+
+#: src/ui/menu.ui:48
+msgid "Red"
+msgstr "Rood"
+
+#: src/ui/menu.ui:52
+msgid "Green"
+msgstr "Groen"
+
+#: src/ui/menu.ui:56
+msgid "Blue"
+msgstr "Blauw"
+
+#: src/ui/menu.ui:60
+msgid "Grayscale"
+msgstr "Grijswaarden"
+
+#: src/ui/menu.ui:64
+msgid "Brightness"
+msgstr "Helderheid"
+
+#: src/ui/menu.ui:70
+msgid "Operations"
+msgstr "Handelingen"
+
+#: src/ui/menu.ui:81
+msgid "Horizontal mirror"
+msgstr "Horizontaal spiegelen"
+
+#: src/ui/menu.ui:85
+msgid "Vertical mirror"
+msgstr "Verticaal spiegelen"
+
+#: src/ui/menu.ui:89
+msgid "Crop"
+msgstr "Bijsnijden"
+
+#: src/ui/menu.ui:97 src/interface/dialog.py:72
+msgid "Image details"
+msgstr "Afbeeldingseigenschappen"
+
+#: src/ui/menu.ui:103
+msgid "Dark mode"
+msgstr "Donker thema"
+
+#: src/ui/menu.ui:109
+msgid "Keyboard shortcuts"
+msgstr "Sneltoetsen"
+
+#: src/ui/menu.ui:113
+msgid "About ImEditor"
+msgstr "Over ImEditor"
+
+#: src/ui/shortcuts.ui:10
+msgid "General"
+msgstr "Algemeen"
+
+#: src/ui/shortcuts.ui:29
+msgid "Close the window"
+msgstr "Venster sluiten"
+
+#: src/ui/shortcuts.ui:37
+msgid "Image"
+msgstr "Afbeelding"
+
+#: src/ui/shortcuts.ui:56
+msgid "Close an image"
+msgstr "Afbeelding sluiten"
+
+#: src/ui/shortcuts.ui:78
+msgid "Edition"
+msgstr "Bewerken"
+
+#: src/interface/window.py:263 src/interface/dialog.py:133
+msgid "untitled"
+msgstr "naamloos"
+
+#: src/interface/window.py:274 src/interface/window.py:284
+msgid "Unable to open this image"
+msgstr "Kan deze afbeelding niet openen"
+
+#: src/interface/window.py:275
+msgid "This image doesn't exists. Please verify the path."
+msgstr "Deze afbeelding bestaat niet. Controleer het pad."
+
+#: src/interface/window.py:285
+msgid "The mode of this image is not supported."
+msgstr "De modus van deze afbeelding wordt niet ondersteund."
+
+#: src/interface/window.py:287
+msgid "Unable to open this file"
+msgstr "Kan bestand niet openen"
+
+#: src/interface/window.py:288
+msgid "The format of this file is not supported."
+msgstr "Dit bestandsformaat wordt niet ondersteund."
+
+#: src/interface/window.py:290
+msgid "Already open"
+msgstr "Reeds geopend"
+
+#: src/interface/window.py:291
+msgid "This image is already opened in ImEditor."
+msgstr "Deze afbeelding is al geopend in ImEditor."
+
+#. if image is not saved
+#: src/interface/window.py:320
+msgid "Do you want to save the changes of the \"{}\" image before closing it?"
+msgstr ""
+"Wil je de aanpassingen aan '{}' opslaan voordat je de afbeelding sluit?"
+
+#: src/interface/window.py:323
+msgid "There are unsaved changes to this image"
+msgstr "Er zijn niet-opgeslagen aanpassingen"
+
+#: src/interface/window.py:410
+msgid "Distributed under the GNU GPL(v3) license.\n"
+msgstr "Uitgebracht onder de GNU GPL(v3)-licentie.\n"
+
+#: src/interface/dialog.py:54 src/interface/dialog.py:162
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/interface/dialog.py:57
+msgid "Apply"
+msgstr "Toepassen"
+
+#: src/interface/dialog.py:75 src/interface/dialog.py:170
+msgid "Name"
+msgstr "Naam"
+
+#: src/interface/dialog.py:78
+msgid "Mode"
+msgstr "Modus"
+
+#: src/interface/dialog.py:81
+msgid "Size"
+msgstr "Grootte"
+
+#: src/interface/dialog.py:86
+msgid "Weight"
+msgstr "Dikte"
+
+#: src/interface/dialog.py:89
+msgid "Last change"
+msgstr "Laatst aangepast"
+
+#: src/interface/dialog.py:93
+msgid "Close"
+msgstr "Sluiten"
+
+#: src/interface/dialog.py:111 src/interface/dialog.py:152
+msgid "Custom color"
+msgstr "Aangepaste kleur"
+
+#: src/interface/dialog.py:115 src/interface/dialog.py:151
+msgid "White"
+msgstr "Wit"
+
+#: src/interface/dialog.py:124 src/interface/dialog.py:153
+msgid "Transparent"
+msgstr "Doorzichtig"
+
+#: src/interface/dialog.py:130
+msgid "New image"
+msgstr "Nieuwe afbeelding"
+
+#: src/interface/dialog.py:165
+msgid "Create"
+msgstr "Maken"
+
+#: src/interface/dialog.py:172
+msgid "Template"
+msgstr "Sjabloon"
+
+#: src/interface/dialog.py:174
+msgid "Width"
+msgstr "Breedte"
+
+#: src/interface/dialog.py:176
+msgid "Height"
+msgstr "Hoogte"
+
+#: src/interface/dialog.py:178
+msgid "Background"
+msgstr "Achtergrond"
+
+#: src/interface/dialog.py:180
+msgid "Background color"
+msgstr "Achtergrondkleur"
+
+#: src/interface/dialog.py:182
+msgid "Format"
+msgstr "Formaat"
+
+#: src/interface/tab.py:54
+msgid "Shape"
+msgstr "Vorm"
+
+#: src/interface/tab.py:57 src/interface/tab.py:184
+msgid "Ellipse"
+msgstr "Ellips"
+
+#: src/interface/tab.py:57 src/interface/tab.py:186
+msgid "Square"
+msgstr "Vierkant"
+
+#: src/interface/tab.py:62
+msgid "Color"
+msgstr "Kleur"
+
+#: src/interface/tools.py:30
+msgid "All images"
+msgstr "Alle afbeeldingen"
+
+#: src/interface/tools.py:38
+msgid "BMP images"
+msgstr "BMP-afbeeldingen"
+
+#: src/interface/tools.py:42
+msgid "PNG images"
+msgstr "PNG-afbeeldingen"
+
+#: src/interface/tools.py:46
+msgid "JPEG images"
+msgstr "JPEG-afbeeldingen"
+
+#: src/interface/tools.py:50
+msgid "WEBP images"
+msgstr "WEBP-afbeeldingen"
+
+#: src/interface/tools.py:54
+msgid "ICO images"
+msgstr "ICO-afbeeldingen"
