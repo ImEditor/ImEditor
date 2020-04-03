@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.10] - DEV
+### Added
+- Add Dutch translation.
+
 ### Changed
 - Use light theme by default (still provide dark theme as an option).
 - Better adjust the default zoom level for large images.
