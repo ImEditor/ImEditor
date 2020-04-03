@@ -1,7 +1,7 @@
 {
     "app-id": "io.github.ImEditor",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.34",
+    "runtime-version": "3.36",
     "sdk": "org.gnome.Sdk",
     "command": "imeditor",
     "finish-args": [
@@ -12,19 +12,19 @@
     ],
     "modules": [
         {
-            "name": "python3-Pillow",
-            "buildsystem": "simple",
-            "build-commands": [
-                "pip3 install --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} Pillow==6.2.0"
-            ],
-            "sources": [
-                {
-                    "type": "file",
-                    "url": "https://files.pythonhosted.org/packages/87/dc/7597336c48796d4a836007460148b7baf7f278ad42b73d49047eb0e8194c/Pillow-6.2.0.tar.gz",
-                    "sha256": "4548236844327a718ce3bb182ab32a16fa2050c61e334e959f554cac052fb0df"
-                }
-            ]
-        },
+	    "name": "python3-Pillow",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} Pillow"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/c7/04/c91bb0e495c1e8a09633ecb061fab32e276ace7cefcef5d12334cdd14cd2/Pillow-7.1.1.tar.gz",
+		    "sha256": "0f89ddc77cf421b8cd34ae852309501458942bf370831b4a9b406156b599a14e"
+		}
+	    ]
+	},
         {
             "name": "imeditor",
             "buildsystem": "meson",
