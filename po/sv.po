@@ -1,0 +1,378 @@
+# Swedish translation for ImEditor.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the imeditor package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: imeditor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-19 17:23+0200\n"
+"PO-Revision-Date: 2020-04-05 10:22+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: data/io.github.ImEditor.desktop.in:3
+#: data/io.github.ImEditor.appdata.xml.in:7
+msgid "ImEditor"
+msgstr "ImEditor"
+
+#: data/io.github.ImEditor.desktop.in:5
+msgid "Simple & versatile image editor."
+msgstr "Enkel och mångsidig bildredigerare."
+
+#: data/io.github.ImEditor.desktop.in:8
+msgid "Pencil;Drawing;"
+msgstr "Penna;Ritning;"
+
+#. Icon name, do not translate
+#: data/io.github.ImEditor.desktop.in:11
+msgid "io.github.ImEditor"
+msgstr "io.github.ImEditor"
+
+#: data/io.github.ImEditor.appdata.xml.in:8
+msgid "Simple &amp; versatile image editor"
+msgstr "Enkel och mångsidig bildredigerare"
+
+#: data/io.github.ImEditor.appdata.xml.in:10
+msgid ""
+"ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, and ICO "
+"file types."
+msgstr ""
+"ImEditor är en enkel och bildredigerare som stödjer filtyperna PNG, JPEG, "
+"WEBP, BMP och ICO."
+
+#: data/io.github.ImEditor.appdata.xml.in:11
+msgid "It offers several tools to easily modify an image."
+msgstr "Den erbjuder flera verktyg för att enkelt modifiera en bild."
+
+#: data/io.github.ImEditor.gschema.xml:6
+msgid "Enable or disable dark mode"
+msgstr "Aktivera eller avaktivera mörkt läge"
+
+#: src/ui/window.ui:40
+msgid "What do you want to do?"
+msgstr "Vad vill du göra?"
+
+#: src/ui/window.ui:54 src/ui/shortcuts.ui:42
+msgid "Create a new image"
+msgstr "Skapa en ny bild"
+
+#: src/ui/window.ui:69 src/ui/shortcuts.ui:49
+msgid "Open an existing image"
+msgstr "Öppna en befintlig bild"
+
+#: src/ui/headerbar.ui:18 src/interface/tab.py:53
+msgid "Pencil"
+msgstr "Penna"
+
+#: src/ui/headerbar.ui:60 src/interface/window.py:408
+msgid "Simple & versatile image editor"
+msgstr "Enkel och mångsidig bildredigerare"
+
+#: src/ui/headerbar.ui:71
+msgid "New"
+msgstr "Nytt"
+
+#: src/ui/headerbar.ui:87
+msgid "Open"
+msgstr "Öppna"
+
+#: src/ui/headerbar.ui:103 src/ui/shortcuts.ui:63
+msgid "Save"
+msgstr "Spara"
+
+#: src/ui/headerbar.ui:119 src/ui/shortcuts.ui:70
+msgid "Save as"
+msgstr "Spara som"
+
+#: src/ui/headerbar.ui:135 src/ui/shortcuts.ui:83
+msgid "Undo"
+msgstr "Ångra"
+
+#: src/ui/headerbar.ui:151 src/ui/shortcuts.ui:90
+msgid "Redo"
+msgstr "Upprepa"
+
+#: src/ui/headerbar.ui:167 src/ui/menu.ui:73
+msgid "Rotate -90°"
+msgstr "Rotera -90°"
+
+#: src/ui/headerbar.ui:183 src/ui/menu.ui:77
+msgid "Rotate 90°"
+msgstr "Rotera 90°"
+
+#: src/ui/headerbar.ui:240
+msgid "Selection"
+msgstr "Markering"
+
+#: src/ui/menu.ui:7 src/ui/shortcuts.ui:15
+msgid "Zoom -"
+msgstr "Zoom -"
+
+#: src/ui/menu.ui:12 src/ui/shortcuts.ui:22
+msgid "Zoom +"
+msgstr "Zoom +"
+
+#: src/ui/menu.ui:20 src/ui/shortcuts.ui:97
+msgid "Copy"
+msgstr "Kopiera"
+
+#: src/ui/menu.ui:25 src/ui/shortcuts.ui:104
+msgid "Paste"
+msgstr "Klistra in"
+
+#: src/ui/menu.ui:30 src/ui/shortcuts.ui:111
+msgid "Cut"
+msgstr "Klipp ut"
+
+#: src/ui/menu.ui:37
+msgid "Filters"
+msgstr "Filter"
+
+#: src/ui/menu.ui:40
+msgid "Black & white"
+msgstr "Svartvit"
+
+#: src/ui/menu.ui:44
+msgid "Negative"
+msgstr "Negativ"
+
+#: src/ui/menu.ui:48
+msgid "Red"
+msgstr "Röd"
+
+#: src/ui/menu.ui:52
+msgid "Green"
+msgstr "Grön"
+
+#: src/ui/menu.ui:56
+msgid "Blue"
+msgstr "Blå"
+
+#: src/ui/menu.ui:60
+msgid "Grayscale"
+msgstr "Gråskala"
+
+#: src/ui/menu.ui:64
+msgid "Brightness"
+msgstr "Ljusstyrka"
+
+#: src/ui/menu.ui:70
+msgid "Operations"
+msgstr "Åtgärder"
+
+#: src/ui/menu.ui:81
+msgid "Horizontal mirror"
+msgstr "Spegla horisontellt"
+
+#: src/ui/menu.ui:85
+msgid "Vertical mirror"
+msgstr "Spegla vertikalt"
+
+#: src/ui/menu.ui:89
+msgid "Crop"
+msgstr "Beskär"
+
+#: src/ui/menu.ui:97 src/interface/dialog.py:72
+msgid "Image details"
+msgstr "Bilddetaljer"
+
+#: src/ui/menu.ui:103
+msgid "Dark mode"
+msgstr "Mörkt läge"
+
+#: src/ui/menu.ui:109
+msgid "Keyboard shortcuts"
+msgstr "Tangentbordsgenvägar"
+
+#: src/ui/menu.ui:113
+msgid "About ImEditor"
+msgstr "Om ImEditor"
+
+#: src/ui/shortcuts.ui:10
+msgid "General"
+msgstr "Allmänt"
+
+#: src/ui/shortcuts.ui:29
+msgid "Close the window"
+msgstr "Stäng fönstret"
+
+#: src/ui/shortcuts.ui:37
+msgid "Image"
+msgstr "Bild"
+
+#: src/ui/shortcuts.ui:56
+msgid "Close an image"
+msgstr "Stäng en bild"
+
+#: src/ui/shortcuts.ui:78
+msgid "Edition"
+msgstr "Utgåva"
+
+#: src/interface/window.py:263 src/interface/dialog.py:133
+msgid "untitled"
+msgstr "namnlös"
+
+#: src/interface/window.py:274 src/interface/window.py:284
+msgid "Unable to open this image"
+msgstr "Kan inte öppna bilden"
+
+#: src/interface/window.py:275
+msgid "This image doesn't exists. Please verify the path."
+msgstr "Bilden finns inte. Verifiera sökvägen."
+
+#: src/interface/window.py:285
+msgid "The mode of this image is not supported."
+msgstr "Bildens läge stöds inte."
+
+#: src/interface/window.py:287
+msgid "Unable to open this file"
+msgstr "Kan inte öppna filen"
+
+#: src/interface/window.py:288
+msgid "The format of this file is not supported."
+msgstr "Det här bildformatet stöds inte."
+
+#: src/interface/window.py:290
+msgid "Already open"
+msgstr "Redan öppen"
+
+#: src/interface/window.py:291
+msgid "This image is already opened in ImEditor."
+msgstr "Denna bild är redan öppnad i ImEditor."
+
+#. if image is not saved
+#: src/interface/window.py:320
+msgid "Do you want to save the changes of the \"{}\" image before closing it?"
+msgstr "Vill du spara ändringarna i \"{}\", innan den stängs?"
+
+#: src/interface/window.py:323
+msgid "There are unsaved changes to this image"
+msgstr "Det finns osparade ändringar i den här bilden"
+
+#: src/interface/window.py:410
+msgid "Distributed under the GNU GPL(v3) license.\n"
+msgstr "Distribuerat under GNU GPL(v3) license.\n"
+
+#: src/interface/dialog.py:54 src/interface/dialog.py:162
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/interface/dialog.py:57
+msgid "Apply"
+msgstr "Tillämpa"
+
+#: src/interface/dialog.py:75 src/interface/dialog.py:170
+msgid "Name"
+msgstr "Namn"
+
+#: src/interface/dialog.py:78
+msgid "Mode"
+msgstr "Läge"
+
+#: src/interface/dialog.py:81
+msgid "Size"
+msgstr "Storlek"
+
+#: src/interface/dialog.py:86
+msgid "Weight"
+msgstr "Vikt"
+
+#: src/interface/dialog.py:89
+msgid "Last change"
+msgstr "Senast ändrad"
+
+#: src/interface/dialog.py:93
+msgid "Close"
+msgstr "Stäng"
+
+#: src/interface/dialog.py:111 src/interface/dialog.py:152
+msgid "Custom color"
+msgstr "Anpassad färg"
+
+#: src/interface/dialog.py:115 src/interface/dialog.py:151
+msgid "White"
+msgstr "Vit"
+
+#: src/interface/dialog.py:124 src/interface/dialog.py:153
+msgid "Transparent"
+msgstr "Transparent"
+
+#: src/interface/dialog.py:130
+msgid "New image"
+msgstr "Ny bild"
+
+#: src/interface/dialog.py:165
+msgid "Create"
+msgstr "Skapa"
+
+#: src/interface/dialog.py:172
+msgid "Template"
+msgstr "Mall"
+
+#: src/interface/dialog.py:174
+msgid "Width"
+msgstr "Bredd"
+
+#: src/interface/dialog.py:176
+msgid "Height"
+msgstr "Höjd"
+
+#: src/interface/dialog.py:178
+msgid "Background"
+msgstr "Bakgrund"
+
+#: src/interface/dialog.py:180
+msgid "Background color"
+msgstr "Bakgrundsfärg"
+
+#: src/interface/dialog.py:182
+msgid "Format"
+msgstr "Format"
+
+#: src/interface/tab.py:54
+msgid "Shape"
+msgstr "Form"
+
+#: src/interface/tab.py:57 src/interface/tab.py:184
+msgid "Ellipse"
+msgstr "Ellips"
+
+#: src/interface/tab.py:57 src/interface/tab.py:186
+msgid "Square"
+msgstr "Kvadrat"
+
+#: src/interface/tab.py:62
+msgid "Color"
+msgstr "Färg"
+
+#: src/interface/tools.py:30
+msgid "All images"
+msgstr "Alla bilder"
+
+#: src/interface/tools.py:38
+msgid "BMP images"
+msgstr "BMP-bilder"
+
+#: src/interface/tools.py:42
+msgid "PNG images"
+msgstr "PNG-bilder"
+
+#: src/interface/tools.py:46
+msgid "JPEG images"
+msgstr "JPEG-bilder"
+
+#: src/interface/tools.py:50
+msgid "WEBP images"
+msgstr "WEBP-bilder"
+
+#: src/interface/tools.py:54
+msgid "ICO images"
+msgstr "ICO-bilder"
