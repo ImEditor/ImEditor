@@ -20,8 +20,8 @@
 	    "sources": [
 		{
 		    "type": "file",
-		    "url": "https://files.pythonhosted.org/packages/c7/04/c91bb0e495c1e8a09633ecb061fab32e276ace7cefcef5d12334cdd14cd2/Pillow-7.1.1.tar.gz",
-		    "sha256": "0f89ddc77cf421b8cd34ae852309501458942bf370831b4a9b406156b599a14e"
+		    "url": "https://files.pythonhosted.org/packages/3e/02/b09732ca4b14405ff159c470a612979acfc6e8645dc32f83ea0129709f7a/Pillow-7.2.0.tar.gz",
+		    "sha256": "97f9e7953a77d5a70f49b9a48da7776dc51e9b738151b22dacf101641594a626"
 		}
 	    ]
 	},
