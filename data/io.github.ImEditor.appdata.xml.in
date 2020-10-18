@@ -36,6 +36,13 @@
 	<launchable type="desktop-id">io.github.ImEditor.desktop</launchable>
 
 	<releases>
+	  <release version="0.9.5" date="2020-10-18">
+			<description>
+				<ul>
+					<li>Just update requirements</li>
+				</ul>
+			</description>
+	​  </release>
 	  <release version="0.9.4" date="2020-04-03">
 			<description>
 				<ul>

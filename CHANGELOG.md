@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9.5] - 2020-10-18
+### Changed
+- Just update requirements.
+
 ## [0.9.4] - 2020-04-03
 ### Added
 - Add Dutch translation.
