@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.9.6] - 2020-11-15
+### Changed
 - Just update requirements and fix a packaging issue.
 
 ## [0.9.5] - 2020-10-18
