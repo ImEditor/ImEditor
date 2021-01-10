@@ -133,6 +133,12 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.rotate_right_action.connect('activate', self.apply_filter, 'rotate', 90)
         self.add_action(self.rotate_right_action)
 
+        # copy2clipboard
+        self.copy2clipboard_action = Gio.SimpleAction.new('copy2clipboard', None)
+        self.copy2clipboard_action.connect('activate', lambda *args:self.get_tab().editor.copy2clipboard())
+        self.add_action(self.copy2clipboard_action)
+        self.app.add_accelerator('<Primary><Shift>c', 'win.copy2clipboard', None)
+
         # Copy
         self.copy_action = Gio.SimpleAction.new('copy', None)
         self.copy_action.connect('activate', lambda *args:self.get_tab().editor.copy())
@@ -233,7 +239,7 @@ class ImEditorWindow(Gtk.ApplicationWindow):
             'rotate_left', 'rotate_right', 'copy', 'paste', 'cut', 'crop',
             'details', 'black_and_white', 'negative', 'red', 'green', 'blue',
             'grayscale', 'brightness', 'vertical_mirror', 'horizontal_mirror',
-            'zoom_minus', 'zoom_plus')
+            'zoom_minus', 'zoom_plus', 'copy2clipboard')
         for action in actions:
             getattr(self, action + '_action').set_enabled(enable)
 

@@ -9,7 +9,7 @@ from .dialog import *
 from .base import *
 from .image import ImageObject
 from .draw import draw_rectangle, draw_ellipse
-
+from .tools import pil_to_pixbuf
 
 class Editor(object):
     def __init__(self, tab, img, filename, saved):
@@ -194,6 +194,14 @@ class Editor(object):
         elif self.task == 2:
             self.do_change(img)
         self.left_button_pressed = False
+
+    def copy2clipboard(self):
+        print("hier")
+        clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+        img = self.image.get_current_img().copy()
+        pixbuf = pil_to_pixbuf(img)
+        clipboard.set_image(pixbuf)
+
 
     def copy(self):
         """Copy a part of/or the entire image"""
