@@ -71,6 +71,13 @@
                 <property name="visible">True</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;c</property>
+                <property name="title" translatable="yes">Copy To Clipboard</property>
+                <property name="visible">True</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
