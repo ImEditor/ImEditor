@@ -196,7 +196,6 @@ class Editor(object):
         self.left_button_pressed = False
 
     def copy2clipboard(self):
-        print("hier")
         clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
         img = self.image.get_current_img().copy()
         pixbuf = pil_to_pixbuf(img)
