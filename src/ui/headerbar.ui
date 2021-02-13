@@ -79,40 +79,6 @@
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="toolbar-actions">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <child>
-          <object class="GtkButton" id="select_button">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Selection</property>
-            <property name="action-name">win.select</property>
-            <property name="image">select_image</property>
-            <property name="always-show-image">True</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="pencil_button">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="action-name">win.pencil</property>
-            <property name="image">pencil_image</property>
-            <property name="always-show-image">True</property>
-          </object>
-        </child>
-        <style>
-          <class name="linked"/>
-        </style>
-      </object>
-      <packing>
-        <property name="pack-type">end</property>
-        <property name="position">2</property>
-      </packing>
-    </child>
-    <child>
       <object class="GtkBox" id="toolbar1">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
@@ -154,6 +120,50 @@
       </object>
       <packing>
         <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="toolbar-actions">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkButton" id="select_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Selection</property>
+            <property name="action-name">win.select</property>
+            <property name="image">select_image</property>
+            <property name="always-show-image">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="pencil_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">win.pencil</property>
+            <property name="image">pencil_image</property>
+            <property name="always-show-image">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <style>
+          <class name="linked"/>
+        </style>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">2</property>
       </packing>
     </child>
     <child>
