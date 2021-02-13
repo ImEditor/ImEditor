@@ -1,77 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.38.2 -->
 <interface domain="imeditor">
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkImage" id="copy2clipboar">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="stock">gtk-copy</property>
+  </object>
   <object class="GtkImage" id="new_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="stock">gtk-new</property>
   </object>
   <object class="GtkImage" id="open_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="stock">gtk-open</property>
   </object>
   <object class="GtkImage" id="pencil_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="tooltip_text" translatable="yes">Pencil</property>
-    <property name="icon_name">applications-graphics-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="tooltip-text" translatable="yes">Pencil</property>
+    <property name="icon-name">applications-graphics-symbolic</property>
   </object>
   <object class="GtkImage" id="redo_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="stock">gtk-redo</property>
   </object>
   <object class="GtkImage" id="rotate_left_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">object-rotate-left</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">object-rotate-left</property>
   </object>
   <object class="GtkImage" id="rotate_right_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">object-rotate-right</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">object-rotate-right</property>
   </object>
   <object class="GtkImage" id="save_as_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="stock">gtk-save-as</property>
   </object>
   <object class="GtkImage" id="save_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="stock">gtk-save</property>
   </object>
   <object class="GtkImage" id="select_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">input-mouse-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">input-mouse-symbolic</property>
   </object>
   <object class="GtkImage" id="undo_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="stock">gtk-undo</property>
   </object>
   <object class="GtkHeaderBar" id="header_bar">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="title">ImEditor</property>
     <property name="subtitle" translatable="yes">Simple &amp; versatile image editor</property>
-    <property name="show_close_button">True</property>
+    <property name="show-close-button">True</property>
+    <child>
+      <object class="GtkMenuButton" id="menu_button">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="receives-default">False</property>
+        <property name="valign">center</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="icon-name">open-menu-symbolic</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="pencil_button">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="action-name">win.pencil</property>
+        <property name="image">pencil_image</property>
+        <property name="always-show-image">True</property>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="select_button">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <property name="tooltip-text" translatable="yes">Selection</property>
+        <property name="action-name">win.select</property>
+        <property name="image">select_image</property>
+        <property name="always-show-image">True</property>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">3</property>
+      </packing>
+    </child>
     <child>
       <object class="GtkBox" id="toolbar">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <child>
           <object class="GtkButton" id="new_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">New</property>
-            <property name="action_name">win.new</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">New</property>
+            <property name="action-name">win.new</property>
             <property name="image">new_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -82,12 +135,12 @@
         <child>
           <object class="GtkButton" id="open_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Open</property>
-            <property name="action_name">win.open</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Open</property>
+            <property name="action-name">win.open</property>
             <property name="image">open_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -98,12 +151,12 @@
         <child>
           <object class="GtkButton" id="save_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Save</property>
-            <property name="action_name">win.save</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Save</property>
+            <property name="action-name">win.save</property>
             <property name="image">save_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -114,12 +167,12 @@
         <child>
           <object class="GtkButton" id="save_as_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Save as</property>
-            <property name="action_name">win.save-as</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Save as</property>
+            <property name="action-name">win.save-as</property>
             <property name="image">save_as_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -130,12 +183,12 @@
         <child>
           <object class="GtkButton" id="undo_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Undo</property>
-            <property name="action_name">win.undo</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Undo</property>
+            <property name="action-name">win.undo</property>
             <property name="image">undo_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -146,12 +199,12 @@
         <child>
           <object class="GtkButton" id="redo_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Redo</property>
-            <property name="action_name">win.redo</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Redo</property>
+            <property name="action-name">win.redo</property>
             <property name="image">redo_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -162,12 +215,12 @@
         <child>
           <object class="GtkButton" id="rotate_left_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Rotate -90°</property>
-            <property name="action_name">win.rotate-left</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Rotate -90°</property>
+            <property name="action-name">win.rotate-left</property>
             <property name="image">rotate_left_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -178,12 +231,12 @@
         <child>
           <object class="GtkButton" id="rotate_right_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Rotate 90°</property>
-            <property name="action_name">win.rotate-right</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Rotate 90°</property>
+            <property name="action-name">win.rotate-right</property>
             <property name="image">rotate_right_image</property>
-            <property name="always_show_image">True</property>
+            <property name="always-show-image">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -196,54 +249,6 @@
         </style>
       </object>
       <packing>
-        <property name="position">3</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkMenuButton" id="menu_button">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="receives_default">False</property>
-        <property name="valign">center</property>
-        <child>
-          <object class="GtkImage">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="icon_name">open-menu-symbolic</property>
-          </object>
-        </child>
-      </object>
-      <packing>
-        <property name="pack_type">end</property>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="pencil_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="action_name">win.pencil</property>
-        <property name="image">pencil_image</property>
-        <property name="always_show_image">True</property>
-      </object>
-      <packing>
-        <property name="pack_type">end</property>
-        <property name="position">2</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="select_button">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="tooltip_text" translatable="yes">Selection</property>
-        <property name="action_name">win.select</property>
-        <property name="image">select_image</property>
-        <property name="always_show_image">True</property>
-      </object>
-      <packing>
-        <property name="pack_type">end</property>
         <property name="position">3</property>
       </packing>
     </child>
