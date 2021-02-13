@@ -244,22 +244,6 @@
             <property name="position">7</property>
           </packing>
         </child>
-        <child>
-          <object class="GtkButton" id="copy2clipboard">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Copy Image To Clipboard</property>
-            <property name="action-name">win.copy2clipboard</property>
-            <property name="image">copy2clipboar</property>
-            <property name="always-show-image">True</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">8</property>
-          </packing>
-        </child>
         <style>
           <class name="linked"/>
         </style>
