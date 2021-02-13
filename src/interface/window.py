@@ -221,11 +221,12 @@ class ImEditorWindow(Gtk.ApplicationWindow):
         self.add_action(self.crop_action)
 
     def set_window_title(self, tab):
-        title = '[{}] - {}'.format(path.basename(tab.editor.image.filename),
-            'ImEditor')
+        title = '{}'.format(path.basename(tab.editor.image.filename))
+        subtitle = '{}x{}'.format(str(tab.width), str(tab.height))
         if tab.zoom_level != 100:
-            title += ' - {}%'.format(tab.zoom_level)
+            subtitle += ' - {}%'.format(tab.zoom_level)
         self.set_title(title)
+        self.header_bar.header_bar.set_subtitle(subtitle)
 
     def enable_toolbar(self, enable=True):
         """Set state of actions (depending on whether an image is open)"""
