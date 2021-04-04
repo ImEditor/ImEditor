@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9.7] - 2021-04-04
+### Added
+- Copy image also to OS clipboard.
+
+### Changed
+- Better grouping of toolbar buttons.
+- Improve title and subtitle of headerbar.
+- Update requirements.
+
 ## [0.9.6] - 2020-11-15
 ### Changed
 - Just update requirements and fix a packaging issue.
