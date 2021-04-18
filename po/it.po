@@ -1,0 +1,376 @@
+# ITALIAN TRANSLATION FOR IMEDITOR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the imeditor package.
+# ALBANO BATTISTELLA <albano_battistella@hotmail.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: imeditor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-19 17:23+0200\n"
+"PO-Revision-Date: 2021-04-05 10:30+0100\n"
+"Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
+"Language-Team: ITALIAN <LL@li.org>\n"
+"Language: It\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.ImEditor.desktop.in:3
+#: data/io.github.ImEditor.appdata.xml.in:7
+msgid "ImEditor"
+msgstr "ImEditor"
+
+#: data/io.github.ImEditor.desktop.in:5
+msgid "Simple & versatile image editor."
+msgstr "Semplice & versatile editor di immagini."
+
+#: data/io.github.ImEditor.desktop.in:8
+msgid "Pencil;Drawing;"
+msgstr "Matita;Disegno;"
+
+#. Icon name, do not translate
+#: data/io.github.ImEditor.desktop.in:11
+msgid "io.github.ImEditor"
+msgstr "io.github.ImEditor"
+
+#: data/io.github.ImEditor.appdata.xml.in:8
+msgid "Simple &amp; versatile image editor"
+msgstr "Semplice &amp; versatile editor di immagini"
+
+#: data/io.github.ImEditor.appdata.xml.in:10
+msgid ""
+"ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, and ICO "
+"file types."
+msgstr ""
+"ImEditor è un semplice editor di immagini, che supporta PNG, JPEG, WEBP, BMP e ICO "
+"file."
+
+#: data/io.github.ImEditor.appdata.xml.in:11
+msgid "It offers several tools to easily modify an image."
+msgstr "Offre diversi strumenti per modificare facilmente un'immagine."
+
+#: data/io.github.ImEditor.gschema.xml:6
+msgid "Enable or disable dark mode"
+msgstr "Abilita o disabilita la modalità scura"
+
+#: src/ui/window.ui:40
+msgid "What do you want to do?"
+msgstr "Cosa vuoi fare?"
+
+#: src/ui/window.ui:54 src/ui/shortcuts.ui:42
+msgid "Create a new image"
+msgstr "Crea una nuova immagine"
+
+#: src/ui/window.ui:69 src/ui/shortcuts.ui:49
+msgid "Open an existing image"
+msgstr "Apri un'immagine esistente"
+
+#: src/ui/headerbar.ui:18 src/interface/tab.py:53
+msgid "Pencil"
+msgstr "Matita"
+
+#: src/ui/headerbar.ui:60 src/interface/window.py:408
+msgid "Simple & versatile image editor"
+msgstr "Semplice & versatile editor di immagini"
+
+#: src/ui/headerbar.ui:71
+msgid "New"
+msgstr "Nuovo"
+
+#: src/ui/headerbar.ui:87
+msgid "Open"
+msgstr "Apri"
+
+#: src/ui/headerbar.ui:103 src/ui/shortcuts.ui:63
+msgid "Save"
+msgstr "Salva"
+
+#: src/ui/headerbar.ui:119 src/ui/shortcuts.ui:70
+msgid "Save as"
+msgstr "Salva come"
+
+#: src/ui/headerbar.ui:135 src/ui/shortcuts.ui:83
+msgid "Undo"
+msgstr "Annulla"
+
+#: src/ui/headerbar.ui:151 src/ui/shortcuts.ui:90
+msgid "Redo"
+msgstr "Rifai"
+
+#: src/ui/headerbar.ui:167 src/ui/menu.ui:73
+msgid "Rotate -90°"
+msgstr "Ruota di -90°"
+
+#: src/ui/headerbar.ui:183 src/ui/menu.ui:77
+msgid "Rotate 90°"
+msgstr "Ruota di 90°"
+
+#: src/ui/headerbar.ui:240
+msgid "Selection"
+msgstr "Selezione"
+
+#: src/ui/menu.ui:7 src/ui/shortcuts.ui:15
+msgid "Zoom -"
+msgstr "Zoom -"
+
+#: src/ui/menu.ui:12 src/ui/shortcuts.ui:22
+msgid "Zoom +"
+msgstr "Zoom +"
+
+#: src/ui/menu.ui:20 src/ui/shortcuts.ui:97
+msgid "Copy"
+msgstr "Copia"
+
+#: src/ui/menu.ui:25 src/ui/shortcuts.ui:104
+msgid "Paste"
+msgstr "Incolla"
+
+#: src/ui/menu.ui:30 src/ui/shortcuts.ui:111
+msgid "Cut"
+msgstr "Taglia"
+
+#: src/ui/menu.ui:37
+msgid "Filters"
+msgstr "Filtri"
+
+#: src/ui/menu.ui:40
+msgid "Black & white"
+msgstr "Bianco & nero"
+
+#: src/ui/menu.ui:44
+msgid "Negative"
+msgstr "Negativo"
+
+#: src/ui/menu.ui:48
+msgid "Red"
+msgstr "Rosso"
+
+#: src/ui/menu.ui:52
+msgid "Green"
+msgstr "Verde"
+
+#: src/ui/menu.ui:56
+msgid "Blue"
+msgstr "Blu"
+
+#: src/ui/menu.ui:60
+msgid "Grayscale"
+msgstr "Scala di grigi"
+
+#: src/ui/menu.ui:64
+msgid "Brightness"
+msgstr "Luminosità"
+
+#: src/ui/menu.ui:70
+msgid "Operations"
+msgstr "Operazioni"
+
+#: src/ui/menu.ui:81
+msgid "Horizontal mirror"
+msgstr "Specchio orizzontale"
+
+#: src/ui/menu.ui:85
+msgid "Vertical mirror"
+msgstr "Specchio verticale"
+
+#: src/ui/menu.ui:89
+msgid "Crop"
+msgstr "Ritaglia"
+
+#: src/ui/menu.ui:97 src/interface/dialog.py:72
+msgid "Image details"
+msgstr "Dettagli immagine"
+
+#: src/ui/menu.ui:103
+msgid "Dark mode"
+msgstr "Modalità scura"
+
+#: src/ui/menu.ui:109
+msgid "Keyboard shortcuts"
+msgstr "Scorciatoie da tastiera"
+
+#: src/ui/menu.ui:113
+msgid "About ImEditor"
+msgstr "Informazioni su ImEditor"
+
+#: src/ui/shortcuts.ui:10
+msgid "General"
+msgstr "Generale"
+
+#: src/ui/shortcuts.ui:29
+msgid "Close the window"
+msgstr "Chiudi la finestra"
+
+#: src/ui/shortcuts.ui:37
+msgid "Image"
+msgstr "Immagine"
+
+#: src/ui/shortcuts.ui:56
+msgid "Close an image"
+msgstr "Chiudi un'immagine"
+
+#: src/ui/shortcuts.ui:78
+msgid "Edition"
+msgstr "Edizione"
+
+#: src/interface/window.py:263 src/interface/dialog.py:133
+msgid "untitled"
+msgstr "Senza titolo"
+
+#: src/interface/window.py:274 src/interface/window.py:284
+msgid "Unable to open this image"
+msgstr "Impossibile aprire questa immagine"
+
+#: src/interface/window.py:275
+msgid "This image doesn't exists. Please verify the path."
+msgstr "Questa immagine non esiste. Si prega di verificare il percorso."
+
+#: src/interface/window.py:285
+msgid "The mode of this image is not supported."
+msgstr "La modalità di questa immagine non è supportata."
+
+#: src/interface/window.py:287
+msgid "Unable to open this file"
+msgstr "Impossibile aprire questo file"
+
+#: src/interface/window.py:288
+msgid "The format of this file is not supported."
+msgstr "Il formato di questo file non è supportato."
+
+#: src/interface/window.py:290
+msgid "Already open"
+msgstr "Già aperto"
+
+#: src/interface/window.py:291
+msgid "This image is already opened in ImEditor."
+msgstr "Questa immagine è già aperta in ImEditor."
+
+#. if image is not saved
+#: src/interface/window.py:320
+msgid "Do you want to save the changes of the \"{}\" image before closing it?"
+msgstr "Vuoi salvare le modifiche all'immagine \"{}\" prima di chiuderla?"
+
+#: src/interface/window.py:323
+msgid "There are unsaved changes to this image"
+msgstr "Sono presenti modifiche non salvate a questa immagine"
+
+#: src/interface/window.py:410
+msgid "Distributed under the GNU GPL(v3) license.\n"
+msgstr "Distribuito sotto licenza GNU GPL(v3).\n"
+
+#: src/interface/dialog.py:54 src/interface/dialog.py:162
+msgid "Cancel"
+msgstr "Cancella"
+
+#: src/interface/dialog.py:57
+msgid "Apply"
+msgstr "Applica"
+
+#: src/interface/dialog.py:75 src/interface/dialog.py:170
+msgid "Name"
+msgstr "Nome"
+
+#: src/interface/dialog.py:78
+msgid "Mode"
+msgstr "Modalità"
+
+#: src/interface/dialog.py:81
+msgid "Size"
+msgstr "Dimensione"
+
+#: src/interface/dialog.py:86
+msgid "Weight"
+msgstr "Peso"
+
+#: src/interface/dialog.py:89
+msgid "Last change"
+msgstr "Ultima modifica"
+
+#: src/interface/dialog.py:93
+msgid "Close"
+msgstr "Chiudi"
+
+#: src/interface/dialog.py:111 src/interface/dialog.py:152
+msgid "Custom color"
+msgstr "Colore personalizzato"
+
+#: src/interface/dialog.py:115 src/interface/dialog.py:151
+msgid "White"
+msgstr "Bianco"
+
+#: src/interface/dialog.py:124 src/interface/dialog.py:153
+msgid "Transparent"
+msgstr "Trasparente"
+
+#: src/interface/dialog.py:130
+msgid "New image"
+msgstr "Nuova immagine"
+
+#: src/interface/dialog.py:165
+msgid "Create"
+msgstr "Crea"
+
+#: src/interface/dialog.py:172
+msgid "Template"
+msgstr "Modello"
+
+#: src/interface/dialog.py:174
+msgid "Width"
+msgstr "Larghezza"
+
+#: src/interface/dialog.py:176
+msgid "Height"
+msgstr "Altezza"
+
+#: src/interface/dialog.py:178
+msgid "Background"
+msgstr "Sfondo"
+
+#: src/interface/dialog.py:180
+msgid "Background color"
+msgstr "Colore di sfondo"
+
+#: src/interface/dialog.py:182
+msgid "Format"
+msgstr "Formato"
+
+#: src/interface/tab.py:54
+msgid "Shape"
+msgstr "Forma"
+
+#: src/interface/tab.py:57 src/interface/tab.py:184
+msgid "Ellipse"
+msgstr "Ellisse"
+
+#: src/interface/tab.py:57 src/interface/tab.py:186
+msgid "Square"
+msgstr "Quadrato"
+
+#: src/interface/tab.py:62
+msgid "Color"
+msgstr "Colore"
+
+#: src/interface/tools.py:30
+msgid "All images"
+msgstr "Tutte le immagini"
+
+#: src/interface/tools.py:38
+msgid "BMP images"
+msgstr "Immagini BMP"
+
+#: src/interface/tools.py:42
+msgid "PNG images"
+msgstr "Immagini PNG"
+
+#: src/interface/tools.py:46
+msgid "JPEG images"
+msgstr "Immagini JPEG"
+
+#: src/interface/tools.py:50
+msgid "WEBP images"
+msgstr "Immagini WEBP"
+
+#: src/interface/tools.py:54
+msgid "ICO images"
+msgstr "Immagini ICO"
