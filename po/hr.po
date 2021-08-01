@@ -1,4 +1,4 @@
-# Croatian translation for curtail
+# Croatian translation for imeditor
 # Copyright (C) 2021 Hugo Posnic
 # This file is distributed under the same license as the imeditor package.
 # Milo Ivir <mail@milotype.de>, 2021.
