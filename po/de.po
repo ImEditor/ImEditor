@@ -1,4 +1,4 @@
-# Croatian translation for imeditor
+# German translation for imeditor
 # Copyright (C) 2021 Hugo Posnic
 # This file is distributed under the same license as the imeditor package.
 # Milo Ivir <mail@milotype.de>, 2021.
@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: imeditor\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-19 17:23+0200\n"
-"PO-Revision-Date: 2021-04-23 12:49+0200\n"
+"PO-Revision-Date: 2021-08-01 15:59+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Language: hr\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
 
 #: data/io.github.ImEditor.desktop.in:3
 #: data/io.github.ImEditor.appdata.xml.in:7
@@ -26,11 +25,11 @@ msgstr "ImEditor"
 
 #: data/io.github.ImEditor.desktop.in:5
 msgid "Simple & versatile image editor."
-msgstr "Jednostavan i svestran program za obradu slika."
+msgstr "Einfaches und vielseitiges Bildbearbeitungsprogramm."
 
 #: data/io.github.ImEditor.desktop.in:8
 msgid "Pencil;Drawing;"
-msgstr "Olovka;crtanje;"
+msgstr "Bleistift;Zeichnen;"
 
 #. Icon name, do not translate
 #: data/io.github.ImEditor.desktop.in:11
@@ -39,107 +38,107 @@ msgstr "io.github.ImEditor"
 
 #: data/io.github.ImEditor.appdata.xml.in:8
 msgid "Simple &amp; versatile image editor"
-msgstr "Jednostavan i svestran program za obradu slika"
+msgstr "Einfaches und vielseitiges Bildbearbeitungsprogramm"
 
 #: data/io.github.ImEditor.appdata.xml.in:10
 msgid ""
 "ImEditor is a simple image editor, supporting PNG, JPEG, WEBP, BMP, and ICO "
 "file types."
 msgstr ""
-"ImEditor je jednostavan program za obradu slika s podrškom za datotečne "
-"formate PNG, JPEG, WEBP, BMP i ICO."
+"ImEditor ist ein einfaches Bildbearbeitungsprogramm für PNG, JPEG, WEBP, "
+"BMP und ICO Dateien."
 
 #: data/io.github.ImEditor.appdata.xml.in:11
 msgid "It offers several tools to easily modify an image."
-msgstr "Nudi nekoliko funkcija za jednostavnu obradu slika."
+msgstr "Es bietet verschiedene Werkzeuge um Bilder einfach zu ändern."
 
 #: data/io.github.ImEditor.gschema.xml:6
 msgid "Enable or disable dark mode"
-msgstr "Aktiviraj ili deaktiviraj tamni modus"
+msgstr "Dunklen Modus aktivieren oder deaktivieren"
 
 #: src/ui/window.ui:40
 msgid "What do you want to do?"
-msgstr "Što želiš uraditi?"
+msgstr "Was möchtest du machen?"
 
 #: src/ui/window.ui:54 src/ui/shortcuts.ui:42
 msgid "Create a new image"
-msgstr "Stvori novu sliku"
+msgstr "Ein neues Bild erstellen"
 
 #: src/ui/window.ui:69 src/ui/shortcuts.ui:49
 msgid "Open an existing image"
-msgstr "Otvori postojeću sliku"
+msgstr "Ein bestehendes Bild öffnen"
 
 #: src/ui/headerbar.ui:18 src/interface/tab.py:53
 msgid "Pencil"
-msgstr "Olovka"
+msgstr "Bleistift"
 
 #: src/ui/headerbar.ui:60 src/interface/window.py:408
 msgid "Simple & versatile image editor"
-msgstr "Jednostavan i svestran program za obradu slika"
+msgstr "Einfaches und vielseitiges Bildbearbeitungsprogramm"
 
 #: src/ui/headerbar.ui:71
 msgid "New"
-msgstr "Nova"
+msgstr "Neu"
 
 #: src/ui/headerbar.ui:87
 msgid "Open"
-msgstr "Otvori"
+msgstr "Öffnen"
 
 #: src/ui/headerbar.ui:103 src/ui/shortcuts.ui:63
 msgid "Save"
-msgstr "Spremi"
+msgstr "Sichern"
 
 #: src/ui/headerbar.ui:119 src/ui/shortcuts.ui:70
 msgid "Save as"
-msgstr "Spremi kao"
+msgstr "Speichern unter"
 
 #: src/ui/headerbar.ui:135 src/ui/shortcuts.ui:83
 msgid "Undo"
-msgstr "Poništi"
+msgstr "Rückgängig"
 
 #: src/ui/headerbar.ui:151 src/ui/shortcuts.ui:90
 msgid "Redo"
-msgstr "Ponovi"
+msgstr "Wiederherstellen"
 
 #: src/ui/headerbar.ui:167 src/ui/menu.ui:73
 msgid "Rotate -90°"
-msgstr "Okreni -90°"
+msgstr "-90° drehen"
 
 #: src/ui/headerbar.ui:183 src/ui/menu.ui:77
 msgid "Rotate 90°"
-msgstr "Okreni 90°"
+msgstr "90° drehen"
 
 #: src/ui/headerbar.ui:240
 msgid "Selection"
-msgstr "Odabir"
+msgstr "Auswahl"
 
 #: src/ui/menu.ui:7 src/ui/shortcuts.ui:15
 msgid "Zoom -"
-msgstr "Smanji prikaz"
+msgstr "Ansicht verkleinern"
 
 #: src/ui/menu.ui:12 src/ui/shortcuts.ui:22
 msgid "Zoom +"
-msgstr "Uvećaj prikaz"
+msgstr "Ansicht vergrößern"
 
 #: src/ui/menu.ui:20 src/ui/shortcuts.ui:97
 msgid "Copy"
-msgstr "Kopiraj"
+msgstr "Kopieren"
 
 #: src/ui/menu.ui:25 src/ui/shortcuts.ui:104
 msgid "Paste"
-msgstr "Umetni"
+msgstr "Einfügen"
 
 #: src/ui/menu.ui:30 src/ui/shortcuts.ui:111
 msgid "Cut"
-msgstr "Izreži"
+msgstr "Ausschneiden"
 
 #: src/ui/menu.ui:37
 msgid "Filters"
-msgstr "Filtri"
+msgstr "Filter"
 
 #: src/ui/menu.ui:40
 msgid "Black & white"
-msgstr "Crno-bijelo"
+msgstr "Schwarz/Weiß"
 
 #: src/ui/menu.ui:44
 msgid "Negative"
@@ -147,132 +146,133 @@ msgstr "Negativ"
 
 #: src/ui/menu.ui:48
 msgid "Red"
-msgstr "Crvena"
+msgstr "Rot"
 
 #: src/ui/menu.ui:52
 msgid "Green"
-msgstr "Zelena"
+msgstr "Grün"
 
 #: src/ui/menu.ui:56
 msgid "Blue"
-msgstr "Plava"
+msgstr "Blau"
 
 #: src/ui/menu.ui:60
 msgid "Grayscale"
-msgstr "Sive nijanse"
+msgstr "Graustufen"
 
 #: src/ui/menu.ui:64
 msgid "Brightness"
-msgstr "Svjetlost"
+msgstr "Helligkeit"
 
 #: src/ui/menu.ui:70
 msgid "Operations"
-msgstr "Operacije"
+msgstr "Aktionen"
 
 #: src/ui/menu.ui:81
 msgid "Horizontal mirror"
-msgstr "Zrcali vodoravno"
+msgstr "Horizontal spiegeln"
 
 #: src/ui/menu.ui:85
 msgid "Vertical mirror"
-msgstr "Zrcali okomito"
+msgstr "Vertikal spiegeln"
 
 #: src/ui/menu.ui:89
 msgid "Crop"
-msgstr "Obreži"
+msgstr "Zuschneiden"
 
 #: src/ui/menu.ui:97 src/interface/dialog.py:72
 msgid "Image details"
-msgstr "Detalji slike"
+msgstr "Bilddetails"
 
 #: src/ui/menu.ui:103
 msgid "Dark mode"
-msgstr "Tamni modus"
+msgstr "Dunkler Modus"
 
 #: src/ui/menu.ui:109
 msgid "Keyboard shortcuts"
-msgstr "Tipkovni prečaci"
+msgstr "Tastenkürzel"
 
 #: src/ui/menu.ui:113
 msgid "About ImEditor"
-msgstr "O programu ImEditor"
+msgstr "Über ImEditor"
 
 #: src/ui/shortcuts.ui:10
 msgid "General"
-msgstr "Opće"
+msgstr "Allgemein"
 
 #: src/ui/shortcuts.ui:29
 msgid "Close the window"
-msgstr "Zatvori prozor"
+msgstr "Dieses Fenster schließen"
 
 #: src/ui/shortcuts.ui:37
 msgid "Image"
-msgstr "Slika"
+msgstr "Bild"
 
 #: src/ui/shortcuts.ui:56
 msgid "Close an image"
-msgstr "Zatvori sliku"
+msgstr "Ein Bild schließen"
 
 #: src/ui/shortcuts.ui:78
 msgid "Edition"
-msgstr "Izdanje"
+msgstr "Ausgabe"
 
 #: src/interface/window.py:263 src/interface/dialog.py:133
 msgid "untitled"
-msgstr "bez naslova"
+msgstr "unbenannt"
 
 #: src/interface/window.py:274 src/interface/window.py:284
 msgid "Unable to open this image"
-msgstr "Nije moguće otvoriti ovu sliku"
+msgstr "Bild kann nicht geöffnet werden"
 
 #: src/interface/window.py:275
 msgid "This image doesn't exists. Please verify the path."
-msgstr "Slika ne postoji. Provjeri stazu."
+msgstr "Dieses Bild existiert nicht. Überprüfe den Pfad."
 
 #: src/interface/window.py:285
 msgid "The mode of this image is not supported."
-msgstr "Modus slike nije podržan."
+msgstr "Bildmodus wird nicht unterstützt."
 
 #: src/interface/window.py:287
 msgid "Unable to open this file"
-msgstr "Nije moguće otvoriti ovu datoteku"
+msgstr "Diese Datei kann nicht geöffnet werden"
 
 #: src/interface/window.py:288
 msgid "The format of this file is not supported."
-msgstr "Format slike nije podržan."
+msgstr "Bildformat wird nicht unterstützt."
 
 #: src/interface/window.py:290
 msgid "Already open"
-msgstr "Već je otvorena"
+msgstr "Schon geöffnet"
 
 #: src/interface/window.py:291
 msgid "This image is already opened in ImEditor."
-msgstr "Ova je slika već otvorena u programu ImEditor."
+msgstr "Dises Bild ist schon geöffnet im ImEditor."
 
 #. if image is not saved
 #: src/interface/window.py:320
 msgid "Do you want to save the changes of the \"{}\" image before closing it?"
-msgstr "Želiš li spremiti promjene slike „{}” prije zatvaranja?"
+msgstr ""
+"Sollen die Änderungen am Bild „{}“ vor dem Schließen gespeichert werden?"
 
 #: src/interface/window.py:323
 msgid "There are unsaved changes to this image"
-msgstr "Postoje nespremljene promjene za ovu sliku"
+msgstr "Dieses Bild enthällt ungespeicherte Änderungen"
 
 #: src/interface/window.py:410
 msgid "Distributed under the GNU GPL(v3) license.\n"
-msgstr "Izdano pod GNU općom javnom licencom v3.\n"
+msgstr "Wird vertrieben mit der GNU GPL(v3) Lizenz.\n"
 
 #: src/interface/dialog.py:54 src/interface/dialog.py:162
 msgid "Cancel"
-msgstr "Odustani"
+msgstr "Abbrechen"
 
 #: src/interface/dialog.py:57
 msgid "Apply"
-msgstr "Primijeni"
+msgstr "Anwenden"
 
 #: src/interface/dialog.py:75 src/interface/dialog.py:170
 msgid "Name"
-msgstr "Ime"
+msgstr "Name"
 
 #: src/interface/dialog.py:78
 msgid "Mode"
@@ -280,59 +280,59 @@ msgstr "Modus"
 
 #: src/interface/dialog.py:81
 msgid "Size"
-msgstr "Veličina"
+msgstr "Größe"
 
 #: src/interface/dialog.py:86
 msgid "Weight"
-msgstr "Debljina"
+msgstr "Gewicht"
 
 #: src/interface/dialog.py:89
 msgid "Last change"
-msgstr "Zadnja promjena"
+msgstr "Letzte Änderung"
 
 #: src/interface/dialog.py:93
 msgid "Close"
-msgstr "Zatvori"
+msgstr "Schließen"
 
 #: src/interface/dialog.py:111 src/interface/dialog.py:152
 msgid "Custom color"
-msgstr "Prilagođena boja"
+msgstr "Benutzerdefinierte Farbe"
 
 #: src/interface/dialog.py:115 src/interface/dialog.py:151
 msgid "White"
-msgstr "Bijela"
+msgstr "Weiß"
 
 #: src/interface/dialog.py:124 src/interface/dialog.py:153
 msgid "Transparent"
-msgstr "Transparentno"
+msgstr "Transparenz"
 
 #: src/interface/dialog.py:130
 msgid "New image"
-msgstr "Nova slika"
+msgstr "Neues Bild"
 
 #: src/interface/dialog.py:165
 msgid "Create"
-msgstr "Stvori"
+msgstr "Erstellen"
 
 #: src/interface/dialog.py:172
 msgid "Template"
-msgstr "Predložak"
+msgstr "Vorlage"
 
 #: src/interface/dialog.py:174
 msgid "Width"
-msgstr "Širina"
+msgstr "Breite"
 
 #: src/interface/dialog.py:176
 msgid "Height"
-msgstr "Visina"
+msgstr "Höhe"
 
 #: src/interface/dialog.py:178
 msgid "Background"
-msgstr "Pozadina"
+msgstr "Hintergrund"
 
 #: src/interface/dialog.py:180
 msgid "Background color"
-msgstr "Boja pozadine"
+msgstr "Hintergrundfarbe"
 
 #: src/interface/dialog.py:182
 msgid "Format"
@@ -340,40 +340,40 @@ msgstr "Format"
 
 #: src/interface/tab.py:54
 msgid "Shape"
-msgstr "Oblik"
+msgstr "Form"
 
 #: src/interface/tab.py:57 src/interface/tab.py:184
 msgid "Ellipse"
-msgstr "Elipsa"
+msgstr "Ellipse"
 
 #: src/interface/tab.py:57 src/interface/tab.py:186
 msgid "Square"
-msgstr "Kvadrat"
+msgstr "Quadrat"
 
 #: src/interface/tab.py:62
 msgid "Color"
-msgstr "Boja"
+msgstr "Farbe"
 
 #: src/interface/tools.py:30
 msgid "All images"
-msgstr "Sve slike"
+msgstr "Alle Bilder"
 
 #: src/interface/tools.py:38
 msgid "BMP images"
-msgstr "BMP slike"
+msgstr "BMP-Bilder"
 
 #: src/interface/tools.py:42
 msgid "PNG images"
-msgstr "PNG slike"
+msgstr "PNG-Bilder"
 
 #: src/interface/tools.py:46
 msgid "JPEG images"
-msgstr "JPEG slike"
+msgstr "JPEG-Bilder"
 
 #: src/interface/tools.py:50
 msgid "WEBP images"
-msgstr "WEBP slike"
+msgstr "WEBP-Bilder"
 
 #: src/interface/tools.py:54
 msgid "ICO images"
-msgstr "ICO slike"
+msgstr "ICO-Bilder"
