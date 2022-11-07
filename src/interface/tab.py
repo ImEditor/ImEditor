@@ -89,7 +89,7 @@ class Tab(Gtk.Box):
         self.zoom_level = self.best_zoom_level()
         self.last_pixbuf = pixbuf
 
-        # Initalize image
+        # Initialize image
         self.update_image(img)
         self.set_zoom_level()
 

@@ -261,7 +261,7 @@ class Editor(object):
             self.image.saved = True
 
     def details(self):
-        """Get informations about the image"""
+        """Get information about the image"""
         img_infos = get_infos(self.image.get_current_img(), self.image.filename)
         details_dialog(self.win, img_infos)
 
@@ -277,7 +277,7 @@ def get_middle_mouse(size, mouse_coords):
 
 
 def get_infos(img, filename):
-    """Fetch informations about an image"""
+    """Fetch information about an image"""
     # Basic infos
     img_infos = {
         'name': path.basename(filename),
