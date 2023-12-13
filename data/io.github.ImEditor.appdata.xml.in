@@ -36,6 +36,17 @@
 	<launchable type="desktop-id">io.github.ImEditor.desktop</launchable>
 
 	<releases>
+	  <release version="0.9.8" date="2023-12-13">
+			<description>
+			  <p>
+			    Here's the changelog of this version:
+				  <ul>
+				    <li>Update translations</li>
+            <li>Update deps</li>
+				  </ul>
+			  </p>
+			</description>
+	​  </release>
 	  <release version="0.9.7" date="2021-04-04">
 			<description>
 			  <p>

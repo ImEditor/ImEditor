@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9.8] - 2023-12-13
+### Changed
+- Update translations.
+- Update deps.
+
 ## [0.9.7] - 2021-04-04
 ### Added
 - Copy image also to OS clipboard.
